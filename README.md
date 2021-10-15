@@ -1,0 +1,1 @@
+# smartclide-design-pattern-selection-theia
