@@ -1,0 +1,702 @@
+(self["webpackChunkbrowser_app"] = self["webpackChunkbrowser_app"] || []).push([["extension_lib_browser_extension-frontend-module_js"],{
+
+/***/ "../extension/lib/browser/data.json":
+/*!******************************************!*\
+  !*** ../extension/lib/browser/data.json ***!
+  \******************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"Abstract Factory":{"values":{"AbstractFactory":{"name":"","extension":0,"classes":{"ConcreteFactory1":{"name":"","extension":1},"ConcreteFactory2":{"name":"","extension":1}}},"AbstractProduct1":{"name":"","extension":1,"classes":{"Product1.1":{"name":"","extension":0},"Product1.2":{"name":"","extension":0}}},"AbstractProduct2":{"name":"","extension":1,"classes":{"Product2.1":{"name":"","extension":0},"Product2.2":{"name":"","extension":0}}},"Client":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0,"classes":{"ConcreteBuilder1":{"name":"","extension":1}}},"Product1":{"name":"","extension":1}}},"Factory Method":{"values":{"Creator":{"name":"","extension":0,"classes":{"ConcreteCreator1":{"name":"","extension":1}}},"Product":{"name":"","extension":0,"classes":{"ConcreteProduct1":{"name":"","extension":1}}}}},"Prototype":{"values":{"Client":{"name":"","extension":0},"Prototype":{"name":"","extension":0,"classes":{"ConcretePrototype1":{"name":"","extension":1},"ConcretePrototype2":{"name":"","extension":1}}}}},"Singleton":{"values":{"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"Client":{"name":"","extension":0},"Target":{"name":"","extension":0,"classes":{"Adapter1":{"name":"","extension":1}}},"Adaptee":{"name":"","extension":0}}},"Bridge":{"values":{"Abstraction":{"name":"","extension":0,"classes":{"RefinedAbstraction1":{"name":"","extension":1}}},"Client":{"name":"","extension":0},"Implementor":{"name":"","extension":0,"classes":{"ConcreteImplementor1":{"name":"","extension":1},"ConcreteImplementor2":{"name":"","extension":1}}}}},"Composite":{"values":{"Client":{"name":"","extension":0},"Component":{"name":"","extension":0,"classes":{"Leaf1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}}}},"Decorator":{"values":{"Component":{"name":"","extension":0,"classes":{"ConcreteComponent1":{"name":"","extension":1},"Decorator":{"name":"","extension":0,"classes":{"ConcreteDecorator1":{"name":"","extension":1},"ConcreteDecorator2":{"name":"","extension":1}}}}}}},"Facade":{"values":{"Director":""}},"Flyweight":{"values":{"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0,"classes":{"ConcreteFlyweight1":{"name":"","extension":1},"UnsharedConcreteFlyweight1":{"name":"","extension":1}}},"Client":{"name":"","extension":0}}},"Proxy":{"values":{"Client":{"name":"","extension":0},"Subject":{"name":"","extension":0,"classes":{"RealSubject":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}}}},"Chain of Responsibility":{"values":{"Client":{"name":"","extension":0},"Handler":{"name":"","extension":0,"classes":{"ConcreteHandler1":{"name":"","extension":1},"ConcreteHandler2":{"name":"","extension":1}}}}},"Command":{"values":{"Client":{"name":"","extension":0},"Receiver1":{"name":"","extension":1},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0,"classes":{"ConcreteCommand1":{"name":"","extension":1}}}}},"Interpreter":{"values":{"Client":{"name":"","extension":0},"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0,"classes":{"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}}}},"Iterator":{"values":{"Client":{"name":"","extension":0},"Aggregate":{"name":"","extension":0,"classes":{"ConcreteAggregate1":{"name":"","extension":1}}},"Iterator":{"name":"","extension":0,"classes":{"ConcreteIterator1":{"name":"","extension":1}}}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0,"classes":{"ConcreteMediator":{"name":"","extension":0}}},"Colleague":{"name":"","extension":0,"classes":{"ConcreteColleague1":{"name":"","extension":1},"ConcreteColleague2":{"name":"","extension":1}}}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"Memento":{"name":"","extension":0},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0,"classes":{"ConcreteSubject1":{"name":"","extension":1}}},"Observer":{"name":"","extension":0,"classes":{"ConcreteObserver1":{"name":"","extension":1}}}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0,"classes":{"ConcreteState1":{"name":"","extension":1},"ConcreteState2":{"name":"","extension":1}}}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0,"classes":{"name":"","extension":0,"classes":{"ConcreteStrategy1":{"name":"","extension":1},"ConcreteStrategy2":{"name":"","extension":1}}}}}},"Template Method":{"values":{"AbstractClass":{"name":"","extension":0,"classes":{"ConcreteClass1":{"name":"","extension":1}}}}},"Visitor":{"values":{"Client":{"name":"","extension":0},"Visitor":{"name":"","extension":0,"classes":{"ConcreteVisitor1":{"name":"","extension":1},"ConcreteVisitor2":{"name":"","extension":1}}},"ObjectStructure":{"name":"","extension":0},"Element":{"name":"","extension":0,"classes":{"name":"","extension":0,"classes":{"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":1}}}}}}}');
+
+/***/ }),
+
+/***/ "../node_modules/css-loader/index.js!../extension/src/browser/style/index.css":
+/*!************************************************************************************!*\
+  !*** ../node_modules/css-loader/index.js!../extension/src/browser/style/index.css ***!
+  \************************************************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "../node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.id, "#widget-container{\r\n\twidth: 550px;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n#label-URL-project{\r\n\tmargin-left: 10px;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n    width: 60%;\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../extension/lib/browser/extension-contribution.js":
+/*!**********************************************************!*\
+  !*** ../extension/lib/browser/extension-contribution.js ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.extensionContribution = exports.extensionCommand = void 0;
+const inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
+const extension_widget_1 = __webpack_require__(/*! ./extension-widget */ "../extension/lib/browser/extension-widget.js");
+const browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
+exports.extensionCommand = { id: 'extension-widget:command' };
+let extensionContribution = class extensionContribution extends browser_1.AbstractViewContribution {
+    /**
+     * `AbstractViewContribution` handles the creation and registering
+     *  of the widget including commands, menus, and keybindings.
+     *
+     * We can pass `defaultWidgetOptions` which define widget properties such as
+     * its location `area` (`main`, `left`, `right`, `bottom`), `mode`, and `ref`.
+     *
+     */
+    constructor() {
+        super({
+            widgetId: extension_widget_1.extensionWidget.ID,
+            widgetName: extension_widget_1.extensionWidget.LABEL,
+            defaultWidgetOptions: { area: 'left' },
+            toggleCommandId: exports.extensionCommand.id
+        });
+    }
+    /**
+     * Example command registration to open the widget from the menu, and quick-open.
+     * For a simpler use case, it is possible to simply call:
+     ```ts
+        super.registerCommands(commands)
+     ```
+     *
+     * For more flexibility, we can pass `OpenViewArguments` which define
+     * options on how to handle opening the widget:
+     *
+     ```ts
+        toggle?: boolean
+        activate?: boolean;
+        reveal?: boolean;
+     ```
+     *
+     * @param commands
+     */
+    registerCommands(commands) {
+        commands.registerCommand(exports.extensionCommand, {
+            execute: () => super.openView({ activate: false, reveal: true })
+        });
+    }
+    /**
+     * Example menu registration to contribute a menu item used to open the widget.
+     * Default location when extending the `AbstractViewContribution` is the `View` main-menu item.
+     *
+     * We can however define new menu path locations in the following way:
+     ```ts
+        menus.registerMenuAction(CommonMenus.HELP, {
+            commandId: 'id',
+            label: 'label'
+        });
+     ```
+     *
+     * @param menus
+     */
+    registerMenus(menus) {
+        super.registerMenus(menus);
+    }
+};
+extensionContribution = __decorate([
+    inversify_1.injectable(),
+    __metadata("design:paramtypes", [])
+], extensionContribution);
+exports.extensionContribution = extensionContribution;
+/*
+export const ExtensionCommand = {
+    id: 'Extension.command',
+    label: "Say Hello"
+};
+
+@injectable()
+export class ExtensionCommandContribution implements CommandContribution {
+
+    constructor(
+        @inject(HelloBackendWithClientService) private readonly helloBackendWithClientService: HelloBackendWithClientService,
+        @inject(HelloBackendService) private readonly helloBackendService: HelloBackendService,
+    ) { }
+
+    registerCommands(registry: CommandRegistry): void {
+        registry.registerCommand(SayHelloViaBackendCommandWithCallBack, {
+            execute: () => this.helloBackendWithClientService.greet().then(r => console.log(r))
+        });
+        registry.registerCommand(SayHelloViaBackendCommand, {
+            execute: () => this.helloBackendService.sayHelloTo('World').then(r => console.log(r))
+        });
+    }
+}
+
+@injectable()
+export class ExtensionMenuContribution implements MenuContribution {
+
+    registerMenus(menus: MenuModelRegistry): void {
+        menus.registerMenuAction(CommonMenus.EDIT_FIND, {
+            commandId: ExtensionCommand.id,
+            label: ExtensionCommand.label
+        });
+    }
+}
+*/ 
+
+
+/***/ }),
+
+/***/ "../extension/lib/browser/extension-frontend-module.js":
+/*!*************************************************************!*\
+  !*** ../extension/lib/browser/extension-frontend-module.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
+const extension_widget_1 = __webpack_require__(/*! ./extension-widget */ "../extension/lib/browser/extension-widget.js");
+const extension_contribution_1 = __webpack_require__(/*! ./extension-contribution */ "../extension/lib/browser/extension-contribution.js");
+const browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
+const protocol_1 = __webpack_require__(/*! ../common/protocol */ "../extension/lib/common/protocol.js");
+const browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
+__webpack_require__(/*! ../../src/browser/style/index.css */ "../extension/src/browser/style/index.css");
+exports.default = new inversify_1.ContainerModule(bind => {
+    browser_1.bindViewContribution(bind, extension_contribution_1.extensionContribution);
+    bind(browser_1.FrontendApplicationContribution).toService(extension_contribution_1.extensionContribution);
+    bind(extension_widget_1.extensionWidget).toSelf();
+    bind(browser_1.WidgetFactory).toDynamicValue(ctx => ({
+        id: extension_widget_1.extensionWidget.ID,
+        createWidget: () => ctx.container.get(extension_widget_1.extensionWidget)
+    })).inSingletonScope();
+    bind(protocol_1.HelloBackendService).toDynamicValue(ctx => {
+        const connection = ctx.container.get(browser_2.WebSocketConnectionProvider);
+        return connection.createProxy(protocol_1.HELLO_BACKEND_PATH);
+    }).inSingletonScope();
+    bind(protocol_1.HelloBackendWithClientService).toDynamicValue(ctx => {
+        const connection = ctx.container.get(browser_2.WebSocketConnectionProvider);
+        const backendClient = ctx.container.get(protocol_1.BackendClient);
+        return connection.createProxy(protocol_1.HELLO_BACKEND_WITH_CLIENT_PATH, backendClient);
+    }).inSingletonScope();
+});
+
+
+/***/ }),
+
+/***/ "../extension/lib/browser/extension-widget.js":
+/*!****************************************************!*\
+  !*** ../extension/lib/browser/extension-widget.js ***!
+  \****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var extensionWidget_1;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.extensionWidget = void 0;
+const React = __importStar(__webpack_require__(/*! react */ "../node_modules/react/index.js"));
+const inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
+const alert_message_1 = __webpack_require__(/*! @theia/core/lib/browser/widgets/alert-message */ "../node_modules/@theia/core/lib/browser/widgets/alert-message.js");
+const react_widget_1 = __webpack_require__(/*! @theia/core/lib/browser/widgets/react-widget */ "../node_modules/@theia/core/lib/browser/widgets/react-widget.js");
+const core_1 = __webpack_require__(/*! @theia/core */ "../node_modules/@theia/core/lib/common/index.js");
+const protocol_1 = __webpack_require__(/*! ../common/protocol */ "../extension/lib/common/protocol.js");
+const data_json_1 = __importDefault(__webpack_require__(/*! ./data.json */ "../extension/lib/browser/data.json"));
+let extensionWidget = extensionWidget_1 = class extensionWidget extends react_widget_1.ReactWidget {
+    async init() {
+        this.id = extensionWidget_1.ID;
+        this.title.label = extensionWidget_1.LABEL;
+        this.title.caption = extensionWidget_1.LABEL;
+        this.title.closable = true;
+        this.title.iconClass = 'fa fa-info-circle';
+        this.update();
+    }
+    render() {
+        const header = `Choose a Design Pattern and get the code. `;
+        return React.createElement("div", { id: 'widget-container' },
+            React.createElement(alert_message_1.AlertMessage, { type: 'INFO', header: header }),
+            React.createElement("div", { id: 'issues' },
+                React.createElement("br", null),
+                React.createElement("select", { id: "drop-down-patterns", onChange: this.updateSelection, name: "statePatternSelection" },
+                    React.createElement("option", { id: "empty-choice", value: "Choose_pattern" }, "Choose pattern"),
+                    React.createElement("optgroup", { label: "Creational" },
+                        React.createElement("option", { value: "Abstract Factory" }, "Abstract Factory"),
+                        React.createElement("option", { value: "Builder" }, "Builder"),
+                        React.createElement("option", { value: "Factory Method" }, "Factory Method"),
+                        React.createElement("option", { value: "Prototype" }, "Prototype"),
+                        React.createElement("option", { value: "Singleton" }, "Singleton")),
+                    React.createElement("optgroup", { label: "Structural" },
+                        React.createElement("option", { value: "Adapter" }, "Adapter"),
+                        React.createElement("option", { value: "Bridge" }, "Bridge"),
+                        React.createElement("option", { value: "Composite" }, "Composite"),
+                        React.createElement("option", { value: "Decorator" }, "Decorator"),
+                        React.createElement("option", { value: "Facade" }, "Facade"),
+                        React.createElement("option", { value: "Flyweight" }, "Flyweight"),
+                        React.createElement("option", { value: "Proxy" }, "Proxy")),
+                    React.createElement("optgroup", { label: "Behavioral" },
+                        React.createElement("option", { value: "Chain of Responsibility" }, "Chain of Responsibility"),
+                        React.createElement("option", { value: "Command" }, "Command"),
+                        React.createElement("option", { value: "Interpreter" }, "Interpreter"),
+                        React.createElement("option", { value: "Iterator" }, "Iterator"),
+                        React.createElement("option", { value: "Mediator" }, "Mediator"),
+                        React.createElement("option", { value: "Memento" }, "Memento"),
+                        React.createElement("option", { value: "Observer" }, "Observer"),
+                        React.createElement("option", { value: "State" }, "State"),
+                        React.createElement("option", { value: "Strategy" }, "Strategy"),
+                        React.createElement("option", { value: "Template Method" }, "Template Method"),
+                        React.createElement("option", { value: "Visitor" }, "Visitor"))),
+                React.createElement("br", null),
+                React.createElement("br", null),
+                React.createElement("button", { id: "btn-get-code", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.runprocess() }, " Get Code "),
+                React.createElement("br", null),
+                React.createElement("div", { id: "show_pattern" }),
+                React.createElement("br", null),
+                React.createElement("div", { id: "result" },
+                    React.createElement("table", { id: "show_pattern_table" }))));
+    }
+    async runprocess() {
+        if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
+            document.getElementById("btn-get-code").style.visibility = 'hidden';
+            var getUrl = window.location.href;
+            extensionWidget_1.res = await this.helloBackendService.sayHelloTo(getUrl);
+            for (var i = 0; i < extensionWidget_1.res.length; i++) {
+                var lastW = extensionWidget_1.res[i].lastIndexOf("/");
+                var file = extensionWidget_1.res[i].substr(lastW + 1);
+                file = file.substr(0, file.indexOf("."));
+                console.log(file);
+                extensionWidget_1.res[i] = file;
+            }
+            console.log("FRONT " + extensionWidget_1.res);
+            //show the JSON values for the chosen key-pattern
+            var values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
+            var table = document.getElementById('show_pattern_table');
+            Object.keys(values).forEach((key) => {
+                var row = this.insertCells(table, key);
+                if (values[key].extension == 1) {
+                    var cell3 = row.insertCell(2);
+                    var t3 = document.createElement("button");
+                    t3.innerHTML = "+";
+                    t3.id = "btn" + key;
+                    cell3.appendChild(t3);
+                    t3.addEventListener('click', (event) => {
+                        this.buttonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, "");
+                    });
+                }
+                if (("classes" in values[key]) == true) {
+                    var classes = values[key]["classes"];
+                    Object.keys(classes).forEach((key1) => {
+                        var row = this.insertCells(table, key1);
+                        if (classes[key1].extension == 1) {
+                            var cell3 = row.insertCell(2);
+                            var t3 = document.createElement("button");
+                            t3.innerHTML = "+";
+                            t3.id = "btn" + key1;
+                            cell3.appendChild(t3);
+                            t3.addEventListener('click', (event) => {
+                                console.log("key " + key);
+                                console.log(JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection]));
+                                this.buttonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[key].classes);
+                                console.log("RUNPROCESS " + JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
+                            });
+                        }
+                    });
+                }
+            });
+            var d = document.getElementById("result");
+            var b = document.createElement("button");
+            b.id = "btnFinalize";
+            b.innerHTML = "Finally Get Code";
+            b.addEventListener('click', (_event) => {
+                this.buttonClick2(table.rows.length);
+            });
+            d.appendChild(b);
+        }
+        else {
+            this.messageService.info('You need to choose a software pattern!');
+        }
+    }
+    //update the state
+    updateSelection(e) {
+        const key = e.currentTarget.name;
+        extensionWidget_1.state[key] = e.currentTarget.value;
+    }
+    //update the state
+    updateInput(e) {
+        const key = e.currentTarget.name;
+        extensionWidget_1.state[key] = e.currentTarget.value;
+    }
+    insertCells(table, key) {
+        var row = table.insertRow(table.rows.length);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var t1 = document.createElement("label");
+        t1.id = "label" + table.rows.length;
+        t1.innerHTML = key;
+        var t2 = document.createElement("input");
+        t2.id = "txtbox" + table.rows.length;
+        var num = table.rows.length;
+        t2.onchange = function () {
+            extensionWidget_1.textBoxValues[num - 1] = t2.value;
+        };
+        t2.placeholder = key;
+        cell1.appendChild(t1);
+        cell2.appendChild(t2);
+        return row;
+    }
+    //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
+    buttonClick(table, key, values, classes) {
+        console.log(JSON.stringify(values));
+        if (extensionWidget_1.state.statePatternSelection == "Abstract Factory") {
+            if (key.includes("AbstractProduct")) {
+                var newValues = JSON.parse(JSON.stringify(values));
+                var count = this.countKeys(values, key.substr(3));
+                console.log(key.substr(3), count);
+                var labelAbstrProd = this.updateLabel(key.substr(3), count);
+                newValues[labelAbstrProd] = { name: "", extension: 1, classes: {} };
+                //JSON.stringify({ "name":"", "extension":1 });
+                //newValues[labelAbstrProd]["classes"] = JSON.stringify({"dff":""});
+                var row = this.insertCells(table, labelAbstrProd);
+                var cell3 = row.insertCell(2);
+                var t3 = document.createElement("button");
+                t3.innerHTML = "+";
+                t3.id = "btn" + labelAbstrProd;
+                cell3.appendChild(t3);
+                console.log("classes " + JSON.stringify(newValues[labelAbstrProd]["classes"]));
+                var count2 = this.countKeys(newValues[key.substr(3)]["classes"], "Product") - 1;
+                console.log("count " + count2);
+                for (var j = 0; j < count2; j++) {
+                    var labelProduct = "Product" + count + "." + (j + 1);
+                    var row = this.insertCells(table, labelProduct);
+                    newValues[labelAbstrProd]["classes"][labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+                }
+                t3.addEventListener('click', (event) => {
+                    this.buttonClick(table, event.target.id, values, "");
+                });
+            }
+            else {
+                var count = this.countKeys(classes, key.substr(3));
+                var labelConFactory = this.updateLabel("ConcreteFactory ", count);
+                var row = this.insertCells(table, labelConFactory);
+                var cell3 = row.insertCell(2);
+                var t3 = document.createElement("button");
+                t3.innerHTML = "+";
+                t3.id = "btn" + labelConFactory;
+                cell3.appendChild(t3);
+                var newValues = JSON.parse(JSON.stringify(values));
+                var numAbstrProd = this.countKeys(newValues, "AbstractProduct") - 1;
+                console.log("AbstrProd " + numAbstrProd);
+                newValues["AbstractFactory"]["classes"][labelConFactory] = JSON.stringify({ "name": "", "extension": 1 });
+                for (var j = 0; j < numAbstrProd; j++) {
+                    var labelProduct = "Product" + (j + 1) + "." + count;
+                    var row = this.insertCells(table, labelProduct);
+                    newValues["AbstractProduct" + (j + 1)]["classes"][labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+                }
+            }
+        }
+        else if (extensionWidget_1.state.statePatternSelection == "Builder") {
+            if (key.includes("Product")) {
+                var count = this.countKeys(values, key.substr(3));
+            }
+            else {
+                var count = this.countKeys(classes, key.substr(3));
+            }
+            var labelProduct = this.updateLabel("Product ", count);
+            var labelConBuilder = this.updateLabel("ConcreteBuilder ", count);
+            var newValues = JSON.parse(JSON.stringify(values));
+            newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues["Builder"]["classes"][labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
+            var row = this.insertCells(table, labelProduct);
+            var cell3 = row.insertCell(2);
+            var t3 = document.createElement("button");
+            t3.innerHTML = "+";
+            t3.id = "btn" + labelProduct;
+            cell3.appendChild(t3);
+            var row = this.insertCells(table, labelConBuilder);
+            var cell3 = row.insertCell(2);
+            var t4 = document.createElement("button");
+            t4.innerHTML = "+";
+            t4.id = "btn" + labelConBuilder;
+            cell3.appendChild(t4);
+        }
+        else if (extensionWidget_1.state.statePatternSelection == "Command") {
+            if (key.includes("Receiver")) {
+                var count = this.countKeys(values, key.substr(3));
+            }
+            else {
+                var count = this.countKeys(classes, key.substr(3));
+            }
+            var labelReceiver = this.updateLabel("Receiver ", count);
+            var labelConCommand = this.updateLabel("ConcreteCommand ", count);
+            var row = this.insertCells(table, labelReceiver);
+            var cell3 = row.insertCell(2);
+            var t3 = document.createElement("button");
+            t3.innerHTML = "+";
+            t3.id = "btn" + labelReceiver;
+            cell3.appendChild(t3);
+            var row = this.insertCells(table, labelConCommand);
+            var cell3 = row.insertCell(2);
+            var t4 = document.createElement("button");
+            t4.innerHTML = "+";
+            t4.id = "btn" + labelConCommand;
+            cell3.appendChild(t4);
+            //inserts new attributes in json
+            var newValues = JSON.parse(JSON.stringify(values));
+            newValues[labelReceiver] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues["Command"]["classes"][labelConCommand] = JSON.stringify({ "name": "", "extension": 1 });
+            console.log(JSON.stringify(newValues));
+            t3.addEventListener('click', (event) => {
+                this.buttonClick(table, event.target.id, values, classes);
+            });
+            t4.addEventListener('click', (event) => {
+                this.buttonClick(table, event.target.id, values, classes);
+            });
+        }
+        else if (extensionWidget_1.state.statePatternSelection == "Iterator") {
+            var count = this.countKeys(classes, key.substr(3));
+            var labelConAggregate = this.updateLabel("ConcreteAggregate ", count);
+            var labelConIterator = this.updateLabel("ConcreteIterator ", count);
+            //button insertion 
+            var row = this.insertCells(table, labelConAggregate);
+            var cell3 = row.insertCell(2);
+            var t3 = document.createElement("button");
+            t3.innerHTML = "+";
+            t3.id = "btn" + labelConAggregate;
+            cell3.appendChild(t3);
+            //button insertion
+            var row = this.insertCells(table, labelConIterator);
+            var cell3 = row.insertCell(2);
+            var t4 = document.createElement("button");
+            t4.innerHTML = "+";
+            t4.id = "btn" + labelConIterator;
+            cell3.appendChild(t4);
+            var newValues = JSON.parse(JSON.stringify(values));
+            newValues["Aggregate"]["classes"][labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 }); //attribute "classes" in Aggreagate attribute gets new json value
+            newValues["Iterator"]["classes"][labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
+            console.log(JSON.stringify(newValues));
+            t3.addEventListener('click', (event) => {
+                this.buttonClick(table, event.target.id, values, classes);
+            });
+            t4.addEventListener('click', (event) => {
+                this.buttonClick(table, event.target.id, values, classes);
+            });
+        }
+        else {
+            if (classes == "") {
+                var count = this.countKeys(values, key.substr(3));
+                var label = this.updateLabel(key.substr(3), count);
+                var newValues = JSON.parse(JSON.stringify(values));
+                newValues[label] = JSON.stringify({ "name": "", "extension": 1 }); //attribute "classes" in Aggreagate attribute gets new json value
+            }
+            else {
+                var count = this.countKeys(classes, key.substr(3));
+                var label = this.updateLabel(key.substr(3), count);
+                var newClasses = JSON.parse(JSON.stringify(classes));
+                newClasses[label] = JSON.stringify({ "name": "", "extension": 1 });
+            }
+            var row = this.insertCells(table, label);
+            var cell3 = row.insertCell(2);
+            var t3 = document.createElement("button");
+            t3.innerHTML = "+";
+            t3.id = "btn" + label;
+            cell3.appendChild(t3);
+            t3.addEventListener('click', (event) => {
+                this.buttonClick(table, event.target.id, values, classes);
+            });
+        }
+        //console.log(JSON.stringify(newValues));
+        extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = newValues;
+    }
+    buttonClick2(rows) {
+        if (rows != extensionWidget_1.textBoxValues.length) {
+            this.messageService.info("You need to give name for ALL the classes!");
+        }
+        else {
+            this.messageService.info("Well done! Code is coming...");
+        }
+    }
+    updateLabel(value, count) {
+        if (value.includes('.')) {
+            return value.substring(0, value.length - 2) + '.' + count;
+        }
+        return value.slice(0, -1) + count;
+    }
+    countKeys(values, keyString) {
+        let count = 0;
+        keyString = keyString.slice(0, -1);
+        Object.keys(values).forEach((key) => {
+            if (key.includes(keyString)) {
+                count++;
+            }
+        });
+        return count + 1;
+    }
+};
+extensionWidget.ID = 'extension:widget';
+extensionWidget.LABEL = 'Extension Widget';
+extensionWidget.state = {
+    statePatternSelection: '',
+};
+extensionWidget.textBoxValues = [];
+extensionWidget.data = JSON.parse(JSON.stringify(data_json_1.default));
+__decorate([
+    inversify_1.inject(core_1.MessageService),
+    __metadata("design:type", core_1.MessageService)
+], extensionWidget.prototype, "messageService", void 0);
+__decorate([
+    inversify_1.inject(protocol_1.HelloBackendService),
+    __metadata("design:type", Object)
+], extensionWidget.prototype, "helloBackendService", void 0);
+__decorate([
+    inversify_1.postConstruct(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], extensionWidget.prototype, "init", null);
+extensionWidget = extensionWidget_1 = __decorate([
+    inversify_1.injectable()
+], extensionWidget);
+exports.extensionWidget = extensionWidget;
+
+
+/***/ }),
+
+/***/ "../extension/lib/common/protocol.js":
+/*!*******************************************!*\
+  !*** ../extension/lib/common/protocol.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.BackendClient = exports.HELLO_BACKEND_WITH_CLIENT_PATH = exports.HelloBackendWithClientService = exports.HELLO_BACKEND_PATH = exports.HelloBackendService = void 0;
+exports.HelloBackendService = Symbol('HelloBackendService');
+exports.HELLO_BACKEND_PATH = '/services/helloBackend';
+exports.HelloBackendWithClientService = Symbol('BackendWithClient');
+exports.HELLO_BACKEND_WITH_CLIENT_PATH = '/services/withClient';
+exports.BackendClient = Symbol('BackendClient');
+
+
+/***/ }),
+
+/***/ "../node_modules/@theia/core/lib/browser/widgets/alert-message.js":
+/*!************************************************************************!*\
+  !*** ../node_modules/@theia/core/lib/browser/widgets/alert-message.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2018 Ericsson and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AlertMessage = void 0;
+const React = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+const widget_1 = __webpack_require__(/*! ./widget */ "../node_modules/@theia/core/lib/browser/widgets/widget.js");
+const AlertMessageIcon = {
+    INFO: widget_1.codicon('info'),
+    SUCCESS: widget_1.codicon('pass'),
+    WARNING: widget_1.codicon('warning'),
+    ERROR: widget_1.codicon('error')
+};
+class AlertMessage extends React.Component {
+    render() {
+        return React.createElement("div", { className: 'theia-alert-message-container' },
+            React.createElement("div", { className: `theia-${this.props.type.toLowerCase()}-alert` },
+                React.createElement("div", { className: 'theia-message-header' },
+                    React.createElement("i", { className: AlertMessageIcon[this.props.type] }),
+                    "\u00A0",
+                    this.props.header),
+                React.createElement("div", { className: 'theia-message-content' }, this.props.children)));
+    }
+}
+exports.AlertMessage = AlertMessage;
+
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/index.css":
+/*!************************************************!*\
+  !*** ../extension/src/browser/style/index.css ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_index_js_index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/index.js!./index.css */ "../node_modules/css-loader/index.js!../extension/src/browser/style/index.css");
+/* harmony import */ var _node_modules_css_loader_index_js_index_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_index_js_index_css__WEBPACK_IMPORTED_MODULE_1__);
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()((_node_modules_css_loader_index_js_index_css__WEBPACK_IMPORTED_MODULE_1___default()), options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((_node_modules_css_loader_index_js_index_css__WEBPACK_IMPORTED_MODULE_1___default().locals) || {});
+
+/***/ })
+
+}]);
+//# sourceMappingURL=extension_lib_browser_extension-frontend-module_js.bundle.js.map
