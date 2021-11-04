@@ -104,7 +104,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 console.log(file);
                 extensionWidget_1.res[i] = file;
             }
-            console.log("FRONT " + extensionWidget_1.res);
             //show the JSON values for the chosen key-pattern
             var values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
             var table = document.getElementById('show_pattern_table');
@@ -117,23 +116,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     t3.id = "btn" + key;
                     cell3.appendChild(t3);
                     t3.addEventListener('click', (event) => {
-                        this.buttonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, "");
-                    });
-                }
-                if (("classes" in values[key]) == true) {
-                    var classes = values[key]["classes"];
-                    Object.keys(classes).forEach((key1) => {
-                        var row = this.insertCells(table, key1);
-                        if (classes[key1].extension == 1) {
-                            var cell3 = row.insertCell(2);
-                            var t3 = document.createElement("button");
-                            t3.innerHTML = "+";
-                            t3.id = "btn" + key1;
-                            cell3.appendChild(t3);
-                            t3.addEventListener('click', (event) => {
-                                this.buttonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[key].classes);
-                            });
-                        }
+                        this.buttonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
                     });
                 }
             });
@@ -176,7 +159,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         t2.autocomplete = "off";
         t2.placeholder = key;
         t2.addEventListener('keypress', (e) => {
-            //You have yout key code here
             this.showSuggestions(t2.value, e.target.id);
         });
         var t3 = document.createElement("div");
@@ -188,89 +170,63 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         return row;
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
-    buttonClick(table, key, values, classes) {
+    buttonClick(table, key, values) {
+        var newValues = JSON.parse(JSON.stringify(values));
+        var count = this.countKeys(values, key.substr(3));
         if (extensionWidget_1.state.statePatternSelection == "Abstract Factory") {
             if (key.includes("AbstractProduct")) {
-                var newValues = JSON.parse(JSON.stringify(values));
-                var count = this.countKeys(values, key.substr(3));
-                var labelAbstrProd = this.updateLabel(key.substr(3), count);
-                newValues[labelAbstrProd] = { name: "", extension: 1, classes: {} };
-                var count2 = this.countKeys(newValues[key.substr(3)]["classes"], "Product") - 1;
-                for (var j = 0; j < count2; j++) {
-                    var labelProduct = "Product" + count + "." + (j + 1);
+                var numAbstrProd = this.countKeys(values, key.substr(3));
+                var labelAbstrProd = this.updateLabel(key.substr(3), numAbstrProd);
+                newValues[labelAbstrProd] = JSON.stringify({ name: "", extension: 1 });
+                var numProd = (this.countKeys(newValues[key.substr(3)]["classes"], "Product") - 1) / numAbstrProd;
+                for (var j = 0; j < numProd; j++) {
+                    var labelProduct = "Product" + numAbstrProd + "." + (j + 1);
                     this.insertCells(table, labelProduct);
-                    newValues[labelAbstrProd]["classes"][labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+                    newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
                 }
             }
             else {
-                var count = this.countKeys(classes, key.substr(3));
-                var labelConFactory = this.updateLabel("ConcreteFactory ", count);
+                var numConFactory = this.countKeys(values, key.substr(3)); //values?? newValues??
+                var labelConFactory = this.updateLabel("ConcreteFactory ", numConFactory);
                 this.insertCells(table, labelConFactory);
-                var newValues = JSON.parse(JSON.stringify(values));
-                var numAbstrProd = this.countKeys(newValues, "AbstractProduct") - 1;
-                newValues["AbstractFactory"]["classes"][labelConFactory] = JSON.stringify({ "name": "", "extension": 1 });
+                var numAbstrProd = this.countKeys(newValues, "AbstractProduct") - 1; //??
+                newValues[labelConFactory] = JSON.stringify({ "name": "", "extension": 1 });
                 for (var j = 0; j < numAbstrProd; j++) {
-                    var labelProduct = "Product" + (j + 1) + "." + count;
+                    var labelProduct = "Product" + (j + 1) + "." + numConFactory;
                     this.insertCells(table, labelProduct);
-                    newValues["AbstractProduct" + (j + 1)]["classes"][labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+                    newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
                 }
             }
         }
         else if (extensionWidget_1.state.statePatternSelection == "Builder") {
-            if (key.includes("Product")) {
-                var count = this.countKeys(values, key.substr(3));
-            }
-            else {
-                var count = this.countKeys(classes, key.substr(3));
-            }
             var labelProduct = this.updateLabel("Product ", count);
             var labelConBuilder = this.updateLabel("ConcreteBuilder ", count);
-            var newValues = JSON.parse(JSON.stringify(values));
             newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
-            newValues["Builder"]["classes"][labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, labelProduct);
             this.insertCells(table, labelConBuilder);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Command") {
-            if (key.includes("Receiver")) {
-                var count = this.countKeys(values, key.substr(3));
-            }
-            else {
-                var count = this.countKeys(classes, key.substr(3));
-            }
             var labelReceiver = this.updateLabel("Receiver ", count);
             var labelConCommand = this.updateLabel("ConcreteCommand ", count);
             this.insertCells(table, labelReceiver);
             this.insertCells(table, labelConCommand);
-            //inserts new attributes in json
-            var newValues = JSON.parse(JSON.stringify(values));
+            //inserts new attributes in json object
             newValues[labelReceiver] = JSON.stringify({ "name": "", "extension": 1 });
-            newValues["Command"]["classes"][labelConCommand] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues[labelConCommand] = JSON.stringify({ "name": "", "extension": 1 });
         }
         else if (extensionWidget_1.state.statePatternSelection == "Iterator") {
-            var count = this.countKeys(classes, key.substr(3));
             var labelConAggregate = this.updateLabel("ConcreteAggregate ", count);
             var labelConIterator = this.updateLabel("ConcreteIterator ", count);
-            //button insertion 
             this.insertCells(table, labelConAggregate);
             this.insertCells(table, labelConIterator);
-            var newValues = JSON.parse(JSON.stringify(values));
-            newValues["Aggregate"]["classes"][labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 }); //attribute "classes" in Aggreagate attribute gets new json value
-            newValues["Iterator"]["classes"][labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
+            //inserts new attributes in json object
+            newValues[labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues[labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
         }
         else {
-            if (classes == "") {
-                var count = this.countKeys(values, key.substr(3));
-                var label = this.updateLabel(key.substr(3), count);
-                var newValues = JSON.parse(JSON.stringify(values));
-                newValues[label] = JSON.stringify({ "name": "", "extension": 1 }); //attribute "classes" in Aggreagate attribute gets new json value
-            }
-            else {
-                var count = this.countKeys(classes, key.substr(3));
-                var label = this.updateLabel(key.substr(3), count);
-                var newClasses = JSON.parse(JSON.stringify(classes));
-                newClasses[label] = JSON.stringify({ "name": "", "extension": 1 });
-            }
+            var label = this.updateLabel(key.substr(3), count);
+            newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
         }
         extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = newValues;
@@ -281,7 +237,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         }
         else {
             this.updateJsonObject();
-            console.log("NEW VALUES" + extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
             this.messageService.info("Well done! Code is coming...");
         }
     }
@@ -332,9 +287,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         var length = table.rows.length;
         for (var i = 0; i < length; i++) {
             var label = document.getElementById('label' + (i + 1)).innerHTML;
-            var txtbox = document.getElementById('txtbox' + (i + 1)).innerHTML;
-            console.log("label: " + label);
-            console.log("input: " + txtbox);
+            var txtbox = document.getElementById('txtbox' + (i + 1)).value;
             extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[label].name = txtbox;
         }
     }

@@ -51,13 +51,11 @@
             },
             "Builder":{
                 "name":"",
-                "extension":0 ,
-                "classes":{
-                    "ConcreteBuilder1":{
-                        "name":"",
-                        "extension":1
-                    }
-                }
+                "extension":0
+            },
+            "ConcreteBuilder1":{
+                "name":"",
+                "extension":1
             },
             "Product1":{
                 "name":"",

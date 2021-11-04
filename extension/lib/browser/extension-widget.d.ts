@@ -21,7 +21,7 @@ export declare class extensionWidget extends ReactWidget {
     updateSelection(e: React.ChangeEvent<HTMLSelectElement>): void;
     updateInput(e: React.ChangeEvent<HTMLInputElement>): void;
     insertCells(table: HTMLTableElement, key: string): HTMLTableRowElement;
-    buttonClick(table: HTMLTableElement, key: string, values: string, classes: string): void;
+    buttonClick(table: HTMLTableElement, key: string, values: string): void;
     buttonClick2(rows: number): void;
     updateLabel(value: string, count: number): string;
     countKeys(values: string, keyString: string): number;
