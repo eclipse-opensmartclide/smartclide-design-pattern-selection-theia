@@ -140,16 +140,16 @@ export class extensionWidget extends ReactWidget {
 		}
 	}
 
-    //update the state
+    //update the state of dropdown
     updateSelection(e:React.ChangeEvent<HTMLSelectElement>){
 		const key =e.currentTarget.name as keyof typeof extensionWidget.state;
 		extensionWidget.state[key]  = e.currentTarget.value;
 	}
-	 //update the state
+	/* //update the state 
 	 updateInput(e:React.ChangeEvent<HTMLInputElement>){
 		const key =e.currentTarget.name as keyof typeof extensionWidget.state;
 		extensionWidget.state[key]  = e.currentTarget.value;
-	}
+	}*/
 	
 	insertCells(table: HTMLTableElement, key: string){
 		var row = table.insertRow(table.rows.length);
@@ -181,21 +181,21 @@ export class extensionWidget extends ReactWidget {
 	//when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
 	buttonClick (table: HTMLTableElement, key: string, values: string) {
 		var newValues = JSON.parse(JSON.stringify(values));
-		var count = this.countKeys(values, key.substr(3, ));
+		var count = this.countKeys(values, key.substr(3, ))-1;
 		if(extensionWidget.state.statePatternSelection=="Abstract Factory"){
 			if(key.includes("AbstractProduct")){
 				var numAbstrProd = this.countKeys(values, key.substr(3,));
 				var labelAbstrProd = this.updateLabel(key.substr(3,), numAbstrProd);
 				newValues[labelAbstrProd] = JSON.stringify({name:"",extension:1});
 				
-				var numProd = (this.countKeys(newValues[key.substr(3,)]["classes"], "Product")-1) / numAbstrProd;
+				var numProd = (this.countKeys(values, "Product")-1) / numAbstrProd;
 				for(var j = 0 ; j < numProd ; j++ ){
 					var labelProduct = "Product"+numAbstrProd+"."+(j+1);
 					this.insertCells(table, labelProduct);
 					newValues[labelProduct]= JSON.stringify({ "name":"", "extension":1});
 				}
 			}else{
-				var numConFactory = this.countKeys(values, key.substr(3,));//values?? newValues??
+				var numConFactory = this.countKeys(values, key.substr(3,)) - 1;//values?? newValues??
 				var labelConFactory = this.updateLabel("ConcreteFactory ", numConFactory);
 				this.insertCells(table, labelConFactory);
 				
