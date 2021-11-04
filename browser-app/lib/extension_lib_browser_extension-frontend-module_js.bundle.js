@@ -22,7 +22,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.id, "#widget-container{\r\n\twidth: 550px;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n#label-URL-project{\r\n\tmargin-left: 10px;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n    width: 60%;\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}", ""]);
+exports.push([module.id, "#widget-container{\r\n\twidth: 550px;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n#label-URL-project{\r\n\tmargin-left: 10px;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n    width: 60%;\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  width: 60%;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}", ""]);
 
 // exports
 
@@ -332,10 +332,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                             t3.id = "btn" + key1;
                             cell3.appendChild(t3);
                             t3.addEventListener('click', (event) => {
-                                console.log("key " + key);
-                                console.log(JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection]));
                                 this.buttonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[key].classes);
-                                console.log("RUNPROCESS " + JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
                             });
                         }
                     });
@@ -377,9 +374,18 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         t2.onchange = function () {
             extensionWidget_1.textBoxValues[num - 1] = t2.value;
         };
+        t2.autocomplete = "off";
         t2.placeholder = key;
+        t2.addEventListener('keypress', (e) => {
+            //You have yout key code here
+            this.showSuggestions(t2.value, e.target.id);
+        });
+        var t3 = document.createElement("div");
+        t3.id = "suggestions" + table.rows.length;
+        t3.className = "suggestions";
         cell1.appendChild(t1);
         cell2.appendChild(t2);
+        cell2.appendChild(t3);
         return row;
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
@@ -389,45 +395,25 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             if (key.includes("AbstractProduct")) {
                 var newValues = JSON.parse(JSON.stringify(values));
                 var count = this.countKeys(values, key.substr(3));
-                console.log(key.substr(3), count);
                 var labelAbstrProd = this.updateLabel(key.substr(3), count);
                 newValues[labelAbstrProd] = { name: "", extension: 1, classes: {} };
-                //JSON.stringify({ "name":"", "extension":1 });
-                //newValues[labelAbstrProd]["classes"] = JSON.stringify({"dff":""});
-                var row = this.insertCells(table, labelAbstrProd);
-                var cell3 = row.insertCell(2);
-                var t3 = document.createElement("button");
-                t3.innerHTML = "+";
-                t3.id = "btn" + labelAbstrProd;
-                cell3.appendChild(t3);
-                console.log("classes " + JSON.stringify(newValues[labelAbstrProd]["classes"]));
                 var count2 = this.countKeys(newValues[key.substr(3)]["classes"], "Product") - 1;
-                console.log("count " + count2);
                 for (var j = 0; j < count2; j++) {
                     var labelProduct = "Product" + count + "." + (j + 1);
-                    var row = this.insertCells(table, labelProduct);
+                    this.insertCells(table, labelProduct);
                     newValues[labelAbstrProd]["classes"][labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
                 }
-                t3.addEventListener('click', (event) => {
-                    this.buttonClick(table, event.target.id, values, "");
-                });
             }
             else {
                 var count = this.countKeys(classes, key.substr(3));
                 var labelConFactory = this.updateLabel("ConcreteFactory ", count);
-                var row = this.insertCells(table, labelConFactory);
-                var cell3 = row.insertCell(2);
-                var t3 = document.createElement("button");
-                t3.innerHTML = "+";
-                t3.id = "btn" + labelConFactory;
-                cell3.appendChild(t3);
+                this.insertCells(table, labelConFactory);
                 var newValues = JSON.parse(JSON.stringify(values));
                 var numAbstrProd = this.countKeys(newValues, "AbstractProduct") - 1;
-                console.log("AbstrProd " + numAbstrProd);
                 newValues["AbstractFactory"]["classes"][labelConFactory] = JSON.stringify({ "name": "", "extension": 1 });
                 for (var j = 0; j < numAbstrProd; j++) {
                     var labelProduct = "Product" + (j + 1) + "." + count;
-                    var row = this.insertCells(table, labelProduct);
+                    this.insertCells(table, labelProduct);
                     newValues["AbstractProduct" + (j + 1)]["classes"][labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
                 }
             }
@@ -444,18 +430,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             var newValues = JSON.parse(JSON.stringify(values));
             newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
             newValues["Builder"]["classes"][labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
-            var row = this.insertCells(table, labelProduct);
-            var cell3 = row.insertCell(2);
-            var t3 = document.createElement("button");
-            t3.innerHTML = "+";
-            t3.id = "btn" + labelProduct;
-            cell3.appendChild(t3);
-            var row = this.insertCells(table, labelConBuilder);
-            var cell3 = row.insertCell(2);
-            var t4 = document.createElement("button");
-            t4.innerHTML = "+";
-            t4.id = "btn" + labelConBuilder;
-            cell3.appendChild(t4);
+            this.insertCells(table, labelProduct);
+            this.insertCells(table, labelConBuilder);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Command") {
             if (key.includes("Receiver")) {
@@ -466,58 +442,25 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             }
             var labelReceiver = this.updateLabel("Receiver ", count);
             var labelConCommand = this.updateLabel("ConcreteCommand ", count);
-            var row = this.insertCells(table, labelReceiver);
-            var cell3 = row.insertCell(2);
-            var t3 = document.createElement("button");
-            t3.innerHTML = "+";
-            t3.id = "btn" + labelReceiver;
-            cell3.appendChild(t3);
-            var row = this.insertCells(table, labelConCommand);
-            var cell3 = row.insertCell(2);
-            var t4 = document.createElement("button");
-            t4.innerHTML = "+";
-            t4.id = "btn" + labelConCommand;
-            cell3.appendChild(t4);
+            this.insertCells(table, labelReceiver);
+            this.insertCells(table, labelConCommand);
             //inserts new attributes in json
             var newValues = JSON.parse(JSON.stringify(values));
             newValues[labelReceiver] = JSON.stringify({ "name": "", "extension": 1 });
             newValues["Command"]["classes"][labelConCommand] = JSON.stringify({ "name": "", "extension": 1 });
             console.log(JSON.stringify(newValues));
-            t3.addEventListener('click', (event) => {
-                this.buttonClick(table, event.target.id, values, classes);
-            });
-            t4.addEventListener('click', (event) => {
-                this.buttonClick(table, event.target.id, values, classes);
-            });
         }
         else if (extensionWidget_1.state.statePatternSelection == "Iterator") {
             var count = this.countKeys(classes, key.substr(3));
             var labelConAggregate = this.updateLabel("ConcreteAggregate ", count);
             var labelConIterator = this.updateLabel("ConcreteIterator ", count);
             //button insertion 
-            var row = this.insertCells(table, labelConAggregate);
-            var cell3 = row.insertCell(2);
-            var t3 = document.createElement("button");
-            t3.innerHTML = "+";
-            t3.id = "btn" + labelConAggregate;
-            cell3.appendChild(t3);
-            //button insertion
-            var row = this.insertCells(table, labelConIterator);
-            var cell3 = row.insertCell(2);
-            var t4 = document.createElement("button");
-            t4.innerHTML = "+";
-            t4.id = "btn" + labelConIterator;
-            cell3.appendChild(t4);
+            this.insertCells(table, labelConAggregate);
+            this.insertCells(table, labelConIterator);
             var newValues = JSON.parse(JSON.stringify(values));
             newValues["Aggregate"]["classes"][labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 }); //attribute "classes" in Aggreagate attribute gets new json value
             newValues["Iterator"]["classes"][labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
             console.log(JSON.stringify(newValues));
-            t3.addEventListener('click', (event) => {
-                this.buttonClick(table, event.target.id, values, classes);
-            });
-            t4.addEventListener('click', (event) => {
-                this.buttonClick(table, event.target.id, values, classes);
-            });
         }
         else {
             if (classes == "") {
@@ -532,15 +475,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 var newClasses = JSON.parse(JSON.stringify(classes));
                 newClasses[label] = JSON.stringify({ "name": "", "extension": 1 });
             }
-            var row = this.insertCells(table, label);
-            var cell3 = row.insertCell(2);
-            var t3 = document.createElement("button");
-            t3.innerHTML = "+";
-            t3.id = "btn" + label;
-            cell3.appendChild(t3);
-            t3.addEventListener('click', (event) => {
-                this.buttonClick(table, event.target.id, values, classes);
-            });
+            this.insertCells(table, label);
         }
         //console.log(JSON.stringify(newValues));
         extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = newValues;
@@ -568,6 +503,32 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             }
         });
         return count + 1;
+    }
+    showSuggestions(value, id) {
+        var res = document.getElementById("suggestions" + id.substr(6));
+        let list = '';
+        let terms = this.autocompleteMatch(value);
+        for (var i = 0; i < terms.length; i++) {
+            list += '<li>' + terms[i] + '</li>';
+        }
+        res.innerHTML = "<ul id='list" + id.substr(6) + "'> " + list + "</ul>";
+        var ul = document.getElementById("list" + id.substr(6));
+        ul.onclick = function (event) {
+            var input = document.getElementById("txtbox" + id.substr(6));
+            input.value = event.target.innerHTML;
+            res.style.visibility = 'hidden';
+        };
+    }
+    autocompleteMatch(input) {
+        if (input == '') {
+            return [];
+        }
+        var reg = new RegExp(input);
+        return extensionWidget_1.res.filter(function (term) {
+            if (term.match(reg)) {
+                return term;
+            }
+        });
     }
 };
 extensionWidget.ID = 'extension:widget';

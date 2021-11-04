@@ -57,3 +57,20 @@ input{
 .btn-get-classes{
 	display: hidden;
 }
+
+.suggestions {
+  border: 1px #ccc;
+  margin-left: 10px;
+  width: 60%;
+}
+.suggestions ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.suggestions ul li {
+  padding: 3px 0;
+}
+.suggestions ul li:hover {
+  background: #eee;
+}

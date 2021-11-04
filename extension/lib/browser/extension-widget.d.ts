@@ -25,5 +25,7 @@ export declare class extensionWidget extends ReactWidget {
     buttonClick2(rows: number): void;
     updateLabel(value: string, count: number): string;
     countKeys(values: string, keyString: string): number;
+    showSuggestions(value: string, id: string): void;
+    autocompleteMatch(input: any): string[];
 }
 //# sourceMappingURL=extension-widget.d.ts.map
