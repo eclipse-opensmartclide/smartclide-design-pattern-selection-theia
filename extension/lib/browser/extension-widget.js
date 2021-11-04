@@ -189,7 +189,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
     buttonClick(table, key, values, classes) {
-        console.log(JSON.stringify(values));
         if (extensionWidget_1.state.statePatternSelection == "Abstract Factory") {
             if (key.includes("AbstractProduct")) {
                 var newValues = JSON.parse(JSON.stringify(values));
@@ -247,7 +246,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             var newValues = JSON.parse(JSON.stringify(values));
             newValues[labelReceiver] = JSON.stringify({ "name": "", "extension": 1 });
             newValues["Command"]["classes"][labelConCommand] = JSON.stringify({ "name": "", "extension": 1 });
-            console.log(JSON.stringify(newValues));
         }
         else if (extensionWidget_1.state.statePatternSelection == "Iterator") {
             var count = this.countKeys(classes, key.substr(3));
@@ -259,7 +257,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             var newValues = JSON.parse(JSON.stringify(values));
             newValues["Aggregate"]["classes"][labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 }); //attribute "classes" in Aggreagate attribute gets new json value
             newValues["Iterator"]["classes"][labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
-            console.log(JSON.stringify(newValues));
         }
         else {
             if (classes == "") {
@@ -276,7 +273,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             }
             this.insertCells(table, label);
         }
-        //console.log(JSON.stringify(newValues));
         extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = newValues;
     }
     buttonClick2(rows) {
@@ -284,6 +280,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             this.messageService.info("You need to give name for ALL the classes!");
         }
         else {
+            this.updateJsonObject();
+            console.log("NEW VALUES" + extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
             this.messageService.info("Well done! Code is coming...");
         }
     }
@@ -328,6 +326,17 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 return term;
             }
         });
+    }
+    updateJsonObject() {
+        var table = document.getElementById('show_pattern_table');
+        var length = table.rows.length;
+        for (var i = 0; i < length; i++) {
+            var label = document.getElementById('label' + (i + 1)).innerHTML;
+            var txtbox = document.getElementById('txtbox' + (i + 1)).innerHTML;
+            console.log("label: " + label);
+            console.log("input: " + txtbox);
+            extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[label].name = txtbox;
+        }
     }
 };
 extensionWidget.ID = 'extension:widget';

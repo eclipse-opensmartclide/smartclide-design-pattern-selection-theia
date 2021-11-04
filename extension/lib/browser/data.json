@@ -3,45 +3,39 @@
         "values": {
             "AbstractFactory": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteFactory1": {
-                        "name": "",
-                        "extension": 1
-                    },
-                    "ConcreteFactory2": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteFactory1": {
+                "name": "",
+                "extension": 1
+            },
+            "ConcreteFactory2": {
+                "name": "",
+                "extension": 1
             },
             "AbstractProduct1": {
                 "name": "",
-                "extension": 1,
-                "classes": {
-                    "Product1.1": {
-                        "name": "",
-                        "extension": 0
-                    },
-                    "Product1.2": {
-                        "name": "",
-                        "extension": 0
-                    }
-                }
+                "extension": 1
+            },
+            "Product1.1": {
+                "name": "",
+                "extension": 0
+            },
+            "Product1.2": {
+                "name": "",
+                "extension": 0
             },
             "AbstractProduct2": {
                 "name": "",
-                "extension": 1,
-                "classes": {
-                    "Product2.1": {
-                        "name": "",
-                        "extension": 0
-                    },
-                    "Product2.2": {
-                        "name": "",
-                        "extension": 0
-                    }
-                }
+                "extension": 1
+            },
+            "Product2.1": {
+                "name": "",
+                "extension": 0
+            },
+            "Product2.2": {
+                "name": "",
+                "extension": 0
             },
             "Client": {
                 "name": "",
@@ -75,23 +69,19 @@
         "values": {
             "Creator": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteCreator1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteCreator1": {
+                "name": "",
+                "extension": 1
             },
             "Product": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteProduct1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteProduct1": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -103,17 +93,15 @@
             },
             "Prototype": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcretePrototype1": {
-                        "name": "",
-                        "extension": 1
-                    },
-                    "ConcretePrototype2": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcretePrototype1": {
+                "name": "",
+                "extension": 1
+            },
+            "ConcretePrototype2": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -133,13 +121,11 @@
             },
             "Target": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "Adapter1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "Adapter1": {
+                "name": "",
+                "extension": 1
             },
             "Adaptee": {
                 "name": "",
@@ -151,13 +137,11 @@
         "values": {
             "Abstraction": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "RefinedAbstraction1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "RefinedAbstraction1": {
+                "name": "",
+                "extension": 1
             },
             "Client": {
                 "name": "",
@@ -165,17 +149,15 @@
             },
             "Implementor": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteImplementor1": {
-                        "name": "",
-                        "extension": 1
-                    },
-                    "ConcreteImplementor2": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteImplementor1": {
+                "name": "",
+                "extension": 1
+            },
+            "ConcreteImplementor2": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -187,17 +169,15 @@
             },
             "Component": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "Leaf1": {
-                        "name": "",
-                        "extension": 1
-                    },
-                    "Composite": {
-                        "name": "",
-                        "extension": 0
-                    }
-                }
+                "extension": 0
+            },
+            "Leaf1": {
+                "name": "",
+                "extension": 1
+            },
+            "Composite": {
+                "name": "",
+                "extension": 0
             }
         }
     },
@@ -205,33 +185,40 @@
         "values": {
             "Component": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteComponent1": {
-                        "name": "",
-                        "extension": 1
-                    },
-                    "Decorator": {
-                        "name": "",
-                        "extension": 0,
-                        "classes": {
-                            "ConcreteDecorator1": {
-                                "name": "",
-                                "extension": 1
-                            },
-                            "ConcreteDecorator2": {
-                                "name": "",
-                                "extension": 1
-                            }
-                        }
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteComponent1": {
+                "name": "",
+                "extension": 1
+            },
+            "Decorator": {
+                "name": "",
+                "extension": 0
+            },
+            "ConcreteDecorator1": {
+                "name": "",
+                "extension": 1
+            },
+            "ConcreteDecorator2": {
+                "name": "",
+                "extension": 1
             }
         }
     },
     "Facade": {
         "values": {
-            "Director": ""
+            "Client": {
+                "name": "",
+                "extension": 0
+            },
+            "Facade": {
+                "name": "",
+                "extension": 0
+            },
+            "AdditionalFacade": {
+                "name": "",
+                "extension": 1
+            }
         }
     },
     "Flyweight": {
@@ -242,17 +229,15 @@
             },
             "Flyweight": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteFlyweight1": {
-                        "name": "",
-                        "extension": 1
-                    },
-                    "UnsharedConcreteFlyweight1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteFlyweight1": {
+                "name": "",
+                "extension": 1
+            },
+            "UnsharedConcreteFlyweight1": {
+                "name": "",
+                "extension": 1
             },
             "Client": {
                 "name": "",
@@ -268,17 +253,15 @@
             },
             "Subject": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "RealSubject": {
-                        "name": "",
-                        "extension": 0
-                    },
-                    "Proxy": {
-                        "name": "",
-                        "extension": 0
-                    }
-                }
+                "extension": 0
+            },
+            "RealSubject": {
+                "name": "",
+                "extension": 0
+            },
+            "Proxy": {
+                "name": "",
+                "extension": 0
             }
         }
     },
@@ -290,17 +273,15 @@
             },
             "Handler": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteHandler1": {
-                        "name": "",
-                        "extension": 1
-                    },
-                    "ConcreteHandler2": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteHandler1": {
+                "name": "",
+                "extension": 1
+            },
+            "ConcreteHandler2": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -320,13 +301,11 @@
             },
             "Command": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteCommand1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteCommand1": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -342,17 +321,15 @@
             },
             "AbstractExpression": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "TerminalExpression1": {
-                        "name": "",
-                        "extension": 1
-                    },
-                    "NonterminalExpression1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "TerminalExpression1": {
+                "name": "",
+                "extension": 1
+            },
+            "NonterminalExpression1": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -364,23 +341,19 @@
             },
             "Aggregate": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteAggregate1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteAggregate1": {
+                "name": "",
+                "extension": 1
             },
             "Iterator": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteIterator1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteIterator1": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -388,27 +361,23 @@
         "values": {
             "Mediator": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteMediator": {
-                        "name": "",
-                        "extension": 0
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteMediator": {
+                "name": "",
+                "extension": 0
             },
             "Colleague": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteColleague1": {
-                        "name": "",
-                        "extension": 1
-                    },
-                    "ConcreteColleague2": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteColleague1": {
+                "name": "",
+                "extension": 1
+            },
+            "ConcreteColleague2": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -432,23 +401,19 @@
         "values": {
             "Subject": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteSubject1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteSubject1": {
+                "name": "",
+                "extension": 1
             },
             "Observer": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteObserver1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteObserver1": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -460,17 +425,15 @@
             },
             "State": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteState1": {
-                        "name": "",
-                        "extension": 1
-                    },
-                    "ConcreteState2": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteState1": {
+                "name": "",
+                "extension": 1
+            },
+            "ConcreteState2": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -482,21 +445,15 @@
             },
             "Strategy": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "name": "",
-                    "extension": 0,
-                    "classes": {
-                        "ConcreteStrategy1": {
-                            "name": "",
-                            "extension": 1
-                        },
-                        "ConcreteStrategy2": {
-                            "name": "",
-                            "extension": 1
-                        }
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteStrategy1": {
+                "name": "",
+                "extension": 1
+            },
+            "ConcreteStrategy2": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -504,13 +461,11 @@
         "values": {
             "AbstractClass": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteClass1": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteClass1": {
+                "name": "",
+                "extension": 1
             }
         }
     },
@@ -522,17 +477,15 @@
             },
             "Visitor": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "ConcreteVisitor1": {
-                        "name": "",
-                        "extension": 1
-                    },
-                    "ConcreteVisitor2": {
-                        "name": "",
-                        "extension": 1
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteVisitor1": {
+                "name": "",
+                "extension": 1
+            },
+            "ConcreteVisitor2": {
+                "name": "",
+                "extension": 1
             },
             "ObjectStructure": {
                 "name": "",
@@ -540,21 +493,15 @@
             },
             "Element": {
                 "name": "",
-                "extension": 0,
-                "classes": {
-                    "name": "",
-                    "extension": 0,
-                    "classes": {
-                        "ConcreteElement1": {
-                            "name": "",
-                            "extension": 1
-                        },
-                        "ConcreteElement2": {
-                            "name": "",
-                            "extension": 1
-                        }
-                    }
-                }
+                "extension": 0
+            },
+            "ConcreteElement1": {
+                "name": "",
+                "extension": 1
+            },
+            "ConcreteElement2": {
+                "name": "",
+                "extension": 1
             }
         }
     }

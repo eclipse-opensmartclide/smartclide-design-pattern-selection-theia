@@ -27,5 +27,6 @@ export declare class extensionWidget extends ReactWidget {
     countKeys(values: string, keyString: string): number;
     showSuggestions(value: string, id: string): void;
     autocompleteMatch(input: any): string[];
+    updateJsonObject(): void;
 }
 //# sourceMappingURL=extension-widget.d.ts.map

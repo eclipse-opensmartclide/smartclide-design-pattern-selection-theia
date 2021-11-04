@@ -208,17 +208,14 @@ export class extensionWidget extends ReactWidget {
 	}
 	//when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
 	buttonClick (table: HTMLTableElement, key: string, values: string, classes: string) {
-		console.log(JSON.stringify(values));
 		if(extensionWidget.state.statePatternSelection=="Abstract Factory"){
 			if(key.includes("AbstractProduct")){
 				var newValues = JSON.parse(JSON.stringify(values));
 				var count = this.countKeys(values, key.substr(3,));
 		
-
 				var labelAbstrProd = this.updateLabel(key.substr(3,), count);
 				newValues[labelAbstrProd] ={name:"",extension:1,classes:{}};
 				
-
 				var count2 = this.countKeys(newValues[key.substr(3,)]["classes"], "Product")-1;
 				for(var j=0;j<count2;j++){
 					var labelProduct = "Product"+count+"."+(j+1);
@@ -230,7 +227,6 @@ export class extensionWidget extends ReactWidget {
 				var labelConFactory = this.updateLabel("ConcreteFactory ", count);
 				this.insertCells(table, labelConFactory);
 				
-
 				var newValues = JSON.parse(JSON.stringify(values));
 				var numAbstrProd = this.countKeys(newValues, "AbstractProduct")-1;
 				newValues["AbstractFactory"]["classes"][labelConFactory] =  JSON.stringify({ "name":"", "extension":1});
@@ -238,8 +234,7 @@ export class extensionWidget extends ReactWidget {
 					var labelProduct = "Product"+(j+1)+"."+count;
 					this.insertCells(table, labelProduct);
 					newValues["AbstractProduct"+(j+1)]["classes"][labelProduct]= JSON.stringify({ "name":"", "extension":1});
-				}
-				
+				}	
 			}
 		}else if(extensionWidget.state.statePatternSelection=="Builder"){
 			if(key.includes("Product")){
@@ -258,7 +253,6 @@ export class extensionWidget extends ReactWidget {
 			this.insertCells(table, labelProduct); 
 			this.insertCells(table, labelConBuilder); 
 		
-			
 		}else if(extensionWidget.state.statePatternSelection=="Command"){
 			if(key.includes("Receiver")){
 				var count = this.countKeys(values, key.substr(3, ));
@@ -276,7 +270,7 @@ export class extensionWidget extends ReactWidget {
 			var newValues = JSON.parse(JSON.stringify(values));
 			newValues[labelReceiver] =  JSON.stringify({ "name":"", "extension":1});
 			newValues["Command"]["classes"][labelConCommand] = JSON.stringify({ "name":"", "extension":1});
-			console.log(JSON.stringify(newValues))
+			
 		}else if(extensionWidget.state.statePatternSelection=="Iterator"){
 			var count = this.countKeys(classes, key.substr(3, ));
 			var labelConAggregate = this.updateLabel("ConcreteAggregate ", count);
@@ -290,11 +284,8 @@ export class extensionWidget extends ReactWidget {
 			var newValues = JSON.parse(JSON.stringify(values));
 			newValues["Aggregate"]["classes"][labelConAggregate] = JSON.stringify( { "name":"", "extension":1});//attribute "classes" in Aggreagate attribute gets new json value
 			newValues["Iterator"]["classes"][labelConIterator] = JSON.stringify({ "name":"", "extension":1});
-				
-			console.log(JSON.stringify(newValues));
 
 		}else{
-			
 			if(classes==""){
 				var count = this.countKeys(values, key.substr(3, ));
 				var label = this.updateLabel(key.substr(3, ), count);
@@ -308,7 +299,6 @@ export class extensionWidget extends ReactWidget {
 			}
 			this.insertCells(table, label); 
 		}
-		//console.log(JSON.stringify(newValues));
 		extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;
 	}
 
@@ -316,6 +306,8 @@ export class extensionWidget extends ReactWidget {
 		if (rows!=extensionWidget.textBoxValues.length){
 			this.messageService.info("You need to give name for ALL the classes!");
 		}else{
+			this.updateJsonObject();
+			console.log("NEW VALUES"+extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 			this.messageService.info("Well done! Code is coming...");
 		}
 	}
@@ -369,7 +361,15 @@ export class extensionWidget extends ReactWidget {
 	}
 
 	updateJsonObject(){
-		
+		var table = document.getElementById('show_pattern_table') as HTMLTableElement;
+		var length = table.rows.length;
+		for(var i = 0 ; i < length ; i++){
+			var label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
+			var txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLLabelElement).innerHTML;
+			console.log("label: "+ label);
+			console.log("input: " + txtbox);
+			extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].name = txtbox;
+		}
 	}
 }
 
