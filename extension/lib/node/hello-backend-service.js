@@ -32,7 +32,6 @@ let HelloBackendServiceImpl = class HelloBackendServiceImpl {
         var res = await this.fileSearchService.find('', opts);
         //fs
         //console.log(fs.readFileSync('C:/Users/test/Downloads/src/src/Main.java','utf8'));
-        console.log("BACK " + res);
         return new Promise(resolve => resolve(res));
     }
 };
