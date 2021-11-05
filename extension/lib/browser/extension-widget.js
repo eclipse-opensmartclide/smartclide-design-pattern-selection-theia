@@ -133,16 +133,16 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             this.messageService.info('You need to choose a software pattern!');
         }
     }
-    //update the state
+    //update the state of dropdown
     updateSelection(e) {
         const key = e.currentTarget.name;
         extensionWidget_1.state[key] = e.currentTarget.value;
     }
-    //update the state
-    updateInput(e) {
-        const key = e.currentTarget.name;
-        extensionWidget_1.state[key] = e.currentTarget.value;
-    }
+    /* //update the state
+     updateInput(e:React.ChangeEvent<HTMLInputElement>){
+        const key =e.currentTarget.name as keyof typeof extensionWidget.state;
+        extensionWidget.state[key]  = e.currentTarget.value;
+    }*/
     insertCells(table, key) {
         var row = table.insertRow(table.rows.length);
         var cell1 = row.insertCell(0);
@@ -176,11 +176,11 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         if (extensionWidget_1.state.statePatternSelection == "Abstract Factory") {
             if (key.includes("AbstractProduct")) {
                 var numAbstrProd = this.countKeys(values, key.substr(3));
-                var labelAbstrProd = this.updateLabel(key.substr(3), numAbstrProd);
+                var labelAbstrProd = this.updateLabel(key.substr(3), numAbstrProd + 1);
                 newValues[labelAbstrProd] = JSON.stringify({ name: "", extension: 1 });
-                var numProd = (this.countKeys(newValues[key.substr(3)]["classes"], "Product") - 1) / numAbstrProd;
+                var numProd = (this.countKeys(values, "Product") - 1) / numAbstrProd;
                 for (var j = 0; j < numProd; j++) {
-                    var labelProduct = "Product" + numAbstrProd + "." + (j + 1);
+                    var labelProduct = "Product" + (numAbstrProd + 1) + "." + (j + 1);
                     this.insertCells(table, labelProduct);
                     newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
                 }
@@ -189,7 +189,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 var numConFactory = this.countKeys(values, key.substr(3)); //values?? newValues??
                 var labelConFactory = this.updateLabel("ConcreteFactory ", numConFactory);
                 this.insertCells(table, labelConFactory);
-                var numAbstrProd = this.countKeys(newValues, "AbstractProduct") - 1; //??
+                var numAbstrProd = this.countKeys(newValues, "AbstractProduct") + 1; //??
                 newValues[labelConFactory] = JSON.stringify({ "name": "", "extension": 1 });
                 for (var j = 0; j < numAbstrProd; j++) {
                     var labelProduct = "Product" + (j + 1) + "." + numConFactory;
@@ -199,8 +199,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             }
         }
         else if (extensionWidget_1.state.statePatternSelection == "Builder") {
-            var labelProduct = this.updateLabel("Product ", count);
-            var labelConBuilder = this.updateLabel("ConcreteBuilder ", count);
+            var labelProduct = this.updateLabel("Product ", count + 1);
+            var labelConBuilder = this.updateLabel("ConcreteBuilder ", count + 1);
             newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, labelProduct);
@@ -216,8 +216,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[labelConCommand] = JSON.stringify({ "name": "", "extension": 1 });
         }
         else if (extensionWidget_1.state.statePatternSelection == "Iterator") {
-            var labelConAggregate = this.updateLabel("ConcreteAggregate ", count);
-            var labelConIterator = this.updateLabel("ConcreteIterator ", count);
+            var labelConAggregate = this.updateLabel("ConcreteAggregate ", count + 1);
+            var labelConIterator = this.updateLabel("ConcreteIterator ", count + 1);
             this.insertCells(table, labelConAggregate);
             this.insertCells(table, labelConIterator);
             //inserts new attributes in json object
@@ -225,7 +225,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
         }
         else {
-            var label = this.updateLabel(key.substr(3), count);
+            var label = this.updateLabel(key.substr(3), count + 1);
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
         }
@@ -254,7 +254,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 count++;
             }
         });
-        return count + 1;
+        return count;
     }
     showSuggestions(value, id) {
         var res = document.getElementById("suggestions" + id.substr(6));
@@ -265,17 +265,25 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         }
         res.innerHTML = "<ul id='list" + id.substr(6) + "'> " + list + "</ul>";
         var ul = document.getElementById("list" + id.substr(6));
+        var input = document.getElementById("txtbox" + id.substr(6));
         ul.onclick = function (event) {
-            var input = document.getElementById("txtbox" + id.substr(6));
             input.value = event.target.innerHTML;
             res.style.visibility = 'hidden';
         };
+        var hideBlock = function () {
+            res.style.visibility = 'hidden';
+        };
+        ul.addEventListener('mouseleave', hideBlock);
+        input.addEventListener('keypress', (e) => {
+            res.style.visibility = 'visible';
+            this.showSuggestions(document.getElementById("txtbox" + id.substr(6)).value, e.target.id);
+        });
     }
     autocompleteMatch(input) {
         if (input == '') {
             return [];
         }
-        var reg = new RegExp(input);
+        var reg = new RegExp('^' + input);
         return extensionWidget_1.res.filter(function (term) {
             if (term.match(reg)) {
                 return term;
