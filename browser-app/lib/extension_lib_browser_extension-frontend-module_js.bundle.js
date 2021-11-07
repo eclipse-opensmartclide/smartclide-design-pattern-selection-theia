@@ -342,26 +342,26 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         let row = table.insertRow(table.rows.length);
         let cell1 = row.insertCell(0);
         let cell2 = row.insertCell(1);
-        let t1 = document.createElement("label");
-        t1.id = "label" + table.rows.length;
-        t1.innerHTML = key;
-        let t2 = document.createElement("input");
-        t2.id = "txtbox" + table.rows.length;
+        let label = document.createElement("label");
+        label.id = "label" + table.rows.length;
+        label.innerHTML = key;
+        let txtbox = document.createElement("input");
+        txtbox.id = "txtbox" + table.rows.length;
         let num = table.rows.length;
-        t2.onchange = function () {
-            extensionWidget_1.textBoxValues[num - 1] = t2.value;
+        txtbox.onchange = function () {
+            extensionWidget_1.textBoxValues[num - 1] = txtbox.value;
         };
-        t2.autocomplete = "off";
-        t2.placeholder = key;
-        t2.addEventListener('keypress', (e) => {
-            this.showSuggestions(t2.value, e.target.id);
+        txtbox.autocomplete = "off";
+        txtbox.placeholder = key;
+        txtbox.addEventListener('keypress', (e) => {
+            this.showSuggestions(txtbox.value, e.target.id);
         });
-        let t3 = document.createElement("div");
-        t3.id = "suggestions" + table.rows.length;
-        t3.className = "suggestions";
-        cell1.appendChild(t1);
-        cell2.appendChild(t2);
-        cell2.appendChild(t3);
+        let suggestions = document.createElement("div");
+        suggestions.id = "suggestions" + table.rows.length;
+        suggestions.className = "suggestions";
+        cell1.appendChild(label);
+        cell2.appendChild(txtbox);
+        cell2.appendChild(suggestions);
         return row;
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
@@ -401,8 +401,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             this.insertCells(table, labelConBuilder);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Command") {
-            var labelReceiver = this.updateLabel("Receiver ", count);
-            var labelConCommand = this.updateLabel("ConcreteCommand ", count);
+            var labelReceiver = this.updateLabel("Receiver ", count + 1);
+            var labelConCommand = this.updateLabel("ConcreteCommand ", count + 1);
             this.insertCells(table, labelReceiver);
             this.insertCells(table, labelConCommand);
             //inserts new attributes in json object
