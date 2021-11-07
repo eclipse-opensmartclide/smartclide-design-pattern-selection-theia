@@ -17,7 +17,7 @@ input{
 	background: transparent;
     border: none;
     color: white;
-    width: 60%;
+    width: 190px;
 }
 
 #TD{
@@ -61,7 +61,10 @@ input{
 .suggestions {
   border: 1px #ccc;
   margin-left: 10px;
-  width: 60%;
+  width:190px;
+  position: absolute;
+  background-color: #3c3c3c;
+  padding-left: 2px;
 }
 .suggestions ul {
   list-style-type: none;
