@@ -19,13 +19,15 @@ export declare class extensionWidget extends ReactWidget {
     protected render(): React.ReactNode;
     protected runprocess(): Promise<void>;
     updateSelection(e: React.ChangeEvent<HTMLSelectElement>): void;
-    updateInput(e: React.ChangeEvent<HTMLInputElement>): void;
     insertCells(table: HTMLTableElement, key: string): HTMLTableRowElement;
-    buttonClick(table: HTMLTableElement, key: string, values: string, classes: string): void;
+    extensionButtonClick(table: HTMLTableElement, key: string, values: string): void;
     buttonClick2(rows: number): void;
     updateLabel(value: string, count: number): string;
     countKeys(values: string, keyString: string): number;
     showSuggestions(value: string, id: string): void;
-    autocompleteMatch(input: any): string[];
+    autocompleteMatch(input: string): string[];
+    updateJsonObject(): void;
+    checkInputs(): "Inputs are invalid" | "Inputs are valid";
+    checkInputsForSameValues(): boolean;
 }
 //# sourceMappingURL=extension-widget.d.ts.map
