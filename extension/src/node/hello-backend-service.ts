@@ -15,7 +15,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     async sayHelloTo(url: string): Promise<string[]> {
         //string manipulation to get the right form of url string
         var lastL = url.indexOf("/#/");
-        var rootUri = url.substr(lastL+3);
+        var rootUri = url.substr(lastL+3) + "/src";
         //console.log(rootUri);
 
         //prepare file-search, define search pattern
