@@ -106,6 +106,10 @@
 
     "Singleton":{
         "values":{
+            "Client":{
+                "name":"",
+                "extension":0
+            },
             "Singleton":{
                 "name":"",
                 "extension":0

@@ -181,22 +181,21 @@ export class extensionWidget extends ReactWidget {
 			if(key.includes("AbstractProduct")){
 			let labelAbstrProd = this.updateLabel(key.substr(3,), count+1);
 				newValues[labelAbstrProd] = JSON.stringify({name:"",extension:1});
-				
-				var numProd = (this.countKeys(values, "Product")-1) / count;
-				for(let j = 0 ; j < numProd ; j++ ){
+				this.insertCells(table, labelAbstrProd);
+				var numProd = (this.countKeys(values, "Product") / count) - 1;// number of "Products"
+				for(let j = 0 ; j < numProd; j++ ){
 					let labelProduct = "Product"+ (count+1) + "."+(j+1);
 					this.insertCells(table, labelProduct);
 					newValues[labelProduct]= JSON.stringify({ "name":"", "extension":1});
 				}
 			}else{
-				let numConFactory = this.countKeys(values, key.substr(3,)) ;//values?? newValues??
-				let labelConFactory = this.updateLabel("ConcreteFactory ", numConFactory);
+				let labelConFactory = this.updateLabel("ConcreteFactory ", count+1);
 				this.insertCells(table, labelConFactory);
 				
-				let numAbstrProd = this.countKeys(newValues, "AbstractProduct")+1; //??
+				let numAbstrProd = this.countKeys(newValues, "AbstractProduct"); 
 				newValues[labelConFactory] =  JSON.stringify({ "name":"", "extension":1});
 				for(let j = 0; j < numAbstrProd ; j++){
-					let labelProduct = "Product"+(j+1)+"." + numConFactory;
+					let labelProduct = "Product"+(j+1)+"." + (count+1);
 					this.insertCells(table, labelProduct);
 					newValues[labelProduct] = JSON.stringify({ "name":"", "extension":1});
 				}	
