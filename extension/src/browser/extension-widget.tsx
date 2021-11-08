@@ -10,6 +10,7 @@ import data from './data.json';
 
 
 
+
 @injectable()
 export class extensionWidget extends ReactWidget {
 	
@@ -125,6 +126,25 @@ export class extensionWidget extends ReactWidget {
 						this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 					});	
 				}
+				if(values[key].insertMethods){
+					if (values[key].insertMethods==1){
+						var keys = Object.keys(values[key]);
+						let row = this.insertCells(table, keys[3]);
+						let cell3 = row.insertCell(2);
+						let t3 = document.createElement("button");
+						t3.innerHTML = "+";
+						t3.id = "btn" + '-' + key + '-' + keys[3];
+						cell3.appendChild(t3);
+						t3.addEventListener('click', (event) => {
+							this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
+							console.log("NEW VALUES: "+ JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
+						});	
+						
+					}else{
+						var keys = Object.keys(values[key]);
+						this.insertCells(table, keys[3]);
+					}
+				}
 			});
 			let d = document.getElementById("result") as HTMLElement;
 			let b = document.createElement("button");
@@ -178,11 +198,11 @@ export class extensionWidget extends ReactWidget {
 	extensionButtonClick (table: HTMLTableElement, key: string, values: string) {
 		let newValues = JSON.parse(JSON.stringify(values));
 		let count = this.countKeys(values, key.substr(3, ));
+		let label = this.updateLabel(key.substr(3,), count+1);
 		if(extensionWidget.state.statePatternSelection=="Abstract Factory"){
 			if(key.includes("AbstractProduct")){
-			let labelAbstrProd = this.updateLabel(key.substr(3,), count+1);
-				newValues[labelAbstrProd] = JSON.stringify({name:"",extension:1});
-				this.insertCells(table, labelAbstrProd);
+				newValues[label] = JSON.stringify({name:"",extension:1});
+				this.insertCells(table, label);
 				var numProd = (this.countKeys(values, "Product") / count) - 1;// number of "Products"
 				for(let j = 0 ; j < numProd; j++ ){
 					let labelProduct = "Product"+ (count+1) + "."+(j+1);
@@ -190,11 +210,10 @@ export class extensionWidget extends ReactWidget {
 					newValues[labelProduct]= JSON.stringify({ "name":"", "extension":1});
 				}
 			}else{
-				let labelConFactory = this.updateLabel("ConcreteFactory ", count+1);
-				this.insertCells(table, labelConFactory);
+				this.insertCells(table, label);
 				
 				let numAbstrProd = this.countKeys(newValues, "AbstractProduct"); 
-				newValues[labelConFactory] =  JSON.stringify({ "name":"", "extension":1});
+				newValues[label] =  JSON.stringify({ "name":"", "extension":1});
 				for(let j = 0; j < numAbstrProd ; j++){
 					let labelProduct = "Product"+(j+1)+"." + (count+1);
 					this.insertCells(table, labelProduct);
@@ -202,13 +221,12 @@ export class extensionWidget extends ReactWidget {
 				}	
 			}
 		}else if(extensionWidget.state.statePatternSelection=="Builder"){
-			let labelProduct = this.updateLabel("Product ", count+1);
 			let labelConBuilder = this.updateLabel("ConcreteBuilder ", count+1);
 
-			newValues[labelProduct] =  JSON.stringify({ "name":"", "extension":1});
+			newValues[label] =  JSON.stringify({ "name":"", "extension":1});
 			newValues[labelConBuilder] = JSON.stringify({ "name":"", "extension":1});
 			
-			this.insertCells(table, labelProduct); 
+			this.insertCells(table, label); 
 			this.insertCells(table, labelConBuilder); 
 		
 		}else if(extensionWidget.state.statePatternSelection=="Command"){
@@ -232,8 +250,13 @@ export class extensionWidget extends ReactWidget {
 			newValues[labelConAggregate] = JSON.stringify( { "name":"", "extension":1});
 			newValues[labelConIterator] = JSON.stringify({ "name":"", "extension":1});
 
+		}else if(key.substr(3,).includes("method")){
+			var string = key.split('-');
+			let countMethods = this.countKeys(newValues[string[1]],"method")
+			let labelMethod = this.updateLabel("method ", countMethods+1);
+			this.insertCells(table, labelMethod);
+			newValues[string[1]][labelMethod] = "";
 		}else{
-			let label = this.updateLabel(key.substr(3, ), count+1);
 			newValues[label] = JSON.stringify({"name":"", "extension":1});
 			this.insertCells(table, label); 
 		}
@@ -260,9 +283,10 @@ export class extensionWidget extends ReactWidget {
 
 	countKeys(values: string, keyString: string){
 		let count = 0;
-		keyString = keyString.slice(0, -1)
+		console.log(typeof values)
+		let string = keyString.replace(/\d/g, ''); //removes the numbers from the string and returns a new one
 		Object.keys(values).forEach((key) =>{
-			if(key.includes(keyString)){
+			if(key.includes(string)){
 				count ++;
 			}
 		});
@@ -324,9 +348,13 @@ export class extensionWidget extends ReactWidget {
 		}else{
 			for(let i = 0 ; i < table.rows.length; i++){
 				const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
+				const label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
 				if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){
 					count++;
 				}
+				/*if(extensionWidget.state.statePatternSelection=="Adapter" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
+
+				}*/
 			}
 			return (count==table.rows.length ? "Inputs are valid" : "Inputs are invalid")
 		}

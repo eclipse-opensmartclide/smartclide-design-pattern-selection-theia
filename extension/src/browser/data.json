@@ -129,7 +129,9 @@
             },
             "Adapter1":{
                 "name":"",
-                "extension":1
+                "extension":0,
+                "insertMethods":1,
+                "method1":""
             },
             "Adaptee":{
                 "name":"",
