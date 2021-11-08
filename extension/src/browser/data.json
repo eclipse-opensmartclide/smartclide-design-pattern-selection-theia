@@ -11,7 +11,7 @@
             },
             "ConcreteFactory2":{
                 "name":"",
-                "extension":1
+                "extension":0
             },
             "AbstractProduct1":{
                 "name":"",
@@ -27,7 +27,7 @@
             },
             "AbstractProduct2":{
                 "name":"",
-                "extension":1
+                "extension":0
             },
             "Product2.1":{
                 "name":"",
@@ -55,7 +55,7 @@
             },
             "ConcreteBuilder1":{
                 "name":"",
-                "extension":1
+                "extension":0
             },
             "Product1":{
                 "name":"",
@@ -71,7 +71,7 @@
             },
             "ConcreteCreator1":{
                 "name":"",
-                "extension":1
+                "extension":0
             },
             "Product":{
                 "name":"",
@@ -99,7 +99,7 @@
             },
             "ConcretePrototype2":{
                 "name":"",
-                "extension":1
+                "extension":0
             }
         }
     },
@@ -162,7 +162,7 @@
             },
             "ConcreteImplementor2":{
                 "name":"",
-                "extension":1
+                "extension":0
             }
         }
     },
@@ -177,7 +177,7 @@
                 "name":"",
                 "extension":0
             },
-            "Leaf1":{
+            "ConcreteDecorator1":{
                 "name":"",
                 "extension":1
              },
@@ -208,7 +208,7 @@
             },
             "ConcreteDecorator2":{
                 "name":"",
-                "extension":1
+                "extension":0
             }
          }
 
@@ -291,7 +291,7 @@
             },
             "ConcreteHandler2":{
                 "name":"",
-                "extension":1
+                "extension":0
             }
         }
     },
@@ -388,7 +388,7 @@
             },
             "ConcreteColleague2":{
                 "name":"",
-                "extension":1
+                "extension":0
             }
         }
     },
@@ -444,7 +444,7 @@
             },
             "ConcreteState2":{
                 "name":"",
-                "extension":1
+                "extension":0
             }
          }
     },
@@ -464,7 +464,7 @@
             },
             "ConcreteStrategy2":{
                 "name":"",
-                "extension":1
+                "extension":0
             }
 
         }
@@ -497,7 +497,7 @@
             },
             "ConcreteVisitor2":{
                 "name":"",
-                "extension":1
+                "extension":0
             },
             "ObjectStructure":{
                 "name":"",
@@ -513,7 +513,7 @@
             },
             "ConcreteElement2":{
                 "name":"",
-                "extension":1
+                "extension":0
             }
         }
     }
