@@ -129,9 +129,9 @@
                 "name": "",
                 "extension": 1
             },
-            "Adaptee": {
+            "Adaptee1": {
                 "name": "",
-                "extension": 0
+                "extension": 1
             }
         }
     },
@@ -217,7 +217,7 @@
                 "name": "",
                 "extension": 0
             },
-            "AdditionalFacade": {
+            "AdditionalFacade1": {
                 "name": "",
                 "extension": 1
             }

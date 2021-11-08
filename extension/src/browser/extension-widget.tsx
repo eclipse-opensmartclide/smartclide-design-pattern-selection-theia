@@ -179,7 +179,7 @@ export class extensionWidget extends ReactWidget {
 		let count = this.countKeys(values, key.substr(3, ));
 		if(extensionWidget.state.statePatternSelection=="Abstract Factory"){
 			if(key.includes("AbstractProduct")){
-			let labelAbstrProd = this.updateLabel(key.substr(3,), count+1);
+				let labelAbstrProd = this.updateLabel(key.substr(3,), count+1);
 				newValues[labelAbstrProd] = JSON.stringify({name:"",extension:1});
 				this.insertCells(table, labelAbstrProd);
 				var numProd = (this.countKeys(values, "Product") / count) - 1;// number of "Products"
@@ -206,13 +206,41 @@ export class extensionWidget extends ReactWidget {
 
 			newValues[labelProduct] =  JSON.stringify({ "name":"", "extension":1});
 			newValues[labelConBuilder] = JSON.stringify({ "name":"", "extension":1});
-			
-			this.insertCells(table, labelProduct); 
+						 
 			this.insertCells(table, labelConBuilder); 
-		
+			this.insertCells(table, labelProduct);
+		}else if(extensionWidget.state.statePatternSelection=="Factory Method") {
+			let labelProduct = this.updateLabel("ConcreteProduct ", count+1);
+			let labelConCreator = this.updateLabel("ConcreteCreator ", count+1);
+
+			newValues[labelProduct] =  JSON.stringify({ "name":"", "extension":1});
+			newValues[labelConCreator] = JSON.stringify({ "name":"", "extension":1});
+						 
+			this.insertCells(table, labelConCreator); 
+			this.insertCells(table, labelProduct);
+		}else if(extensionWidget.state.statePatternSelection=="Adapter") {
+			let labelAdapter = this.updateLabel("Adapter ", count+1);
+			let labelAdaptee = this.updateLabel("Adaptee ", count+1);
+
+			newValues[labelAdapter] =  JSON.stringify({ "name":"", "extension":1});
+			newValues[labelAdaptee] = JSON.stringify({ "name":"", "extension":1});
+						 
+			this.insertCells(table, labelAdapter); 
+			this.insertCells(table, labelAdaptee);	
+		}else if(extensionWidget.state.statePatternSelection=="Flyweight") {
+			let label;
+			if(key.includes("UnsharedConcreteFlyweight")){
+				label = this.updateLabel(key.substr(3, ), count+1);
+				 
+			}else{
+				var numConFly = count - this.countKeys(values, "UnsharedConcreteFlyweight");// number of "ConcreteFlyweight"
+				label = this.updateLabel(key.substr(3, ), numConFly+1);
+			}
+			newValues[label] = JSON.stringify({"name":"", "extension":1});
+			this.insertCells(table, label);
 		}else if(extensionWidget.state.statePatternSelection=="Command"){
-			var labelReceiver = this.updateLabel("Receiver ", count);
-			var labelConCommand = this.updateLabel("ConcreteCommand ", count);
+			var labelReceiver = this.updateLabel("Receiver ", count+1);
+			var labelConCommand = this.updateLabel("ConcreteCommand ", count+1);
 
 			this.insertCells(table, labelReceiver); 	
 			this.insertCells(table, labelConCommand); 

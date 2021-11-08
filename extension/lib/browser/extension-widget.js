@@ -196,8 +196,38 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             let labelConBuilder = this.updateLabel("ConcreteBuilder ", count + 1);
             newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
-            this.insertCells(table, labelProduct);
             this.insertCells(table, labelConBuilder);
+            this.insertCells(table, labelProduct);
+        }
+        else if (extensionWidget_1.state.statePatternSelection == "Factory Method") {
+            let labelProduct = this.updateLabel("ConcreteProduct ", count + 1);
+            let labelConCreator = this.updateLabel("ConcreteCreator ", count + 1);
+            newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues[labelConCreator] = JSON.stringify({ "name": "", "extension": 1 });
+            this.insertCells(table, labelConCreator);
+            this.insertCells(table, labelProduct);
+        }
+        else if (extensionWidget_1.state.statePatternSelection == "Adapter") {
+            let labelAdapter = this.updateLabel("Adapter ", count + 1);
+            let labelAdaptee = this.updateLabel("Adaptee ", count + 1);
+            newValues[labelAdapter] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues[labelAdaptee] = JSON.stringify({ "name": "", "extension": 1 });
+            this.insertCells(table, labelAdapter);
+            this.insertCells(table, labelAdaptee);
+        }
+        else if (extensionWidget_1.state.statePatternSelection == "Flyweight") {
+            let label;
+            if (key.includes("UnsharedConcreteFlyweight")) {
+                label = this.updateLabel(key.substr(3), count + 1);
+            }
+            else {
+                var numConFly = count - this.countKeys(values, "UnsharedConcreteFlyweight"); // number of "ConcreteFlyweight"
+                console.log("count  " + count);
+                console.log("UnsharedConcreteFlyweight   " + this.countKeys(values, "UnsharedConcreteFlyweight"));
+                label = this.updateLabel(key.substr(3), numConFly + 1);
+            }
+            newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
+            this.insertCells(table, label);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Command") {
             var labelReceiver = this.updateLabel("Receiver ", count);
@@ -314,32 +344,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
     checkInputsForSameValues() {
         //return (extensionWidget.textBoxValues.every( (val, i, arr) => val === arr[0] ) ) ;
         return extensionWidget_1.textBoxValues.some((val, i) => extensionWidget_1.textBoxValues.indexOf(val) !== i);
-    }
-    showSuggestions(value, id) {
-        var res = document.getElementById("suggestions" + id.substr(6));
-        let list = '';
-        let terms = this.autocompleteMatch(value);
-        for (var i = 0; i < terms.length; i++) {
-            list += '<li>' + terms[i] + '</li>';
-        }
-        res.innerHTML = "<ul id='list" + id.substr(6) + "'> " + list + "</ul>";
-        var ul = document.getElementById("list" + id.substr(6));
-        ul.onclick = function (event) {
-            var input = document.getElementById("txtbox" + id.substr(6));
-            input.value = event.target.innerHTML;
-            res.style.visibility = 'hidden';
-        };
-    }
-    autocompleteMatch(input) {
-        if (input == '') {
-            return [];
-        }
-        var reg = new RegExp(input);
-        return extensionWidget_1.res.filter(function (term) {
-            if (term.match(reg)) {
-                return term;
-            }
-        });
     }
 };
 extensionWidget.ID = 'extension:widget';
