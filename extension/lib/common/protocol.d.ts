@@ -3,6 +3,7 @@ export declare const HelloBackendService: unique symbol;
 export declare const HELLO_BACKEND_PATH = "/services/helloBackend";
 export interface HelloBackendService {
     sayHelloTo(url: string): Promise<string[]>;
+    getMethods(): void;
 }
 export declare const HelloBackendWithClientService: unique symbol;
 export declare const HELLO_BACKEND_WITH_CLIENT_PATH = "/services/withClient";

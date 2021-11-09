@@ -104,12 +104,13 @@ export class extensionWidget extends ReactWidget {
 
 			var getUrl = window.location.href;
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
-			for (let i=0; i<extensionWidget.res.length; i++){
+			/*for (let i=0; i<extensionWidget.res.length; i++){
             	let lastW = extensionWidget.res[i].lastIndexOf("/");
 				let file = extensionWidget.res[i].substr(lastW+1);
 				file = file.substr(0, file.indexOf("."));
 				extensionWidget.res[i] = file;  
-			}
+			}*/
+			console.log(extensionWidget.res)
 
 			//show the JSON values for the chosen key-pattern
 			let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
@@ -348,13 +349,14 @@ export class extensionWidget extends ReactWidget {
 		}else{
 			for(let i = 0 ; i < table.rows.length; i++){
 				const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
-				const label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
+				//const label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
 				if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){
 					count++;
 				}
-				/*if(extensionWidget.state.statePatternSelection=="Adapter" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
-
-				}*/
+				//if(extensionWidget.state.statePatternSelection=="Adapter" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
+					//const txtboxMethod = (document.getElementById( 'txtbox'+ (i + 2) ) as HTMLInputElement).value;
+				
+				//}
 			}
 			return (count==table.rows.length ? "Inputs are valid" : "Inputs are invalid")
 		}
@@ -364,6 +366,8 @@ export class extensionWidget extends ReactWidget {
 		//return (extensionWidget.textBoxValues.every( (val, i, arr) => val === arr[0] ) ) ;
 		return extensionWidget.textBoxValues.some((val, i) => extensionWidget.textBoxValues.indexOf(val) !== i);
 	}
+
+	
 }
 
 

@@ -1,7 +1,7 @@
 import { injectable, inject } from "inversify";
 import { HelloBackendService } from "../common/protocol";
 import {FileSearchService } from "@theia/file-search/lib/common/file-search-service";
-//import * as fs from 'fs';
+
 
 @injectable()
 export class HelloBackendServiceImpl implements HelloBackendService {
@@ -10,7 +10,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     protected readonly fileSearchService!:FileSearchService;
       
     static index = -1;
-    
+    static array: string[];
 
     async sayHelloTo(url: string): Promise<string[]> {
         //string manipulation to get the right form of url string
@@ -30,13 +30,22 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         //search for every file name in textbox values
         //index=-1 if not found
         var res= await this.fileSearchService.find('',opts);
-                    
+        HelloBackendServiceImpl.array = res;
+        for (let i=0; i<res.length; i++){
+            let lastW = res[i].lastIndexOf("/");
+            let file = res[i].substr(lastW+1);
+            file = file.substr(0, file.indexOf("."));
+            res[i] = file;  
+        }
         //fs
         //console.log(fs.readFileSync('C:/Users/test/Downloads/src/src/Main.java','utf8'));
-
-        return new Promise<string[]>(resolve => resolve(res));
-
+        
+        return new Promise<string[]>(resolve => resolve(res))
+    }
 
     
-    }
+    
+    
 }
+
+

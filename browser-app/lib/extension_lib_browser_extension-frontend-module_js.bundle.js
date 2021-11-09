@@ -7,7 +7,7 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"Abstract Factory":{"values":{"AbstractFactory":{"name":"","extension":0},"ConcreteFactory1":{"name":"","extension":1},"ConcreteFactory2":{"name":"","extension":1},"AbstractProduct1":{"name":"","extension":1},"Product1.1":{"name":"","extension":0},"Product1.2":{"name":"","extension":0},"AbstractProduct2":{"name":"","extension":1},"Product2.1":{"name":"","extension":0},"Product2.2":{"name":"","extension":0},"Client":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0},"ConcreteBuilder1":{"name":"","extension":1},"Product1":{"name":"","extension":1}}},"Factory Method":{"values":{"Creator":{"name":"","extension":0},"ConcreteCreator1":{"name":"","extension":1},"Product":{"name":"","extension":0},"ConcreteProduct1":{"name":"","extension":1}}},"Prototype":{"values":{"Client":{"name":"","extension":0},"Prototype":{"name":"","extension":0},"ConcretePrototype1":{"name":"","extension":1},"ConcretePrototype2":{"name":"","extension":1}}},"Singleton":{"values":{"Client":{"name":"","extension":0},"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"Client":{"name":"","extension":0},"Target":{"name":"","extension":0},"Adapter1":{"name":"","extension":1},"Adaptee":{"name":"","extension":0}}},"Bridge":{"values":{"Abstraction":{"name":"","extension":0},"RefinedAbstraction1":{"name":"","extension":1},"Client":{"name":"","extension":0},"Implementor":{"name":"","extension":0},"ConcreteImplementor1":{"name":"","extension":1},"ConcreteImplementor2":{"name":"","extension":1}}},"Composite":{"values":{"Client":{"name":"","extension":0},"Component":{"name":"","extension":0},"Leaf1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}},"Decorator":{"values":{"Component":{"name":"","extension":0},"ConcreteComponent1":{"name":"","extension":1},"Decorator":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"ConcreteDecorator2":{"name":"","extension":1}}},"Facade":{"values":{"Client":{"name":"","extension":0},"Facade":{"name":"","extension":0},"AdditionalFacade":{"name":"","extension":1}}},"Flyweight":{"values":{"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0},"ConcreteFlyweight1":{"name":"","extension":1},"UnsharedConcreteFlyweight1":{"name":"","extension":1},"Client":{"name":"","extension":0}}},"Proxy":{"values":{"Client":{"name":"","extension":0},"Subject":{"name":"","extension":0},"RealSubject":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}},"Chain of Responsibility":{"values":{"Client":{"name":"","extension":0},"Handler":{"name":"","extension":0},"ConcreteHandler1":{"name":"","extension":1},"ConcreteHandler2":{"name":"","extension":1}}},"Command":{"values":{"Client":{"name":"","extension":0},"Receiver1":{"name":"","extension":1},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0},"ConcreteCommand1":{"name":"","extension":1}}},"Interpreter":{"values":{"Client":{"name":"","extension":0},"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0},"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}},"Iterator":{"values":{"Client":{"name":"","extension":0},"Aggregate":{"name":"","extension":0},"ConcreteAggregate1":{"name":"","extension":1},"Iterator":{"name":"","extension":0},"ConcreteIterator1":{"name":"","extension":1}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0},"ConcreteMediator":{"name":"","extension":0},"Colleague":{"name":"","extension":0},"ConcreteColleague1":{"name":"","extension":1},"ConcreteColleague2":{"name":"","extension":1}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"Memento":{"name":"","extension":0},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0},"ConcreteSubject1":{"name":"","extension":1},"Observer":{"name":"","extension":0},"ConcreteObserver1":{"name":"","extension":1}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0},"ConcreteState1":{"name":"","extension":1},"ConcreteState2":{"name":"","extension":1}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0},"ConcreteStrategy1":{"name":"","extension":1},"ConcreteStrategy2":{"name":"","extension":1}}},"Template Method":{"values":{"AbstractClass":{"name":"","extension":0},"ConcreteClass1":{"name":"","extension":1}}},"Visitor":{"values":{"Client":{"name":"","extension":0},"Visitor":{"name":"","extension":0},"ConcreteVisitor1":{"name":"","extension":1},"ConcreteVisitor2":{"name":"","extension":1},"ObjectStructure":{"name":"","extension":0},"Element":{"name":"","extension":0},"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":1}}}}');
+module.exports = JSON.parse('{"Abstract Factory":{"values":{"AbstractFactory":{"name":"","extension":0},"ConcreteFactory1":{"name":"","extension":1},"ConcreteFactory2":{"name":"","extension":0},"AbstractProduct1":{"name":"","extension":1},"Product1.1":{"name":"","extension":0},"Product1.2":{"name":"","extension":0},"AbstractProduct2":{"name":"","extension":0},"Product2.1":{"name":"","extension":0},"Product2.2":{"name":"","extension":0},"Client":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0},"ConcreteBuilder1":{"name":"","extension":0},"Product1":{"name":"","extension":1}}},"Factory Method":{"values":{"Creator":{"name":"","extension":0},"ConcreteCreator1":{"name":"","extension":0},"Product":{"name":"","extension":0},"ConcreteProduct1":{"name":"","extension":1}}},"Prototype":{"values":{"Client":{"name":"","extension":0},"Prototype":{"name":"","extension":0},"ConcretePrototype1":{"name":"","extension":1},"ConcretePrototype2":{"name":"","extension":0}}},"Singleton":{"values":{"Client":{"name":"","extension":0},"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"Client":{"name":"","extension":0},"Target":{"name":"","extension":0},"Adapter1":{"name":"","extension":0,"insertMethods":1,"method1":""},"Adaptee":{"name":"","extension":0}}},"Bridge":{"values":{"Abstraction":{"name":"","extension":0},"RefinedAbstraction1":{"name":"","extension":1},"Client":{"name":"","extension":0},"Implementor":{"name":"","extension":0},"ConcreteImplementor1":{"name":"","extension":1},"ConcreteImplementor2":{"name":"","extension":0}}},"Composite":{"values":{"Client":{"name":"","extension":0},"Component":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}},"Decorator":{"values":{"Component":{"name":"","extension":0},"ConcreteComponent1":{"name":"","extension":1},"Decorator":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"ConcreteDecorator2":{"name":"","extension":0}}},"Facade":{"values":{"Client":{"name":"","extension":0},"Facade":{"name":"","extension":0},"AdditionalFacade":{"name":"","extension":1}}},"Flyweight":{"values":{"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0},"ConcreteFlyweight1":{"name":"","extension":1},"UnsharedConcreteFlyweight1":{"name":"","extension":1},"Client":{"name":"","extension":0}}},"Proxy":{"values":{"Client":{"name":"","extension":0},"Subject":{"name":"","extension":0},"RealSubject":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}},"Chain of Responsibility":{"values":{"Client":{"name":"","extension":0},"Handler":{"name":"","extension":0},"ConcreteHandler1":{"name":"","extension":1},"ConcreteHandler2":{"name":"","extension":0}}},"Command":{"values":{"Client":{"name":"","extension":0},"Receiver1":{"name":"","extension":1},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0},"ConcreteCommand1":{"name":"","extension":1}}},"Interpreter":{"values":{"Client":{"name":"","extension":0},"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0},"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}},"Iterator":{"values":{"Client":{"name":"","extension":0},"Aggregate":{"name":"","extension":0},"ConcreteAggregate1":{"name":"","extension":1},"Iterator":{"name":"","extension":0},"ConcreteIterator1":{"name":"","extension":1}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0},"ConcreteMediator":{"name":"","extension":0},"Colleague":{"name":"","extension":0},"ConcreteColleague1":{"name":"","extension":1},"ConcreteColleague2":{"name":"","extension":0}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"Memento":{"name":"","extension":0},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0},"ConcreteSubject1":{"name":"","extension":1},"Observer":{"name":"","extension":0},"ConcreteObserver1":{"name":"","extension":1}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0},"ConcreteState1":{"name":"","extension":1},"ConcreteState2":{"name":"","extension":0}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0},"ConcreteStrategy1":{"name":"","extension":1},"ConcreteStrategy2":{"name":"","extension":0}}},"Template Method":{"values":{"AbstractClass":{"name":"","extension":0},"ConcreteClass1":{"name":"","extension":1}}},"Visitor":{"values":{"Client":{"name":"","extension":0},"Visitor":{"name":"","extension":0},"ConcreteVisitor1":{"name":"","extension":1},"ConcreteVisitor2":{"name":"","extension":0},"ObjectStructure":{"name":"","extension":0},"Element":{"name":"","extension":0},"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":0}}}}');
 
 /***/ }),
 
@@ -298,12 +298,13 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             document.getElementById("btn-get-code").style.visibility = 'hidden';
             var getUrl = window.location.href;
             extensionWidget_1.res = await this.helloBackendService.sayHelloTo(getUrl);
-            for (let i = 0; i < extensionWidget_1.res.length; i++) {
-                let lastW = extensionWidget_1.res[i].lastIndexOf("/");
-                let file = extensionWidget_1.res[i].substr(lastW + 1);
+            /*for (let i=0; i<extensionWidget.res.length; i++){
+                let lastW = extensionWidget.res[i].lastIndexOf("/");
+                let file = extensionWidget.res[i].substr(lastW+1);
                 file = file.substr(0, file.indexOf("."));
-                extensionWidget_1.res[i] = file;
-            }
+                extensionWidget.res[i] = file;
+            }*/
+            console.log(extensionWidget_1.res);
             //show the JSON values for the chosen key-pattern
             let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
             var table = document.getElementById('show_pattern_table');
@@ -318,6 +319,25 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     t3.addEventListener('click', (event) => {
                         this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
                     });
+                }
+                if (values[key].insertMethods) {
+                    if (values[key].insertMethods == 1) {
+                        var keys = Object.keys(values[key]);
+                        let row = this.insertCells(table, keys[3]);
+                        let cell3 = row.insertCell(2);
+                        let t3 = document.createElement("button");
+                        t3.innerHTML = "+";
+                        t3.id = "btn" + '-' + key + '-' + keys[3];
+                        cell3.appendChild(t3);
+                        t3.addEventListener('click', (event) => {
+                            this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
+                            console.log("NEW VALUES: " + JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
+                        });
+                    }
+                    else {
+                        var keys = Object.keys(values[key]);
+                        this.insertCells(table, keys[3]);
+                    }
                 }
             });
             let d = document.getElementById("result");
@@ -368,11 +388,11 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
     extensionButtonClick(table, key, values) {
         let newValues = JSON.parse(JSON.stringify(values));
         let count = this.countKeys(values, key.substr(3));
+        let label = this.updateLabel(key.substr(3), count + 1);
         if (extensionWidget_1.state.statePatternSelection == "Abstract Factory") {
             if (key.includes("AbstractProduct")) {
-                let labelAbstrProd = this.updateLabel(key.substr(3), count + 1);
-                newValues[labelAbstrProd] = JSON.stringify({ name: "", extension: 1 });
-                this.insertCells(table, labelAbstrProd);
+                newValues[label] = JSON.stringify({ name: "", extension: 1 });
+                this.insertCells(table, label);
                 var numProd = (this.countKeys(values, "Product") / count) - 1; // number of "Products"
                 for (let j = 0; j < numProd; j++) {
                     let labelProduct = "Product" + (count + 1) + "." + (j + 1);
@@ -381,10 +401,9 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 }
             }
             else {
-                let labelConFactory = this.updateLabel("ConcreteFactory ", count + 1);
-                this.insertCells(table, labelConFactory);
+                this.insertCells(table, label);
                 let numAbstrProd = this.countKeys(newValues, "AbstractProduct");
-                newValues[labelConFactory] = JSON.stringify({ "name": "", "extension": 1 });
+                newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
                 for (let j = 0; j < numAbstrProd; j++) {
                     let labelProduct = "Product" + (j + 1) + "." + (count + 1);
                     this.insertCells(table, labelProduct);
@@ -393,11 +412,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             }
         }
         else if (extensionWidget_1.state.statePatternSelection == "Builder") {
-            let labelProduct = this.updateLabel("Product ", count + 1);
             let labelConBuilder = this.updateLabel("ConcreteBuilder ", count + 1);
-            newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
-            this.insertCells(table, labelProduct);
+            this.insertCells(table, label);
             this.insertCells(table, labelConBuilder);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Command") {
@@ -418,8 +436,14 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
         }
+        else if (key.substr(3).includes("method")) {
+            var string = key.split('-');
+            let countMethods = this.countKeys(newValues[string[1]], "method");
+            let labelMethod = this.updateLabel("method ", countMethods + 1);
+            this.insertCells(table, labelMethod);
+            newValues[string[1]][labelMethod] = "";
+        }
         else {
-            let label = this.updateLabel(key.substr(3), count + 1);
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
         }
@@ -444,9 +468,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
     }
     countKeys(values, keyString) {
         let count = 0;
-        keyString = keyString.slice(0, -1);
+        console.log(typeof values);
+        let string = keyString.replace(/\d/g, ''); //removes the numbers from the string and returns a new one
         Object.keys(values).forEach((key) => {
-            if (key.includes(keyString)) {
+            if (key.includes(string)) {
                 count++;
             }
         });
@@ -505,9 +530,14 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         else {
             for (let i = 0; i < table.rows.length; i++) {
                 const txtbox = document.getElementById('txtbox' + (i + 1)).value;
+                //const label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
                 if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) {
                     count++;
                 }
+                //if(extensionWidget.state.statePatternSelection=="Adapter" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
+                //const txtboxMethod = (document.getElementById( 'txtbox'+ (i + 2) ) as HTMLInputElement).value;
+                this.helloBackendService.getMethods();
+                //}
             }
             return (count == table.rows.length ? "Inputs are valid" : "Inputs are invalid");
         }
