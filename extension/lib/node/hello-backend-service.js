@@ -41,14 +41,29 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
         //console.log(fs.readFileSync('C:/Users/test/Downloads/src/src/Main.java','utf8'));
         return new Promise(resolve => resolve(res));
     }
-    async getMethods() {
-        //var fs = require("fs")
-        for (const file of HelloBackendServiceImpl_1.array) {
-            console.log(1);
-            console.log(file);
+    async getMethods(url, fileName) {
+        var lastL = url.indexOf("/#/");
+        var rootUri = url.substr(lastL + 3);
+        var fs = require("fs");
+        try {
+            const data = fs.readFileSync(rootUri + "\\" + fileName + ".java", 'utf8');
+            console.log(data);
+            const regex = new RegExp(/(?:(?:public|private|protected|static|final|native|synchronized|abstract|transient)+\s+)+[$_\w<>\[\]\s]*\s+[\$_\w]+\([^\)]*\)?\s*/gm);
+            const array = [...data.matchAll(regex)];
+            console.log("ARRAY" + array);
+            var methodNames = [];
+            for (var i = 0; i < array.length; i++) {
+                var firstString = (array[i].toString()).split('('); //?
+                var secondString = (firstString[0].toString()).split(/\s+/);
+                methodNames.push(secondString.slice(-1));
+            }
+            console.log(methodNames);
         }
+        catch (err) {
+            console.error(err);
+        }
+        return new Promise(resolve => resolve(methodNames));
     }
-    ;
 };
 HelloBackendServiceImpl.index = -1;
 __decorate([

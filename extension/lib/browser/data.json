@@ -51,7 +51,10 @@
             },
             "Builder": {
                 "name": "",
-                "extension": 0
+                "extension": 0,
+                "insertMethods": 1,
+                "method1": "",
+                "method2": ""
             },
             "ConcreteBuilder1": {
                 "name": "",

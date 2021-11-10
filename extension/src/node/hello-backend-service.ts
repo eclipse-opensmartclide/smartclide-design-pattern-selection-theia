@@ -43,6 +43,30 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         return new Promise<string[]>(resolve => resolve(res))
     }
 
+    async getMethods(url: string, fileName: string): Promise<string[]>{
+        var lastL = url.indexOf("/#/");
+        var rootUri = url.substr(lastL+3);
+        var fs = require("fs");
+        try {
+            const data = fs.readFileSync(rootUri+"\\"+ fileName +".java", 'utf8')
+            console.log(data);
+            const regex = new RegExp(/(?:(?:public|private|protected|static|final|native|synchronized|abstract|transient)+\s+)+[$_\w<>\[\]\s]*\s+[\$_\w]+\([^\)]*\)?\s*/gm);
+            const array = [...data.matchAll(regex)];
+            console.log("ARRAY"+array);
+            var methodNames: any[] | PromiseLike<string[]> = [];
+            for(var i = 0; i<array.length; i++){
+                var firstString = (array[i].toString()).split('(');//?
+                var secondString = (firstString[0].toString()).split(/\s+/);
+                methodNames.push(secondString.slice(-1))
+            }
+            console.log(methodNames)
+        } catch (err) {
+            console.error(err)
+          }
+          return new Promise<string[]>(resolve => resolve(methodNames));
+    }
+    
+
     
     
     

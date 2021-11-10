@@ -355,19 +355,22 @@ export class extensionWidget extends ReactWidget {
 				}
 				//if(extensionWidget.state.statePatternSelection=="Adapter" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
 					//const txtboxMethod = (document.getElementById( 'txtbox'+ (i + 2) ) as HTMLInputElement).value;
-				
+					
 				//}
 			}
+			var getUrl = window.location.href;
+			var methodNames = this.helloBackendService.getMethods(getUrl, "Director");
+			console.log(JSON.stringify(methodNames));
 			return (count==table.rows.length ? "Inputs are valid" : "Inputs are invalid")
 		}
 		
 	}
 	checkInputsForSameValues(){
-		//return (extensionWidget.textBoxValues.every( (val, i, arr) => val === arr[0] ) ) ;
+		//return extensionWidget.textBoxValues.every(num => extensionWidget.textBoxValues.indexOf(num) === extensionWidget.textBoxValues.lastIndexOf(num));
 		return extensionWidget.textBoxValues.some((val, i) => extensionWidget.textBoxValues.indexOf(val) !== i);
 	}
 
-	
+
 }
 
 
