@@ -1,6 +1,10 @@
 {
     "Abstract Factory": {
         "values": {
+            "Client": {
+                "name": "",
+                "extension": 0
+            },
             "AbstractFactory": {
                 "name": "",
                 "extension": 0
@@ -34,10 +38,6 @@
                 "extension": 0
             },
             "Product2.2": {
-                "name": "",
-                "extension": 0
-            },
-            "Client": {
                 "name": "",
                 "extension": 0
             }
@@ -137,6 +137,10 @@
     },
     "Bridge": {
         "values": {
+            "Client": {
+                "name": "",
+                "extension": 0
+            },
             "Abstraction": {
                 "name": "",
                 "extension": 0
@@ -144,10 +148,6 @@
             "RefinedAbstraction1": {
                 "name": "",
                 "extension": 1
-            },
-            "Client": {
-                "name": "",
-                "extension": 0
             },
             "Implementor": {
                 "name": "",
@@ -225,6 +225,10 @@
     },
     "Flyweight": {
         "values": {
+            "Client": {
+                "name": "",
+                "extension": 0
+            },
             "FlyweightFactory": {
                 "name": "",
                 "extension": 0
@@ -240,10 +244,6 @@
             "UnsharedConcreteFlyweight1": {
                 "name": "",
                 "extension": 1
-            },
-            "Client": {
-                "name": "",
-                "extension": 0
             }
         }
     },

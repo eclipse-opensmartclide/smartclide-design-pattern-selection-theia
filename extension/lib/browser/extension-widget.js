@@ -138,7 +138,14 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         extensionWidget_1.state[key] = e.currentTarget.value;
     }
     insertCells(table, key) {
-        let row = table.insertRow(table.rows.length);
+        let index = 0;
+        for (var i = 0; i < table.rows.length; i++) {
+            let label = document.getElementById('label' + (i + 1)).innerHTML;
+            if (key > label)
+                index++;
+            console.log(key > label);
+        }
+        let row = table.insertRow(index);
         let cell1 = row.insertCell(0);
         let cell2 = row.insertCell(1);
         let t1 = document.createElement("label");
@@ -222,16 +229,14 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             }
             else {
                 var numConFly = count - this.countKeys(values, "UnsharedConcreteFlyweight"); // number of "ConcreteFlyweight"
-                console.log("count  " + count);
-                console.log("UnsharedConcreteFlyweight   " + this.countKeys(values, "UnsharedConcreteFlyweight"));
                 label = this.updateLabel(key.substr(3), numConFly + 1);
             }
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Command") {
-            var labelReceiver = this.updateLabel("Receiver ", count);
-            var labelConCommand = this.updateLabel("ConcreteCommand ", count);
+            var labelReceiver = this.updateLabel("Receiver ", count + 1);
+            var labelConCommand = this.updateLabel("ConcreteCommand ", count + 1);
             this.insertCells(table, labelReceiver);
             this.insertCells(table, labelConCommand);
             //inserts new attributes in json object

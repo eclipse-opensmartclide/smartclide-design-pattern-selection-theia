@@ -146,7 +146,13 @@ export class extensionWidget extends ReactWidget {
 	}
 	
 	insertCells(table: HTMLTableElement, key: string){
-		let row = table.insertRow(table.rows.length);
+		let index = 0;
+		for (var i=0; i<table.rows.length; i++){
+			let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
+			if (key>label) index++;
+			console.log(key>label);
+		}
+		let row = table.insertRow(index);
 		let cell1 = row.insertCell(0);
 		let cell2 = row.insertCell(1);
 		let t1 = document.createElement("label");
