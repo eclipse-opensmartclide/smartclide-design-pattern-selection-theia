@@ -344,7 +344,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             let label = document.getElementById('label' + (i + 1)).innerHTML;
             if (key > label)
                 index++;
-            console.log(key > label);
         }
         let row = table.insertRow(index);
         let cell1 = row.insertCell(0);
@@ -549,7 +548,16 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
     }
     checkInputsForSameValues() {
         //return (extensionWidget.textBoxValues.every( (val, i, arr) => val === arr[0] ) ) ;
-        return extensionWidget_1.textBoxValues.some((val, i) => extensionWidget_1.textBoxValues.indexOf(val) !== i);
+        //return extensionWidget.textBoxValues.some((val, i) => extensionWidget.textBoxValues.indexOf(val) !== i);
+        const uniqueElements = new Set(extensionWidget_1.textBoxValues);
+        console.log(JSON.stringify(uniqueElements));
+        console.log(extensionWidget_1.textBoxValues);
+        if (uniqueElements.size < extensionWidget_1.textBoxValues.length) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 };
 extensionWidget.ID = 'extension:widget';

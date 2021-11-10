@@ -150,7 +150,6 @@ export class extensionWidget extends ReactWidget {
 		for (var i=0; i<table.rows.length; i++){
 			let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
 			if (key>label) index++;
-			console.log(key>label);
 		}
 		let row = table.insertRow(index);
 		let cell1 = row.insertCell(0);
@@ -366,8 +365,13 @@ export class extensionWidget extends ReactWidget {
 		
 	}
 	checkInputsForSameValues(){
-		//return (extensionWidget.textBoxValues.every( (val, i, arr) => val === arr[0] ) ) ;
-		return extensionWidget.textBoxValues.some((val, i) => extensionWidget.textBoxValues.indexOf(val) !== i);
+		const uniqueElements = new Set(extensionWidget.textBoxValues);
+    	if (uniqueElements.size<extensionWidget.textBoxValues.length){
+			return true;
+		}else{
+			return false;
+		}
+    	
 	}
 
 }
