@@ -118,6 +118,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     t3.addEventListener('click', (event) => {
                         this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
                     });
+<<<<<<< HEAD
                 }
                 if (values[key].insertMethods) {
                     if (values[key].insertMethods == 1) {
@@ -137,6 +138,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         var keys = Object.keys(values[key]);
                         this.insertCells(table, keys[3]);
                     }
+=======
+>>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
                 }
             });
             let d = document.getElementById("result");
@@ -158,7 +161,13 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         extensionWidget_1.state[key] = e.currentTarget.value;
     }
     insertCells(table, key) {
-        let row = table.insertRow(table.rows.length);
+        let index = 0;
+        for (var i = 0; i < table.rows.length; i++) {
+            let label = document.getElementById('label' + (i + 1)).innerHTML;
+            if (key > label)
+                index++;
+        }
+        let row = table.insertRow(index);
         let cell1 = row.insertCell(0);
         let cell2 = row.insertCell(1);
         let label = document.createElement("label");
@@ -170,6 +179,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         txtbox.onchange = function () {
             extensionWidget_1.textBoxValues[num - 1] = txtbox.value;
         };
+<<<<<<< HEAD
         txtbox.autocomplete = "off";
         txtbox.placeholder = key;
         txtbox.addEventListener('keypress', (e) => {
@@ -181,6 +191,19 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         cell1.appendChild(label);
         cell2.appendChild(txtbox);
         cell2.appendChild(suggestions);
+=======
+        t2.autocomplete = "off";
+        t2.placeholder = key;
+        t2.addEventListener('keypress', (e) => {
+            this.showSuggestions(t2.value, e.target.id);
+        });
+        let t3 = document.createElement("div");
+        t3.id = "suggestions" + table.rows.length;
+        t3.className = "suggestions";
+        cell1.appendChild(t1);
+        cell2.appendChild(t2);
+        cell2.appendChild(t3);
+>>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
         return row;
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
@@ -190,8 +213,14 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         let label = this.updateLabel(key.substr(3), count + 1);
         if (extensionWidget_1.state.statePatternSelection == "Abstract Factory") {
             if (key.includes("AbstractProduct")) {
+<<<<<<< HEAD
                 newValues[label] = JSON.stringify({ name: "", extension: 1 });
                 this.insertCells(table, label);
+=======
+                let labelAbstrProd = this.updateLabel(key.substr(3), count + 1);
+                newValues[labelAbstrProd] = JSON.stringify({ name: "", extension: 1 });
+                this.insertCells(table, labelAbstrProd);
+>>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
                 var numProd = (this.countKeys(values, "Product") / count) - 1; // number of "Products"
                 for (let j = 0; j < numProd; j++) {
                     let labelProduct = "Product" + (count + 1) + "." + (j + 1);
@@ -212,10 +241,44 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         }
         else if (extensionWidget_1.state.statePatternSelection == "Builder") {
             let labelConBuilder = this.updateLabel("ConcreteBuilder ", count + 1);
+<<<<<<< HEAD
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
+=======
+            newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
+>>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
             this.insertCells(table, labelConBuilder);
+            this.insertCells(table, labelProduct);
+        }
+        else if (extensionWidget_1.state.statePatternSelection == "Factory Method") {
+            let labelProduct = this.updateLabel("ConcreteProduct ", count + 1);
+            let labelConCreator = this.updateLabel("ConcreteCreator ", count + 1);
+            newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues[labelConCreator] = JSON.stringify({ "name": "", "extension": 1 });
+            this.insertCells(table, labelConCreator);
+            this.insertCells(table, labelProduct);
+        }
+        else if (extensionWidget_1.state.statePatternSelection == "Adapter") {
+            let labelAdapter = this.updateLabel("Adapter ", count + 1);
+            let labelAdaptee = this.updateLabel("Adaptee ", count + 1);
+            newValues[labelAdapter] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues[labelAdaptee] = JSON.stringify({ "name": "", "extension": 1 });
+            this.insertCells(table, labelAdapter);
+            this.insertCells(table, labelAdaptee);
+        }
+        else if (extensionWidget_1.state.statePatternSelection == "Flyweight") {
+            let label;
+            if (key.includes("UnsharedConcreteFlyweight")) {
+                label = this.updateLabel(key.substr(3), count + 1);
+            }
+            else {
+                var numConFly = count - this.countKeys(values, "UnsharedConcreteFlyweight"); // number of "ConcreteFlyweight"
+                label = this.updateLabel(key.substr(3), numConFly + 1);
+            }
+            newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
+            this.insertCells(table, label);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Command") {
             var labelReceiver = this.updateLabel("Receiver ", count + 1);
@@ -235,6 +298,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
         }
+<<<<<<< HEAD
         else if (key.substr(3).includes("method")) {
             var string = key.split('-');
             let countMethods = this.countKeys(newValues[string[1]], "method");
@@ -243,6 +307,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[string[1]][labelMethod] = "";
         }
         else {
+=======
+        else {
+            let label = this.updateLabel(key.substr(3), count + 1);
+>>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
         }
@@ -344,8 +412,22 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         }
     }
     checkInputsForSameValues() {
+<<<<<<< HEAD
         //return extensionWidget.textBoxValues.every(num => extensionWidget.textBoxValues.indexOf(num) === extensionWidget.textBoxValues.lastIndexOf(num));
         return extensionWidget_1.textBoxValues.some((val, i) => extensionWidget_1.textBoxValues.indexOf(val) !== i);
+=======
+        //return (extensionWidget.textBoxValues.every( (val, i, arr) => val === arr[0] ) ) ;
+        //return extensionWidget.textBoxValues.some((val, i) => extensionWidget.textBoxValues.indexOf(val) !== i);
+        const uniqueElements = new Set(extensionWidget_1.textBoxValues);
+        console.log(JSON.stringify(uniqueElements));
+        console.log(extensionWidget_1.textBoxValues);
+        if (uniqueElements.size < extensionWidget_1.textBoxValues.length) {
+            return true;
+        }
+        else {
+            return false;
+        }
+>>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
     }
 };
 extensionWidget.ID = 'extension:widget';

@@ -166,7 +166,12 @@ export class extensionWidget extends ReactWidget {
 	}
 	
 	insertCells(table: HTMLTableElement, key: string){
-		let row = table.insertRow(table.rows.length);
+		let index = 0;
+		for (var i=0; i<table.rows.length; i++){
+			let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
+			if (key>label) index++;
+		}
+		let row = table.insertRow(index);
 		let cell1 = row.insertCell(0);
 		let cell2 = row.insertCell(1);
 		let label = document.createElement("label");
@@ -228,7 +233,35 @@ export class extensionWidget extends ReactWidget {
 			
 			this.insertCells(table, label); 
 			this.insertCells(table, labelConBuilder); 
-		
+		}else if(extensionWidget.state.statePatternSelection=="Factory Method") {
+			let labelProduct = this.updateLabel("ConcreteProduct ", count+1);
+			let labelConCreator = this.updateLabel("ConcreteCreator ", count+1);
+
+			newValues[labelProduct] =  JSON.stringify({ "name":"", "extension":1});
+			newValues[labelConCreator] = JSON.stringify({ "name":"", "extension":1});
+						 
+			this.insertCells(table, labelConCreator); 
+			this.insertCells(table, labelProduct);
+		}else if(extensionWidget.state.statePatternSelection=="Adapter") {
+			let labelAdapter = this.updateLabel("Adapter ", count+1);
+			let labelAdaptee = this.updateLabel("Adaptee ", count+1);
+
+			newValues[labelAdapter] =  JSON.stringify({ "name":"", "extension":1});
+			newValues[labelAdaptee] = JSON.stringify({ "name":"", "extension":1});
+						 
+			this.insertCells(table, labelAdapter); 
+			this.insertCells(table, labelAdaptee);	
+		}else if(extensionWidget.state.statePatternSelection=="Flyweight") {
+			let label;
+			if(key.includes("UnsharedConcreteFlyweight")){
+				label = this.updateLabel(key.substr(3, ), count+1);
+				 
+			}else{
+				var numConFly = count - this.countKeys(values, "UnsharedConcreteFlyweight");// number of "ConcreteFlyweight"
+				label = this.updateLabel(key.substr(3, ), numConFly+1);
+			}
+			newValues[label] = JSON.stringify({"name":"", "extension":1});
+			this.insertCells(table, label);
 		}else if(extensionWidget.state.statePatternSelection=="Command"){
 			var labelReceiver = this.updateLabel("Receiver ", count+1);
 			var labelConCommand = this.updateLabel("ConcreteCommand ", count+1);
@@ -365,10 +398,14 @@ export class extensionWidget extends ReactWidget {
 		
 	}
 	checkInputsForSameValues(){
-		//return extensionWidget.textBoxValues.every(num => extensionWidget.textBoxValues.indexOf(num) === extensionWidget.textBoxValues.lastIndexOf(num));
-		return extensionWidget.textBoxValues.some((val, i) => extensionWidget.textBoxValues.indexOf(val) !== i);
+		const uniqueElements = new Set(extensionWidget.textBoxValues);
+    	if (uniqueElements.size<extensionWidget.textBoxValues.length){
+			return true;
+		}else{
+			return false;
+		}
+    	
 	}
-
 
 }
 

@@ -8,16 +8,18 @@
     padding: 10px;
     text-transform: uppercase;
 }
-#label-URL-project{
-	margin-left: 10px;
-}
 
 input{
 	margin-left: 10px;
 	background: transparent;
     border: none;
     color: white;
+<<<<<<< HEAD
     width: 60%;
+=======
+    width: 190px;
+    height: 20px;
+>>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
 }
 
 #TD{
@@ -61,7 +63,14 @@ input{
 .suggestions {
   border: 1px #ccc;
   margin-left: 10px;
+<<<<<<< HEAD
   width: 60%;
+=======
+  width:190px;
+  position: absolute;
+  background-color: #3c3c3c;
+  padding-left: 2px;
+>>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
 }
 .suggestions ul {
   list-style-type: none;
@@ -73,4 +82,8 @@ input{
 }
 .suggestions ul li:hover {
   background: #eee;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a

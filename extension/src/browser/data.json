@@ -1,6 +1,10 @@
 {
     "Abstract Factory":{
         "values":{
+            "Client":{
+                "name":"",
+                "extension":0
+            },
             "AbstractFactory":{
                 "name":"",
                 "extension":0
@@ -34,10 +38,6 @@
                 "extension":0
             },
             "Product2.2":{
-                "name":"",
-                "extension":0
-            },
-            "Client":{
                 "name":"",
                 "extension":0
             }
@@ -136,15 +136,19 @@
                 "insertMethods":1,
                 "method1":""
             },
-            "Adaptee":{
+            "Adaptee1":{
                 "name":"",
-                "extension":0
+                "extension":1
             }
         }
     },
 
     "Bridge":{
         "values":{
+            "Client":{
+                "name":"",
+                "extension":0
+            },
             "Abstraction":{
                 "name":"",
                 "extension":0
@@ -152,10 +156,6 @@
             "RefinedAbstraction1":{
                 "name":"",
                 "extension":1
-            },
-            "Client":{
-                "name":"",
-                "extension":0
             },
             "Implementor":{
                 "name":"",
@@ -229,7 +229,7 @@
                 "name":"",
                 "extension":0
             },
-            "AdditionalFacade":{
+            "AdditionalFacade1":{
                 "name":"",
                 "extension":1
             }
@@ -237,6 +237,10 @@
     },
     "Flyweight":{
         "values":{
+            "Client":{
+                "name":"",
+                "extension":0
+            },
             "FlyweightFactory":{
                 "name":"",
                 "extension":0
@@ -252,11 +256,7 @@
             "UnsharedConcreteFlyweight1":{
                 "name":"",
                 "extension":1
-            },
-            "Client":{
-                "name":"",
-                "extension":0
-            }
+            }            
         }
     },
 
