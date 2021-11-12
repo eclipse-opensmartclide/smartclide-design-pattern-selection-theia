@@ -248,12 +248,12 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         }
         extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = newValues;
     }
-    buttonClick2(rows) {
+    async buttonClick2(rows) {
         if (rows != extensionWidget_1.textBoxValues.length) {
             this.messageService.info("You need to give name for ALL the classes!");
         }
         else {
-            if (this.checkInputs() == "Inputs are valid") {
+            if (await this.checkInputs() == "Inputs are valid") {
                 this.updateJsonObject();
                 this.messageService.info("Well done! Code is coming...");
             }
@@ -320,7 +320,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[label].name = txtbox;
         }
     }
-    checkInputs() {
+    async checkInputs() {
         let count = 0;
         const table = document.getElementById('show_pattern_table');
         if (this.checkInputsForSameValues()) {
@@ -338,7 +338,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 //}
             }
             var getUrl = window.location.href;
-            var methodNames = this.helloBackendService.getMethods(getUrl, "Director");
+            var methodNames = await this.helloBackendService.getMethods(getUrl, "Director");
             console.log(JSON.stringify(methodNames));
             return (count == table.rows.length ? "Inputs are valid" : "Inputs are invalid");
         }

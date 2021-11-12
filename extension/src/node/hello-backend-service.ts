@@ -2,6 +2,10 @@ import { injectable, inject } from "inversify";
 import { HelloBackendService } from "../common/protocol";
 import {FileSearchService } from "@theia/file-search/lib/common/file-search-service";
 
+interface LabeledValue{
+	label:string[];
+}
+
 
 @injectable()
 export class HelloBackendServiceImpl implements HelloBackendService {
@@ -47,23 +51,31 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         var lastL = url.indexOf("/#/");
         var rootUri = url.substr(lastL+3);
         var fs = require("fs");
+        let lO = {label: [""]};
         try {
             const data = fs.readFileSync(rootUri+"\\"+ fileName +".java", 'utf8')
             console.log(data);
             const regex = new RegExp(/(?:(?:public|private|protected|static|final|native|synchronized|abstract|transient)+\s+)+[$_\w<>\[\]\s]*\s+[\$_\w]+\([^\)]*\)?\s*/gm);
             const array = [...data.matchAll(regex)];
             console.log("ARRAY"+array);
-            var methodNames: any[] | PromiseLike<string[]> = [];
+           // var methodNames: PromiseLike<string[]>;
+            
             for(var i = 0; i<array.length; i++){
                 var firstString = (array[i].toString()).split('(');//?
                 var secondString = (firstString[0].toString()).split(/\s+/);
-                methodNames.push(secondString.slice(-1))
+               
+                async function fillPromise(labelObj: LabeledValue){
+                    (await labelObj.label).push(secondString[secondString.length-1])//.slice(-1))
+                }
+                fillPromise(lO);
+                
             }
-            console.log(methodNames)
+
+            console.log("lO" + lO.label);
         } catch (err) {
             console.error(err)
           }
-          return new Promise<string[]>(resolve => resolve(methodNames));
+          return new Promise<string[]>(resolve => resolve(lO.label));
     }
     
 

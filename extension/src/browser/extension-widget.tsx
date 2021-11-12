@@ -10,7 +10,6 @@ import data from './data.json';
 
 
 
-
 @injectable()
 export class extensionWidget extends ReactWidget {
 	
@@ -264,11 +263,11 @@ export class extensionWidget extends ReactWidget {
 		extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;
 	}
 
-	buttonClick2 (rows : number):void{
+	async buttonClick2 (rows : number):Promise<void>{
 		if (rows!=extensionWidget.textBoxValues.length){
 			this.messageService.info("You need to give name for ALL the classes!");
 		}else{
-			if (this.checkInputs() == "Inputs are valid"){
+			if (await this.checkInputs() == "Inputs are valid"){
 				this.updateJsonObject();
 				this.messageService.info("Well done! Code is coming...");
 			}else{
@@ -341,7 +340,7 @@ export class extensionWidget extends ReactWidget {
 			}
 	}
 
-	checkInputs(){
+	async checkInputs(){
 		let count = 0;
 		const table = document.getElementById('show_pattern_table') as HTMLTableElement;
 		if (this.checkInputsForSameValues()){
@@ -359,7 +358,7 @@ export class extensionWidget extends ReactWidget {
 				//}
 			}
 			var getUrl = window.location.href;
-			var methodNames = this.helloBackendService.getMethods(getUrl, "Director");
+			var methodNames = await this.helloBackendService.getMethods(getUrl, "Director");
 			console.log(JSON.stringify(methodNames));
 			return (count==table.rows.length ? "Inputs are valid" : "Inputs are invalid")
 		}
