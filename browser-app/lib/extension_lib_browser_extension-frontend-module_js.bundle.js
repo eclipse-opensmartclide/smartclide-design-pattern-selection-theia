@@ -7,11 +7,7 @@
 /***/ ((module) => {
 
 "use strict";
-<<<<<<< HEAD
-module.exports = JSON.parse('{"Abstract Factory":{"values":{"AbstractFactory":{"name":"","extension":0},"ConcreteFactory1":{"name":"","extension":1},"ConcreteFactory2":{"name":"","extension":0},"AbstractProduct1":{"name":"","extension":1},"Product1.1":{"name":"","extension":0},"Product1.2":{"name":"","extension":0},"AbstractProduct2":{"name":"","extension":0},"Product2.1":{"name":"","extension":0},"Product2.2":{"name":"","extension":0},"Client":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0,"insertMethods":1,"method1":"","method2":""},"ConcreteBuilder1":{"name":"","extension":0},"Product1":{"name":"","extension":1}}},"Factory Method":{"values":{"Creator":{"name":"","extension":0},"ConcreteCreator1":{"name":"","extension":0},"Product":{"name":"","extension":0},"ConcreteProduct1":{"name":"","extension":1}}},"Prototype":{"values":{"Client":{"name":"","extension":0},"Prototype":{"name":"","extension":0},"ConcretePrototype1":{"name":"","extension":1},"ConcretePrototype2":{"name":"","extension":0}}},"Singleton":{"values":{"Client":{"name":"","extension":0},"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"Client":{"name":"","extension":0},"Target":{"name":"","extension":0},"Adapter1":{"name":"","extension":0,"insertMethods":1,"method1":""},"Adaptee":{"name":"","extension":0}}},"Bridge":{"values":{"Abstraction":{"name":"","extension":0},"RefinedAbstraction1":{"name":"","extension":1},"Client":{"name":"","extension":0},"Implementor":{"name":"","extension":0},"ConcreteImplementor1":{"name":"","extension":1},"ConcreteImplementor2":{"name":"","extension":0}}},"Composite":{"values":{"Client":{"name":"","extension":0},"Component":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}},"Decorator":{"values":{"Component":{"name":"","extension":0},"ConcreteComponent1":{"name":"","extension":1},"Decorator":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"ConcreteDecorator2":{"name":"","extension":0}}},"Facade":{"values":{"Client":{"name":"","extension":0},"Facade":{"name":"","extension":0},"AdditionalFacade":{"name":"","extension":1}}},"Flyweight":{"values":{"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0},"ConcreteFlyweight1":{"name":"","extension":1},"UnsharedConcreteFlyweight1":{"name":"","extension":1},"Client":{"name":"","extension":0}}},"Proxy":{"values":{"Client":{"name":"","extension":0},"Subject":{"name":"","extension":0},"RealSubject":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}},"Chain of Responsibility":{"values":{"Client":{"name":"","extension":0},"Handler":{"name":"","extension":0},"ConcreteHandler1":{"name":"","extension":1},"ConcreteHandler2":{"name":"","extension":0}}},"Command":{"values":{"Client":{"name":"","extension":0},"Receiver1":{"name":"","extension":1},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0},"ConcreteCommand1":{"name":"","extension":1}}},"Interpreter":{"values":{"Client":{"name":"","extension":0},"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0},"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}},"Iterator":{"values":{"Client":{"name":"","extension":0},"Aggregate":{"name":"","extension":0},"ConcreteAggregate1":{"name":"","extension":1},"Iterator":{"name":"","extension":0},"ConcreteIterator1":{"name":"","extension":1}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0},"ConcreteMediator":{"name":"","extension":0},"Colleague":{"name":"","extension":0},"ConcreteColleague1":{"name":"","extension":1},"ConcreteColleague2":{"name":"","extension":0}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"Memento":{"name":"","extension":0},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0},"ConcreteSubject1":{"name":"","extension":1},"Observer":{"name":"","extension":0},"ConcreteObserver1":{"name":"","extension":1}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0},"ConcreteState1":{"name":"","extension":1},"ConcreteState2":{"name":"","extension":0}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0},"ConcreteStrategy1":{"name":"","extension":1},"ConcreteStrategy2":{"name":"","extension":0}}},"Template Method":{"values":{"AbstractClass":{"name":"","extension":0},"ConcreteClass1":{"name":"","extension":1}}},"Visitor":{"values":{"Client":{"name":"","extension":0},"Visitor":{"name":"","extension":0},"ConcreteVisitor1":{"name":"","extension":1},"ConcreteVisitor2":{"name":"","extension":0},"ObjectStructure":{"name":"","extension":0},"Element":{"name":"","extension":0},"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":0}}}}');
-=======
-module.exports = JSON.parse('{"Abstract Factory":{"values":{"Client":{"name":"","extension":0},"AbstractFactory":{"name":"","extension":0},"ConcreteFactory1":{"name":"","extension":1},"ConcreteFactory2":{"name":"","extension":1},"AbstractProduct1":{"name":"","extension":1},"Product1.1":{"name":"","extension":0},"Product1.2":{"name":"","extension":0},"AbstractProduct2":{"name":"","extension":1},"Product2.1":{"name":"","extension":0},"Product2.2":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0},"ConcreteBuilder1":{"name":"","extension":1},"Product1":{"name":"","extension":1}}},"Factory Method":{"values":{"Creator":{"name":"","extension":0},"ConcreteCreator1":{"name":"","extension":1},"Product":{"name":"","extension":0},"ConcreteProduct1":{"name":"","extension":1}}},"Prototype":{"values":{"Client":{"name":"","extension":0},"Prototype":{"name":"","extension":0},"ConcretePrototype1":{"name":"","extension":1},"ConcretePrototype2":{"name":"","extension":1}}},"Singleton":{"values":{"Client":{"name":"","extension":0},"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"Client":{"name":"","extension":0},"Target":{"name":"","extension":0},"Adapter1":{"name":"","extension":1},"Adaptee1":{"name":"","extension":1}}},"Bridge":{"values":{"Client":{"name":"","extension":0},"Abstraction":{"name":"","extension":0},"RefinedAbstraction1":{"name":"","extension":1},"Implementor":{"name":"","extension":0},"ConcreteImplementor1":{"name":"","extension":1},"ConcreteImplementor2":{"name":"","extension":1}}},"Composite":{"values":{"Client":{"name":"","extension":0},"Component":{"name":"","extension":0},"Leaf1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}},"Decorator":{"values":{"Component":{"name":"","extension":0},"ConcreteComponent1":{"name":"","extension":1},"Decorator":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"ConcreteDecorator2":{"name":"","extension":1}}},"Facade":{"values":{"Client":{"name":"","extension":0},"Facade":{"name":"","extension":0},"AdditionalFacade1":{"name":"","extension":1}}},"Flyweight":{"values":{"Client":{"name":"","extension":0},"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0},"ConcreteFlyweight1":{"name":"","extension":1},"UnsharedConcreteFlyweight1":{"name":"","extension":1}}},"Proxy":{"values":{"Client":{"name":"","extension":0},"Subject":{"name":"","extension":0},"RealSubject":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}},"Chain of Responsibility":{"values":{"Client":{"name":"","extension":0},"Handler":{"name":"","extension":0},"ConcreteHandler1":{"name":"","extension":1},"ConcreteHandler2":{"name":"","extension":1}}},"Command":{"values":{"Client":{"name":"","extension":0},"Receiver1":{"name":"","extension":1},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0},"ConcreteCommand1":{"name":"","extension":1}}},"Interpreter":{"values":{"Client":{"name":"","extension":0},"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0},"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}},"Iterator":{"values":{"Client":{"name":"","extension":0},"Aggregate":{"name":"","extension":0},"ConcreteAggregate1":{"name":"","extension":1},"Iterator":{"name":"","extension":0},"ConcreteIterator1":{"name":"","extension":1}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0},"ConcreteMediator":{"name":"","extension":0},"Colleague":{"name":"","extension":0},"ConcreteColleague1":{"name":"","extension":1},"ConcreteColleague2":{"name":"","extension":1}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"Memento":{"name":"","extension":0},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0},"ConcreteSubject1":{"name":"","extension":1},"Observer":{"name":"","extension":0},"ConcreteObserver1":{"name":"","extension":1}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0},"ConcreteState1":{"name":"","extension":1},"ConcreteState2":{"name":"","extension":1}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0},"ConcreteStrategy1":{"name":"","extension":1},"ConcreteStrategy2":{"name":"","extension":1}}},"Template Method":{"values":{"AbstractClass":{"name":"","extension":0},"ConcreteClass1":{"name":"","extension":1}}},"Visitor":{"values":{"Client":{"name":"","extension":0},"Visitor":{"name":"","extension":0},"ConcreteVisitor1":{"name":"","extension":1},"ConcreteVisitor2":{"name":"","extension":1},"ObjectStructure":{"name":"","extension":0},"Element":{"name":"","extension":0},"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":1}}}}');
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
+module.exports = JSON.parse('{"AbstractFactory":{"values":{"Client":{"name":"","extension":0},"AbstractFactory":{"name":"","extension":0},"ConcreteFactory1":{"name":"","extension":1},"ConcreteFactory2":{"name":"","extension":0},"AbstractProduct1":{"name":"","extension":1},"Product1.1":{"name":"","extension":0},"Product1.2":{"name":"","extension":0},"AbstractProduct2":{"name":"","extension":0},"Product2.1":{"name":"","extension":0},"Product2.2":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0,"insertMethods":1,"method1":"","method2":""},"ConcreteBuilder1":{"name":"","extension":0},"Product1":{"name":"","extension":1}}},"FactoryMethod":{"values":{"Creator":{"name":"","extension":0},"ConcreteCreator1":{"name":"","extension":0},"Product":{"name":"","extension":0},"ConcreteProduct1":{"name":"","extension":1}}},"Prototype":{"values":{"Client":{"name":"","extension":0},"Prototype":{"name":"","extension":0},"ConcretePrototype1":{"name":"","extension":1},"ConcretePrototype2":{"name":"","extension":0}}},"Singleton":{"values":{"Client":{"name":"","extension":0},"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"Client":{"name":"","extension":0},"Target":{"name":"","extension":0},"Adapter1":{"name":"","extension":0,"insertMethods":1,"method1":""},"Adaptee1":{"name":"","extension":1}}},"Bridge":{"values":{"Client":{"name":"","extension":0},"Abstraction":{"name":"","extension":0},"RefinedAbstraction1":{"name":"","extension":1},"Implementor":{"name":"","extension":0},"ConcreteImplementor1":{"name":"","extension":1},"ConcreteImplementor2":{"name":"","extension":0}}},"Composite":{"values":{"Client":{"name":"","extension":0},"Component":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}},"Decorator":{"values":{"Component":{"name":"","extension":0},"ConcreteComponent1":{"name":"","extension":1},"Decorator":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"ConcreteDecorator2":{"name":"","extension":0}}},"Facade":{"values":{"Client":{"name":"","extension":0},"Facade":{"name":"","extension":0},"AdditionalFacade1":{"name":"","extension":1}}},"Flyweight":{"values":{"Client":{"name":"","extension":0},"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0},"ConcreteFlyweight1":{"name":"","extension":1},"UnsharedConcreteFlyweight1":{"name":"","extension":1}}},"Proxy":{"values":{"Client":{"name":"","extension":0},"Subject":{"name":"","extension":0},"RealSubject":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}},"ChainofResponsibility":{"values":{"Client":{"name":"","extension":0},"Handler":{"name":"","extension":0},"ConcreteHandler1":{"name":"","extension":1},"ConcreteHandler2":{"name":"","extension":0}}},"Command":{"values":{"Client":{"name":"","extension":0},"Receiver1":{"name":"","extension":1},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0},"ConcreteCommand1":{"name":"","extension":1}}},"Interpreter":{"values":{"Client":{"name":"","extension":0},"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0},"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}},"Iterator":{"values":{"Client":{"name":"","extension":0},"Aggregate":{"name":"","extension":0},"ConcreteAggregate1":{"name":"","extension":1},"Iterator":{"name":"","extension":0},"ConcreteIterator1":{"name":"","extension":1}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0},"ConcreteMediator":{"name":"","extension":0},"Colleague":{"name":"","extension":0},"ConcreteColleague1":{"name":"","extension":1},"ConcreteColleague2":{"name":"","extension":0}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"Memento":{"name":"","extension":0},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0},"ConcreteSubject1":{"name":"","extension":1},"Observer":{"name":"","extension":0},"ConcreteObserver1":{"name":"","extension":1}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0},"ConcreteState1":{"name":"","extension":1},"ConcreteState2":{"name":"","extension":0}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0},"ConcreteStrategy1":{"name":"","extension":1},"ConcreteStrategy2":{"name":"","extension":0}}},"TemplateMethod":{"values":{"AbstractClass":{"name":"","extension":0},"ConcreteClass1":{"name":"","extension":1}}},"Visitor":{"values":{"Client":{"name":"","extension":0},"Visitor":{"name":"","extension":0},"ConcreteVisitor1":{"name":"","extension":1},"ConcreteVisitor2":{"name":"","extension":0},"ObjectStructure":{"name":"","extension":0},"Element":{"name":"","extension":0},"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":0}}}}');
 
 /***/ }),
 
@@ -26,11 +22,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-<<<<<<< HEAD
-exports.push([module.id, "#widget-container{\r\n\twidth: 550px;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n#label-URL-project{\r\n\tmargin-left: 10px;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n    width: 60%;\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  width: 60%;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}", ""]);
-=======
-exports.push([module.id, "#widget-container{\r\n\twidth: 550px;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n    width: 190px;\r\n    height: 20px;\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n", ""]);
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
+exports.push([module.id, "#widget-container{\r\n\twidth: 550px;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n\r\n    width: 190px;\r\n    height: 20px;\r\n\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n#btnFinalize{\r\n  visibility: hidden;\r\n  margin-left: 10px;\r\n}", ""]);
 
 // exports
 
@@ -267,9 +259,9 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 React.createElement("select", { id: "drop-down-patterns", onChange: this.updateSelection, name: "statePatternSelection" },
                     React.createElement("option", { id: "empty-choice", value: "Choose_pattern" }, "Choose pattern"),
                     React.createElement("optgroup", { label: "Creational" },
-                        React.createElement("option", { value: "Abstract Factory" }, "Abstract Factory"),
+                        React.createElement("option", { value: "AbstractFactory" }, "Abstract Factory"),
                         React.createElement("option", { value: "Builder" }, "Builder"),
-                        React.createElement("option", { value: "Factory Method" }, "Factory Method"),
+                        React.createElement("option", { value: "FactoryMethod" }, "Factory Method"),
                         React.createElement("option", { value: "Prototype" }, "Prototype"),
                         React.createElement("option", { value: "Singleton" }, "Singleton")),
                     React.createElement("optgroup", { label: "Structural" },
@@ -281,7 +273,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         React.createElement("option", { value: "Flyweight" }, "Flyweight"),
                         React.createElement("option", { value: "Proxy" }, "Proxy")),
                     React.createElement("optgroup", { label: "Behavioral" },
-                        React.createElement("option", { value: "Chain of Responsibility" }, "Chain of Responsibility"),
+                        React.createElement("option", { value: "ChainofResponsibility" }, "Chain of Responsibility"),
                         React.createElement("option", { value: "Command" }, "Command"),
                         React.createElement("option", { value: "Interpreter" }, "Interpreter"),
                         React.createElement("option", { value: "Iterator" }, "Iterator"),
@@ -290,8 +282,11 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         React.createElement("option", { value: "Observer" }, "Observer"),
                         React.createElement("option", { value: "State" }, "State"),
                         React.createElement("option", { value: "Strategy" }, "Strategy"),
-                        React.createElement("option", { value: "Template Method" }, "Template Method"),
+                        React.createElement("option", { value: "TemplateMethod" }, "Template Method"),
                         React.createElement("option", { value: "Visitor" }, "Visitor"))),
+                React.createElement("button", { id: "btn-refresh", type: "button", title: 'Refresh', onClick: _a => this.refreshPage(document.getElementById('show_pattern_table')) },
+                    " ",
+                    React.createElement("i", { className: "fa fa-refresh" })),
                 React.createElement("br", null),
                 React.createElement("br", null),
                 React.createElement("button", { id: "btn-get-code", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.runprocess() }, " Get Code "),
@@ -299,7 +294,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 React.createElement("div", { id: "show_pattern" }),
                 React.createElement("br", null),
                 React.createElement("div", { id: "result" },
-                    React.createElement("table", { id: "show_pattern_table" }))));
+                    React.createElement("table", { id: "show_pattern_table" }),
+                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Final Code "))));
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
@@ -327,7 +323,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     t3.addEventListener('click', (event) => {
                         this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
                     });
-<<<<<<< HEAD
                 }
                 if (values[key].insertMethods) {
                     if (values[key].insertMethods == 1) {
@@ -347,18 +342,15 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         var keys = Object.keys(values[key]);
                         this.insertCells(table, keys[3]);
                     }
-=======
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
                 }
             });
-            let d = document.getElementById("result");
-            let b = document.createElement("button");
-            b.id = "btnFinalize";
-            b.innerHTML = "Finally Get Code";
-            b.addEventListener('click', (_event) => {
-                this.buttonClick2(table.rows.length);
-            });
-            d.appendChild(b);
+            document.getElementById("btnFinalize").style.visibility = 'visible';
+            //let images =  require("./AbstractFactory.jpg");
+            /*let img = document.createElement("img");
+            //img.src = images.default;
+            img.id = extensionWidget.state.statePatternSelection + "-img";
+            img.alt = "Class Diagram of "+extensionWidget.state.statePatternSelection+ " design pattern";
+            d.append(img);*/
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
@@ -388,7 +380,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         txtbox.onchange = function () {
             extensionWidget_1.textBoxValues[num - 1] = txtbox.value;
         };
-<<<<<<< HEAD
         txtbox.autocomplete = "off";
         txtbox.placeholder = key;
         txtbox.addEventListener('keypress', (e) => {
@@ -400,19 +391,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         cell1.appendChild(label);
         cell2.appendChild(txtbox);
         cell2.appendChild(suggestions);
-=======
-        t2.autocomplete = "off";
-        t2.placeholder = key;
-        t2.addEventListener('keypress', (e) => {
-            this.showSuggestions(t2.value, e.target.id);
-        });
-        let t3 = document.createElement("div");
-        t3.id = "suggestions" + table.rows.length;
-        t3.className = "suggestions";
-        cell1.appendChild(t1);
-        cell2.appendChild(t2);
-        cell2.appendChild(t3);
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
         return row;
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
@@ -422,14 +400,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         let label = this.updateLabel(key.substr(3), count + 1);
         if (extensionWidget_1.state.statePatternSelection == "Abstract Factory") {
             if (key.includes("AbstractProduct")) {
-<<<<<<< HEAD
                 newValues[label] = JSON.stringify({ name: "", extension: 1 });
                 this.insertCells(table, label);
-=======
-                let labelAbstrProd = this.updateLabel(key.substr(3), count + 1);
-                newValues[labelAbstrProd] = JSON.stringify({ name: "", extension: 1 });
-                this.insertCells(table, labelAbstrProd);
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
                 var numProd = (this.countKeys(values, "Product") / count) - 1; // number of "Products"
                 for (let j = 0; j < numProd; j++) {
                     let labelProduct = "Product" + (count + 1) + "." + (j + 1);
@@ -450,16 +422,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         }
         else if (extensionWidget_1.state.statePatternSelection == "Builder") {
             let labelConBuilder = this.updateLabel("ConcreteBuilder ", count + 1);
-<<<<<<< HEAD
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
-=======
-            newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
-            newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
             this.insertCells(table, labelConBuilder);
-            this.insertCells(table, labelProduct);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Factory Method") {
             let labelProduct = this.updateLabel("ConcreteProduct ", count + 1);
@@ -507,7 +473,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
         }
-<<<<<<< HEAD
         else if (key.substr(3).includes("method")) {
             var string = key.split('-');
             let countMethods = this.countKeys(newValues[string[1]], "method");
@@ -516,10 +481,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[string[1]][labelMethod] = "";
         }
         else {
-=======
-        else {
-            let label = this.updateLabel(key.substr(3), count + 1);
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
         }
@@ -621,28 +582,24 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         }
     }
     checkInputsForSameValues() {
-<<<<<<< HEAD
-        //return extensionWidget.textBoxValues.every(num => extensionWidget.textBoxValues.indexOf(num) === extensionWidget.textBoxValues.lastIndexOf(num));
-        return extensionWidget_1.textBoxValues.some((val, i) => extensionWidget_1.textBoxValues.indexOf(val) !== i);
-=======
-        //return (extensionWidget.textBoxValues.every( (val, i, arr) => val === arr[0] ) ) ;
-        //return extensionWidget.textBoxValues.some((val, i) => extensionWidget.textBoxValues.indexOf(val) !== i);
         const uniqueElements = new Set(extensionWidget_1.textBoxValues);
-        console.log(JSON.stringify(uniqueElements));
-        console.log(extensionWidget_1.textBoxValues);
         if (uniqueElements.size < extensionWidget_1.textBoxValues.length) {
             return true;
         }
         else {
             return false;
         }
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
+    }
+    refreshPage(table) {
+        table.innerHTML = "";
+        document.getElementById("btn-get-code").style.visibility = 'visible';
+        document.getElementById("btnFinalize").style.visibility = 'hidden';
     }
 };
 extensionWidget.ID = 'extension:widget';
 extensionWidget.LABEL = 'Extension Widget';
 extensionWidget.state = {
-    statePatternSelection: '',
+    statePatternSelection: ''
 };
 extensionWidget.textBoxValues = [];
 extensionWidget.data = JSON.parse(JSON.stringify(data_json_1.default));

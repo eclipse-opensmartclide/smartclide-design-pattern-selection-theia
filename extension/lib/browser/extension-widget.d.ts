@@ -29,5 +29,6 @@ export declare class extensionWidget extends ReactWidget {
     updateJsonObject(): void;
     checkInputs(): Promise<"Inputs are invalid" | "Inputs are valid">;
     checkInputsForSameValues(): boolean;
+    refreshPage(table: HTMLTableElement): void;
 }
 //# sourceMappingURL=extension-widget.d.ts.map

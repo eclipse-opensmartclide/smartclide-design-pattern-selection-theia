@@ -9,7 +9,6 @@ import { HelloBackendService } from '../common/protocol';
 import data from './data.json';
 
 
-
 @injectable()
 export class extensionWidget extends ReactWidget {
 	
@@ -19,7 +18,7 @@ export class extensionWidget extends ReactWidget {
     static readonly LABEL = 'Extension Widget';
 	
     static state = {
-		statePatternSelection: '',
+		statePatternSelection: ''
 	}
 	
     @inject(MessageService)
@@ -48,14 +47,15 @@ export class extensionWidget extends ReactWidget {
 		
 		return <div id='widget-container'>
 		<AlertMessage type='INFO' header={header} />
+		
 		<div id='issues'>
 				<br />
 				<select id="drop-down-patterns" onChange={this.updateSelection} name="statePatternSelection">
 						<option id="empty-choice" value="Choose_pattern">Choose pattern</option>
 					<optgroup label="Creational">
-						<option value="Abstract Factory">Abstract Factory</option>
+						<option value="AbstractFactory">Abstract Factory</option>
 						<option value="Builder">Builder</option>
-						<option value="Factory Method">Factory Method</option>
+						<option value="FactoryMethod">Factory Method</option>
 						<option value="Prototype">Prototype</option>
 						<option value="Singleton">Singleton</option>
 					</optgroup>
@@ -69,7 +69,7 @@ export class extensionWidget extends ReactWidget {
 						<option value="Proxy">Proxy</option>
 					</optgroup>
 					<optgroup label="Behavioral">
-						<option value="Chain of Responsibility">Chain of Responsibility</option>
+						<option value="ChainofResponsibility">Chain of Responsibility</option>
 						<option value="Command">Command</option>
 						<option value="Interpreter">Interpreter</option>
 						<option value="Iterator">Iterator</option>
@@ -78,10 +78,12 @@ export class extensionWidget extends ReactWidget {
 						<option value="Observer">Observer</option>
 						<option value="State">State</option>
 						<option value="Strategy">Strategy</option>
-						<option value="Template Method">Template Method</option>
+						<option value="TemplateMethod">Template Method</option>
 						<option value="Visitor">Visitor</option>
 					</optgroup>
-				</select><br /> 
+				</select>
+				<button id="btn-refresh" type="button" title='Refresh' onClick={_a => this.refreshPage(document.getElementById('show_pattern_table') as HTMLTableElement)}> <i className = "fa fa-refresh" ></i></button>
+				<br /> 
 				<br /> 
 				<button id="btn-get-code" type="button" title='Get the code according to the pattern' onClick={_a => this.runprocess()}> Get Code </button>
 				<br /> 
@@ -92,6 +94,7 @@ export class extensionWidget extends ReactWidget {
 				<div id="result">
 					<table id="show_pattern_table">
 					</table>
+					<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Final Code </button>
 				</div>
 			</div>
 			</div>
@@ -146,14 +149,14 @@ export class extensionWidget extends ReactWidget {
 					}
 				}
 			});
-			let d = document.getElementById("result") as HTMLElement;
-			let b = document.createElement("button");
-			b.id = "btnFinalize";
-			b.innerHTML = "Finally Get Code";
-			b.addEventListener('click', (_event) => {
-				this.buttonClick2(table.rows.length);							
-			});
-			d.appendChild(b);  
+			(document.getElementById("btnFinalize") as HTMLButtonElement).style.visibility = 'visible';
+			
+			//let images =  require("./AbstractFactory.jpg");
+			/*let img = document.createElement("img");
+			//img.src = images.default;
+			img.id = extensionWidget.state.statePatternSelection + "-img";
+			img.alt = "Class Diagram of "+extensionWidget.state.statePatternSelection+ " design pattern";
+			d.append(img);*/
 		}else{
 			this.messageService.info('You need to choose a software pattern!');
 		}
@@ -399,12 +402,13 @@ export class extensionWidget extends ReactWidget {
 	}
 	checkInputsForSameValues(){
 		const uniqueElements = new Set(extensionWidget.textBoxValues);
-    	if (uniqueElements.size<extensionWidget.textBoxValues.length){
-			return true;
-		}else{
-			return false;
-		}
+		return uniqueElements.size<extensionWidget.textBoxValues.length ? true : false;
     	
+	}
+	refreshPage(table: HTMLTableElement){
+		table.innerHTML = "";
+		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
+		(document.getElementById("btnFinalize") as HTMLButtonElement).style.visibility = 'hidden';
 	}
 
 }

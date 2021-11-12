@@ -57,7 +57,7 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
                 var firstString = (array[i].toString()).split('('); //?
                 var secondString = (firstString[0].toString()).split(/\s+/);
                 async function fillPromise(labelObj) {
-                    (await labelObj.label).push(secondString[2]); //.slice(-1))
+                    (await labelObj.label).push(secondString[secondString.length - 1]); //.slice(-1))
                 }
                 fillPromise(lO);
             }

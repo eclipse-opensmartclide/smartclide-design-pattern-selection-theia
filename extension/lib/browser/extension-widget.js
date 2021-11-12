@@ -58,9 +58,9 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 React.createElement("select", { id: "drop-down-patterns", onChange: this.updateSelection, name: "statePatternSelection" },
                     React.createElement("option", { id: "empty-choice", value: "Choose_pattern" }, "Choose pattern"),
                     React.createElement("optgroup", { label: "Creational" },
-                        React.createElement("option", { value: "Abstract Factory" }, "Abstract Factory"),
+                        React.createElement("option", { value: "AbstractFactory" }, "Abstract Factory"),
                         React.createElement("option", { value: "Builder" }, "Builder"),
-                        React.createElement("option", { value: "Factory Method" }, "Factory Method"),
+                        React.createElement("option", { value: "FactoryMethod" }, "Factory Method"),
                         React.createElement("option", { value: "Prototype" }, "Prototype"),
                         React.createElement("option", { value: "Singleton" }, "Singleton")),
                     React.createElement("optgroup", { label: "Structural" },
@@ -72,7 +72,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         React.createElement("option", { value: "Flyweight" }, "Flyweight"),
                         React.createElement("option", { value: "Proxy" }, "Proxy")),
                     React.createElement("optgroup", { label: "Behavioral" },
-                        React.createElement("option", { value: "Chain of Responsibility" }, "Chain of Responsibility"),
+                        React.createElement("option", { value: "ChainofResponsibility" }, "Chain of Responsibility"),
                         React.createElement("option", { value: "Command" }, "Command"),
                         React.createElement("option", { value: "Interpreter" }, "Interpreter"),
                         React.createElement("option", { value: "Iterator" }, "Iterator"),
@@ -81,8 +81,11 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         React.createElement("option", { value: "Observer" }, "Observer"),
                         React.createElement("option", { value: "State" }, "State"),
                         React.createElement("option", { value: "Strategy" }, "Strategy"),
-                        React.createElement("option", { value: "Template Method" }, "Template Method"),
+                        React.createElement("option", { value: "TemplateMethod" }, "Template Method"),
                         React.createElement("option", { value: "Visitor" }, "Visitor"))),
+                React.createElement("button", { id: "btn-refresh", type: "button", title: 'Refresh', onClick: _a => this.refreshPage(document.getElementById('show_pattern_table')) },
+                    " ",
+                    React.createElement("i", { className: "fa fa-refresh" })),
                 React.createElement("br", null),
                 React.createElement("br", null),
                 React.createElement("button", { id: "btn-get-code", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.runprocess() }, " Get Code "),
@@ -90,7 +93,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 React.createElement("div", { id: "show_pattern" }),
                 React.createElement("br", null),
                 React.createElement("div", { id: "result" },
-                    React.createElement("table", { id: "show_pattern_table" }))));
+                    React.createElement("table", { id: "show_pattern_table" }),
+                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Final Code "))));
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
@@ -118,7 +122,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     t3.addEventListener('click', (event) => {
                         this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
                     });
-<<<<<<< HEAD
                 }
                 if (values[key].insertMethods) {
                     if (values[key].insertMethods == 1) {
@@ -138,18 +141,15 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         var keys = Object.keys(values[key]);
                         this.insertCells(table, keys[3]);
                     }
-=======
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
                 }
             });
-            let d = document.getElementById("result");
-            let b = document.createElement("button");
-            b.id = "btnFinalize";
-            b.innerHTML = "Finally Get Code";
-            b.addEventListener('click', (_event) => {
-                this.buttonClick2(table.rows.length);
-            });
-            d.appendChild(b);
+            document.getElementById("btnFinalize").style.visibility = 'visible';
+            //let images =  require("./AbstractFactory.jpg");
+            /*let img = document.createElement("img");
+            //img.src = images.default;
+            img.id = extensionWidget.state.statePatternSelection + "-img";
+            img.alt = "Class Diagram of "+extensionWidget.state.statePatternSelection+ " design pattern";
+            d.append(img);*/
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
@@ -179,7 +179,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         txtbox.onchange = function () {
             extensionWidget_1.textBoxValues[num - 1] = txtbox.value;
         };
-<<<<<<< HEAD
         txtbox.autocomplete = "off";
         txtbox.placeholder = key;
         txtbox.addEventListener('keypress', (e) => {
@@ -191,19 +190,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         cell1.appendChild(label);
         cell2.appendChild(txtbox);
         cell2.appendChild(suggestions);
-=======
-        t2.autocomplete = "off";
-        t2.placeholder = key;
-        t2.addEventListener('keypress', (e) => {
-            this.showSuggestions(t2.value, e.target.id);
-        });
-        let t3 = document.createElement("div");
-        t3.id = "suggestions" + table.rows.length;
-        t3.className = "suggestions";
-        cell1.appendChild(t1);
-        cell2.appendChild(t2);
-        cell2.appendChild(t3);
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
         return row;
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
@@ -213,14 +199,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         let label = this.updateLabel(key.substr(3), count + 1);
         if (extensionWidget_1.state.statePatternSelection == "Abstract Factory") {
             if (key.includes("AbstractProduct")) {
-<<<<<<< HEAD
                 newValues[label] = JSON.stringify({ name: "", extension: 1 });
                 this.insertCells(table, label);
-=======
-                let labelAbstrProd = this.updateLabel(key.substr(3), count + 1);
-                newValues[labelAbstrProd] = JSON.stringify({ name: "", extension: 1 });
-                this.insertCells(table, labelAbstrProd);
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
                 var numProd = (this.countKeys(values, "Product") / count) - 1; // number of "Products"
                 for (let j = 0; j < numProd; j++) {
                     let labelProduct = "Product" + (count + 1) + "." + (j + 1);
@@ -241,16 +221,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         }
         else if (extensionWidget_1.state.statePatternSelection == "Builder") {
             let labelConBuilder = this.updateLabel("ConcreteBuilder ", count + 1);
-<<<<<<< HEAD
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
-=======
-            newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
-            newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
             this.insertCells(table, labelConBuilder);
-            this.insertCells(table, labelProduct);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Factory Method") {
             let labelProduct = this.updateLabel("ConcreteProduct ", count + 1);
@@ -298,7 +272,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
         }
-<<<<<<< HEAD
         else if (key.substr(3).includes("method")) {
             var string = key.split('-');
             let countMethods = this.countKeys(newValues[string[1]], "method");
@@ -307,10 +280,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[string[1]][labelMethod] = "";
         }
         else {
-=======
-        else {
-            let label = this.updateLabel(key.substr(3), count + 1);
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
         }
@@ -412,28 +381,24 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         }
     }
     checkInputsForSameValues() {
-<<<<<<< HEAD
-        //return extensionWidget.textBoxValues.every(num => extensionWidget.textBoxValues.indexOf(num) === extensionWidget.textBoxValues.lastIndexOf(num));
-        return extensionWidget_1.textBoxValues.some((val, i) => extensionWidget_1.textBoxValues.indexOf(val) !== i);
-=======
-        //return (extensionWidget.textBoxValues.every( (val, i, arr) => val === arr[0] ) ) ;
-        //return extensionWidget.textBoxValues.some((val, i) => extensionWidget.textBoxValues.indexOf(val) !== i);
         const uniqueElements = new Set(extensionWidget_1.textBoxValues);
-        console.log(JSON.stringify(uniqueElements));
-        console.log(extensionWidget_1.textBoxValues);
         if (uniqueElements.size < extensionWidget_1.textBoxValues.length) {
             return true;
         }
         else {
             return false;
         }
->>>>>>> d75fc889320bebd2cc26c7d4a25aa607137dcb8a
+    }
+    refreshPage(table) {
+        table.innerHTML = "";
+        document.getElementById("btn-get-code").style.visibility = 'visible';
+        document.getElementById("btnFinalize").style.visibility = 'hidden';
     }
 };
 extensionWidget.ID = 'extension:widget';
 extensionWidget.LABEL = 'Extension Widget';
 extensionWidget.state = {
-    statePatternSelection: '',
+    statePatternSelection: ''
 };
 extensionWidget.textBoxValues = [];
 extensionWidget.data = JSON.parse(JSON.stringify(data_json_1.default));
