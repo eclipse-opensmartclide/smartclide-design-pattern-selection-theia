@@ -21,13 +21,14 @@ export declare class extensionWidget extends ReactWidget {
     updateSelection(e: React.ChangeEvent<HTMLSelectElement>): void;
     insertCells(table: HTMLTableElement, key: string): HTMLTableRowElement;
     extensionButtonClick(table: HTMLTableElement, key: string, values: string): void;
-    buttonClick2(rows: number): void;
+    buttonClick2(rows: number): Promise<void>;
     updateLabel(value: string, count: number): string;
     countKeys(values: string, keyString: string): number;
     showSuggestions(value: string, id: string): void;
     autocompleteMatch(input: string): string[];
     updateJsonObject(): void;
-    checkInputs(): "Inputs are invalid" | "Inputs are valid";
+    checkInputs(): Promise<"Inputs are invalid" | "Inputs are valid">;
     checkInputsForSameValues(): boolean;
+    refreshPage(table: HTMLTableElement): void;
 }
 //# sourceMappingURL=extension-widget.d.ts.map

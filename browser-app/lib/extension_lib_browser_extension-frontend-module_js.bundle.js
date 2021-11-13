@@ -7,7 +7,7 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"Abstract Factory":{"values":{"Client":{"name":"","extension":0},"AbstractFactory":{"name":"","extension":0},"ConcreteFactory1":{"name":"","extension":1},"ConcreteFactory2":{"name":"","extension":1},"AbstractProduct1":{"name":"","extension":1},"Product1.1":{"name":"","extension":0},"Product1.2":{"name":"","extension":0},"AbstractProduct2":{"name":"","extension":1},"Product2.1":{"name":"","extension":0},"Product2.2":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0},"ConcreteBuilder1":{"name":"","extension":1},"Product1":{"name":"","extension":1}}},"Factory Method":{"values":{"Creator":{"name":"","extension":0},"ConcreteCreator1":{"name":"","extension":1},"Product":{"name":"","extension":0},"ConcreteProduct1":{"name":"","extension":1}}},"Prototype":{"values":{"Client":{"name":"","extension":0},"Prototype":{"name":"","extension":0},"ConcretePrototype1":{"name":"","extension":1},"ConcretePrototype2":{"name":"","extension":1}}},"Singleton":{"values":{"Client":{"name":"","extension":0},"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"Client":{"name":"","extension":0},"Target":{"name":"","extension":0},"Adapter1":{"name":"","extension":1},"Adaptee1":{"name":"","extension":1}}},"Bridge":{"values":{"Client":{"name":"","extension":0},"Abstraction":{"name":"","extension":0},"RefinedAbstraction1":{"name":"","extension":1},"Implementor":{"name":"","extension":0},"ConcreteImplementor1":{"name":"","extension":1},"ConcreteImplementor2":{"name":"","extension":1}}},"Composite":{"values":{"Client":{"name":"","extension":0},"Component":{"name":"","extension":0},"Leaf1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}},"Decorator":{"values":{"Component":{"name":"","extension":0},"ConcreteComponent1":{"name":"","extension":1},"Decorator":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"ConcreteDecorator2":{"name":"","extension":1}}},"Facade":{"values":{"Client":{"name":"","extension":0},"Facade":{"name":"","extension":0},"AdditionalFacade1":{"name":"","extension":1}}},"Flyweight":{"values":{"Client":{"name":"","extension":0},"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0},"ConcreteFlyweight1":{"name":"","extension":1},"UnsharedConcreteFlyweight1":{"name":"","extension":1}}},"Proxy":{"values":{"Client":{"name":"","extension":0},"Subject":{"name":"","extension":0},"RealSubject":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}},"Chain of Responsibility":{"values":{"Client":{"name":"","extension":0},"Handler":{"name":"","extension":0},"ConcreteHandler1":{"name":"","extension":1},"ConcreteHandler2":{"name":"","extension":1}}},"Command":{"values":{"Client":{"name":"","extension":0},"Receiver1":{"name":"","extension":1},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0},"ConcreteCommand1":{"name":"","extension":1}}},"Interpreter":{"values":{"Client":{"name":"","extension":0},"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0},"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}},"Iterator":{"values":{"Client":{"name":"","extension":0},"Aggregate":{"name":"","extension":0},"ConcreteAggregate1":{"name":"","extension":1},"Iterator":{"name":"","extension":0},"ConcreteIterator1":{"name":"","extension":1}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0},"ConcreteMediator":{"name":"","extension":0},"Colleague":{"name":"","extension":0},"ConcreteColleague1":{"name":"","extension":1},"ConcreteColleague2":{"name":"","extension":1}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"Memento":{"name":"","extension":0},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0},"ConcreteSubject1":{"name":"","extension":1},"Observer":{"name":"","extension":0},"ConcreteObserver1":{"name":"","extension":1}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0},"ConcreteState1":{"name":"","extension":1},"ConcreteState2":{"name":"","extension":1}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0},"ConcreteStrategy1":{"name":"","extension":1},"ConcreteStrategy2":{"name":"","extension":1}}},"Template Method":{"values":{"AbstractClass":{"name":"","extension":0},"ConcreteClass1":{"name":"","extension":1}}},"Visitor":{"values":{"Client":{"name":"","extension":0},"Visitor":{"name":"","extension":0},"ConcreteVisitor1":{"name":"","extension":1},"ConcreteVisitor2":{"name":"","extension":1},"ObjectStructure":{"name":"","extension":0},"Element":{"name":"","extension":0},"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":1}}}}');
+module.exports = JSON.parse('{"AbstractFactory":{"values":{"Client":{"name":"","extension":0},"AbstractFactory":{"name":"","extension":0},"ConcreteFactory1":{"name":"","extension":1},"ConcreteFactory2":{"name":"","extension":0},"AbstractProduct1":{"name":"","extension":1},"Product1.1":{"name":"","extension":0},"Product1.2":{"name":"","extension":0},"AbstractProduct2":{"name":"","extension":0},"Product2.1":{"name":"","extension":0},"Product2.2":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0,"insertMethods":1,"method1":"","method2":""},"ConcreteBuilder1":{"name":"","extension":0},"Product1":{"name":"","extension":1}}},"FactoryMethod":{"values":{"Creator":{"name":"","extension":0},"ConcreteCreator1":{"name":"","extension":0},"Product":{"name":"","extension":0},"ConcreteProduct1":{"name":"","extension":1}}},"Prototype":{"values":{"Client":{"name":"","extension":0},"Prototype":{"name":"","extension":0},"ConcretePrototype1":{"name":"","extension":1},"ConcretePrototype2":{"name":"","extension":0}}},"Singleton":{"values":{"Client":{"name":"","extension":0},"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"Client":{"name":"","extension":0},"Target":{"name":"","extension":0},"Adapter1":{"name":"","extension":0,"insertMethods":1,"method1":""},"Adaptee1":{"name":"","extension":1}}},"Bridge":{"values":{"Client":{"name":"","extension":0},"Abstraction":{"name":"","extension":0},"RefinedAbstraction1":{"name":"","extension":1},"Implementor":{"name":"","extension":0},"ConcreteImplementor1":{"name":"","extension":1},"ConcreteImplementor2":{"name":"","extension":0}}},"Composite":{"values":{"Client":{"name":"","extension":0},"Component":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}},"Decorator":{"values":{"Component":{"name":"","extension":0},"ConcreteComponent1":{"name":"","extension":1},"Decorator":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"ConcreteDecorator2":{"name":"","extension":0}}},"Facade":{"values":{"Client":{"name":"","extension":0},"Facade":{"name":"","extension":0},"AdditionalFacade1":{"name":"","extension":1}}},"Flyweight":{"values":{"Client":{"name":"","extension":0},"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0},"ConcreteFlyweight1":{"name":"","extension":1},"UnsharedConcreteFlyweight1":{"name":"","extension":1}}},"Proxy":{"values":{"Client":{"name":"","extension":0},"Subject":{"name":"","extension":0},"RealSubject":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}},"ChainofResponsibility":{"values":{"Client":{"name":"","extension":0},"Handler":{"name":"","extension":0},"ConcreteHandler1":{"name":"","extension":1},"ConcreteHandler2":{"name":"","extension":0}}},"Command":{"values":{"Client":{"name":"","extension":0},"Receiver1":{"name":"","extension":1},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0},"ConcreteCommand1":{"name":"","extension":1}}},"Interpreter":{"values":{"Client":{"name":"","extension":0},"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0},"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}},"Iterator":{"values":{"Client":{"name":"","extension":0},"Aggregate":{"name":"","extension":0},"ConcreteAggregate1":{"name":"","extension":1},"Iterator":{"name":"","extension":0},"ConcreteIterator1":{"name":"","extension":1}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0},"ConcreteMediator":{"name":"","extension":0},"Colleague":{"name":"","extension":0},"ConcreteColleague1":{"name":"","extension":1},"ConcreteColleague2":{"name":"","extension":0}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"Memento":{"name":"","extension":0},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0},"ConcreteSubject1":{"name":"","extension":1},"Observer":{"name":"","extension":0},"ConcreteObserver1":{"name":"","extension":1}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0},"ConcreteState1":{"name":"","extension":1},"ConcreteState2":{"name":"","extension":0}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0},"ConcreteStrategy1":{"name":"","extension":1},"ConcreteStrategy2":{"name":"","extension":0}}},"TemplateMethod":{"values":{"AbstractClass":{"name":"","extension":0},"ConcreteClass1":{"name":"","extension":1}}},"Visitor":{"values":{"Client":{"name":"","extension":0},"Visitor":{"name":"","extension":0},"ConcreteVisitor1":{"name":"","extension":1},"ConcreteVisitor2":{"name":"","extension":0},"ObjectStructure":{"name":"","extension":0},"Element":{"name":"","extension":0},"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":0}}}}');
 
 /***/ }),
 
@@ -22,7 +22,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.id, "#widget-container{\r\n\twidth: 550px;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n    width: 190px;\r\n    height: 20px;\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n", ""]);
+exports.push([module.id, "#widget-container{\r\n\twidth: 550px;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n\r\n    width: 190px;\r\n    height: 20px;\r\n\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n#btnFinalize{\r\n  visibility: hidden;\r\n  margin-left: 10px;\r\n}\r\n.img{\r\n  visibility : hidden;\r\n}", ""]);
 
 // exports
 
@@ -259,9 +259,9 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 React.createElement("select", { id: "drop-down-patterns", onChange: this.updateSelection, name: "statePatternSelection" },
                     React.createElement("option", { id: "empty-choice", value: "Choose_pattern" }, "Choose pattern"),
                     React.createElement("optgroup", { label: "Creational" },
-                        React.createElement("option", { value: "Abstract Factory" }, "Abstract Factory"),
+                        React.createElement("option", { value: "AbstractFactory" }, "Abstract Factory"),
                         React.createElement("option", { value: "Builder" }, "Builder"),
-                        React.createElement("option", { value: "Factory Method" }, "Factory Method"),
+                        React.createElement("option", { value: "FactoryMethod" }, "Factory Method"),
                         React.createElement("option", { value: "Prototype" }, "Prototype"),
                         React.createElement("option", { value: "Singleton" }, "Singleton")),
                     React.createElement("optgroup", { label: "Structural" },
@@ -273,7 +273,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         React.createElement("option", { value: "Flyweight" }, "Flyweight"),
                         React.createElement("option", { value: "Proxy" }, "Proxy")),
                     React.createElement("optgroup", { label: "Behavioral" },
-                        React.createElement("option", { value: "Chain of Responsibility" }, "Chain of Responsibility"),
+                        React.createElement("option", { value: "ChainofResponsibility" }, "Chain of Responsibility"),
                         React.createElement("option", { value: "Command" }, "Command"),
                         React.createElement("option", { value: "Interpreter" }, "Interpreter"),
                         React.createElement("option", { value: "Iterator" }, "Iterator"),
@@ -282,8 +282,11 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         React.createElement("option", { value: "Observer" }, "Observer"),
                         React.createElement("option", { value: "State" }, "State"),
                         React.createElement("option", { value: "Strategy" }, "Strategy"),
-                        React.createElement("option", { value: "Template Method" }, "Template Method"),
+                        React.createElement("option", { value: "TemplateMethod" }, "Template Method"),
                         React.createElement("option", { value: "Visitor" }, "Visitor"))),
+                React.createElement("button", { id: "btn-refresh", type: "button", title: 'Refresh', onClick: _a => this.refreshPage(document.getElementById('show_pattern_table')) },
+                    " ",
+                    React.createElement("i", { className: "fa fa-refresh" })),
                 React.createElement("br", null),
                 React.createElement("br", null),
                 React.createElement("button", { id: "btn-get-code", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.runprocess() }, " Get Code "),
@@ -291,7 +294,9 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 React.createElement("div", { id: "show_pattern" }),
                 React.createElement("br", null),
                 React.createElement("div", { id: "result" },
-                    React.createElement("table", { id: "show_pattern_table" }))));
+                    React.createElement("table", { id: "show_pattern_table" }),
+                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Final Code "),
+                    React.createElement("img", { src: Object(function webpackMissingModule() { var e = new Error("Cannot find module 'undefined'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).default, id: extensionWidget_1.state.statePatternSelection + "-img", alt: "Class Diagram of " + extensionWidget_1.state.statePatternSelection }))));
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
@@ -301,12 +306,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             image.alt = "dog";
             var getUrl = window.location.href;
             extensionWidget_1.res = await this.helloBackendService.sayHelloTo(getUrl);
-            for (let i = 0; i < extensionWidget_1.res.length; i++) {
-                let lastW = extensionWidget_1.res[i].lastIndexOf("/");
-                let file = extensionWidget_1.res[i].substr(lastW + 1);
-                file = file.substr(0, file.indexOf("."));
-                extensionWidget_1.res[i] = file;
-            }
+            console.log(extensionWidget_1.res);
             //show the JSON values for the chosen key-pattern
             let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
             var table = document.getElementById('show_pattern_table');
@@ -322,15 +322,34 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
                     });
                 }
+                if (values[key].insertMethods) {
+                    if (values[key].insertMethods == 1) {
+                        var keys = Object.keys(values[key]);
+                        let row = this.insertCells(table, keys[3]);
+                        let cell3 = row.insertCell(2);
+                        let t3 = document.createElement("button");
+                        t3.innerHTML = "+";
+                        t3.id = "btn" + '-' + key + '-' + keys[3];
+                        cell3.appendChild(t3);
+                        t3.addEventListener('click', (event) => {
+                            this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
+                            console.log("NEW VALUES: " + JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
+                        });
+                    }
+                    else {
+                        var keys = Object.keys(values[key]);
+                        this.insertCells(table, keys[3]);
+                    }
+                }
             });
-            let d = document.getElementById("result");
-            let b = document.createElement("button");
-            b.id = "btnFinalize";
-            b.innerHTML = "Finally Get Code";
-            b.addEventListener('click', (_event) => {
-                this.buttonClick2(table.rows.length);
-            });
-            d.appendChild(b);
+            document.getElementById("btnFinalize").style.visibility = 'visible';
+            document.getElementById(extensionWidget_1.state.statePatternSelection + "-img").style.visibility = 'visible';
+            //var d = document.getElementById("result") as HTMLElement; 
+            //let img = document.createElement("img");
+            //img.src = {require(./img/AbstractFactory.jpg)};
+            //img.id = extensionWidget.state.statePatternSelection + "-img";
+            //img.alt = "Class Diagram of "+extensionWidget.state.statePatternSelection+ " design pattern";
+            //d.append(img);
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
@@ -351,37 +370,37 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         let row = table.insertRow(index);
         let cell1 = row.insertCell(0);
         let cell2 = row.insertCell(1);
-        let t1 = document.createElement("label");
-        t1.id = "label" + table.rows.length;
-        t1.innerHTML = key;
-        let t2 = document.createElement("input");
-        t2.id = "txtbox" + table.rows.length;
+        let label = document.createElement("label");
+        label.id = "label" + table.rows.length;
+        label.innerHTML = key;
+        let txtbox = document.createElement("input");
+        txtbox.id = "txtbox" + table.rows.length;
         let num = table.rows.length;
-        t2.onchange = function () {
-            extensionWidget_1.textBoxValues[num - 1] = t2.value;
+        txtbox.onchange = function () {
+            extensionWidget_1.textBoxValues[num - 1] = txtbox.value;
         };
-        t2.autocomplete = "off";
-        t2.placeholder = key;
-        t2.addEventListener('keypress', (e) => {
-            this.showSuggestions(t2.value, e.target.id);
+        txtbox.autocomplete = "off";
+        txtbox.placeholder = key;
+        txtbox.addEventListener('keypress', (e) => {
+            this.showSuggestions(txtbox.value, e.target.id);
         });
-        let t3 = document.createElement("div");
-        t3.id = "suggestions" + table.rows.length;
-        t3.className = "suggestions";
-        cell1.appendChild(t1);
-        cell2.appendChild(t2);
-        cell2.appendChild(t3);
+        let suggestions = document.createElement("div");
+        suggestions.id = "suggestions" + table.rows.length;
+        suggestions.className = "suggestions";
+        cell1.appendChild(label);
+        cell2.appendChild(txtbox);
+        cell2.appendChild(suggestions);
         return row;
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
     extensionButtonClick(table, key, values) {
         let newValues = JSON.parse(JSON.stringify(values));
         let count = this.countKeys(values, key.substr(3));
+        let label = this.updateLabel(key.substr(3), count + 1);
         if (extensionWidget_1.state.statePatternSelection == "Abstract Factory") {
             if (key.includes("AbstractProduct")) {
-                let labelAbstrProd = this.updateLabel(key.substr(3), count + 1);
-                newValues[labelAbstrProd] = JSON.stringify({ name: "", extension: 1 });
-                this.insertCells(table, labelAbstrProd);
+                newValues[label] = JSON.stringify({ name: "", extension: 1 });
+                this.insertCells(table, label);
                 var numProd = (this.countKeys(values, "Product") / count) - 1; // number of "Products"
                 for (let j = 0; j < numProd; j++) {
                     let labelProduct = "Product" + (count + 1) + "." + (j + 1);
@@ -390,10 +409,9 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 }
             }
             else {
-                let labelConFactory = this.updateLabel("ConcreteFactory ", count + 1);
-                this.insertCells(table, labelConFactory);
+                this.insertCells(table, label);
                 let numAbstrProd = this.countKeys(newValues, "AbstractProduct");
-                newValues[labelConFactory] = JSON.stringify({ "name": "", "extension": 1 });
+                newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
                 for (let j = 0; j < numAbstrProd; j++) {
                     let labelProduct = "Product" + (j + 1) + "." + (count + 1);
                     this.insertCells(table, labelProduct);
@@ -402,12 +420,11 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             }
         }
         else if (extensionWidget_1.state.statePatternSelection == "Builder") {
-            let labelProduct = this.updateLabel("Product ", count + 1);
             let labelConBuilder = this.updateLabel("ConcreteBuilder ", count + 1);
-            newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
+            this.insertCells(table, label);
             this.insertCells(table, labelConBuilder);
-            this.insertCells(table, labelProduct);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Factory Method") {
             let labelProduct = this.updateLabel("ConcreteProduct ", count + 1);
@@ -455,19 +472,25 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
         }
+        else if (key.substr(3).includes("method")) {
+            var string = key.split('-');
+            let countMethods = this.countKeys(newValues[string[1]], "method");
+            let labelMethod = this.updateLabel("method ", countMethods + 1);
+            this.insertCells(table, labelMethod);
+            newValues[string[1]][labelMethod] = "";
+        }
         else {
-            let label = this.updateLabel(key.substr(3), count + 1);
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
         }
         extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = newValues;
     }
-    buttonClick2(rows) {
+    async buttonClick2(rows) {
         if (rows != extensionWidget_1.textBoxValues.length) {
             this.messageService.info("You need to give name for ALL the classes!");
         }
         else {
-            if (this.checkInputs() == "Inputs are valid") {
+            if (await this.checkInputs() == "Inputs are valid") {
                 this.updateJsonObject();
                 this.messageService.info("Well done! Code is coming...");
             }
@@ -481,9 +504,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
     }
     countKeys(values, keyString) {
         let count = 0;
-        keyString = keyString.slice(0, -1);
+        console.log(typeof values);
+        let string = keyString.replace(/\d/g, ''); //removes the numbers from the string and returns a new one
         Object.keys(values).forEach((key) => {
-            if (key.includes(keyString)) {
+            if (key.includes(string)) {
                 count++;
             }
         });
@@ -533,7 +557,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[label].name = txtbox;
         }
     }
-    checkInputs() {
+    async checkInputs() {
         let count = 0;
         const table = document.getElementById('show_pattern_table');
         if (this.checkInputsForSameValues()) {
@@ -542,27 +566,43 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         else {
             for (let i = 0; i < table.rows.length; i++) {
                 const txtbox = document.getElementById('txtbox' + (i + 1)).value;
+                //const label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
                 if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) {
                     count++;
                 }
+                //if(extensionWidget.state.statePatternSelection=="Adaptee" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
+                //const txtboxMethod = (document.getElementById( 'txtbox'+ (i + 2) ) as HTMLInputElement).value;
+                //}
             }
+            var getUrl = window.location.href;
+            var methodNames = await this.helloBackendService.getMethods(getUrl, "Director");
+            console.log(JSON.stringify(methodNames));
             return (count == table.rows.length ? "Inputs are valid" : "Inputs are invalid");
         }
     }
     checkInputsForSameValues() {
         const uniqueElements = new Set(extensionWidget_1.textBoxValues);
+<<<<<<< HEAD
         if (uniqueElements.size < extensionWidget_1.textBoxValues.length) {
             return true;
         }
         else {
             return false;
         }
+=======
+        return uniqueElements.size < extensionWidget_1.textBoxValues.length ? true : false;
+    }
+    refreshPage(table) {
+        table.innerHTML = "";
+        document.getElementById("btn-get-code").style.visibility = 'visible';
+        document.getElementById("btnFinalize").style.visibility = 'hidden';
+>>>>>>> 1ad0910539e11aed8308c131ba0232c6ff552c57
     }
 };
 extensionWidget.ID = 'extension:widget';
 extensionWidget.LABEL = 'Extension Widget';
 extensionWidget.state = {
-    statePatternSelection: '',
+    statePatternSelection: ''
 };
 extensionWidget.textBoxValues = [];
 extensionWidget.data = JSON.parse(JSON.stringify(data_json_1.default));

@@ -14,8 +14,10 @@ input{
 	background: transparent;
     border: none;
     color: white;
+
     width: 190px;
     height: 20px;
+
 }
 
 #TD{
@@ -74,4 +76,11 @@ input{
 }
 .suggestions ul li:hover {
   background: #eee;
+}
+#btnFinalize{
+  visibility: hidden;
+  margin-left: 10px;
+}
+.img{
+  visibility : hidden;
 }

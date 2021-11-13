@@ -1,5 +1,5 @@
 {
-    "Abstract Factory": {
+    "AbstractFactory": {
         "values": {
             "Client": {
                 "name": "",
@@ -15,7 +15,7 @@
             },
             "ConcreteFactory2": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             },
             "AbstractProduct1": {
                 "name": "",
@@ -31,7 +31,7 @@
             },
             "AbstractProduct2": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             },
             "Product2.1": {
                 "name": "",
@@ -51,11 +51,14 @@
             },
             "Builder": {
                 "name": "",
-                "extension": 0
+                "extension": 0,
+                "insertMethods": 1,
+                "method1": "",
+                "method2": ""
             },
             "ConcreteBuilder1": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             },
             "Product1": {
                 "name": "",
@@ -63,7 +66,7 @@
             }
         }
     },
-    "Factory Method": {
+    "FactoryMethod": {
         "values": {
             "Creator": {
                 "name": "",
@@ -71,7 +74,7 @@
             },
             "ConcreteCreator1": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             },
             "Product": {
                 "name": "",
@@ -99,7 +102,7 @@
             },
             "ConcretePrototype2": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             }
         }
     },
@@ -127,7 +130,9 @@
             },
             "Adapter1": {
                 "name": "",
-                "extension": 1
+                "extension": 0,
+                "insertMethods": 1,
+                "method1": ""
             },
             "Adaptee1": {
                 "name": "",
@@ -159,7 +164,7 @@
             },
             "ConcreteImplementor2": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             }
         }
     },
@@ -173,7 +178,7 @@
                 "name": "",
                 "extension": 0
             },
-            "Leaf1": {
+            "ConcreteDecorator1": {
                 "name": "",
                 "extension": 1
             },
@@ -203,7 +208,7 @@
             },
             "ConcreteDecorator2": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             }
         }
     },
@@ -267,7 +272,7 @@
             }
         }
     },
-    "Chain of Responsibility": {
+    "ChainofResponsibility": {
         "values": {
             "Client": {
                 "name": "",
@@ -283,7 +288,7 @@
             },
             "ConcreteHandler2": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             }
         }
     },
@@ -379,7 +384,7 @@
             },
             "ConcreteColleague2": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             }
         }
     },
@@ -435,7 +440,7 @@
             },
             "ConcreteState2": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             }
         }
     },
@@ -455,11 +460,11 @@
             },
             "ConcreteStrategy2": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             }
         }
     },
-    "Template Method": {
+    "TemplateMethod": {
         "values": {
             "AbstractClass": {
                 "name": "",
@@ -487,7 +492,7 @@
             },
             "ConcreteVisitor2": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             },
             "ObjectStructure": {
                 "name": "",
@@ -503,7 +508,7 @@
             },
             "ConcreteElement2": {
                 "name": "",
-                "extension": 1
+                "extension": 0
             }
         }
     }

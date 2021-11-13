@@ -9,7 +9,6 @@ import { HelloBackendService } from '../common/protocol';
 import data from './data.json';
 
 
-
 @injectable()
 export class extensionWidget extends ReactWidget {
 	
@@ -19,7 +18,7 @@ export class extensionWidget extends ReactWidget {
     static readonly LABEL = 'Extension Widget';
 	
     static state = {
-		statePatternSelection: '',
+		statePatternSelection: ''
 	}
 	
     @inject(MessageService)
@@ -49,14 +48,15 @@ export class extensionWidget extends ReactWidget {
 		
 		return <div id='widget-container'>
 		<AlertMessage type='INFO' header={header} />
+		
 		<div id='issues'>
 				<br />
 				<select id="drop-down-patterns" onChange={this.updateSelection} name="statePatternSelection">
 						<option id="empty-choice" value="Choose_pattern">Choose pattern</option>
 					<optgroup label="Creational">
-						<option value="Abstract Factory">Abstract Factory</option>
+						<option value="AbstractFactory">Abstract Factory</option>
 						<option value="Builder">Builder</option>
-						<option value="Factory Method">Factory Method</option>
+						<option value="FactoryMethod">Factory Method</option>
 						<option value="Prototype">Prototype</option>
 						<option value="Singleton">Singleton</option>
 					</optgroup>
@@ -70,7 +70,7 @@ export class extensionWidget extends ReactWidget {
 						<option value="Proxy">Proxy</option>
 					</optgroup>
 					<optgroup label="Behavioral">
-						<option value="Chain of Responsibility">Chain of Responsibility</option>
+						<option value="ChainofResponsibility">Chain of Responsibility</option>
 						<option value="Command">Command</option>
 						<option value="Interpreter">Interpreter</option>
 						<option value="Iterator">Iterator</option>
@@ -79,10 +79,12 @@ export class extensionWidget extends ReactWidget {
 						<option value="Observer">Observer</option>
 						<option value="State">State</option>
 						<option value="Strategy">Strategy</option>
-						<option value="Template Method">Template Method</option>
+						<option value="TemplateMethod">Template Method</option>
 						<option value="Visitor">Visitor</option>
 					</optgroup>
-				</select><br /> 
+				</select>
+				<button id="btn-refresh" type="button" title='Refresh' onClick={_a => this.refreshPage(document.getElementById('show_pattern_table') as HTMLTableElement)}> <i className = "fa fa-refresh" ></i></button>
+				<br /> 
 				<br /> 
 				<button id="btn-get-code" type="button" title='Get the code according to the pattern' onClick={_a => this.runprocess()}> Get Code </button>
 				<br /> 
@@ -94,6 +96,7 @@ export class extensionWidget extends ReactWidget {
 					
 					<table id="show_pattern_table">
 					</table>
+					<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Final Code </button>
 				</div>
 			</div>
 			</div>
@@ -105,12 +108,7 @@ export class extensionWidget extends ReactWidget {
 
 			var getUrl = window.location.href;
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
-			for (let i=0; i<extensionWidget.res.length; i++){
-            	let lastW = extensionWidget.res[i].lastIndexOf("/");
-				let file = extensionWidget.res[i].substr(lastW+1);
-				file = file.substr(0, file.indexOf("."));
-				extensionWidget.res[i] = file;  
-			}
+			console.log(extensionWidget.res)
 
 			//show the JSON values for the chosen key-pattern
 			let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
@@ -139,6 +137,8 @@ export class extensionWidget extends ReactWidget {
 				this.buttonClick2(table.rows.length);							
 			});
 			d.appendChild(b);  
+			(document.getElementById("btnFinalize") as HTMLButtonElement).style.visibility = 'visible';
+			(document.getElementById(extensionWidget.state.statePatternSelection + "-img") as HTMLImageElement).style.visibility = 'visible';
 		}else{
 			this.messageService.info('You need to choose a software pattern!');
 		}
@@ -159,39 +159,41 @@ export class extensionWidget extends ReactWidget {
 		let row = table.insertRow(index);
 		let cell1 = row.insertCell(0);
 		let cell2 = row.insertCell(1);
-		let t1 = document.createElement("label");
-		t1.id = "label"+ table.rows.length;
-		t1.innerHTML = key;
-
-		let t2 = document.createElement("input");
-		t2.id = "txtbox"+ table.rows.length;
+		let label = document.createElement("label");
+		label.id = "label"+ table.rows.length;
+		label.innerHTML = key;
+	
+		let txtbox = document.createElement("input");
+		txtbox.id = "txtbox"+ table.rows.length;
 		let num = table.rows.length;
-		t2.onchange = function () {  
-			extensionWidget.textBoxValues[num-1] = t2.value;
+		txtbox.onchange = function () {  
+			extensionWidget.textBoxValues[num-1] = txtbox.value;
 		};
-		t2.autocomplete = "off";
-		t2.placeholder = key;
-		t2.addEventListener('keypress', (e: KeyboardEvent) =>{
-			this.showSuggestions(t2.value, ( e.target as Element).id);
+	
+		txtbox.autocomplete = "off";
+		txtbox.placeholder = key;
+		txtbox.addEventListener('keypress', (e: KeyboardEvent) =>{
+			this.showSuggestions(txtbox.value, ( e.target as Element).id);
 		});
-		let t3 = document.createElement("div");
-		t3.id = "suggestions"+table.rows.length;
-		t3.className = "suggestions";
+
+		let suggestions = document.createElement("div");
+		suggestions.id = "suggestions"+table.rows.length;
+		suggestions.className = "suggestions";
 		
-		cell1.appendChild(t1);
-		cell2.appendChild(t2);
-		cell2.appendChild(t3);
+		cell1.appendChild(label);
+		cell2.appendChild(txtbox);
+		cell2.appendChild(suggestions);
 		return row;
 	}
 	//when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
 	extensionButtonClick (table: HTMLTableElement, key: string, values: string) {
 		let newValues = JSON.parse(JSON.stringify(values));
 		let count = this.countKeys(values, key.substr(3, ));
+		let label = this.updateLabel(key.substr(3,), count+1);
 		if(extensionWidget.state.statePatternSelection=="Abstract Factory"){
 			if(key.includes("AbstractProduct")){
-				let labelAbstrProd = this.updateLabel(key.substr(3,), count+1);
-				newValues[labelAbstrProd] = JSON.stringify({name:"",extension:1});
-				this.insertCells(table, labelAbstrProd);
+				newValues[label] = JSON.stringify({name:"",extension:1});
+				this.insertCells(table, label);
 				var numProd = (this.countKeys(values, "Product") / count) - 1;// number of "Products"
 				for(let j = 0 ; j < numProd; j++ ){
 					let labelProduct = "Product"+ (count+1) + "."+(j+1);
@@ -199,11 +201,10 @@ export class extensionWidget extends ReactWidget {
 					newValues[labelProduct]= JSON.stringify({ "name":"", "extension":1});
 				}
 			}else{
-				let labelConFactory = this.updateLabel("ConcreteFactory ", count+1);
-				this.insertCells(table, labelConFactory);
+				this.insertCells(table, label);
 				
 				let numAbstrProd = this.countKeys(newValues, "AbstractProduct"); 
-				newValues[labelConFactory] =  JSON.stringify({ "name":"", "extension":1});
+				newValues[label] =  JSON.stringify({ "name":"", "extension":1});
 				for(let j = 0; j < numAbstrProd ; j++){
 					let labelProduct = "Product"+(j+1)+"." + (count+1);
 					this.insertCells(table, labelProduct);
@@ -211,14 +212,13 @@ export class extensionWidget extends ReactWidget {
 				}	
 			}
 		}else if(extensionWidget.state.statePatternSelection=="Builder"){
-			let labelProduct = this.updateLabel("Product ", count+1);
 			let labelConBuilder = this.updateLabel("ConcreteBuilder ", count+1);
 
-			newValues[labelProduct] =  JSON.stringify({ "name":"", "extension":1});
+			newValues[label] =  JSON.stringify({ "name":"", "extension":1});
 			newValues[labelConBuilder] = JSON.stringify({ "name":"", "extension":1});
-						 
+			
+			this.insertCells(table, label); 
 			this.insertCells(table, labelConBuilder); 
-			this.insertCells(table, labelProduct);
 		}else if(extensionWidget.state.statePatternSelection=="Factory Method") {
 			let labelProduct = this.updateLabel("ConcreteProduct ", count+1);
 			let labelConCreator = this.updateLabel("ConcreteCreator ", count+1);
@@ -270,30 +270,29 @@ export class extensionWidget extends ReactWidget {
 			newValues[labelConIterator] = JSON.stringify({ "name":"", "extension":1});
 
 		}else{
-			let label = this.updateLabel(key.substr(3, ), count+1);
 			newValues[label] = JSON.stringify({"name":"", "extension":1});
 			this.insertCells(table, label); 
 		}
 		extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;
 	}
 
-	buttonClick2 (rows : number):void{
+	async buttonClick2 (rows : number):Promise<void>{
 		if (rows!=extensionWidget.textBoxValues.length){
 			this.messageService.info("You need to give name for ALL the classes!");
 		}else{
-			if (this.checkInputs() == "Inputs are valid"){
+			if (await this.checkInputs() == "Inputs are valid"){
 				if (extensionWidget.state.statePatternSelection=="Adapter"){
 				
 					let adapteeName = (document.getElementById("Adaptee") as HTMLInputElement).value;
 					if (extensionWidget.res.includes(adapteeName)){
 						//call function to get methods (methodNames) of adapteeName class 
-						let methodName = (document.getElementById("AdapteeMethod") as HTMLInputElement).value;
-						if (extensionWidget.methodNames.includes(methodName)){
+						//let methodName = (document.getElementById("AdapteeMethod") as HTMLInputElement).value;
+						/*if (extensionWidget.methodNames.includes(methodName)){
 							this.updateJsonObject();
 							this.messageService.info("Well done! Code is coming...");
 						}else{
 							this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class!");
-						}
+						}*/
 					}else{
 						this.messageService.info("For Adaptee you need to choose a class name that already exists!");
 					}
@@ -303,8 +302,12 @@ export class extensionWidget extends ReactWidget {
 					this.messageService.info("Well done! Code is coming...");
 				}
 				
-			}else{
-				this.messageService.info("Inputs are invalid");
+				if (await this.checkInputs() == "Inputs are valid"){
+					this.updateJsonObject();
+					this.messageService.info("Well done! Code is coming...");
+				}else{
+					this.messageService.info("Inputs are invalid");
+				}
 			}
 		
 		}
@@ -316,9 +319,10 @@ export class extensionWidget extends ReactWidget {
 
 	countKeys(values: string, keyString: string){
 		let count = 0;
-		keyString = keyString.slice(0, -1)
+		console.log(typeof values)
+		let string = keyString.replace(/\d/g, ''); //removes the numbers from the string and returns a new one
 		Object.keys(values).forEach((key) =>{
-			if(key.includes(keyString)){
+			if(key.includes(string)){
 				count ++;
 			}
 		});
@@ -372,7 +376,7 @@ export class extensionWidget extends ReactWidget {
 			}
 	}
 
-	checkInputs(){
+	async checkInputs(){
 		let count = 0;
 		const table = document.getElementById('show_pattern_table') as HTMLTableElement;
 		if (this.checkInputsForSameValues()){
@@ -390,12 +394,15 @@ export class extensionWidget extends ReactWidget {
 	}
 	checkInputsForSameValues(){
 		const uniqueElements = new Set(extensionWidget.textBoxValues);
-    	if (uniqueElements.size<extensionWidget.textBoxValues.length){
-			return true;
-		}else{
-			return false;
-		}
+		return uniqueElements.size<extensionWidget.textBoxValues.length ? true : false;
     	
+	}
+	refreshPage(table: HTMLTableElement){
+		table.innerHTML = "";
+		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
+		(document.getElementById("btnFinalize") as HTMLButtonElement).style.visibility = 'hidden';
 	}
 
 }
+
+
