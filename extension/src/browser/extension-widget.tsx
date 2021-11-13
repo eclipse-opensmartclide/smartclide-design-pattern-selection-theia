@@ -95,6 +95,8 @@ export class extensionWidget extends ReactWidget {
 					<table id="show_pattern_table">
 					</table>
 					<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Final Code </button>
+					<img src = {require("./img/"+extensionWidget.state.statePatternSelection+"Icon"+".jpg").default} 
+					id = {extensionWidget.state.statePatternSelection + "-img"} alt= {"Class Diagram of "+extensionWidget.state.statePatternSelection }></img>
 				</div>
 			</div>
 			</div>
@@ -106,12 +108,6 @@ export class extensionWidget extends ReactWidget {
 
 			var getUrl = window.location.href;
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
-			/*for (let i=0; i<extensionWidget.res.length; i++){
-            	let lastW = extensionWidget.res[i].lastIndexOf("/");
-				let file = extensionWidget.res[i].substr(lastW+1);
-				file = file.substr(0, file.indexOf("."));
-				extensionWidget.res[i] = file;  
-			}*/
 			console.log(extensionWidget.res)
 
 			//show the JSON values for the chosen key-pattern
@@ -150,13 +146,7 @@ export class extensionWidget extends ReactWidget {
 				}
 			});
 			(document.getElementById("btnFinalize") as HTMLButtonElement).style.visibility = 'visible';
-			
-			//let images =  require("./AbstractFactory.jpg");
-			/*let img = document.createElement("img");
-			//img.src = images.default;
-			img.id = extensionWidget.state.statePatternSelection + "-img";
-			img.alt = "Class Diagram of "+extensionWidget.state.statePatternSelection+ " design pattern";
-			d.append(img);*/
+			(document.getElementById(extensionWidget.state.statePatternSelection + "-img") as HTMLImageElement).style.visibility = 'visible';
 		}else{
 			this.messageService.info('You need to choose a software pattern!');
 		}
@@ -388,7 +378,7 @@ export class extensionWidget extends ReactWidget {
 				if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){
 					count++;
 				}
-				//if(extensionWidget.state.statePatternSelection=="Adapter" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
+				//if(extensionWidget.state.statePatternSelection=="Adaptee" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
 					//const txtboxMethod = (document.getElementById( 'txtbox'+ (i + 2) ) as HTMLInputElement).value;
 					
 				//}

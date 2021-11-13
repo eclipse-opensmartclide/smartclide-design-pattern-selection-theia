@@ -81,3 +81,6 @@ input{
   visibility: hidden;
   margin-left: 10px;
 }
+.img{
+  visibility : hidden;
+}

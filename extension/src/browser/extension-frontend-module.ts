@@ -6,6 +6,7 @@ import { BackendClient, HelloBackendWithClientService, HelloBackendService, HELL
 import { WebSocketConnectionProvider } from "@theia/core/lib/browser";
 import '../../src/browser/style/index.css';
 
+
 export default new ContainerModule(bind => {
     bindViewContribution(bind, extensionContribution);
     bind(FrontendApplicationContribution).toService(extensionContribution);

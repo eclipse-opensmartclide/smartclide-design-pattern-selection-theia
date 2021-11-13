@@ -94,19 +94,14 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 React.createElement("br", null),
                 React.createElement("div", { id: "result" },
                     React.createElement("table", { id: "show_pattern_table" }),
-                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Final Code "))));
+                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Final Code "),
+                    React.createElement("img", { src: require("./img/" + extensionWidget_1.state.statePatternSelection + ".jpg").default, id: extensionWidget_1.state.statePatternSelection + "-img", alt: "Class Diagram of " + extensionWidget_1.state.statePatternSelection }))));
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
             document.getElementById("btn-get-code").style.visibility = 'hidden';
             var getUrl = window.location.href;
             extensionWidget_1.res = await this.helloBackendService.sayHelloTo(getUrl);
-            /*for (let i=0; i<extensionWidget.res.length; i++){
-                let lastW = extensionWidget.res[i].lastIndexOf("/");
-                let file = extensionWidget.res[i].substr(lastW+1);
-                file = file.substr(0, file.indexOf("."));
-                extensionWidget.res[i] = file;
-            }*/
             console.log(extensionWidget_1.res);
             //show the JSON values for the chosen key-pattern
             let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
@@ -144,12 +139,13 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 }
             });
             document.getElementById("btnFinalize").style.visibility = 'visible';
-            //let images =  require("./AbstractFactory.jpg");
-            /*let img = document.createElement("img");
-            //img.src = images.default;
-            img.id = extensionWidget.state.statePatternSelection + "-img";
-            img.alt = "Class Diagram of "+extensionWidget.state.statePatternSelection+ " design pattern";
-            d.append(img);*/
+            document.getElementById(extensionWidget_1.state.statePatternSelection + "-img").style.visibility = 'visible';
+            //var d = document.getElementById("result") as HTMLElement; 
+            //let img = document.createElement("img");
+            //img.src = {require(./img/AbstractFactory.jpg)};
+            //img.id = extensionWidget.state.statePatternSelection + "-img";
+            //img.alt = "Class Diagram of "+extensionWidget.state.statePatternSelection+ " design pattern";
+            //d.append(img);
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
@@ -370,7 +366,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) {
                     count++;
                 }
-                //if(extensionWidget.state.statePatternSelection=="Adapter" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
+                //if(extensionWidget.state.statePatternSelection=="Adaptee" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
                 //const txtboxMethod = (document.getElementById( 'txtbox'+ (i + 2) ) as HTMLInputElement).value;
                 //}
             }
@@ -382,12 +378,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
     }
     checkInputsForSameValues() {
         const uniqueElements = new Set(extensionWidget_1.textBoxValues);
-        if (uniqueElements.size < extensionWidget_1.textBoxValues.length) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return uniqueElements.size < extensionWidget_1.textBoxValues.length ? true : false;
     }
     refreshPage(table) {
         table.innerHTML = "";

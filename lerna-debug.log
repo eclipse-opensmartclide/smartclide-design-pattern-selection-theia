@@ -16,7 +16,7 @@
 11 silly getExecOpts }
 12 error execute callback with error
 13 error Error: Command failed: npm run prepare
-13 error (node:3724) [DEP_WEBPACK_COMPILATION_ASSETS] DeprecationWarning: Compilation.assets will be frozen in future, all modifications are deprecated.
+13 error (node:11380) [DEP_WEBPACK_COMPILATION_ASSETS] DeprecationWarning: Compilation.assets will be frozen in future, all modifications are deprecated.
 13 error BREAKING CHANGE: No more changes should happen to Compilation.assets after sealing the Compilation.
 13 error 	Do changes to assets earlier, e. g. in Compilation.hooks.processAssets.
 13 error 	Make sure to select an appropriate stage from Compilation.PROCESS_ASSETS_STAGE_*.
@@ -36,7 +36,7 @@
 13 error npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
 13 error
 13 error npm ERR! A complete log of this run can be found in:
-13 error npm ERR!     C:\Users\user\AppData\Roaming\npm-cache\_logs\2021-11-12T11_49_36_779Z-debug.log
+13 error npm ERR!     C:\Users\user\AppData\Roaming\npm-cache\_logs\2021-11-13T11_37_38_521Z-debug.log
 13 error
 13 error
 13 error > browser-app@0.0.0 prepare C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\browser-app
@@ -59,9 +59,9 @@
 13 error runtime modules 7.02 KiB 11 modules
 13 error javascript modules 8.56 MiB
 13 error   modules by path [1m../node_modules/[39m[22m 8.52 MiB 1147 modules
-13 error   modules by path [1m../extension/[39m[22m 30.3 KiB
-13 error     modules by path [1m../extension/lib/[39m[22m 28.5 KiB 4 modules
-13 error     modules by path [1m../extension/src/browser/style/*.css[39m[22m 1.8 KiB 2 modules
+13 error   modules by path [1m../extension/[39m[22m 30.9 KiB
+13 error     modules by path [1m../extension/lib/[39m[22m 29 KiB 4 modules
+13 error     modules by path [1m../extension/src/browser/style/*.css[39m[22m 1.9 KiB 2 modules
 13 error json modules 303 KiB
 13 error   modules by path [1m../node_modules/@theia/core/[39m[22m 241 KiB 55 modules
 13 error   modules by path [1m../node_modules/@theia/monaco/[39m[22m 25.3 KiB 11 modules
@@ -151,8 +151,8 @@
 13 error [1m[33mWARNING[39m[22m in [1m../node_modules/inversify/lib/constants/error_msgs.js[39m[22m
 13 error [1mModule Warning (from ../node_modules/source-map-loader/dist/cjs.js):
 13 error [1m[31mFailed[39m[22m[1m to parse source map from 'C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\node_modules\inversify\src\constants\error_msgs.ts' file: [1m[31mError[39m[22m[1m: ENOENT: no such file or directory, open 'C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\node_modules\inversify\src\constants\error_msgs.ts'[39m[22m
-13 error  @ ../node_modules/inversify/lib/annotation/injectable.js 4:18-52
-13 error  @ ../node_modules/inversify/lib/inversify.js 15:19-53
+13 error  @ ../node_modules/inversify/lib/annotation/inject.js 4:19-53
+13 error  @ ../node_modules/inversify/lib/inversify.js 21:15-45
 13 error  @ ./src-gen/frontend/index.js 5:22-42
 13 error
 13 error [1m[33mWARNING[39m[22m in [1m../node_modules/inversify/lib/constants/literal_types.js[39m[22m
@@ -384,24 +384,17 @@
 13 error 44 warnings have detailed information that is not shown.
 13 error Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
 13 error
-13 error [1m[31mERROR[39m[22m in [1m../extension/lib/browser/extension-widget.js[39m[22m [1m[32m150:25-57[39m[22m
-13 error [1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve './AbstractFactory.jpg' in 'C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension\lib\browser'[39m[22m
-13 error resolve './AbstractFactory.jpg' in 'C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension\lib\browser'
+13 error [1m[31mERROR[39m[22m in [1m../extension/lib/browser/extension-widget.js[39m[22m [1m[32m98:54-128[39m[22m
+13 error [1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve './img' in 'C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension\lib\browser'[39m[22m
+13 error resolve './img' in 'C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension\lib\browser'
 13 error   using description file: C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension\package.json (relative path: ./lib/browser)
 13 error     Field 'browser' doesn't contain a valid alias configuration
-13 error     using description file: C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension\package.json (relative path: ./lib/browser/AbstractFactory.jpg)
-13 error       no extension
-13 error         Field 'browser' doesn't contain a valid alias configuration
-13 error         [1m[31mC:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension\lib\browser\AbstractFactory.jpg doesn't exist[39m[22m
-13 error       .js
-13 error         Field 'browser' doesn't contain a valid alias configuration
-13 error         [1m[31mC:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension\lib\browser\AbstractFactory.jpg.js doesn't exist[39m[22m
-13 error       as directory
-13 error         [1m[31mC:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension\lib\browser\AbstractFactory.jpg doesn't exist[39m[22m
+13 error     using description file: C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension\package.json (relative path: ./lib/browser/img)
+13 error       [1m[31mC:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension\lib\browser\img doesn't exist[39m[22m
 13 error  @ ../extension/lib/browser/extension-frontend-module.js 4:27-56
 13 error  @ ./src-gen/frontend/index.js 64:31-88
 13 error
-13 error webpack 5.45.1 compiled with [1m[31m1 error[39m[22m and [1m[33m44 warnings[39m[22m in 70071 ms
+13 error webpack 5.45.1 compiled with [1m[31m1 error[39m[22m and [1m[33m44 warnings[39m[22m in 51968 ms
 13 error
 13 error
 13 error     at C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\node_modules\execa\index.js:236:11

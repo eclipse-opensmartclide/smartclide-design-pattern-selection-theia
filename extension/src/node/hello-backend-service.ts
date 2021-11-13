@@ -51,7 +51,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         var lastL = url.indexOf("/#/");
         var rootUri = url.substr(lastL+3);
         var fs = require("fs");
-        let lO = {label: [""]};
+        let lO = {label: []};
         try {
             const data = fs.readFileSync(rootUri+"\\"+ fileName +".java", 'utf8')
             console.log(data);
