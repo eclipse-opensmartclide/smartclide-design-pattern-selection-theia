@@ -43,6 +43,7 @@ export class extensionWidget extends ReactWidget {
 	static res: string[];
 	static data = JSON.parse(JSON.stringify(data));
 	
+	
 	protected render(): React.ReactNode {
 		const header = `Choose a Design Pattern and get the code. `;
 		
@@ -90,6 +91,7 @@ export class extensionWidget extends ReactWidget {
 				</div>
 				<br /> 
 				<div id="result">
+					
 					<table id="show_pattern_table">
 					</table>
 				</div>
@@ -126,6 +128,9 @@ export class extensionWidget extends ReactWidget {
 					});	
 				}
 			});
+
+			
+
 			let d = document.getElementById("result") as HTMLElement;
 			let b = document.createElement("button");
 			b.id = "btnFinalize";
@@ -277,8 +282,27 @@ export class extensionWidget extends ReactWidget {
 			this.messageService.info("You need to give name for ALL the classes!");
 		}else{
 			if (this.checkInputs() == "Inputs are valid"){
-				this.updateJsonObject();
-				this.messageService.info("Well done! Code is coming...");
+				if (extensionWidget.state.statePatternSelection=="Adapter"){
+				
+					let adapteeName = (document.getElementById("Adaptee") as HTMLInputElement).value;
+					if (extensionWidget.res.includes(adapteeName)){
+						//call function to get methods (methodNames) of adapteeName class 
+						let methodName = (document.getElementById("AdapteeMethod") as HTMLInputElement).value;
+						if (extensionWidget.methodNames.includes(methodName)){
+							this.updateJsonObject();
+							this.messageService.info("Well done! Code is coming...");
+						}else{
+							this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class!");
+						}
+					}else{
+						this.messageService.info("For Adaptee you need to choose a class name that already exists!");
+					}
+					
+	
+					this.updateJsonObject();
+					this.messageService.info("Well done! Code is coming...");
+				}
+				
 			}else{
 				this.messageService.info("Inputs are invalid");
 			}

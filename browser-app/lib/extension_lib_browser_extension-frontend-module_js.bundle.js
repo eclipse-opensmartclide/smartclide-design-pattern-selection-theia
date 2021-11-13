@@ -296,6 +296,9 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
             document.getElementById("btn-get-code").style.visibility = 'hidden';
+            let image = document.createElement("img");
+            image.src = "./" + extensionWidget_1.state.statePatternSelection + ".png";
+            image.alt = "dog";
             var getUrl = window.location.href;
             extensionWidget_1.res = await this.helloBackendService.sayHelloTo(getUrl);
             for (let i = 0; i < extensionWidget_1.res.length; i++) {
@@ -547,11 +550,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         }
     }
     checkInputsForSameValues() {
-        //return (extensionWidget.textBoxValues.every( (val, i, arr) => val === arr[0] ) ) ;
-        //return extensionWidget.textBoxValues.some((val, i) => extensionWidget.textBoxValues.indexOf(val) !== i);
         const uniqueElements = new Set(extensionWidget_1.textBoxValues);
-        console.log(JSON.stringify(uniqueElements));
-        console.log(extensionWidget_1.textBoxValues);
         if (uniqueElements.size < extensionWidget_1.textBoxValues.length) {
             return true;
         }

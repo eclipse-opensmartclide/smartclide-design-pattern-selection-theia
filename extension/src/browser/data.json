@@ -127,13 +127,21 @@
                 "name":"",
                 "extension":0
             },
-            "Adapter1":{
+            "Adapter":{
                 "name":"",
                 "extension":1
             },
-            "Adaptee1":{
+            "AdapterMethod":{
+                "name":"",
+                "extension":0
+            },
+            "Adaptee":{
                 "name":"",
                 "extension":1
+            },
+            "AdapteeMethod":{
+                "name":"",
+                "extension":0
             }
         }
     },
