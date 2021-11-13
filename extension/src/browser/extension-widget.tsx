@@ -95,8 +95,6 @@ export class extensionWidget extends ReactWidget {
 					<table id="show_pattern_table">
 					</table>
 					<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Final Code </button>
-					<img src = {require("./img/"+extensionWidget.state.statePatternSelection+"Icon"+".jpg").default} 
-					id = {extensionWidget.state.statePatternSelection + "-img"} alt= {"Class Diagram of "+extensionWidget.state.statePatternSelection }></img>
 				</div>
 			</div>
 			</div>
@@ -125,25 +123,6 @@ export class extensionWidget extends ReactWidget {
 						this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 					});	
 				}
-				if(values[key].insertMethods){
-					if (values[key].insertMethods==1){
-						var keys = Object.keys(values[key]);
-						let row = this.insertCells(table, keys[3]);
-						let cell3 = row.insertCell(2);
-						let t3 = document.createElement("button");
-						t3.innerHTML = "+";
-						t3.id = "btn" + '-' + key + '-' + keys[3];
-						cell3.appendChild(t3);
-						t3.addEventListener('click', (event) => {
-							this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
-							console.log("NEW VALUES: "+ JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
-						});	
-						
-					}else{
-						var keys = Object.keys(values[key]);
-						this.insertCells(table, keys[3]);
-					}
-				}
 			});
 			(document.getElementById("btnFinalize") as HTMLButtonElement).style.visibility = 'visible';
 			(document.getElementById(extensionWidget.state.statePatternSelection + "-img") as HTMLImageElement).style.visibility = 'visible';
@@ -170,13 +149,14 @@ export class extensionWidget extends ReactWidget {
 		let label = document.createElement("label");
 		label.id = "label"+ table.rows.length;
 		label.innerHTML = key;
-
+	
 		let txtbox = document.createElement("input");
 		txtbox.id = "txtbox"+ table.rows.length;
 		let num = table.rows.length;
 		txtbox.onchange = function () {  
 			extensionWidget.textBoxValues[num-1] = txtbox.value;
 		};
+	
 		txtbox.autocomplete = "off";
 		txtbox.placeholder = key;
 		txtbox.addEventListener('keypress', (e: KeyboardEvent) =>{
@@ -276,12 +256,6 @@ export class extensionWidget extends ReactWidget {
 			newValues[labelConAggregate] = JSON.stringify( { "name":"", "extension":1});
 			newValues[labelConIterator] = JSON.stringify({ "name":"", "extension":1});
 
-		}else if(key.substr(3,).includes("method")){
-			var string = key.split('-');
-			let countMethods = this.countKeys(newValues[string[1]],"method")
-			let labelMethod = this.updateLabel("method ", countMethods+1);
-			this.insertCells(table, labelMethod);
-			newValues[string[1]][labelMethod] = "";
 		}else{
 			newValues[label] = JSON.stringify({"name":"", "extension":1});
 			this.insertCells(table, label); 
@@ -374,18 +348,10 @@ export class extensionWidget extends ReactWidget {
 		}else{
 			for(let i = 0 ; i < table.rows.length; i++){
 				const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
-				//const label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
 				if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){
 					count++;
 				}
-				//if(extensionWidget.state.statePatternSelection=="Adaptee" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
-					//const txtboxMethod = (document.getElementById( 'txtbox'+ (i + 2) ) as HTMLInputElement).value;
-					
-				//}
 			}
-			var getUrl = window.location.href;
-			var methodNames = await this.helloBackendService.getMethods(getUrl, "Director");
-			console.log(JSON.stringify(methodNames));
 			return (count==table.rows.length ? "Inputs are valid" : "Inputs are invalid")
 		}
 		
