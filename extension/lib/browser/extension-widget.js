@@ -88,14 +88,14 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     React.createElement("i", { className: "fa fa-refresh" })),
                 React.createElement("br", null),
                 React.createElement("br", null),
-                React.createElement("button", { id: "btn-get-code", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.runprocess() }, " Get Code "),
+                React.createElement("button", { id: "btn-get-code", type: "button", title: 'Assign roles to classes and methods', onClick: _a => this.runprocess() }, "Assign roles to classes and methods"),
                 React.createElement("br", null),
                 React.createElement("div", { id: "show_pattern" }),
                 React.createElement("br", null),
                 React.createElement("div", { id: "result" },
                     React.createElement("table", { id: "show_pattern_table" }),
-                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Final Code "),
-                    React.createElement("img", { src: require("./img/" + extensionWidget_1.state.statePatternSelection + ".jpg").default, id: extensionWidget_1.state.statePatternSelection + "-img", alt: "Class Diagram of " + extensionWidget_1.state.statePatternSelection }))));
+                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Code "),
+                    React.createElement("img", { id: 'image', alt: "Class Diagram " }))));
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
@@ -118,34 +118,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
                     });
                 }
-                if (values[key].insertMethods) {
-                    if (values[key].insertMethods == 1) {
-                        var keys = Object.keys(values[key]);
-                        let row = this.insertCells(table, keys[3]);
-                        let cell3 = row.insertCell(2);
-                        let t3 = document.createElement("button");
-                        t3.innerHTML = "+";
-                        t3.id = "btn" + '-' + key + '-' + keys[3];
-                        cell3.appendChild(t3);
-                        t3.addEventListener('click', (event) => {
-                            this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
-                            console.log("NEW VALUES: " + JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
-                        });
-                    }
-                    else {
-                        var keys = Object.keys(values[key]);
-                        this.insertCells(table, keys[3]);
-                    }
-                }
             });
             document.getElementById("btnFinalize").style.visibility = 'visible';
-            document.getElementById(extensionWidget_1.state.statePatternSelection + "-img").style.visibility = 'visible';
-            //var d = document.getElementById("result") as HTMLElement; 
-            //let img = document.createElement("img");
-            //img.src = {require(./img/AbstractFactory.jpg)};
-            //img.id = extensionWidget.state.statePatternSelection + "-img";
-            //img.alt = "Class Diagram of "+extensionWidget.state.statePatternSelection+ " design pattern";
-            //d.append(img);
+            document.getElementById('image').style.visibility = 'visible';
+            document.getElementById('image').className = extensionWidget_1.state.statePatternSelection;
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
@@ -268,13 +244,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
         }
-        else if (key.substr(3).includes("method")) {
-            var string = key.split('-');
-            let countMethods = this.countKeys(newValues[string[1]], "method");
-            let labelMethod = this.updateLabel("method ", countMethods + 1);
-            this.insertCells(table, labelMethod);
-            newValues[string[1]][labelMethod] = "";
-        }
         else {
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
@@ -300,7 +269,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
     }
     countKeys(values, keyString) {
         let count = 0;
-        console.log(typeof values);
         let string = keyString.replace(/\d/g, ''); //removes the numbers from the string and returns a new one
         Object.keys(values).forEach((key) => {
             if (key.includes(string)) {
@@ -362,17 +330,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         else {
             for (let i = 0; i < table.rows.length; i++) {
                 const txtbox = document.getElementById('txtbox' + (i + 1)).value;
-                //const label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
                 if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) {
                     count++;
                 }
-                //if(extensionWidget.state.statePatternSelection=="Adaptee" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
-                //const txtboxMethod = (document.getElementById( 'txtbox'+ (i + 2) ) as HTMLInputElement).value;
-                //}
             }
-            var getUrl = window.location.href;
-            var methodNames = await this.helloBackendService.getMethods(getUrl, "Director");
-            console.log(JSON.stringify(methodNames));
             return (count == table.rows.length ? "Inputs are valid" : "Inputs are invalid");
         }
     }
@@ -384,6 +345,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         table.innerHTML = "";
         document.getElementById("btn-get-code").style.visibility = 'visible';
         document.getElementById("btnFinalize").style.visibility = 'hidden';
+        document.getElementById('image').style.visibility = 'hidden';
     }
 };
 extensionWidget.ID = 'extension:widget';

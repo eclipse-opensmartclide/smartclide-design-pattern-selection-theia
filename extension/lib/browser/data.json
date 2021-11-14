@@ -58,7 +58,9 @@
             },
             "ConcreteBuilder1": {
                 "name": "",
-                "extension": 0
+                "extension": 0,
+                "insertMethods": 1,
+                "ConcreteBuilder1Method1": ""
             },
             "Product1": {
                 "name": "",
@@ -130,13 +132,13 @@
             },
             "Adapter1": {
                 "name": "",
-                "extension": 0,
-                "insertMethods": 1,
-                "method1": ""
+                "extension": 0
             },
             "Adaptee1": {
                 "name": "",
-                "extension": 1
+                "extension": 1,
+                "insertMethods": 1,
+                "AdapterMethod1": ""
             }
         }
     },
@@ -176,7 +178,9 @@
             },
             "Component": {
                 "name": "",
-                "extension": 0
+                "extension": 0,
+                "insertMethods": 0,
+                "ComponentMethod": ""
             },
             "ConcreteDecorator1": {
                 "name": "",
@@ -196,7 +200,9 @@
             },
             "ConcreteComponent1": {
                 "name": "",
-                "extension": 1
+                "extension": 1,
+                "insertMethods": 0,
+                "ConcreteComponent1Method": ""
             },
             "Decorator": {
                 "name": "",
@@ -204,11 +210,15 @@
             },
             "ConcreteDecorator1": {
                 "name": "",
-                "extension": 1
+                "extension": 1,
+                "insertMethods": 0,
+                "ConcreteDecorator1Method": ""
             },
             "ConcreteDecorator2": {
                 "name": "",
-                "extension": 0
+                "extension": 0,
+                "insertMethods": 0,
+                "ConcreteDecorator2Method": ""
             }
         }
     },

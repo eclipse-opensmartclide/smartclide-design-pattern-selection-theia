@@ -7,7 +7,95 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"AbstractFactory":{"values":{"Client":{"name":"","extension":0},"AbstractFactory":{"name":"","extension":0},"ConcreteFactory1":{"name":"","extension":1},"ConcreteFactory2":{"name":"","extension":0},"AbstractProduct1":{"name":"","extension":1},"Product1.1":{"name":"","extension":0},"Product1.2":{"name":"","extension":0},"AbstractProduct2":{"name":"","extension":0},"Product2.1":{"name":"","extension":0},"Product2.2":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0,"insertMethods":1,"method1":"","method2":""},"ConcreteBuilder1":{"name":"","extension":0},"Product1":{"name":"","extension":1}}},"FactoryMethod":{"values":{"Creator":{"name":"","extension":0},"ConcreteCreator1":{"name":"","extension":0},"Product":{"name":"","extension":0},"ConcreteProduct1":{"name":"","extension":1}}},"Prototype":{"values":{"Client":{"name":"","extension":0},"Prototype":{"name":"","extension":0},"ConcretePrototype1":{"name":"","extension":1},"ConcretePrototype2":{"name":"","extension":0}}},"Singleton":{"values":{"Client":{"name":"","extension":0},"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"Client":{"name":"","extension":0},"Target":{"name":"","extension":0},"Adapter1":{"name":"","extension":0,"insertMethods":1,"method1":""},"Adaptee1":{"name":"","extension":1}}},"Bridge":{"values":{"Client":{"name":"","extension":0},"Abstraction":{"name":"","extension":0},"RefinedAbstraction1":{"name":"","extension":1},"Implementor":{"name":"","extension":0},"ConcreteImplementor1":{"name":"","extension":1},"ConcreteImplementor2":{"name":"","extension":0}}},"Composite":{"values":{"Client":{"name":"","extension":0},"Component":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}},"Decorator":{"values":{"Component":{"name":"","extension":0},"ConcreteComponent1":{"name":"","extension":1},"Decorator":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"ConcreteDecorator2":{"name":"","extension":0}}},"Facade":{"values":{"Client":{"name":"","extension":0},"Facade":{"name":"","extension":0},"AdditionalFacade1":{"name":"","extension":1}}},"Flyweight":{"values":{"Client":{"name":"","extension":0},"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0},"ConcreteFlyweight1":{"name":"","extension":1},"UnsharedConcreteFlyweight1":{"name":"","extension":1}}},"Proxy":{"values":{"Client":{"name":"","extension":0},"Subject":{"name":"","extension":0},"RealSubject":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}},"ChainofResponsibility":{"values":{"Client":{"name":"","extension":0},"Handler":{"name":"","extension":0},"ConcreteHandler1":{"name":"","extension":1},"ConcreteHandler2":{"name":"","extension":0}}},"Command":{"values":{"Client":{"name":"","extension":0},"Receiver1":{"name":"","extension":1},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0},"ConcreteCommand1":{"name":"","extension":1}}},"Interpreter":{"values":{"Client":{"name":"","extension":0},"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0},"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}},"Iterator":{"values":{"Client":{"name":"","extension":0},"Aggregate":{"name":"","extension":0},"ConcreteAggregate1":{"name":"","extension":1},"Iterator":{"name":"","extension":0},"ConcreteIterator1":{"name":"","extension":1}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0},"ConcreteMediator":{"name":"","extension":0},"Colleague":{"name":"","extension":0},"ConcreteColleague1":{"name":"","extension":1},"ConcreteColleague2":{"name":"","extension":0}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"Memento":{"name":"","extension":0},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0},"ConcreteSubject1":{"name":"","extension":1},"Observer":{"name":"","extension":0},"ConcreteObserver1":{"name":"","extension":1}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0},"ConcreteState1":{"name":"","extension":1},"ConcreteState2":{"name":"","extension":0}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0},"ConcreteStrategy1":{"name":"","extension":1},"ConcreteStrategy2":{"name":"","extension":0}}},"TemplateMethod":{"values":{"AbstractClass":{"name":"","extension":0},"ConcreteClass1":{"name":"","extension":1}}},"Visitor":{"values":{"Client":{"name":"","extension":0},"Visitor":{"name":"","extension":0},"ConcreteVisitor1":{"name":"","extension":1},"ConcreteVisitor2":{"name":"","extension":0},"ObjectStructure":{"name":"","extension":0},"Element":{"name":"","extension":0},"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":0}}}}');
+module.exports = JSON.parse('{"AbstractFactory":{"values":{"Client":{"name":"","extension":0},"AbstractFactory":{"name":"","extension":0},"ConcreteFactory1":{"name":"","extension":1},"ConcreteFactory2":{"name":"","extension":0},"AbstractProduct1":{"name":"","extension":1},"Product1.1":{"name":"","extension":0},"Product1.2":{"name":"","extension":0},"AbstractProduct2":{"name":"","extension":0},"Product2.1":{"name":"","extension":0},"Product2.2":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0,"insertMethods":1,"method1":"","method2":""},"ConcreteBuilder1":{"name":"","extension":0,"insertMethods":1,"ConcreteBuilder1Method1":""},"Product1":{"name":"","extension":1}}},"FactoryMethod":{"values":{"Creator":{"name":"","extension":0},"ConcreteCreator1":{"name":"","extension":0},"Product":{"name":"","extension":0},"ConcreteProduct1":{"name":"","extension":1}}},"Prototype":{"values":{"Client":{"name":"","extension":0},"Prototype":{"name":"","extension":0},"ConcretePrototype1":{"name":"","extension":1},"ConcretePrototype2":{"name":"","extension":0}}},"Singleton":{"values":{"Client":{"name":"","extension":0},"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"Client":{"name":"","extension":0},"Target":{"name":"","extension":0},"Adapter1":{"name":"","extension":0},"Adaptee1":{"name":"","extension":1,"insertMethods":1,"AdapterMethod1":""}}},"Bridge":{"values":{"Client":{"name":"","extension":0},"Abstraction":{"name":"","extension":0},"RefinedAbstraction1":{"name":"","extension":1},"Implementor":{"name":"","extension":0},"ConcreteImplementor1":{"name":"","extension":1},"ConcreteImplementor2":{"name":"","extension":0}}},"Composite":{"values":{"Client":{"name":"","extension":0},"Component":{"name":"","extension":0,"insertMethods":0,"ComponentMethod":""},"ConcreteDecorator1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}},"Decorator":{"values":{"Component":{"name":"","extension":0},"ConcreteComponent1":{"name":"","extension":1,"insertMethods":0,"ConcreteComponent1Method":""},"Decorator":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1,"insertMethods":0,"ConcreteDecorator1Method":""},"ConcreteDecorator2":{"name":"","extension":0,"insertMethods":0,"ConcreteDecorator2Method":""}}},"Facade":{"values":{"Client":{"name":"","extension":0},"Facade":{"name":"","extension":0},"AdditionalFacade1":{"name":"","extension":1}}},"Flyweight":{"values":{"Client":{"name":"","extension":0},"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0},"ConcreteFlyweight1":{"name":"","extension":1},"UnsharedConcreteFlyweight1":{"name":"","extension":1}}},"Proxy":{"values":{"Client":{"name":"","extension":0},"Subject":{"name":"","extension":0},"RealSubject":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}},"ChainofResponsibility":{"values":{"Client":{"name":"","extension":0},"Handler":{"name":"","extension":0},"ConcreteHandler1":{"name":"","extension":1},"ConcreteHandler2":{"name":"","extension":0}}},"Command":{"values":{"Client":{"name":"","extension":0},"Receiver1":{"name":"","extension":1},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0},"ConcreteCommand1":{"name":"","extension":1}}},"Interpreter":{"values":{"Client":{"name":"","extension":0},"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0},"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}},"Iterator":{"values":{"Client":{"name":"","extension":0},"Aggregate":{"name":"","extension":0},"ConcreteAggregate1":{"name":"","extension":1},"Iterator":{"name":"","extension":0},"ConcreteIterator1":{"name":"","extension":1}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0},"ConcreteMediator":{"name":"","extension":0},"Colleague":{"name":"","extension":0},"ConcreteColleague1":{"name":"","extension":1},"ConcreteColleague2":{"name":"","extension":0}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"Memento":{"name":"","extension":0},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0},"ConcreteSubject1":{"name":"","extension":1},"Observer":{"name":"","extension":0},"ConcreteObserver1":{"name":"","extension":1}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0},"ConcreteState1":{"name":"","extension":1},"ConcreteState2":{"name":"","extension":0}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0},"ConcreteStrategy1":{"name":"","extension":1},"ConcreteStrategy2":{"name":"","extension":0}}},"TemplateMethod":{"values":{"AbstractClass":{"name":"","extension":0},"ConcreteClass1":{"name":"","extension":1}}},"Visitor":{"values":{"Client":{"name":"","extension":0},"Visitor":{"name":"","extension":0},"ConcreteVisitor1":{"name":"","extension":1},"ConcreteVisitor2":{"name":"","extension":0},"ObjectStructure":{"name":"","extension":0},"Element":{"name":"","extension":0},"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":0}}}}');
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/AbstractFactoryIcon.png":
+/*!******************************************************************!*\
+  !*** ../extension/src/browser/style/img/AbstractFactoryIcon.png ***!
+  \******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "b4160dbba7cde973e7ae..png";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/AdapterIcon.jpg":
+/*!**********************************************************!*\
+  !*** ../extension/src/browser/style/img/AdapterIcon.jpg ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "0a17945d72c03c04273c..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/BridgeIcon.jpg":
+/*!*********************************************************!*\
+  !*** ../extension/src/browser/style/img/BridgeIcon.jpg ***!
+  \*********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "8137fb52632a86d7c037..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/BuilderIcon.jpg":
+/*!**********************************************************!*\
+  !*** ../extension/src/browser/style/img/BuilderIcon.jpg ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "46cfd581428cc3061e59..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/CompositeIcon.jpg":
+/*!************************************************************!*\
+  !*** ../extension/src/browser/style/img/CompositeIcon.jpg ***!
+  \************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "37d1b01e0a96837f023c..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/DecoratorIcon.jpg":
+/*!************************************************************!*\
+  !*** ../extension/src/browser/style/img/DecoratorIcon.jpg ***!
+  \************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "4b83a266267417554fea..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/PrototypeIcon.jpg":
+/*!************************************************************!*\
+  !*** ../extension/src/browser/style/img/PrototypeIcon.jpg ***!
+  \************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "81f123ed48bc8ef24775..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/SingletonIcon.jpg":
+/*!************************************************************!*\
+  !*** ../extension/src/browser/style/img/SingletonIcon.jpg ***!
+  \************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "774412fc12308efad6e1..jpg";
 
 /***/ }),
 
@@ -17,12 +105,13 @@ module.exports = JSON.parse('{"AbstractFactory":{"values":{"Client":{"name":"","
   \************************************************************************************/
 /***/ ((module, exports, __webpack_require__) => {
 
+var escape = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/url/escape.js */ "../node_modules/css-loader/lib/url/escape.js");
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "../node_modules/css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.id, "#widget-container{\r\n\twidth: 550px;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n\r\n    width: 190px;\r\n    height: 20px;\r\n\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n#btnFinalize{\r\n  visibility: hidden;\r\n  margin-left: 10px;\r\n}\r\n.img{\r\n  visibility : hidden;\r\n}", ""]);
+exports.push([module.id, "#widget-container{\r\n\twidth: 550px;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n\r\n    width: 190px;\r\n    height: 20px;\r\n\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n#btnFinalize{\r\n  visibility: hidden;\r\n  margin-left: 10px;\r\n}\r\n#image{\r\n  width: 550px;\r\n  height: auto;\r\n  visibility: hidden;\r\n}\r\n.AbstractFactory{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AbstractFactoryIcon.png */ "../extension/src/browser/style/img/AbstractFactoryIcon.png")) + ");\r\n}\r\n.Adapter{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Bridge{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BridgeIcon.jpg */ "../extension/src/browser/style/img/BridgeIcon.jpg")) + ");\r\n}\r\n.Builder{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BuilderIcon.jpg */ "../extension/src/browser/style/img/BuilderIcon.jpg")) + ");\r\n}\r\n.Composite{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/CompositeIcon.jpg */ "../extension/src/browser/style/img/CompositeIcon.jpg")) + ");\r\n}\r\n.Decorator{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/DecoratorIcon.jpg */ "../extension/src/browser/style/img/DecoratorIcon.jpg")) + ");\r\n}\r\n.FactoryMethod{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Prototype{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/PrototypeIcon.jpg */ "../extension/src/browser/style/img/PrototypeIcon.jpg")) + ");\r\n}\r\n.Singleton{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/SingletonIcon.jpg */ "../extension/src/browser/style/img/SingletonIcon.jpg")) + ");\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -289,14 +378,14 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     React.createElement("i", { className: "fa fa-refresh" })),
                 React.createElement("br", null),
                 React.createElement("br", null),
-                React.createElement("button", { id: "btn-get-code", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.runprocess() }, " Get Code "),
+                React.createElement("button", { id: "btn-get-code", type: "button", title: 'Assign roles to classes and methods', onClick: _a => this.runprocess() }, "Assign roles to classes and methods"),
                 React.createElement("br", null),
                 React.createElement("div", { id: "show_pattern" }),
                 React.createElement("br", null),
                 React.createElement("div", { id: "result" },
                     React.createElement("table", { id: "show_pattern_table" }),
-                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Final Code "),
-                    React.createElement("img", { src: Object(function webpackMissingModule() { var e = new Error("Cannot find module 'undefined'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).default, id: extensionWidget_1.state.statePatternSelection + "-img", alt: "Class Diagram of " + extensionWidget_1.state.statePatternSelection }))));
+                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Code "),
+                    React.createElement("img", { id: 'image', alt: "Class Diagram " }))));
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
@@ -319,34 +408,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
                     });
                 }
-                if (values[key].insertMethods) {
-                    if (values[key].insertMethods == 1) {
-                        var keys = Object.keys(values[key]);
-                        let row = this.insertCells(table, keys[3]);
-                        let cell3 = row.insertCell(2);
-                        let t3 = document.createElement("button");
-                        t3.innerHTML = "+";
-                        t3.id = "btn" + '-' + key + '-' + keys[3];
-                        cell3.appendChild(t3);
-                        t3.addEventListener('click', (event) => {
-                            this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
-                            console.log("NEW VALUES: " + JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
-                        });
-                    }
-                    else {
-                        var keys = Object.keys(values[key]);
-                        this.insertCells(table, keys[3]);
-                    }
-                }
             });
             document.getElementById("btnFinalize").style.visibility = 'visible';
-            document.getElementById(extensionWidget_1.state.statePatternSelection + "-img").style.visibility = 'visible';
-            //var d = document.getElementById("result") as HTMLElement; 
-            //let img = document.createElement("img");
-            //img.src = {require(./img/AbstractFactory.jpg)};
-            //img.id = extensionWidget.state.statePatternSelection + "-img";
-            //img.alt = "Class Diagram of "+extensionWidget.state.statePatternSelection+ " design pattern";
-            //d.append(img);
+            document.getElementById('image').style.visibility = 'visible';
+            document.getElementById('image').className = extensionWidget_1.state.statePatternSelection;
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
@@ -469,13 +534,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
         }
-        else if (key.substr(3).includes("method")) {
-            var string = key.split('-');
-            let countMethods = this.countKeys(newValues[string[1]], "method");
-            let labelMethod = this.updateLabel("method ", countMethods + 1);
-            this.insertCells(table, labelMethod);
-            newValues[string[1]][labelMethod] = "";
-        }
         else {
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
@@ -501,7 +559,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
     }
     countKeys(values, keyString) {
         let count = 0;
-        console.log(typeof values);
         let string = keyString.replace(/\d/g, ''); //removes the numbers from the string and returns a new one
         Object.keys(values).forEach((key) => {
             if (key.includes(string)) {
@@ -563,17 +620,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         else {
             for (let i = 0; i < table.rows.length; i++) {
                 const txtbox = document.getElementById('txtbox' + (i + 1)).value;
-                //const label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
                 if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) {
                     count++;
                 }
-                //if(extensionWidget.state.statePatternSelection=="Adaptee" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
-                //const txtboxMethod = (document.getElementById( 'txtbox'+ (i + 2) ) as HTMLInputElement).value;
-                //}
             }
-            var getUrl = window.location.href;
-            var methodNames = await this.helloBackendService.getMethods(getUrl, "Director");
-            console.log(JSON.stringify(methodNames));
             return (count == table.rows.length ? "Inputs are valid" : "Inputs are invalid");
         }
     }
@@ -585,6 +635,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         table.innerHTML = "";
         document.getElementById("btn-get-code").style.visibility = 'visible';
         document.getElementById("btnFinalize").style.visibility = 'hidden';
+        document.getElementById('image').style.visibility = 'hidden';
     }
 };
 extensionWidget.ID = 'extension:widget';
