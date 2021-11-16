@@ -13,21 +13,22 @@ export declare class extensionWidget extends ReactWidget {
     protected readonly helloBackendService: HelloBackendService;
     protected init(): Promise<void>;
     static setState: any;
-    static textBoxValues: Array<string>;
     static res: string[];
+    static methodNames: string[];
+    static textBoxValues: Array<string>;
     static data: any;
     protected render(): React.ReactNode;
     protected runprocess(): Promise<void>;
     updateSelection(e: React.ChangeEvent<HTMLSelectElement>): void;
-    insertCells(table: HTMLTableElement, key: string): HTMLTableRowElement;
+    insertCells(table: HTMLTableElement, key: string): Promise<HTMLTableRowElement>;
     extensionButtonClick(table: HTMLTableElement, key: string, values: string): void;
     buttonClick2(rows: number): Promise<void>;
     updateLabel(value: string, count: number): string;
     countKeys(values: string, keyString: string): number;
-    showSuggestions(value: string, id: string): void;
-    autocompleteMatch(input: string): string[];
+    showSuggestions(value: string, table: string[], id: string): void;
+    autocompleteMatch(input: string, table: string[]): string[];
     updateJsonObject(): void;
-    checkInputs(): Promise<"Inputs are invalid" | "Inputs are valid">;
+    checkInputs(): "Inputs are invalid" | "Inputs are valid";
     checkInputsForSameValues(): boolean;
     refreshPage(table: HTMLTableElement): void;
 }

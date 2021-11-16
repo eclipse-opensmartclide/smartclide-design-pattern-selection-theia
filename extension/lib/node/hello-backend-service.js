@@ -47,8 +47,7 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
         var fs = require("fs");
         let lO = { label: [] };
         try {
-            const data = fs.readFileSync(rootUri + "\\" + fileName + ".java", 'utf8');
-            console.log(data);
+            const data = fs.readFileSync(rootUri + "\\src\\" + fileName + ".java", 'utf8');
             const regex = new RegExp(/(?:(?:public|private|protected|static|final|native|synchronized|abstract|transient)+\s+)+[$_\w<>\[\]\s]*\s+[\$_\w]+\([^\)]*\)?\s*/gm);
             const array = [...data.matchAll(regex)];
             console.log("ARRAY" + array);
@@ -56,10 +55,8 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
             for (var i = 0; i < array.length; i++) {
                 var firstString = (array[i].toString()).split('('); //?
                 var secondString = (firstString[0].toString()).split(/\s+/);
-                async function fillPromise(labelObj) {
-                    (await labelObj.label).push(secondString[secondString.length - 1]); //.slice(-1))
-                }
-                fillPromise(lO);
+                var item = secondString[secondString.length - 1];
+                this.fillPromise(lO, item);
             }
             console.log("lO" + lO.label);
         }
@@ -67,6 +64,9 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
             console.error(err);
         }
         return new Promise(resolve => resolve(lO.label));
+    }
+    fillPromise(labelObj, item) {
+        labelObj.label.push(item);
     }
 };
 HelloBackendServiceImpl.index = -1;

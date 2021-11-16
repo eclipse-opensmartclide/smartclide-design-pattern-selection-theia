@@ -122,32 +122,28 @@
 
     "Adapter":{
         "values":{
-            "Client":{
-                "name":"",
-                "extension":0
-            },
-            "Target":{
+            "Client Interface":{
                 "name":"",
                 "extension":0
             },
             "Adapter":{
                 "name":"",
-                "extension":0,
-                "insertMethods":1,
-                "method1":""
+                "extension":0
             },
-            "AdapterMethod":{
+            "AdapterMethod": {
                 "name":"",
                 "extension":0
             },
             "Adaptee":{
                 "name":"",
-                "extension":1
+                "extension":0
             },
-            "AdapteeMethod":{
+            "AdapteeMethod": {
                 "name":"",
                 "extension":0
             }
+            
+           
         }
     },
 

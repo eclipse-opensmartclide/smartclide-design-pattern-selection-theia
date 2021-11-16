@@ -94,25 +94,20 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 React.createElement("br", null),
                 React.createElement("div", { id: "result" },
                     React.createElement("table", { id: "show_pattern_table" }),
-                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Final Code "),
-                    React.createElement("img", { src: require("./img/" + extensionWidget_1.state.statePatternSelection + ".jpg").default, id: extensionWidget_1.state.statePatternSelection + "-img", alt: "Class Diagram of " + extensionWidget_1.state.statePatternSelection }))));
+                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Final Code "))));
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
             document.getElementById("btn-get-code").style.visibility = 'hidden';
-            let image = document.createElement("img");
-            image.src = "./" + extensionWidget_1.state.statePatternSelection + ".png";
-            image.alt = "dog";
             var getUrl = window.location.href;
             extensionWidget_1.res = await this.helloBackendService.sayHelloTo(getUrl);
-            console.log(extensionWidget_1.res);
             //show the JSON values for the chosen key-pattern
             let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
             var table = document.getElementById('show_pattern_table');
-            Object.keys(values).forEach((key) => {
+            Object.keys(values).forEach(async (key) => {
                 let row = this.insertCells(table, key);
                 if (values[key].extension == 1) {
-                    let cell3 = row.insertCell(2);
+                    let cell3 = (await row).insertCell(2);
                     let t3 = document.createElement("button");
                     t3.innerHTML = "+";
                     t3.id = "btn" + key;
@@ -121,34 +116,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
                     });
                 }
-                if (values[key].insertMethods) {
-                    if (values[key].insertMethods == 1) {
-                        var keys = Object.keys(values[key]);
-                        let row = this.insertCells(table, keys[3]);
-                        let cell3 = row.insertCell(2);
-                        let t3 = document.createElement("button");
-                        t3.innerHTML = "+";
-                        t3.id = "btn" + '-' + key + '-' + keys[3];
-                        cell3.appendChild(t3);
-                        t3.addEventListener('click', (event) => {
-                            this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
-                            console.log("NEW VALUES: " + JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
-                        });
-                    }
-                    else {
-                        var keys = Object.keys(values[key]);
-                        this.insertCells(table, keys[3]);
-                    }
-                }
             });
             document.getElementById("btnFinalize").style.visibility = 'visible';
-            document.getElementById(extensionWidget_1.state.statePatternSelection + "-img").style.visibility = 'visible';
-            //var d = document.getElementById("result") as HTMLElement; 
-            //let img = document.createElement("img");
-            //img.src = {require(./img/AbstractFactory.jpg)};
-            //img.id = extensionWidget.state.statePatternSelection + "-img";
-            //img.alt = "Class Diagram of "+extensionWidget.state.statePatternSelection+ " design pattern";
-            //d.append(img);
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
@@ -159,7 +128,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         const key = e.currentTarget.name;
         extensionWidget_1.state[key] = e.currentTarget.value;
     }
-    insertCells(table, key) {
+    async insertCells(table, key) {
         let index = 0;
         for (var i = 0; i < table.rows.length; i++) {
             let label = document.getElementById('label' + (i + 1)).innerHTML;
@@ -169,6 +138,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         let row = table.insertRow(index);
         let cell1 = row.insertCell(0);
         let cell2 = row.insertCell(1);
+        cell2.id = "cell2";
         let label = document.createElement("label");
         label.id = "label" + table.rows.length;
         label.innerHTML = key;
@@ -180,15 +150,17 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         };
         txtbox.autocomplete = "off";
         txtbox.placeholder = key;
-        txtbox.addEventListener('keypress', (e) => {
-            this.showSuggestions(txtbox.value, e.target.id);
-        });
-        let suggestions = document.createElement("div");
-        suggestions.id = "suggestions" + table.rows.length;
-        suggestions.className = "suggestions";
+        if (!key.includes("Method")) {
+            txtbox.addEventListener('keypress', (e) => {
+                this.showSuggestions(txtbox.value, extensionWidget_1.res, e.target.id);
+            });
+            let suggestions = document.createElement("div");
+            suggestions.id = "suggestions" + table.rows.length;
+            suggestions.className = "suggestions";
+            cell2.appendChild(suggestions);
+        }
         cell1.appendChild(label);
         cell2.appendChild(txtbox);
-        cell2.appendChild(suggestions);
         return row;
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
@@ -233,14 +205,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             this.insertCells(table, labelConCreator);
             this.insertCells(table, labelProduct);
         }
-        else if (extensionWidget_1.state.statePatternSelection == "Adapter") {
-            let labelAdapter = this.updateLabel("Adapter ", count + 1);
-            let labelAdaptee = this.updateLabel("Adaptee ", count + 1);
-            newValues[labelAdapter] = JSON.stringify({ "name": "", "extension": 1 });
-            newValues[labelAdaptee] = JSON.stringify({ "name": "", "extension": 1 });
-            this.insertCells(table, labelAdapter);
-            this.insertCells(table, labelAdaptee);
-        }
         else if (extensionWidget_1.state.statePatternSelection == "Flyweight") {
             let label;
             if (key.includes("UnsharedConcreteFlyweight")) {
@@ -271,13 +235,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             newValues[labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 });
             newValues[labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
         }
-        else if (key.substr(3).includes("method")) {
-            var string = key.split('-');
-            let countMethods = this.countKeys(newValues[string[1]], "method");
-            let labelMethod = this.updateLabel("method ", countMethods + 1);
-            this.insertCells(table, labelMethod);
-            newValues[string[1]][labelMethod] = "";
-        }
         else {
             newValues[label] = JSON.stringify({ "name": "", "extension": 1 });
             this.insertCells(table, label);
@@ -285,13 +242,46 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = newValues;
     }
     async buttonClick2(rows) {
-        if (rows != extensionWidget_1.textBoxValues.length) {
+        let flag = true;
+        let i = 0;
+        while (i < rows && flag == true) {
+            const txtvalue = document.getElementById("txtbox" + (i + 1)).value;
+            if (txtvalue == "")
+                flag = false;
+            i++;
+        }
+        if (!flag) {
             this.messageService.info("You need to give name for ALL the classes!");
         }
         else {
-            if (await this.checkInputs() == "Inputs are valid") {
-                this.updateJsonObject();
-                this.messageService.info("Well done! Code is coming...");
+            console.log("front1");
+            if (this.checkInputs() == "Inputs are valid") {
+                console.log("front2");
+                if (extensionWidget_1.state.statePatternSelection == "Adapter") {
+                    let adapteeName = document.getElementById("txtbox4").value;
+                    var getUrl = window.location.href;
+                    console.log("front3");
+                    var methodNames = await this.helloBackendService.getMethods(getUrl, adapteeName);
+                    console.log(methodNames);
+                    if (extensionWidget_1.res.includes(adapteeName)) {
+                        //call function to get methods (methodNames) of adapteeName class 
+                        let methodName = document.getElementById("txtbox5").value;
+                        if (methodNames.includes(methodName)) {
+                            this.updateJsonObject();
+                            this.messageService.info("Well done! Code is coming...");
+                        }
+                        else {
+                            this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: " + methodNames);
+                        }
+                    }
+                    else {
+                        this.messageService.info("For Adaptee you need to choose a class name that already exists: " + extensionWidget_1.res);
+                    }
+                }
+                else {
+                    this.updateJsonObject();
+                    this.messageService.info("Well done! Code is coming...");
+                }
             }
             else {
                 this.messageService.info("Inputs are invalid");
@@ -313,10 +303,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         return count;
     }
     //autocomplete
-    showSuggestions(value, id) {
+    showSuggestions(value, table, id) {
         let res = document.getElementById("suggestions" + id.substr(6));
         let list = '';
-        let terms = this.autocompleteMatch(value);
+        let terms = this.autocompleteMatch(value, table);
         for (var i = 0; i < terms.length; i++) {
             list += '<li>' + terms[i] + '</li>';
         }
@@ -333,16 +323,16 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         ul.addEventListener('mouseleave', hideBlock);
         input.addEventListener('keypress', (e) => {
             res.style.visibility = 'visible';
-            this.showSuggestions(document.getElementById("txtbox" + id.substr(6)).value, e.target.id);
+            this.showSuggestions(document.getElementById("txtbox" + id.substr(6)).value, table, e.target.id);
         });
     }
     //autocomplete
-    autocompleteMatch(input) {
+    autocompleteMatch(input, table) {
         if (input == '') {
             return [];
         }
         let reg = new RegExp('^' + input);
-        return extensionWidget_1.res.filter(function (term) {
+        return table.filter(function (term) {
             if (term.match(reg)) {
                 return term;
             }
@@ -356,7 +346,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[label].name = txtbox;
         }
     }
-    async checkInputs() {
+    checkInputs() {
         let count = 0;
         const table = document.getElementById('show_pattern_table');
         if (this.checkInputsForSameValues()) {
@@ -365,37 +355,29 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         else {
             for (let i = 0; i < table.rows.length; i++) {
                 const txtbox = document.getElementById('txtbox' + (i + 1)).value;
-                //const label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
-                if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) {
-                    count++;
+                const labelvalue = document.getElementById('label' + (i + 1)).innerHTML;
+                if (labelvalue.includes("Method")) {
+                    if (txtbox.match("^([a-z]{1}[a-zA-Z]*[0-9]*)$")) { //camel writing names of methods
+                        count++;
+                    }
                 }
-                //if(extensionWidget.state.statePatternSelection=="Adaptee" && extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].method1){
-                //const txtboxMethod = (document.getElementById( 'txtbox'+ (i + 2) ) as HTMLInputElement).value;
-                //}
+                else {
+                    if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) {
+                        count++;
+                    }
+                }
             }
-            var getUrl = window.location.href;
-            var methodNames = await this.helloBackendService.getMethods(getUrl, "Director");
-            console.log(JSON.stringify(methodNames));
             return (count == table.rows.length ? "Inputs are valid" : "Inputs are invalid");
         }
     }
     checkInputsForSameValues() {
         const uniqueElements = new Set(extensionWidget_1.textBoxValues);
-<<<<<<< HEAD
-        if (uniqueElements.size < extensionWidget_1.textBoxValues.length) {
-            return true;
-        }
-        else {
-            return false;
-        }
-=======
         return uniqueElements.size < extensionWidget_1.textBoxValues.length ? true : false;
     }
     refreshPage(table) {
         table.innerHTML = "";
         document.getElementById("btn-get-code").style.visibility = 'visible';
         document.getElementById("btnFinalize").style.visibility = 'hidden';
->>>>>>> 1ad0910539e11aed8308c131ba0232c6ff552c57
     }
 };
 extensionWidget.ID = 'extension:widget';

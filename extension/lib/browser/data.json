@@ -120,23 +120,25 @@
     },
     "Adapter": {
         "values": {
-            "Client": {
+            "Client Interface": {
                 "name": "",
                 "extension": 0
             },
-            "Target": {
+            "Adapter": {
                 "name": "",
                 "extension": 0
             },
-            "Adapter1": {
+            "AdapterMethod": {
                 "name": "",
-                "extension": 0,
-                "insertMethods": 1,
-                "method1": ""
+                "extension": 0
             },
-            "Adaptee1": {
+            "Adaptee": {
                 "name": "",
-                "extension": 1
+                "extension": 0
+            },
+            "AdapteeMethod": {
+                "name": "",
+                "extension": 0
             }
         }
     },
