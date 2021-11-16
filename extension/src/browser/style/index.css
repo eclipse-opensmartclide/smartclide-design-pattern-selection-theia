@@ -82,6 +82,37 @@ input{
   visibility: hidden;
   margin-left: 10px;
 }
-.img{
-  visibility : hidden;
+#image{
+  width: 100%;
+  height: auto;
+  visibility: hidden;
 }
+.AbstractFactory{
+  content : url(./img/AbstractFactoryIcon.jpg);
+}
+.Adapter{
+  content : url(./img/AdapterIcon.jpg);
+}
+.Bridge{
+  content : url(./img/BridgeIcon.jpg);
+}
+.Builder{
+  content : url(./img/BuilderIcon.jpg);
+}
+.Composite{
+  content : url(./img/CompositeIcon.jpg);
+}
+.Decorator{
+  content : url(./img/DecoratorIcon.jpg);
+}
+.FactoryMethod{
+  content : url(./img/AdapterIcon.jpg);
+}
+.Prototype{
+  content : url(./img/PrototypeIcon.jpg);
+}
+.Singleton{
+  content : url(./img/SingletonIcon.jpg);
+}
+
+

@@ -7,7 +7,7 @@ import { MessageService } from '@theia/core';
 
 import { HelloBackendService } from '../common/protocol';
 import data from './data.json';
-
+import explanation from './explanation.json';
 
 @injectable()
 export class extensionWidget extends ReactWidget {
@@ -42,8 +42,7 @@ export class extensionWidget extends ReactWidget {
 	static methodNames: string[];
 	static textBoxValues: Array<string> = [];
 	static data = JSON.parse(JSON.stringify(data));
-	
-	
+	static explanation = JSON.parse(JSON.stringify(explanation));
 	protected render(): React.ReactNode {
 		const header = `Choose a Design Pattern and get the code. `;
 		
@@ -87,7 +86,7 @@ export class extensionWidget extends ReactWidget {
 				<button id="btn-refresh" type="button" title='Refresh' onClick={_a => this.refreshPage(document.getElementById('show_pattern_table') as HTMLTableElement)}> <i className = "fa fa-refresh" ></i></button>
 				<br /> 
 				<br /> 
-				<button id="btn-get-code" type="button" title='Get the code according to the pattern' onClick={_a => this.runprocess()}> Get Code </button>
+				<button id="btn-get-code" type="button" title='Assign roles to classes and methods' onClick={_a => this.runprocess()}>Assign roles to classes and methods</button>
 				<br /> 
 				<div id="show_pattern"> 
 					
@@ -97,7 +96,10 @@ export class extensionWidget extends ReactWidget {
 					
 					<table id="show_pattern_table">
 					</table>
-					<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Final Code </button>
+					<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Code </button>
+					<p id={'description'}></p>
+					<p id={'example'}></p>
+					<img id = {'image'} alt= "Class Diagram " ></img>
 				</div>
 			</div>
 			</div>
@@ -128,6 +130,12 @@ export class extensionWidget extends ReactWidget {
 			});
 
 			(document.getElementById("btnFinalize") as HTMLButtonElement).style.visibility = 'visible';
+			(document.getElementById('image') as HTMLImageElement).style.visibility = 'visible';
+			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
+			(document.getElementById('description') as HTMLElement).style.visibility = 'visible';
+			(document.getElementById('description') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].description;
+			(document.getElementById('example') as HTMLElement).style.visibility = 'visible';
+			(document.getElementById('example') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].example;
 		}else{
 			this.messageService.info('You need to choose a software pattern!');
 		}
@@ -307,7 +315,6 @@ export class extensionWidget extends ReactWidget {
 
 	countKeys(values: string, keyString: string){
 		let count = 0;
-		console.log(typeof values)
 		let string = keyString.replace(/\d/g, ''); //removes the numbers from the string and returns a new one
 		Object.keys(values).forEach((key) =>{
 			if(key.includes(string)){
@@ -396,6 +403,9 @@ export class extensionWidget extends ReactWidget {
 		table.innerHTML = "";
 		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
 		(document.getElementById("btnFinalize") as HTMLButtonElement).style.visibility = 'hidden';
+		(document.getElementById('image') as HTMLImageElement).style.visibility = 'hidden';
+		(document.getElementById('example') as HTMLElement).style.visibility = 'hidden';
+		(document.getElementById('description') as HTMLElement).style.visibility = 'hidden';
 	}
 
 }

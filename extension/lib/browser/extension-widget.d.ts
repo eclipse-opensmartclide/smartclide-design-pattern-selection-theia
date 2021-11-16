@@ -17,6 +17,7 @@ export declare class extensionWidget extends ReactWidget {
     static methodNames: string[];
     static textBoxValues: Array<string>;
     static data: any;
+    static explanation: any;
     protected render(): React.ReactNode;
     protected runprocess(): Promise<void>;
     updateSelection(e: React.ChangeEvent<HTMLSelectElement>): void;

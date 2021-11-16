@@ -50,15 +50,19 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
             const data = fs.readFileSync(rootUri + "\\src\\" + fileName + ".java", 'utf8');
             const regex = new RegExp(/(?:(?:public|private|protected|static|final|native|synchronized|abstract|transient)+\s+)+[$_\w<>\[\]\s]*\s+[\$_\w]+\([^\)]*\)?\s*/gm);
             const array = [...data.matchAll(regex)];
-            console.log("ARRAY" + array);
-            // var methodNames: PromiseLike<string[]>;
             for (var i = 0; i < array.length; i++) {
                 var firstString = (array[i].toString()).split('('); //?
                 var secondString = (firstString[0].toString()).split(/\s+/);
+<<<<<<< HEAD
                 var item = secondString[secondString.length - 1];
                 this.fillPromise(lO, item);
+=======
+                async function fillPromise(Obj) {
+                    (await Obj.label).push(secondString[secondString.length - 1]);
+                }
+                fillPromise(lO);
+>>>>>>> b5b72f807560cd37645b5fb95bfdc18af085c044
             }
-            console.log("lO" + lO.label);
         }
         catch (err) {
             console.error(err);
