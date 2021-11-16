@@ -82,12 +82,12 @@ input{
   margin-left: 10px;
 }
 #image{
-  width: 550px;
+  width: 100%;
   height: auto;
   visibility: hidden;
 }
 .AbstractFactory{
-  content : url(./img/AbstractFactoryIcon.png);
+  content : url(./img/AbstractFactoryIcon.jpg);
 }
 .Adapter{
   content : url(./img/AdapterIcon.jpg);
@@ -113,4 +113,5 @@ input{
 .Singleton{
   content : url(./img/SingletonIcon.jpg);
 }
+
 

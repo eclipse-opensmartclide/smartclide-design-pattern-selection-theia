@@ -70,11 +70,6 @@ export class HelloBackendServiceImpl implements HelloBackendService {
           }
           return new Promise<string[]>(resolve => resolve(lO.label));
     }
-    
-
-    
-    
-    
 }
 
 
