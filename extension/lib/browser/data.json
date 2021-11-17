@@ -122,7 +122,7 @@
     },
     "Adapter": {
         "values": {
-            "Client Interface": {
+            "Client Interfac": {
                 "name": "",
                 "extension": 0
             },
@@ -136,17 +136,11 @@
             },
             "Adaptee": {
                 "name": "",
-<<<<<<< HEAD
                 "extension": 0
             },
             "AdapteeMethod": {
                 "name": "",
                 "extension": 0
-=======
-                "extension": 1,
-                "insertMethods": 1,
-                "AdapterMethod1": ""
->>>>>>> b5b72f807560cd37645b5fb95bfdc18af085c044
             }
         }
     },

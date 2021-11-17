@@ -8,6 +8,8 @@ export abstract class patternParticipatingClass {
 
     constructor(cn: string){
         this.cName = cn;
+		this.mList = [];
+		this.aList = [];
     }
 
     public abstract writeToFile() :void;

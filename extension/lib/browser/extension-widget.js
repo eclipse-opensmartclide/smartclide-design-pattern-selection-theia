@@ -95,22 +95,11 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 React.createElement("br", null),
                 React.createElement("div", { id: "result" },
                     React.createElement("table", { id: "show_pattern_table" }),
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Final Code "))));
-=======
-                    React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Code "),
-                    React.createElement("p", { id: 'description' }),
-                    React.createElement("p", { id: 'example' }),
-                    React.createElement("img", { id: 'image', alt: "Class Diagram " }))));
->>>>>>> b5b72f807560cd37645b5fb95bfdc18af085c044
-=======
                     React.createElement("div", { id: "elements" },
                         React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Code "),
                         React.createElement("p", { id: 'description' }),
                         React.createElement("p", { id: 'example' }),
                         React.createElement("img", { id: 'image', alt: "Class Diagram " })))));
->>>>>>> a0b0ab1c13cf2401caba4a8c3d3a1cbfd3da820b
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
@@ -133,22 +122,11 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     });
                 }
             });
-<<<<<<< HEAD
-            document.getElementById("btnFinalize").style.visibility = 'visible';
-<<<<<<< HEAD
-=======
-            document.getElementById('image').style.visibility = 'visible';
-=======
             document.getElementById("elements").style.visibility = 'visible';
->>>>>>> a0b0ab1c13cf2401caba4a8c3d3a1cbfd3da820b
             document.getElementById('image').className = extensionWidget_1.state.statePatternSelection;
             document.getElementById('description').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].description;
             document.getElementById('example').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].example;
-<<<<<<< HEAD
->>>>>>> b5b72f807560cd37645b5fb95bfdc18af085c044
-=======
             await this.helloBackendService.main();
->>>>>>> a0b0ab1c13cf2401caba4a8c3d3a1cbfd3da820b
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
@@ -385,7 +363,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         else {
             for (let i = 0; i < table.rows.length; i++) {
                 const txtbox = document.getElementById('txtbox' + (i + 1)).value;
-<<<<<<< HEAD
                 const labelvalue = document.getElementById('label' + (i + 1)).innerHTML;
                 if (labelvalue.includes("Method")) {
                     if (txtbox.match("^([a-z]{1}[a-zA-Z]*[0-9]*)$")) { //camel writing names of methods
@@ -396,10 +373,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) {
                         count++;
                     }
-=======
-                if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) {
-                    count++;
->>>>>>> b5b72f807560cd37645b5fb95bfdc18af085c044
                 }
             }
             return (count == table.rows.length ? "Inputs are valid" : "Inputs are invalid");

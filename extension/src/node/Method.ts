@@ -13,6 +13,7 @@ export class Method {
 		this.isAbstract = isA;
 		this.visibility = v;
 		this.code = c;
+		this.params = [];
 	}
 	
 	public writeToFile(): void {
