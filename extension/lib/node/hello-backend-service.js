@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HelloBackendServiceImpl = void 0;
 const inversify_1 = require("inversify");
 const file_search_service_1 = require("@theia/file-search/lib/common/file-search-service");
+const CodeGenerator_1 = require("./CodeGenerator");
 let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServiceImpl {
     async sayHelloTo(url) {
         //string manipulation to get the right form of url string
@@ -63,6 +64,13 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
             console.error(err);
         }
         return new Promise(resolve => resolve(lO.label));
+    }
+    async main() {
+        let cg = new CodeGenerator_1.CodeGenerator();
+        let ppc = cg.BridgeFactory();
+        for (let i = 0; i < ppc.length; i++) {
+            ppc[i].writeToFile();
+        }
     }
 };
 HelloBackendServiceImpl.index = -1;

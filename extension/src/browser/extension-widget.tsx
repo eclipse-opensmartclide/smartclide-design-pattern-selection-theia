@@ -94,10 +94,12 @@ export class extensionWidget extends ReactWidget {
 				<div id="result">
 					<table id="show_pattern_table">
 					</table>
-					<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Code </button>
-					<p id={'description'}></p>
-					<p id={'example'}></p>
-					<img id = {'image'} alt= "Class Diagram " ></img>
+					<div id="elements">
+						<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Code </button>
+						<p id={'description'}></p>
+						<p id={'example'}></p>
+						<img id = {'image'} alt= "Class Diagram " ></img>
+					</div>
 				</div>
 			</div>
 			</div>
@@ -127,13 +129,11 @@ export class extensionWidget extends ReactWidget {
 					});	
 				}
 			});
-			(document.getElementById("btnFinalize") as HTMLButtonElement).style.visibility = 'visible';
-			(document.getElementById('image') as HTMLImageElement).style.visibility = 'visible';
+			(document.getElementById("elements") as HTMLElement).style.visibility = 'visible';
 			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
-			(document.getElementById('description') as HTMLElement).style.visibility = 'visible';
 			(document.getElementById('description') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].description;
-			(document.getElementById('example') as HTMLElement).style.visibility = 'visible';
 			(document.getElementById('example') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].example;
+			await this.helloBackendService.main();
 		}else{
 			this.messageService.info('You need to choose a software pattern!');
 		}
@@ -371,10 +371,8 @@ export class extensionWidget extends ReactWidget {
 	refreshPage(table: HTMLTableElement){
 		table.innerHTML = "";
 		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
-		(document.getElementById("btnFinalize") as HTMLButtonElement).style.visibility = 'hidden';
-		(document.getElementById('image') as HTMLImageElement).style.visibility = 'hidden';
-		(document.getElementById('example') as HTMLElement).style.visibility = 'hidden';
-		(document.getElementById('description') as HTMLElement).style.visibility = 'hidden';
+		(document.getElementById("elements") as HTMLElement).style.visibility = 'hidden';
+
 	}
 
 }

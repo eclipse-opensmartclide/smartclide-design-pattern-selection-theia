@@ -1,7 +1,8 @@
 import { injectable, inject } from "inversify";
 import { HelloBackendService } from "../common/protocol";
 import {FileSearchService } from "@theia/file-search/lib/common/file-search-service";
-
+import { CodeGenerator } from "./CodeGenerator";
+import {patternParticipatingClass} from './patternParticipatingClass';
 interface LabeledValue{
 	label:string[];
 }
@@ -69,6 +70,14 @@ export class HelloBackendServiceImpl implements HelloBackendService {
             console.error(err)
           }
           return new Promise<string[]>(resolve => resolve(lO.label));
+    }
+    async main(): Promise<void>{
+        let cg : CodeGenerator  = new CodeGenerator();
+        let ppc : Array<patternParticipatingClass> = cg.BridgeFactory();
+		for (let i=0; i<ppc.length; i++) {
+			ppc[i].writeToFile();
+		}
+
     }
 }
 
