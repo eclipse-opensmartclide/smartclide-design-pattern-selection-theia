@@ -134,7 +134,7 @@ export class extensionWidget extends ReactWidget {
 			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
 			(document.getElementById('description') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].description;
 			(document.getElementById('example') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].example;
-			await this.helloBackendService.main();
+			await this.helloBackendService.main('hello');
 		}else{
 			this.messageService.info('You need to choose a software pattern!');
 		}

@@ -9,12 +9,16 @@ export class Attribute {
 		this.visibility = v;
 	}
 	
-	public writeToFile(): void {
-		console.log("\t" + this.visibility + " " + this.type + " " + this.aName + ";");
+	public writeToFile(cName : string): void {
+		var fs = require('fs');
+
+        fs.writeFile(cName + ".java" ,"\t" + this.visibility + " " + this.type + " " + this.aName + ";");
 	}
 
-	public writeAsParam() : void{
-		console.log(this.type + " " + this.aName);
+	public writeAsParam(cName : string) : void{
+		var fs = require('fs');
+
+        fs.writeFile(cName + ".java" ,this.type + " " + this.aName);
 	}
 	
 }

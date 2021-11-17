@@ -66,11 +66,11 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
     fillPromise(labelObj, item) {
         labelObj.label.push(item);
     }
-    async main() {
+    async main(cName) {
         let cg = new CodeGenerator_1.CodeGenerator();
         let ppc = cg.BridgeFactory();
         for (let i = 0; i < ppc.length; i++) {
-            ppc[i].writeToFile();
+            ppc[i].writeToFile(cName);
         }
     }
 };

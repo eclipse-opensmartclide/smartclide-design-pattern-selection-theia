@@ -76,11 +76,11 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     
     
     
-    async main(): Promise<void>{
+    async main(cName : string): Promise<void>{
         let cg : CodeGenerator  = new CodeGenerator();
         let ppc : Array<patternParticipatingClass> = cg.BridgeFactory();
 		for (let i=0; i<ppc.length; i++) {
-			ppc[i].writeToFile();
+			ppc[i].writeToFile(cName);
 		}
 
     }

@@ -7,11 +7,13 @@ export class ConcreteClass extends patternParticipatingClass {
 		this.superClass = sc;
 	}
 
-	public writeToFile(): void {
-		console.log("public class " + this.cName + " extends " + this.superClass + " {");
+	public writeToFile(cName : string): void {
+        var fs = require('fs');
+
+        fs.writeFile(this.cName + ".java" , "public class " + this.cName + " extends " + this.superClass + " {");
 		this.writeAttributes();
 		this.writeMethods();
-		console.log("}");
+        fs.writeFile(this.cName + ".java" , "}");
 	}
 	
 }

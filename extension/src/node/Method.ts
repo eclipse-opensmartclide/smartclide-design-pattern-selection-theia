@@ -16,26 +16,33 @@ export class Method {
 		this.params = [];
 	}
 	
-	public writeToFile(): void {
-		console.log("\t" + this.visibility + " ");
+	public writeToFile(cName : string): void {
+		var fs = require('fs');
+
+        fs.writeFile(cName + ".java" ,"\t" + this.visibility + " ");
 		if (this.isAbstract) 
-			console.log("abstract " + this.rType + " " + this.mName + "(");
-		else 
-			console.log(this.rType + " " + this.mName + "(");
+
+        fs.writeFile(cName + ".java" ,"abstract " + this.rType + " " + this.mName + "(");
+		else {
+
+        fs.writeFile(cName + ".java" ,this.rType + " " + this.mName + "(");
 		for (let i=0; i<this.params.length;i++) {
 			if (i==(this.params.length-1)) 
-				this.params[i].writeAsParam();
+				this.params[i].writeAsParam(cName);
 			else {
-				this.params[i].writeAsParam();
+				this.params[i].writeAsParam(cName);
 				console.log(", ");
 			}
 		}
 		if (this.isAbstract) 
-			console.log(");");
+			fs.writeFile(cName + ".java" ,");");
 		else {
-			console.log(") {");
-			console.log(this.code);
-			console.log("\t}");
+
+			fs.writeFile(cName + ".java" ,") {");
+
+			fs.writeFile(cName + ".java" ,this.code);
+
+			fs.writeFile(cName + ".java" ,"\t}");
 		}
 	}
-}
+	}}

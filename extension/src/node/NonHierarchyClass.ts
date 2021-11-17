@@ -5,11 +5,13 @@ export class NonHierarchyClass extends patternParticipatingClass {
 		super(cn);
 	}
 
-	public writeToFile(): void {
-		console.log("public class " + this.cName + " {");
+	public writeToFile(cName : string): void {
+		var fs = require('fs');
+
+        fs.writeFile(cName + ".java" ,"public class " + this.cName + " {");
 		this.writeAttributes();
 		this.writeMethods();
-		console.log("}");
+        fs.writeFile(cName + ".java" ,"}");
 	}
 
 }
