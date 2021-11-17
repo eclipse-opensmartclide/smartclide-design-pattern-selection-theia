@@ -9,7 +9,11 @@ export declare class HelloBackendServiceImpl implements HelloBackendService {
     static array: string[];
     sayHelloTo(url: string): Promise<string[]>;
     getMethods(url: string, fileName: string): Promise<string[]>;
+<<<<<<< HEAD
     fillPromise(labelObj: LabeledValue, item: string): void;
+=======
+    main(): Promise<void>;
+>>>>>>> a0b0ab1c13cf2401caba4a8c3d3a1cbfd3da820b
 }
 export {};
 //# sourceMappingURL=hello-backend-service.d.ts.map
