@@ -100,7 +100,7 @@ export class extensionWidget extends ReactWidget {
 						<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Code </button>
 						<p id={'description'}></p>
 						<p id={'example'}></p>
-						<img id = {'image'} alt= "Class Diagram " ></img>
+						<img id = "image" alt= "Class Diagram " ></img>
 					</div>
 				</div>
 			</div>

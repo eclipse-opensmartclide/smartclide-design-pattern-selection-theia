@@ -99,7 +99,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Code "),
                         React.createElement("p", { id: 'description' }),
                         React.createElement("p", { id: 'example' }),
-                        React.createElement("img", { id: 'image', alt: "Class Diagram " })))));
+                        React.createElement("img", { id: "image", alt: "Class Diagram " })))));
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {

@@ -1,5 +1,5 @@
 #widget-container{
-	width: 550px;
+  max-width: 100%;
 }
 #widget-container h2 {
     color: var(--theia-ui-font-color1);
@@ -30,6 +30,8 @@ input{
 }
 #issues{
 	margin-left: 10px;
+  margin-right: 10px;
+  max-width: 100%;
 }
 
 .divIssue{
@@ -82,10 +84,11 @@ input{
   margin-left: 10px;
 }
 #image{
-  width: 100%;
+  max-width: 100%;
   height: auto;
 }
 #elements{
+  max-width: 100%;
   visibility: hidden;
 }
 .AbstractFactory{
