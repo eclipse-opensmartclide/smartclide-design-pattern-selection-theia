@@ -76,12 +76,43 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     
     
     
-    async main(cName : string): Promise<void>{
+    async main(url : string, cName : string): Promise<void>{
+        //var lastL = url.indexOf("/#/");
+        //var rootUri = url.substr(lastL+3);
+        /*var fs = require('fs');
+        fs.open("hell.txt", 'r', function(err: Error){
+            if(err){
+                fs.appendFile("hell.txt","hey", function(err: Error){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        console.log("The file was saved!");
+                        console.log("DATA" +fs.open("hell.txt",'r'));
+                    }
+                    
+                })
+            }else{
+                console.log("The file exists");
+                fs.appendFile("hell.txt","hey", 'utf8', function(err: Error){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        var data = fs.readFileSync("hell.txt",'utf-8');
+                        console.log("DATA: "+ data);
+                        console.log("The file was saved!");
+                    }
+                    
+                })
+            }
+        });*/
+       
+        
         let cg : CodeGenerator  = new CodeGenerator();
         let ppc : Array<patternParticipatingClass> = cg.BridgeFactory();
 		for (let i=0; i<ppc.length; i++) {
 			ppc[i].writeToFile(cName);
 		}
+       
 
     }
 }

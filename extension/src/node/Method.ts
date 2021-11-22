@@ -18,31 +18,47 @@ export class Method {
 	
 	public writeToFile(cName : string): void {
 		var fs = require('fs');
-
-        fs.writeFile(cName + ".java" ,"\t" + this.visibility + " ");
-		if (this.isAbstract) 
-
-        fs.writeFile(cName + ".java" ,"abstract " + this.rType + " " + this.mName + "(");
-		else {
-
-        fs.writeFile(cName + ".java" ,this.rType + " " + this.mName + "(");
+		fs.appendFile(cName + ".java" ,"\n \t" + this.visibility + " ", function(err: Error){
+			if(err) console.log(err);
+		 });
+        
+		if (this.isAbstract){
+			fs.appendFile(cName + ".java" ,"abstract " + this.rType + " " + this.mName + "(", function(err: Error){
+				if(err) console.log(err);
+			});
+		}else {
+			fs.appendFile(cName + ".java" ,this.rType + " " + this.mName + "(",
+			function(err: Error){
+				if(err) console.log(err);
+			 });
+		}
+        
 		for (let i=0; i<this.params.length;i++) {
 			if (i==(this.params.length-1)) 
 				this.params[i].writeAsParam(cName);
 			else {
 				this.params[i].writeAsParam(cName);
-				console.log(", ");
+				fs.appendFile(cName + ".java",", ", function(err: Error){
+					if(err) console.log(err);
+				 });
 			}
 		}
-		if (this.isAbstract) 
-			fs.writeFile(cName + ".java" ,");");
-		else {
-
-			fs.writeFile(cName + ".java" ,") {");
-
-			fs.writeFile(cName + ".java" ,this.code);
-
-			fs.writeFile(cName + ".java" ,"\t}");
+		if (this.isAbstract) {
+			console.log(1);
+			fs.appendFile(cName + ".java" ,");",function(err: Error){
+				if(err) console.log(err);
+			 });
+		}else {
+			fs.appendFile(cName + ".java" ,") {", function(err: Error){
+				if(err) console.log(err);
+			});
+			fs.appendFile(cName + ".java" ,this.code, function(err: Error){
+				if(err) console.log(err);
+			 });
+			fs.appendFile(cName + ".java" ,"\t}", function(err: Error){
+				if(err) console.log(err);
+			 });
+			
 		}
-	}
+	
 	}}

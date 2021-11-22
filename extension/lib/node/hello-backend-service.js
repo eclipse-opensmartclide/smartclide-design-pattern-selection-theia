@@ -66,7 +66,35 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
     fillPromise(labelObj, item) {
         labelObj.label.push(item);
     }
-    async main(cName) {
+    async main(url, cName) {
+        //var lastL = url.indexOf("/#/");
+        //var rootUri = url.substr(lastL+3);
+        /*var fs = require('fs');
+        fs.open("hell.txt", 'r', function(err: Error){
+            if(err){
+                fs.appendFile("hell.txt","hey", function(err: Error){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        console.log("The file was saved!");
+                        console.log("DATA" +fs.open("hell.txt",'r'));
+                    }
+                    
+                })
+            }else{
+                console.log("The file exists");
+                fs.appendFile("hell.txt","hey", 'utf8', function(err: Error){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        var data = fs.readFileSync("hell.txt",'utf-8');
+                        console.log("DATA: "+ data);
+                        console.log("The file was saved!");
+                    }
+                    
+                })
+            }
+        });*/
         let cg = new CodeGenerator_1.CodeGenerator();
         let ppc = cg.BridgeFactory();
         for (let i = 0; i < ppc.length; i++) {

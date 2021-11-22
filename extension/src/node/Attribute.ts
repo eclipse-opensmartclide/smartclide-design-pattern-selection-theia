@@ -11,14 +11,19 @@ export class Attribute {
 	
 	public writeToFile(cName : string): void {
 		var fs = require('fs');
-
-        fs.writeFile(cName + ".java" ,"\t" + this.visibility + " " + this.type + " " + this.aName + ";");
+		fs.appendFile(cName + ".java" ,"\n \t" + this.visibility + " " + this.type + " " + this.aName + ";", function(err: Error){
+			if(err) console.log(err);
+		});
+		
+        
 	}
 
 	public writeAsParam(cName : string) : void{
 		var fs = require('fs');
-
-        fs.writeFile(cName + ".java" ,this.type + " " + this.aName);
+		fs.appendFile(cName + ".java" ,this.type + " " + this.aName, function(err: Error){
+			if(err) console.log(err);
+		});
+       
 	}
 	
 }

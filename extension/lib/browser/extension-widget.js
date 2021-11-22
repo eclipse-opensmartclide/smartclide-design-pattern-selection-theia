@@ -126,7 +126,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             document.getElementById('image').className = extensionWidget_1.state.statePatternSelection;
             document.getElementById('description').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].description;
             document.getElementById('example').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].example;
-            await this.helloBackendService.main('hello');
+            await this.helloBackendService.main(getUrl, "MainBuilder");
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
