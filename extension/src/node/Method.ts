@@ -18,16 +18,16 @@ export class Method {
 	
 	public writeToFile(cName : string): void {
 		var fs = require('fs');
-		fs.appendFile(cName + ".java" ,"\n \t" + this.visibility + " ", function(err: Error){
+		fs.appendFileSync(cName + ".java" ,"\n " + this.visibility + " ", function(err: Error){
 			if(err) console.log(err);
 		 });
         
 		if (this.isAbstract){
-			fs.appendFile(cName + ".java" ,"abstract " + this.rType + " " + this.mName + "(", function(err: Error){
+			fs.appendFileSync(cName + ".java" ,"abstract " + this.rType + " " + this.mName + "(", function(err: Error){
 				if(err) console.log(err);
 			});
 		}else {
-			fs.appendFile(cName + ".java" ,this.rType + " " + this.mName + "(",
+			fs.appendFileSync(cName + ".java" ,this.rType + " " + this.mName + "(",
 			function(err: Error){
 				if(err) console.log(err);
 			 });
@@ -38,24 +38,24 @@ export class Method {
 				this.params[i].writeAsParam(cName);
 			else {
 				this.params[i].writeAsParam(cName);
-				fs.appendFile(cName + ".java",", ", function(err: Error){
+				fs.appendFileSync(cName + ".java",", ", function(err: Error){
 					if(err) console.log(err);
 				 });
 			}
 		}
 		if (this.isAbstract) {
 			console.log(1);
-			fs.appendFile(cName + ".java" ,");",function(err: Error){
+			fs.appendFileSync(cName + ".java" ,");",function(err: Error){
 				if(err) console.log(err);
 			 });
 		}else {
-			fs.appendFile(cName + ".java" ,") {", function(err: Error){
+			fs.appendFileSync(cName + ".java" ,") {", function(err: Error){
 				if(err) console.log(err);
 			});
-			fs.appendFile(cName + ".java" ,this.code, function(err: Error){
+			fs.appendFileSync(cName + ".java" ,"\n" + this.code + "\n", function(err: Error){
 				if(err) console.log(err);
 			 });
-			fs.appendFile(cName + ".java" ,"\t}", function(err: Error){
+			fs.appendFileSync(cName + ".java" ,"\t}", function(err: Error){
 				if(err) console.log(err);
 			 });
 			

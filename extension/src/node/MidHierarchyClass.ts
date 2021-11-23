@@ -9,19 +9,15 @@ export class MidHierarchyClass extends patternParticipatingClass {
 
 	public writeToFile(cName : string): void {
 		var fs = require('fs');
-		try {
-			fs.appendFileSync(cName + ".java" ,"public abstract class " + this.cName + " extends " + this.superClass + " {");
-		} catch(e) {
-			console.error(e);
-		}
+		fs.appendFileSync(cName + ".java" ,"public abstract class " + this.cName + " extends " + this.superClass + " {",function(err: Error){
+            if(err) console.log(err);
+         });
        
 		this.writeAttributes();
 		this.writeMethods();
-		try{
-			fs.appendFileSync(cName + ".java" ,"}");
-		} catch(e) {
-			console.error(e);
-		}
+		fs.appendFileSync(cName + ".java" ,"}",function(err: Error){
+				if(err) console.log(err);
+			 });
        
 	}
 

@@ -11,7 +11,7 @@ export class Attribute {
 	
 	public writeToFile(cName : string): void {
 		var fs = require('fs');
-		fs.appendFile(cName + ".java" ,"\n \t" + this.visibility + " " + this.type + " " + this.aName + ";", function(err: Error){
+		fs.appendFileSync(cName + ".java" ,"\n " + this.visibility + " " + this.type + " " + this.aName + ";", function(err: Error){
 			if(err) console.log(err);
 		});
 		
@@ -20,7 +20,7 @@ export class Attribute {
 
 	public writeAsParam(cName : string) : void{
 		var fs = require('fs');
-		fs.appendFile(cName + ".java" ,this.type + " " + this.aName, function(err: Error){
+		fs.appendFileSync(cName + ".java" ,this.type + " " + this.aName, function(err: Error){
 			if(err) console.log(err);
 		});
        

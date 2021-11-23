@@ -82,7 +82,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         /*var fs = require('fs');
         fs.open("hell.txt", 'r', function(err: Error){
             if(err){
-                fs.appendFile("hell.txt","hey", function(err: Error){
+                fs.appendFileSync("hell.txt","hey", function(err: Error){
                     if(err){
                         console.log(err);
                     }else{
@@ -93,7 +93,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
                 })
             }else{
                 console.log("The file exists");
-                fs.appendFile("hell.txt","hey", 'utf8', function(err: Error){
+                fs.appendFileSync("hell.txt","hey", 'utf8', function(err: Error){
                     if(err){
                         console.log(err);
                     }else{

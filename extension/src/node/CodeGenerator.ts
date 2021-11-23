@@ -2,7 +2,7 @@ import {patternParticipatingClass} from './patternParticipatingClass';
 import {abstractClass} from './abstractClass';
 import {Attribute} from './Attribute';
 import {Method} from './Method';
-//import {ConcreteClass} from './ConcreteClass';
+import {ConcreteClass} from './ConcreteClass';
 
 interface Object{
     //[x: string]: any;
@@ -19,7 +19,7 @@ export class CodeGenerator {
 		abstraction.addMethod(new Method("calcPayroll", "double", true, "public", ""));
 		this.fillPromise(ppc, abstraction);
 
-		/*let refinedAbstraction1 : patternParticipatingClass = new ConcreteClass("Technical", "Employee");
+		let refinedAbstraction1 : patternParticipatingClass = new ConcreteClass("Technical", "Employee");
 		refinedAbstraction1.addMethod(new Method("calcPayroll", "double", false, "public", " \t\t return pmnt.calcTechnical();"));
 		this.fillPromise(ppc, refinedAbstraction1);
 
@@ -43,7 +43,7 @@ export class CodeGenerator {
 		convreteImplementor2.addMethod(new Method("calcTechnical", "double", false, "public", " \t\t return hours*10;"));
 		convreteImplementor2.addMethod(new Method("calcPM", "double", false, "public", " \t\t return hours*25;"));
 		this.fillPromise(ppc, convreteImplementor2);
-		console.log("ppc " + ppc.object);	*/
+		console.log("ppc " + ppc.object);	
 		return ppc.object;		
 	}
 	fillPromise(labelObj: Object, item: patternParticipatingClass){
