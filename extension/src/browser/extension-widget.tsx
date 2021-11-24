@@ -134,7 +134,7 @@ export class extensionWidget extends ReactWidget {
 			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
 			(document.getElementById('description') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].description;
 			(document.getElementById('example') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].example;
-			await this.helloBackendService.main(getUrl, "MainBuilder");
+			
 		}else{
 			this.messageService.info('You need to choose a software pattern!');
 		}
@@ -292,6 +292,7 @@ export class extensionWidget extends ReactWidget {
 						if (methodNames.includes(methodName)){
 							this.updateJsonObject();
 							this.messageService.info("Well done! Code is coming...");
+							await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
 						}else{
 							this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: "+methodNames);
 						}
@@ -301,6 +302,7 @@ export class extensionWidget extends ReactWidget {
 				}else{
 					this.updateJsonObject();
 					this.messageService.info("Well done! Code is coming...");
+					await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
 				}
 			}else{
 				this.messageService.info("Inputs are invalid");

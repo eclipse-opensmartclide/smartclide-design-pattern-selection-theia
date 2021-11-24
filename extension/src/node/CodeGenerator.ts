@@ -1,20 +1,45 @@
 import {patternParticipatingClass} from './patternParticipatingClass';
 import {abstractClass} from './abstractClass';
-import {Attribute} from './Attribute';
-import {Method} from './Method';
-import {ConcreteClass} from './ConcreteClass';
+//import {Attribute} from './Attribute';
+//import {Method} from './Method';
+//import {ConcreteClass} from './ConcreteClass';
+import { NonHierarchyClass } from './NonHierarchyClass';
+import { MidHierarchyClass } from './MidHierarchyClass';
 
 interface Object{
-    //[x: string]: any;
     object :Array<patternParticipatingClass>;
 }
 export class CodeGenerator {
 	
-	public BridgeFactory(): Array<patternParticipatingClass>  {		
+	public BridgeFactory(jsonObj: string): Array<patternParticipatingClass>  {		
 		let ppc : Object ={object: []}
+		let obj = JSON.parse(JSON.stringify(jsonObj));
 
+		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Client.name);
+		this.fillPromise(ppc, file1);
+		
+		let file2 :patternParticipatingClass = new abstractClass(obj.Implementor.name);
+		this.fillPromise(ppc, file2);
+
+		let file3 :patternParticipatingClass = new abstractClass(obj.Abstraction.name);
+		this.fillPromise(ppc, file3);
+
+		Object.keys(obj).forEach((key) =>{
+			console.log(key);
+			if(key.includes("RefinedAbstraction")){
+				console.log(key);
+				let file4 :patternParticipatingClass = new MidHierarchyClass(obj[key].name, obj.Abstraction.name);
+				this.fillPromise(ppc, file4);
+			}else if(key.includes("ConcreteImplementor")){
+				let file5 :patternParticipatingClass = new MidHierarchyClass(obj[key].name, obj.Implementor.name);
+				this.fillPromise(ppc, file5);
+			}else{
+
+			}
+
+		});
 		// Building first hierarchy
-		let abstraction : patternParticipatingClass = new abstractClass("Employee");
+		/*let abstraction : patternParticipatingClass = new abstractClass("Employee");
 		abstraction.addAttribute(new Attribute("pmnt", "Payment", "private"));
 		abstraction.addMethod(new Method("calcPayroll", "double", true, "public", ""));
 		this.fillPromise(ppc, abstraction);
@@ -42,8 +67,8 @@ export class CodeGenerator {
 		convreteImplementor2.addAttribute(new Attribute("hours", "int", "private"));
 		convreteImplementor2.addMethod(new Method("calcTechnical", "double", false, "public", " \t\t return hours*10;"));
 		convreteImplementor2.addMethod(new Method("calcPM", "double", false, "public", " \t\t return hours*25;"));
-		this.fillPromise(ppc, convreteImplementor2);
-		console.log("ppc " + ppc.object);	
+		this.fillPromise(ppc, convreteImplementor2);*/
+
 		return ppc.object;		
 	}
 	fillPromise(labelObj: Object, item: patternParticipatingClass){
