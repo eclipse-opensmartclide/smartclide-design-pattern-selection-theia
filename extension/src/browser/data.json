@@ -1,10 +1,6 @@
 {
     "AbstractFactory":{
         "values":{
-            "Client":{
-                "name":"",
-                "extension":0
-            },
             "AbstractFactory":{
                 "name":"",
                 "extension":0
@@ -51,16 +47,15 @@
             },
             "Builder":{
                 "name":"",
-                "extension":0,
-                "insertMethods":1,
-                "method1":"",
-                "method2":""
+                "extension":0
+            },
+            "BuilderMethod1": {
+                "name":"",
+                "extension":1
             },
             "ConcreteBuilder1":{
                 "name":"",
-                "extension":0,
-                "insertMethods":1,
-                "ConcreteBuilder1Method1":""
+                "extension":0
             },
             "Product1":{
                 "name":"",
@@ -90,10 +85,6 @@
     },
     "Prototype":{
         "values":{
-            "Client":{
-                "name":"",
-                "extension":0
-            },
             "Prototype":{
                 "name":"",
                 "extension":0
@@ -101,20 +92,12 @@
             "ConcretePrototype1":{
                 "name":"",
                 "extension":1
-            },
-            "ConcretePrototype2":{
-                "name":"",
-                "extension":0
             }
         }
     },
 
     "Singleton":{
         "values":{
-            "Client":{
-                "name":"",
-                "extension":0
-            },
             "Singleton":{
                 "name":"",
                 "extension":0
@@ -124,7 +107,7 @@
 
     "Adapter":{
         "values":{
-            "Client Interfac":{
+            "Client Interface":{
                 "name":"",
                 "extension":0
             },
@@ -143,54 +126,50 @@
             "AdapteeMethod": {
                 "name":"",
                 "extension":0
-            }
-            
-           
+            }   
         }
     },
 
     "Bridge":{
         "values":{
-            "Client":{
-                "name":"",
-                "extension":0
-            },
             "Abstraction":{
                 "name":"",
                 "extension":0
+            },
+            "AbstractionMethod1":{
+                "name":"",
+                "extension":1
             },
             "RefinedAbstraction1":{
                 "name":"",
                 "extension":1
             },
-            "Implementor":{
+            "Implementation":{
                 "name":"",
                 "extension":0
             },
-            "ConcreteImplementor1":{
+            "ImplementationMethod1":{
                 "name":"",
                 "extension":1
             },
-            "ConcreteImplementor2":{
+            "ConcreteImplementation1":{
                 "name":"",
-                "extension":0
+                "extension":1
             }
         }
     },
 
     "Composite":{
         "values":{
-            "Client":{
+            "Component":{
                 "name":"",
                 "extension":0
             },
-            "Component":{
+            "ComponentMethod":{
                 "name":"",
-                "extension":0,
-                "insertMethods":0,
-                "ComponentMethod":""
+                "extension":0
             },
-            "ConcreteDecorator1":{
+            "ConcreteComponent1":{
                 "name":"",
                 "extension":1
              },
@@ -207,11 +186,13 @@
                 "name":"",
                 "extension":0
             },
+            "ComponentMethod":{
+                "name":"",
+                "extension":0
+            },
             "ConcreteComponent1":{
                 "name":"",
-                 "extension":1,
-                 "insertMethods":0,
-                 "ConcreteComponent1Method":""
+                 "extension":1
             },
             "Decorator":{
                 "name":"",
@@ -219,15 +200,11 @@
             },
             "ConcreteDecorator1":{
                 "name":"",
-                "extension":1,
-                "insertMethods":0,
-                "ConcreteDecorator1Method":""
+                "extension":1
             },
-            "ConcreteDecorator2":{
+            "ConcreteDecorator1Method":{
                 "name":"",
-                "extension":0,
-                "insertMethods":0,
-                "ConcreteDecorator2Method":""
+                "extension":0
             }
          }
 
@@ -235,10 +212,6 @@
 
     "Facade":{
         "values":{
-            "Client":{
-                "name":"",
-                "extension":0
-            },
             "Facade":{
                 "name":"",
                 "extension":0
@@ -276,15 +249,15 @@
 
     "Proxy":{
         "values":{
-            "Client":{
+            "ServiceInterface":{
                 "name":"",
                 "extension":0
             },
-            "Subject":{
+            "ServiceInterfaceMethod":{
                 "name":"",
                 "extension":0
             },
-            "RealSubject":{
+            "Service":{
                 "name":"",
                 "extension":0
             },
@@ -296,10 +269,6 @@
     },
     "ChainofResponsibility":{
         "values":{
-            "Client":{
-                "name":"",
-                "extension":0
-            },
             "Handler":{
                 "name":"",
                 "extension":0
@@ -317,10 +286,6 @@
 
     "Command":{
         "values":{
-            "Client":{
-                "name":"",
-                "extension":0
-            },
             "Receiver1":{
                 "name":"",
                 "extension":1
@@ -341,10 +306,6 @@
     },
     "Interpreter":{
         "values":{
-            "Client":{
-                "name":"",
-                "extension":0
-            },
             "Context":{
                 "name":"",
                 "extension":0
@@ -365,15 +326,11 @@
     },
     "Iterator":{
         "values":{
-            "Client":{
+            "Collection":{
                 "name":"",
                 "extension":0
             },
-            "Aggregate":{
-                "name":"",
-                "extension":0
-            },
-            "ConcreteAggregate1":{
+            "ConcreteCollection1":{
                 "name":"",
                 "extension":1
             },
@@ -383,7 +340,7 @@
             },
             "ConcreteIterator1":{
                 "name":"",
-                "extension":1
+                "extension":0
             }
         }
     },
@@ -502,10 +459,6 @@
     },
     "Visitor":{
         "values":{
-            "Client":{
-                "name":"",
-                "extension":0
-            },
             "Visitor":{
                 "name":"",
                 "extension":0
