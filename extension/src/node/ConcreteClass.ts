@@ -7,7 +7,7 @@ export class ConcreteClass extends patternParticipatingClass {
 		this.superClass = sc;
 	}
 
-	public writeToFile(cName : string): void {
+	public writeToFile(): void {
         var fs = require('fs');
 
         fs.appendFileSync(this.cName + ".java" , "public class " + this.cName + " extends " + this.superClass + " {");

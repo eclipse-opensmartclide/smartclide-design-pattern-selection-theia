@@ -1,7 +1,7 @@
 import {patternParticipatingClass} from './patternParticipatingClass';
 export class abstractClass extends patternParticipatingClass{
     
-    public writeToFile(cName :string): void {
+    public writeToFile(): void {
         const fs = require('fs');
 
         fs.appendFileSync(this.cName + ".java","public abstract class " + this.cName + " {", function(err: Error){

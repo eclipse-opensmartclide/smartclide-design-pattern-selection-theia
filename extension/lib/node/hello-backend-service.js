@@ -72,7 +72,7 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
         if (statePatternSelection == "Bridge") {
             let ppc = cg.BridgeFactory(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile("");
+                ppc[i].writeToFile();
             }
         }
     }

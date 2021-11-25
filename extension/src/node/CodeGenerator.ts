@@ -3,74 +3,156 @@ import {abstractClass} from './abstractClass';
 //import {Attribute} from './Attribute';
 //import {Method} from './Method';
 //import {ConcreteClass} from './ConcreteClass';
+//import { NonHierarchyClass } from './NonHierarchyClass';
+//import { MidHierarchyClass } from './MidHierarchyClass';
+import { ConcreteClass } from './ConcreteClass';
 import { NonHierarchyClass } from './NonHierarchyClass';
-import { MidHierarchyClass } from './MidHierarchyClass';
 
 interface Object{
     object :Array<patternParticipatingClass>;
 }
 export class CodeGenerator {
 	
-	public BridgeFactory(jsonObj: string): Array<patternParticipatingClass>  {		
+	
+	public AbstractFactory(jsonObj: string): Array<patternParticipatingClass>  {
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
-
-		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Client.name);
-		this.fillPromise(ppc, file1);
-		
-		let file2 :patternParticipatingClass = new abstractClass(obj.Implementor.name);
-		this.fillPromise(ppc, file2);
-
-		let file3 :patternParticipatingClass = new abstractClass(obj.Abstraction.name);
-		this.fillPromise(ppc, file3);
-
 		Object.keys(obj).forEach((key) =>{
-			console.log(key);
-			if(key.includes("RefinedAbstraction")){
-				console.log(key);
-				let file4 :patternParticipatingClass = new MidHierarchyClass(obj[key].name, obj.Abstraction.name);
-				this.fillPromise(ppc, file4);
-			}else if(key.includes("ConcreteImplementor")){
-				let file5 :patternParticipatingClass = new MidHierarchyClass(obj[key].name, obj.Implementor.name);
-				this.fillPromise(ppc, file5);
+			if(key.includes("AbstractFactory")){
+				let file1 :patternParticipatingClass = new abstractClass(obj[key].name);
+				this.fillPromise(ppc, file1);
+			}else if(key.includes("ConcreteFactory")){
+				let file2 :patternParticipatingClass = new NonHierarchyClass(obj[key].name);
+				this.fillPromise(ppc, file2);
+			}else if(key.includes("AbstractProduct")){
+				let file3 :patternParticipatingClass = new NonHierarchyClass(obj[key].name);
+				this.fillPromise(ppc, file3);
 			}else{
-
+				// δεν το εχω κανει
+				let file4 :patternParticipatingClass = new ConcreteClass(obj[key].name,"");
+				this.fillPromise(ppc, file4);
 			}
-
 		});
-		// Building first hierarchy
-		/*let abstraction : patternParticipatingClass = new abstractClass("Employee");
-		abstraction.addAttribute(new Attribute("pmnt", "Payment", "private"));
-		abstraction.addMethod(new Method("calcPayroll", "double", true, "public", ""));
-		this.fillPromise(ppc, abstraction);
-
-		let refinedAbstraction1 : patternParticipatingClass = new ConcreteClass("Technical", "Employee");
-		refinedAbstraction1.addMethod(new Method("calcPayroll", "double", false, "public", " \t\t return pmnt.calcTechnical();"));
-		this.fillPromise(ppc, refinedAbstraction1);
-
-		let refinedAbstraction2 : patternParticipatingClass = new ConcreteClass("PM", "Employee");
-		refinedAbstraction2.addMethod(new Method("calcPayroll", "double", false, "public", " \t\t return pmnt.calcPM();"));
-		this.fillPromise(ppc, refinedAbstraction2);
-
-		// Building first hierarchy
-		let implementor : patternParticipatingClass = new abstractClass("Payment");
-		implementor.addMethod(new Method("calcTechnical", "double", true, "public", ""));
-		implementor.addMethod(new Method("calcPM", "double", true, "public", ""));
-		this.fillPromise(ppc, implementor);
-
-		let convreteImplementor1 : patternParticipatingClass = new ConcreteClass("Salary", "Payment");
-		convreteImplementor1.addMethod(new Method("calcTechnical", "double", false, "public", " \t\t return 800;"));
-		convreteImplementor1.addMethod(new Method("calcPM", "double", false, "public", " \t\t return 1200;"));
-		this.fillPromise(ppc, convreteImplementor1);
-
-		let convreteImplementor2 :patternParticipatingClass  = new ConcreteClass("PerHour", "Payment");
-		convreteImplementor2.addAttribute(new Attribute("hours", "int", "private"));
-		convreteImplementor2.addMethod(new Method("calcTechnical", "double", false, "public", " \t\t return hours*10;"));
-		convreteImplementor2.addMethod(new Method("calcPM", "double", false, "public", " \t\t return hours*25;"));
-		this.fillPromise(ppc, convreteImplementor2);*/
-
 		return ppc.object;		
 	}
+	public Builder(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;}
+	public FactoryMethod(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;}
+	public Singleton(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}
+	public Adapter(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}
+	public Prototype(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;}	
+	public Bridge(jsonObj: string): Array<patternParticipatingClass>  {		
+		let ppc : Object ={object: []}
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+		Object.keys(obj).forEach((key) =>{
+			if(key.includes("RefinedAbstraction")){
+				let file1 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Abstraction.name);
+				this.fillPromise(ppc, file1);
+			}else if(key.includes("ConcreteImplementor")){
+				let file2 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Implementor.name);
+				this.fillPromise(ppc, file2);
+			}else if(key.includes("Implementor")){
+				let file3 :patternParticipatingClass = new abstractClass(obj[key].name);
+				this.fillPromise(ppc, file3);
+			}else{
+				let file4 :patternParticipatingClass = new abstractClass(obj[key].name);
+				this.fillPromise(ppc, file4);
+			}
+			
+		});
+		return ppc.object;		
+	}
+	public Composite(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public Decorator(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public Facade(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public Flyweight(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public Proxy(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public ChainofResponsibility(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public Command(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}
+	public Interpreter(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public Mediator(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public Memento(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}		
+	public Observer(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public State(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public Stategy(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public TemplateMethod(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public Visitor(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
 	fillPromise(labelObj: Object, item: patternParticipatingClass){
         labelObj.object.push(item);
         

@@ -82,7 +82,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         if(statePatternSelection == "Bridge"){
             let ppc : Array<patternParticipatingClass> = cg.BridgeFactory(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile("");
+                ppc[i].writeToFile();
             }
         }
         
