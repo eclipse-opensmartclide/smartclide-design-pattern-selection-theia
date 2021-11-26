@@ -70,7 +70,7 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
         let cg = new CodeGenerator_1.CodeGenerator();
         console.log(statePatternSelection);
         if (statePatternSelection == "Bridge") {
-            let ppc = cg.BridgeFactory(jsonObj);
+            let ppc = cg.Bridge(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
                 ppc[i].writeToFile();
             }

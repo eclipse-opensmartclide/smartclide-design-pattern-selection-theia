@@ -28,8 +28,10 @@ export class CodeGenerator {
 				let file3 :patternParticipatingClass = new NonHierarchyClass(obj[key].name);
 				this.fillPromise(ppc, file3);
 			}else{
-				// δεν το εχω κανει
-				let file4 :patternParticipatingClass = new ConcreteClass(obj[key].name,"");
+				let array = key.split('.');
+				var num = array[0].replace(/\D/g,'');
+				console.log(num);
+				let file4 :patternParticipatingClass = new ConcreteClass(obj[key].name,"AbstractProduct"+num);
 				this.fillPromise(ppc, file4);
 			}
 		});
@@ -138,7 +140,7 @@ export class CodeGenerator {
 		//let obj = JSON.parse(JSON.stringify(jsonObj));
 		return ppc.object;
 	}	
-	public Stategy(jsonObj: string): Array<patternParticipatingClass>{
+	public Strategy(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
 		//let obj = JSON.parse(JSON.stringify(jsonObj));
 		return ppc.object;
