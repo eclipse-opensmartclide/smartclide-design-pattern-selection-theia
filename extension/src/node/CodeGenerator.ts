@@ -7,6 +7,7 @@ import {abstractClass} from './abstractClass';
 //import { MidHierarchyClass } from './MidHierarchyClass';
 import { ConcreteClass } from './ConcreteClass';
 import { NonHierarchyClass } from './NonHierarchyClass';
+import { Attribute } from './Attribute';
 
 
 interface Object{
@@ -74,6 +75,7 @@ export class CodeGenerator {
 				this.fillPromise(ppc, file1);
 			}else if(key.includes("ConcreteImplementor")){
 				let file2 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Implementor.name);
+				file2.addAttribute(new Attribute("variable", "string", "private"))
 				this.fillPromise(ppc, file2);
 			}else if(key.includes("Implementor")){
 				let file3 :patternParticipatingClass = new abstractClass(obj[key].name);
@@ -82,7 +84,6 @@ export class CodeGenerator {
 				let file4 :patternParticipatingClass = new abstractClass(obj[key].name);
 				this.fillPromise(ppc, file4);
 			}
-			
 		});
 		return ppc.object;		
 	}

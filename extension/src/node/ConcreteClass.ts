@@ -9,19 +9,20 @@ export class ConcreteClass extends patternParticipatingClass {
 
 	public writeToFile(rootUri : string): void {
         var fs = require('fs');
-		let filename = rootUri+"/"+this.cName + ".java";
-        fs.open(filename,'r',(err: Error, data: string) =>{
-			//if the file doesnt exist
-            if (err) {
-        		fs.appendFileSync(this.cName + ".java" , "public class " + this.cName + " extends " + this.superClass + " {");
-				this.writeAttributes(rootUri);
-				this.writeMethods(rootUri);
-        		fs.appendFileSync(this.cName + ".java" , "\n}");
-			}else{
-				console.log(data);
-                this.writeAttributes(rootUri);
-                this.writeMethods(rootUri);
-			}
-		});
+		let filename = rootUri+"/src/"+this.cName + ".java";
+		var fileContents;
+		try {
+  			fileContents = fs.readFileSync(filename);
+		 	console.log(fileContents);
+            this.writeAttributes(rootUri);
+            this.writeMethods(rootUri);
+		} catch (err) {
+  			// Here you get the error when the file was not found,
+  			// but you also get any other error
+			fs.appendFileSync(filename, "public class " + this.cName + " extends " + this.superClass + " {");
+			this.writeAttributes(rootUri);
+			this.writeMethods(rootUri);
+			fs.appendFileSync(this.cName + ".java" , "\n}");
+		}
 	}
 }
