@@ -68,11 +68,144 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
     }
     async main(url, jsonObj, statePatternSelection) {
         let cg = new CodeGenerator_1.CodeGenerator();
-        console.log(statePatternSelection);
-        if (statePatternSelection == "Bridge") {
+        var lastL = url.indexOf("/#/");
+        var rootUri = url.substr(lastL + 3);
+        if (statePatternSelection == "AbstractFactory") {
+            let ppc = cg.AbstractFactory(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Builder") {
+            let ppc = cg.Builder(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "FactoryMethod") {
+            let ppc = cg.FactoryMethod(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Prototype") {
+            let ppc = cg.Prototype(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Singleton") {
+            let ppc = cg.Singleton(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Adapter") {
+            let ppc = cg.Adapter(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Bridge") {
             let ppc = cg.Bridge(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Composite") {
+            let ppc = cg.Composite(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Decorator") {
+            let ppc = cg.Decorator(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Facade") {
+            let ppc = cg.Facade(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Flyweight") {
+            let ppc = cg.Flyweight(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Proxy") {
+            let ppc = cg.Proxy(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "ChainofResponsibility") {
+            let ppc = cg.ChainofResponsibility(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Command") {
+            let ppc = cg.ChainofResponsibility(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Interpreter") {
+            let ppc = cg.ChainofResponsibility(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Iterator") {
+            let ppc = cg.ChainofResponsibility(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Mediator") {
+            let ppc = cg.ChainofResponsibility(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Memento") {
+            let ppc = cg.ChainofResponsibility(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Observer") {
+            let ppc = cg.Observer(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "State") {
+            let ppc = cg.State(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "Strategy") {
+            let ppc = cg.Strategy(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else if (statePatternSelection == "TemplateMethod") {
+            let ppc = cg.TemplateMethod(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
+            }
+        }
+        else {
+            let ppc = cg.Visitor(jsonObj);
+            for (let i = 0; i < ppc.length; i++) {
+                ppc[i].writeToFile(rootUri);
             }
         }
     }

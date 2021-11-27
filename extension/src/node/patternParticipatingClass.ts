@@ -12,15 +12,15 @@ export abstract class patternParticipatingClass {
 		this.aList = [];
     }
 
-    public abstract writeToFile() :void;
-    public writeMethods():void {
+    public abstract writeToFile(rootUri : string) :void;
+    public writeMethods(rootUri : string):void {
         for (let i=0; i<this.mList.length; i++) {
-			this.mList[i].writeToFile(this.cName);
+			this.mList[i].writeToFile(this.cName, rootUri);
 		}		
     }
-    public writeAttributes(): void {
+    public writeAttributes(rootUri : string): void {
 		for (let i=0; i<this.aList.length; i++) {
-			this.aList[i].writeToFile(this.cName);
+			this.aList[i].writeToFile(this.cName, rootUri);
 		}		
 	}	
 	

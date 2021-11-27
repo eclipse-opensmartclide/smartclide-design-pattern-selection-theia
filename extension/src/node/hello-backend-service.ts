@@ -78,121 +78,122 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     
     async main(url : string, jsonObj : string, statePatternSelection: string): Promise<void>{ 
         let cg : CodeGenerator  = new CodeGenerator();
-        console.log(statePatternSelection)
+        var lastL = url.indexOf("/#/");
+        var rootUri = url.substr(lastL+3);
         if(statePatternSelection == "AbstractFactory"){
             let ppc : Array<patternParticipatingClass> = cg.AbstractFactory(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Builder"){
             let ppc : Array<patternParticipatingClass> = cg.Builder(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "FactoryMethod"){
             let ppc : Array<patternParticipatingClass> = cg.FactoryMethod(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Prototype"){
             let ppc : Array<patternParticipatingClass> = cg.Prototype(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Singleton"){
             let ppc : Array<patternParticipatingClass> = cg.Singleton(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Adapter"){
             let ppc : Array<patternParticipatingClass> = cg.Adapter(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Bridge"){
             let ppc : Array<patternParticipatingClass> = cg.Bridge(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Composite"){
             let ppc : Array<patternParticipatingClass> = cg.Composite(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Decorator"){
             let ppc : Array<patternParticipatingClass> = cg.Decorator(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Facade"){
             let ppc : Array<patternParticipatingClass> = cg.Facade(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Flyweight"){
             let ppc : Array<patternParticipatingClass> = cg.Flyweight(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Proxy"){
             let ppc : Array<patternParticipatingClass> = cg.Proxy(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "ChainofResponsibility"){
             let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Command"){
             let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Interpreter"){
             let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Iterator"){
             let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Mediator"){
             let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Memento"){
             let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Observer"){
             let ppc : Array<patternParticipatingClass> = cg.Observer(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "State"){
             let ppc : Array<patternParticipatingClass> = cg.State(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Strategy"){
             let ppc : Array<patternParticipatingClass> = cg.Strategy(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "TemplateMethod"){
             let ppc : Array<patternParticipatingClass> = cg.TemplateMethod(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }else {
             let ppc : Array<patternParticipatingClass> = cg.Visitor(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile();
+                ppc[i].writeToFile(rootUri);
             }
         }
         

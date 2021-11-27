@@ -16,7 +16,7 @@ export class Method {
 		this.params = [];
 	}
 	
-	public writeToFile(cName : string): void {
+	public writeToFile(cName : string, rootUri : string): void {
 		var fs = require('fs');
 		fs.appendFileSync(cName + ".java" ,"\n " + this.visibility + " ", function(err: Error){
 			if(err) console.log(err);
@@ -35,9 +35,9 @@ export class Method {
         
 		for (let i=0; i<this.params.length;i++) {
 			if (i==(this.params.length-1)) 
-				this.params[i].writeAsParam(cName);
+				this.params[i].writeAsParam(cName, rootUri);
 			else {
-				this.params[i].writeAsParam(cName);
+				this.params[i].writeAsParam(cName, rootUri);
 				fs.appendFileSync(cName + ".java",", ", function(err: Error){
 					if(err) console.log(err);
 				 });

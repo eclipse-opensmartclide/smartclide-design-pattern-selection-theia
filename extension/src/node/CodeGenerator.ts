@@ -8,6 +8,7 @@ import {abstractClass} from './abstractClass';
 import { ConcreteClass } from './ConcreteClass';
 import { NonHierarchyClass } from './NonHierarchyClass';
 
+
 interface Object{
     object :Array<patternParticipatingClass>;
 }
@@ -30,8 +31,13 @@ export class CodeGenerator {
 			}else{
 				let array = key.split('.');
 				var num = array[0].replace(/\D/g,'');
-				console.log(num);
-				let file4 :patternParticipatingClass = new ConcreteClass(obj[key].name,"AbstractProduct"+num);
+				let variable ="";
+				Object.keys(obj).forEach((key)=>{
+					if(key == "AbstractProduct"+num){
+						variable = obj[key].name;
+					}
+				})
+				let file4 :patternParticipatingClass = new ConcreteClass(obj[key].name,variable);
 				this.fillPromise(ppc, file4);
 			}
 		});

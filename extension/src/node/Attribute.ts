@@ -9,7 +9,7 @@ export class Attribute {
 		this.visibility = v;
 	}
 	
-	public writeToFile(cName : string): void {
+	public writeToFile(cName : string, rootUri: string): void {
 		var fs = require('fs');
 		fs.appendFileSync(cName + ".java" ,"\n " + this.visibility + " " + this.type + " " + this.aName + ";", function(err: Error){
 			if(err) console.log(err);
@@ -18,7 +18,7 @@ export class Attribute {
         
 	}
 
-	public writeAsParam(cName : string) : void{
+	public writeAsParam(cName : string, rootUri : string) : void{
 		var fs = require('fs');
 		fs.appendFileSync(cName + ".java" ,this.type + " " + this.aName, function(err: Error){
 			if(err) console.log(err);
