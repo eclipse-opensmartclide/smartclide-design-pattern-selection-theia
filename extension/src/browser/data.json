@@ -5,11 +5,11 @@
                 "name":"",
                 "extension":0
             },
-            "ConcreteFactory1":{
+            "Family1":{
                 "name":"",
                 "extension":1
             },
-            "ConcreteFactory2":{
+            "Family2":{
                 "name":"",
                 "extension":0
             },
@@ -136,9 +136,9 @@
                 "name":"",
                 "extension":0
             },
-            "AbstractionMethod1":{
+            "AbstractionMethod":{
                 "name":"",
-                "extension":1
+                "extension":0
             },
             "RefinedAbstraction1":{
                 "name":"",
@@ -148,9 +148,9 @@
                 "name":"",
                 "extension":0
             },
-            "ImplementationMethod1":{
+            "ImplementationMethod":{
                 "name":"",
-                "extension":1
+                "extension":0
             },
             "ConcreteImplementation1":{
                 "name":"",
@@ -224,10 +224,6 @@
     },
     "Flyweight":{
         "values":{
-            "Client":{
-                "name":"",
-                "extension":0
-            },
             "FlyweightFactory":{
                 "name":"",
                 "extension":0
@@ -240,9 +236,13 @@
                 "name":"",
                 "extension":1
             },
-            "UnsharedConcreteFlyweight1":{
+            "ConcreteFlyweight1Attribute":{
                 "name":"",
-                "extension":1
+                "extension":0
+            },
+            "Client":{
+                "name":"",
+                "extension":0
             }            
         }
     },
@@ -276,19 +276,15 @@
             "ConcreteHandler1":{
                 "name":"",
                 "extension":1
-            },
-            "ConcreteHandler2":{
-                "name":"",
-                "extension":0
             }
         }
     },
 
     "Command":{
         "values":{
-            "Receiver1":{
+            "Receiver":{
                 "name":"",
-                "extension":1
+                "extension":0
             },
             "Invoker":{
                 "name":"",
@@ -299,6 +295,14 @@
                 "extension":0
             },
             "ConcreteCommand1":{
+                "name":"",
+                "extension":1
+            },
+            "ConcreteCommand1Method":{
+                "name":"",
+                "extension":0
+            },
+            "ConcreteCommand1MethodParameter1":{
                 "name":"",
                 "extension":1
             }
@@ -324,45 +328,21 @@
             }
         }
     },
-    "Iterator":{
-        "values":{
-            "Collection":{
-                "name":"",
-                "extension":0
-            },
-            "ConcreteCollection1":{
-                "name":"",
-                "extension":1
-            },
-            "Iterator":{
-                "name":"",
-                "extension":0
-            },
-            "ConcreteIterator1":{
-                "name":"",
-                "extension":0
-            }
-        }
-    },
     "Mediator":{
         "values":{
             "Mediator":{
                 "name":"",
                 "extension":0
             },
-            "ConcreteMediator":{
-                "name":"",
-                "extension":0
-            },
-            "Colleague":{
-                "name":"",
-                "extension":0
-            },
-            "ConcreteColleague1":{
+            "ConcreteMediator1":{
                 "name":"",
                 "extension":1
             },
-            "ConcreteColleague2":{
+            "Component1":{
+                "name":"",
+                "extension":1
+            },
+            "Component2":{
                 "name":"",
                 "extension":0
             }
@@ -374,9 +354,17 @@
                 "name":"",
                 "extension":0
             },
+            "OriginatorAttribute1":{
+                "name":"",
+                "extension":1
+            },
             "Memento":{
                 "name":"",
                 "extension":0
+            },
+            "MementoAttribute1":{
+                "name":"",
+                "extension":1
             },
             "Caretaker":{
                 "name":"",
@@ -417,10 +405,6 @@
             "ConcreteState1":{
                 "name":"",
                 "extension":1
-            },
-            "ConcreteState2":{
-                "name":"",
-                "extension":0
             }
          }
     },
@@ -434,15 +418,14 @@
                 "name":"",
                 "extension":0
             },
+            "StrategyMethod":{
+                "name":"",
+                "extension":0
+            },
             "ConcreteStrategy1":{
                 "name":"",
                  "extension":1
-            },
-            "ConcreteStrategy2":{
-                "name":"",
-                "extension":0
             }
-
         }
     },
     "TemplateMethod":{
@@ -450,6 +433,10 @@
             "AbstractClass":{
                 "name":"",
                 "extension":0
+            },
+            "AbstractClassMethod1":{
+                "name":"",
+                "extension":1
             },
             "ConcreteClass1":{
                 "name":"",
@@ -466,14 +453,6 @@
             "ConcreteVisitor1":{
                 "name":"",
                 "extension":1
-            },
-            "ConcreteVisitor2":{
-                "name":"",
-                "extension":0
-            },
-            "ObjectStructure":{
-                "name":"",
-                "extension":0
             },
             "Element":{
                 "name":"",
