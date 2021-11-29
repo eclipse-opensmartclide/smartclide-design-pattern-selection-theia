@@ -12,7 +12,7 @@ export class Attribute {
 	public writeToFile(cName : string, rootUri: string): void {
 		var fs = require('fs');
 		let filename = rootUri+"/src/"+cName + ".java";
-		fs.appendFileSync(filename ,"\n " + this.visibility + " " + this.type + " " + this.aName + ";");
+		fs.appendFileSync(filename ,"\n \t" + this.visibility + " " + this.type + " " + this.aName + ";");
 
         
 	}

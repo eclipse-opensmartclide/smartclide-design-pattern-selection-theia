@@ -62,22 +62,26 @@ export class CodeGenerator {
 	public FactoryMethod(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
 		//let obj = JSON.parse(JSON.stringify(jsonObj));
-		return ppc.object;}
+		return ppc.object;
+	}
 	public Singleton(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Singleton.name);
+		file1.addAttribute(new Attribute("instance",obj.Singleton.name,"private"));
+		file1.addMethod(new Method(obj.Singleton.name,"", false, "private", "\t instance  =  new "+obj.Singleton.name + "();"));
+		file1.addMethod(new Method("getInstance",obj.Singleton.name, false, "private", " \t if(instance == null) { \n \t instance = new "+obj.Singleton.name +"();\n \t }\n  \t return instance;"));
+		this.fillPromise(ppc, file1);
 		return ppc.object;
-	}
-	public Adapter(jsonObj: string): Array<patternParticipatingClass>{
+	}public Prototype(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
 		//let obj = JSON.parse(JSON.stringify(jsonObj));
 		return ppc.object;
-	}
-	public Prototype(jsonObj: string): Array<patternParticipatingClass>{
+	}public Adapter(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
 		//let obj = JSON.parse(JSON.stringify(jsonObj));
-		return ppc.object;}	
-	public Bridge(jsonObj: string): Array<patternParticipatingClass>  {		
+		return ppc.object;
+	}public Bridge(jsonObj: string): Array<patternParticipatingClass>  {		
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		Object.keys(obj).forEach((key) =>{
