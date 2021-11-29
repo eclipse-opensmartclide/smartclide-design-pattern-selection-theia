@@ -100,7 +100,7 @@ export class extensionWidget extends ReactWidget {
 						<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Code </button>
 						<p id={'description'}></p>
 						<p id={'example'}></p>
-						<img id = {'image'} alt= "Class Diagram " ></img>
+						<img id = "image" alt= "Class Diagram " ></img>
 					</div>
 				</div>
 			</div>
@@ -118,17 +118,8 @@ export class extensionWidget extends ReactWidget {
 			let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
 			var table = document.getElementById('show_pattern_table') as HTMLTableElement;
 			Object.keys(values).forEach(async (key) =>{
-				let row = this.insertCells(table, key);
-				if(values[key].extension==1){
-					let cell3 = (await row).insertCell(2);
-					let t3 = document.createElement("button");
-					t3.innerHTML = "+";
-					t3.id = "btn"+ key;
-					cell3.appendChild(t3);
-					t3.addEventListener('click', (event) => {
-						this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
-					});	
-				}
+				this.insertCells(table, key);
+				
 			});
 			(document.getElementById("elements") as HTMLElement).style.visibility = 'visible';
 			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
@@ -180,7 +171,18 @@ export class extensionWidget extends ReactWidget {
 		}
 		cell1.appendChild(label);
 		cell2.appendChild(txtbox);
-		
+
+		let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values;
+		if(values[key].extension==1){
+			let cell3 = (await row).insertCell(2);
+			let t3 = document.createElement("button");
+			t3.innerHTML = "+";
+			t3.id = "btn"+ key;
+			cell3.appendChild(t3);
+			t3.addEventListener('click', (event) => {
+				this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
+			});	
+		}
 		return row;
 	}
 	//when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
@@ -188,81 +190,101 @@ export class extensionWidget extends ReactWidget {
 		let newValues = JSON.parse(JSON.stringify(values));
 		let count = this.countKeys(values, key.substr(3, ));
 		let label = this.updateLabel(key.substr(3,), count+1);
-		if(extensionWidget.state.statePatternSelection=="Abstract Factory"){
+		console.log(label + "   count: " + count);
+		if(extensionWidget.state.statePatternSelection=="AbstractFactory"){
 			if(key.includes("AbstractProduct")){
-				newValues[label] = JSON.stringify({name:"",extension:1});
+				newValues[label] = JSON.stringify({name:"",extension:0});
 				this.insertCells(table, label);
-				var numProd = (this.countKeys(values, "Product") / count) - 1;// number of "Products"
+				var numProd = (this.countKeys(values, "Product") / count)-1;// number of "Products" in each AbstractProduct
+				console.log(numProd);
 				for(let j = 0 ; j < numProd; j++ ){
 					let labelProduct = "Product"+ (count+1) + "."+(j+1);
+					console.log(labelProduct);
 					this.insertCells(table, labelProduct);
-					newValues[labelProduct]= JSON.stringify({ "name":"", "extension":1});
+					newValues[labelProduct]= JSON.stringify({ "name":"", "extension":0});
 				}
 			}else{
 				this.insertCells(table, label);
-				
 				let numAbstrProd = this.countKeys(newValues, "AbstractProduct"); 
-				newValues[label] =  JSON.stringify({ "name":"", "extension":1});
+				newValues[label] =  JSON.stringify({ "name":"", "extension":0});
 				for(let j = 0; j < numAbstrProd ; j++){
 					let labelProduct = "Product"+(j+1)+"." + (count+1);
 					this.insertCells(table, labelProduct);
-					newValues[labelProduct] = JSON.stringify({ "name":"", "extension":1});
+					newValues[labelProduct] = JSON.stringify({ "name":"", "extension":0});
 				}	
 			}
-		}else if(extensionWidget.state.statePatternSelection=="Builder"){
+		}else if(extensionWidget.state.statePatternSelection=="Builder" && key.includes("Product")){
 			let labelConBuilder = this.updateLabel("ConcreteBuilder ", count+1);
 
-			newValues[label] =  JSON.stringify({ "name":"", "extension":1});
-			newValues[labelConBuilder] = JSON.stringify({ "name":"", "extension":1});
-			
+			newValues[label] =  JSON.stringify({ "name":"", "extension":0});
+			newValues[labelConBuilder] = JSON.stringify({ "name":"", "extension":0});
+				
 			this.insertCells(table, label); 
 			this.insertCells(table, labelConBuilder); 
 		}else if(extensionWidget.state.statePatternSelection=="Factory Method") {
-			let labelProduct = this.updateLabel("ConcreteProduct ", count+1);
 			let labelConCreator = this.updateLabel("ConcreteCreator ", count+1);
 
-			newValues[labelProduct] =  JSON.stringify({ "name":"", "extension":1});
-			newValues[labelConCreator] = JSON.stringify({ "name":"", "extension":1});
-						 
-			this.insertCells(table, labelConCreator); 
-			this.insertCells(table, labelProduct);	
-		}else if(extensionWidget.state.statePatternSelection=="Flyweight") {
-			let label;
-			if(key.includes("UnsharedConcreteFlyweight")){
-				label = this.updateLabel(key.substr(3, ), count+1);
-				 
-			}else{
-				var numConFly = count - this.countKeys(values, "UnsharedConcreteFlyweight");// number of "ConcreteFlyweight"
-				label = this.updateLabel(key.substr(3, ), numConFly+1);
-			}
-			newValues[label] = JSON.stringify({"name":"", "extension":1});
-			this.insertCells(table, label);
-		}else if(extensionWidget.state.statePatternSelection=="Command"){
-			var labelReceiver = this.updateLabel("Receiver ", count+1);
-			var labelConCommand = this.updateLabel("ConcreteCommand ", count+1);
-
-			this.insertCells(table, labelReceiver); 	
-			this.insertCells(table, labelConCommand); 
-
-			//inserts new attributes in json object
-			newValues[labelReceiver] =  JSON.stringify({ "name":"", "extension":1});
-			newValues[labelConCommand] = JSON.stringify({ "name":"", "extension":1});
+			newValues[label] =  JSON.stringify({ "name":"", "extension":0});
+			newValues[labelConCreator] = JSON.stringify({ "name":"", "extension":0});
 			
-		}else if(extensionWidget.state.statePatternSelection=="Iterator"){
-			let labelConAggregate = this.updateLabel("ConcreteAggregate ", count+1);
-			let labelConIterator = this.updateLabel("ConcreteIterator ", count+1);
-		
-			this.insertCells(table, labelConAggregate); 
-			this.insertCells(table, labelConIterator); 
-			//inserts new attributes in json object
-			newValues[labelConAggregate] = JSON.stringify( { "name":"", "extension":1});
-			newValues[labelConIterator] = JSON.stringify({ "name":"", "extension":1});
+			this.insertCells(table, label);				 
+			this.insertCells(table, labelConCreator); 
+		}else if(extensionWidget.state.statePatternSelection=="Decorator" && key.includes("ConcreteDecorator")) {
+			console.log("label1" + key.substr(3,));
+			let labelConDec = this.updateLabel(key.substr(3,), (count/2+1));
+			console.log("label2" + labelConDec);
+			let labelmethod = labelConDec + "Method";
+			
+			newValues[label] =  JSON.stringify({ "name":"", "extension":0});
+			newValues[labelmethod] = JSON.stringify({ "name":"", "extension":0});
+				
+			this.insertCells(table, labelConDec); 
+			this.insertCells(table, labelmethod); 
+		}else if(extensionWidget.state.statePatternSelection=="Flyweight") {	 
+			let label = this.updateLabel(key.substr(3,), count/2+1); 
+			let labelAttr = label + "Attribute";
 
+			newValues[label] = JSON.stringify({"name":"", "extension":0});
+			newValues[labelAttr] = JSON.stringify({"name":"", "extension":1});
+
+			this.insertCells(table, label);
+			this.insertCells(table, labelAttr);
+		}else if(extensionWidget.state.statePatternSelection=="Command"){
+			if(key.includes("MethodParameter")){
+				let count = 0;
+				key = key.substr(3,);
+				let nkey = key.substr(0, key.length-1);
+				console.log("key.length "+key.length);
+				console.log("nkey "+nkey);
+				Object.keys(newValues).forEach((vkey) =>{
+					if(vkey.includes(nkey)){
+						count ++;
+					}
+				});
+				console.log("count "+count);
+				let label = this.updateLabel(key, count+1);
+				newValues[label] = JSON.stringify({"name":"", "extension":0});
+				this.insertCells(table, label);
+			}else{
+				let count2 = this.countKeys(values, "MethodParameter");
+				let labelConCommand = this.updateLabel("ConcreteCommand ", (count-count2)/2+1);
+				let labelConComMeth = labelConCommand + "Method";
+				let labelConComMethParam = labelConCommand + "MethodParameter1";
+
+				this.insertCells(table, labelConCommand); 
+				this.insertCells(table, labelConComMeth);
+				this.insertCells(table, labelConComMethParam);
+
+				newValues[labelConCommand] = JSON.stringify({ "name":"", "extension":0});
+				newValues[labelConComMeth] =  JSON.stringify({ "name":"", "extension":0});
+				newValues[labelConComMethParam] = JSON.stringify({ "name":"", "extension":1});
+			}
 		}else{
-			newValues[label] = JSON.stringify({"name":"", "extension":1});
+			newValues[label] = JSON.stringify({"name":"", "extension":0});
 			this.insertCells(table, label); 
 		}
 		extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;
+		console.log(JSON.stringify(newValues));
 	}
 
 	async buttonClick2 (rows : number):Promise<void>{
@@ -276,13 +298,10 @@ export class extensionWidget extends ReactWidget {
 		if (!flag){
 			this.messageService.info("You need to give name for ALL the classes!");
 		}else{
-			console.log("front1");
 			if (this.checkInputs() == "Inputs are valid"){
-				console.log("front2");
 				if (extensionWidget.state.statePatternSelection=="Adapter"){
 					let adapteeName = (document.getElementById("txtbox4") as HTMLInputElement).value;
 					var getUrl = window.location.href;
-					console.log("front3");
 					var methodNames = await this.helloBackendService.getMethods(getUrl, adapteeName);
 					console.log(methodNames);
 					if (extensionWidget.res.includes(adapteeName)){
@@ -316,9 +335,9 @@ export class extensionWidget extends ReactWidget {
 
 	countKeys(values: string, keyString: string){
 		let count = 0;
-		let string = keyString.replace(/\d/g, ''); //removes the numbers from the string and returns a new one
+		let str = keyString.replace(/\d/g, ''); //removes the numbers from the string and returns a new one
 		Object.keys(values).forEach((key) =>{
-			if(key.includes(string)){
+			if(key.includes(str)){
 				count ++;
 			}
 		});

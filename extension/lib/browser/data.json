@@ -1,19 +1,15 @@
 {
     "AbstractFactory": {
         "values": {
-            "Client": {
-                "name": "",
-                "extension": 0
-            },
             "AbstractFactory": {
                 "name": "",
                 "extension": 0
             },
-            "ConcreteFactory1": {
+            "Family1": {
                 "name": "",
                 "extension": 1
             },
-            "ConcreteFactory2": {
+            "Family2": {
                 "name": "",
                 "extension": 0
             },
@@ -51,16 +47,15 @@
             },
             "Builder": {
                 "name": "",
-                "extension": 0,
-                "insertMethods": 1,
-                "method1": "",
-                "method2": ""
+                "extension": 0
+            },
+            "BuilderMethod1": {
+                "name": "",
+                "extension": 1
             },
             "ConcreteBuilder1": {
                 "name": "",
-                "extension": 0,
-                "insertMethods": 1,
-                "ConcreteBuilder1Method1": ""
+                "extension": 0
             },
             "Product1": {
                 "name": "",
@@ -90,10 +85,6 @@
     },
     "Prototype": {
         "values": {
-            "Client": {
-                "name": "",
-                "extension": 0
-            },
             "Prototype": {
                 "name": "",
                 "extension": 0
@@ -101,19 +92,11 @@
             "ConcretePrototype1": {
                 "name": "",
                 "extension": 1
-            },
-            "ConcretePrototype2": {
-                "name": "",
-                "extension": 0
             }
         }
     },
     "Singleton": {
         "values": {
-            "Client": {
-                "name": "",
-                "extension": 0
-            },
             "Singleton": {
                 "name": "",
                 "extension": 0
@@ -122,7 +105,7 @@
     },
     "Adapter": {
         "values": {
-            "Client Interfac": {
+            "Client Interface": {
                 "name": "",
                 "extension": 0
             },
@@ -146,11 +129,11 @@
     },
     "Bridge": {
         "values": {
-            "Client": {
+            "Abstraction": {
                 "name": "",
                 "extension": 0
             },
-            "Abstraction": {
+            "AbstractionMethod": {
                 "name": "",
                 "extension": 0
             },
@@ -158,33 +141,31 @@
                 "name": "",
                 "extension": 1
             },
-            "Implementor": {
+            "Implementation": {
                 "name": "",
                 "extension": 0
             },
-            "ConcreteImplementor1": {
+            "ImplementationMethod": {
+                "name": "",
+                "extension": 0
+            },
+            "ConcreteImplementation1": {
                 "name": "",
                 "extension": 1
-            },
-            "ConcreteImplementor2": {
-                "name": "",
-                "extension": 0
             }
         }
     },
     "Composite": {
         "values": {
-            "Client": {
+            "Component": {
                 "name": "",
                 "extension": 0
             },
-            "Component": {
+            "ComponentMethod": {
                 "name": "",
-                "extension": 0,
-                "insertMethods": 0,
-                "ComponentMethod": ""
+                "extension": 0
             },
-            "ConcreteDecorator1": {
+            "ConcreteComponent1": {
                 "name": "",
                 "extension": 1
             },
@@ -200,11 +181,13 @@
                 "name": "",
                 "extension": 0
             },
+            "ComponentMethod": {
+                "name": "",
+                "extension": 0
+            },
             "ConcreteComponent1": {
                 "name": "",
-                "extension": 1,
-                "insertMethods": 0,
-                "ConcreteComponent1Method": ""
+                "extension": 1
             },
             "Decorator": {
                 "name": "",
@@ -212,24 +195,16 @@
             },
             "ConcreteDecorator1": {
                 "name": "",
-                "extension": 1,
-                "insertMethods": 0,
-                "ConcreteDecorator1Method": ""
+                "extension": 1
             },
-            "ConcreteDecorator2": {
+            "ConcreteDecorator1Method": {
                 "name": "",
-                "extension": 0,
-                "insertMethods": 0,
-                "ConcreteDecorator2Method": ""
+                "extension": 0
             }
         }
     },
     "Facade": {
         "values": {
-            "Client": {
-                "name": "",
-                "extension": 0
-            },
             "Facade": {
                 "name": "",
                 "extension": 0
@@ -242,10 +217,6 @@
     },
     "Flyweight": {
         "values": {
-            "Client": {
-                "name": "",
-                "extension": 0
-            },
             "FlyweightFactory": {
                 "name": "",
                 "extension": 0
@@ -258,23 +229,27 @@
                 "name": "",
                 "extension": 1
             },
-            "UnsharedConcreteFlyweight1": {
+            "ConcreteFlyweight1Attribute": {
                 "name": "",
-                "extension": 1
+                "extension": 0
+            },
+            "Client": {
+                "name": "",
+                "extension": 0
             }
         }
     },
     "Proxy": {
         "values": {
-            "Client": {
+            "ServiceInterface": {
                 "name": "",
                 "extension": 0
             },
-            "Subject": {
+            "ServiceInterfaceMethod": {
                 "name": "",
                 "extension": 0
             },
-            "RealSubject": {
+            "Service": {
                 "name": "",
                 "extension": 0
             },
@@ -286,10 +261,6 @@
     },
     "ChainofResponsibility": {
         "values": {
-            "Client": {
-                "name": "",
-                "extension": 0
-            },
             "Handler": {
                 "name": "",
                 "extension": 0
@@ -297,22 +268,14 @@
             "ConcreteHandler1": {
                 "name": "",
                 "extension": 1
-            },
-            "ConcreteHandler2": {
-                "name": "",
-                "extension": 0
             }
         }
     },
     "Command": {
         "values": {
-            "Client": {
+            "Receiver": {
                 "name": "",
                 "extension": 0
-            },
-            "Receiver1": {
-                "name": "",
-                "extension": 1
             },
             "Invoker": {
                 "name": "",
@@ -325,15 +288,19 @@
             "ConcreteCommand1": {
                 "name": "",
                 "extension": 1
+            },
+            "ConcreteCommand1Method": {
+                "name": "",
+                "extension": 0
+            },
+            "ConcreteCommand1MethodParameter1": {
+                "name": "",
+                "extension": 1
             }
         }
     },
     "Interpreter": {
         "values": {
-            "Client": {
-                "name": "",
-                "extension": 0
-            },
             "Context": {
                 "name": "",
                 "extension": 0
@@ -352,49 +319,21 @@
             }
         }
     },
-    "Iterator": {
-        "values": {
-            "Client": {
-                "name": "",
-                "extension": 0
-            },
-            "Aggregate": {
-                "name": "",
-                "extension": 0
-            },
-            "ConcreteAggregate1": {
-                "name": "",
-                "extension": 1
-            },
-            "Iterator": {
-                "name": "",
-                "extension": 0
-            },
-            "ConcreteIterator1": {
-                "name": "",
-                "extension": 1
-            }
-        }
-    },
     "Mediator": {
         "values": {
             "Mediator": {
                 "name": "",
                 "extension": 0
             },
-            "ConcreteMediator": {
-                "name": "",
-                "extension": 0
-            },
-            "Colleague": {
-                "name": "",
-                "extension": 0
-            },
-            "ConcreteColleague1": {
+            "ConcreteMediator1": {
                 "name": "",
                 "extension": 1
             },
-            "ConcreteColleague2": {
+            "Component1": {
+                "name": "",
+                "extension": 1
+            },
+            "Component2": {
                 "name": "",
                 "extension": 0
             }
@@ -406,9 +345,17 @@
                 "name": "",
                 "extension": 0
             },
+            "OriginatorAttribute1": {
+                "name": "",
+                "extension": 1
+            },
             "Memento": {
                 "name": "",
                 "extension": 0
+            },
+            "MementoAttribute1": {
+                "name": "",
+                "extension": 1
             },
             "Caretaker": {
                 "name": "",
@@ -449,10 +396,6 @@
             "ConcreteState1": {
                 "name": "",
                 "extension": 1
-            },
-            "ConcreteState2": {
-                "name": "",
-                "extension": 0
             }
         }
     },
@@ -466,13 +409,13 @@
                 "name": "",
                 "extension": 0
             },
+            "StrategyMethod": {
+                "name": "",
+                "extension": 0
+            },
             "ConcreteStrategy1": {
                 "name": "",
                 "extension": 1
-            },
-            "ConcreteStrategy2": {
-                "name": "",
-                "extension": 0
             }
         }
     },
@@ -482,6 +425,10 @@
                 "name": "",
                 "extension": 0
             },
+            "AbstractClassMethod1": {
+                "name": "",
+                "extension": 1
+            },
             "ConcreteClass1": {
                 "name": "",
                 "extension": 1
@@ -490,10 +437,6 @@
     },
     "Visitor": {
         "values": {
-            "Client": {
-                "name": "",
-                "extension": 0
-            },
             "Visitor": {
                 "name": "",
                 "extension": 0
@@ -501,14 +444,6 @@
             "ConcreteVisitor1": {
                 "name": "",
                 "extension": 1
-            },
-            "ConcreteVisitor2": {
-                "name": "",
-                "extension": 0
-            },
-            "ObjectStructure": {
-                "name": "",
-                "extension": 0
             },
             "Element": {
                 "name": "",
