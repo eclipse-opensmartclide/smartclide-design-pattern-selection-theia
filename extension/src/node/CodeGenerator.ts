@@ -8,6 +8,7 @@ import {abstractClass} from './abstractClass';
 import { ConcreteClass } from './ConcreteClass';
 import { NonHierarchyClass } from './NonHierarchyClass';
 import { Attribute } from './Attribute';
+import { Method } from './Method';
 
 
 interface Object{
@@ -22,9 +23,19 @@ export class CodeGenerator {
 		Object.keys(obj).forEach((key) =>{
 			if(key.includes("AbstractFactory")){
 				let file1 :patternParticipatingClass = new abstractClass(obj[key].name);
+				Object.keys(obj).forEach((key)=>{
+					if(key.includes("Product") && !key.includes("AbstractProduct")){
+						file1.addMethod(new Method("create"+obj[key],obj[key], true, "public", ""));
+					}
+				})
 				this.fillPromise(ppc, file1);
 			}else if(key.includes("ConcreteFactory")){
 				let file2 :patternParticipatingClass = new NonHierarchyClass(obj[key].name);
+				Object.keys(obj).forEach((key)=>{
+					if(key.includes("Product") && !key.includes("AbstractProduct")){
+						file2.addMethod(new Method("create"+obj[key],obj[key], true, "public", ""));
+					}
+				})
 				this.fillPromise(ppc, file2);
 			}else if(key.includes("AbstractProduct")){
 				let file3 :patternParticipatingClass = new NonHierarchyClass(obj[key].name);
