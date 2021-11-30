@@ -7,13 +7,13 @@ export class Method {
 	code : string;
 	params: Array<Attribute>; 
 	
-	constructor(mn :string, rt: string, isA : boolean, v: string, c: string) {
+	constructor(mn :string, rt: string, isA : boolean, v: string, c: string, params : Array<Attribute>) {
 		this.mName = mn;
 		this.rType = rt;
 		this.isAbstract = isA;
 		this.visibility = v;
 		this.code = c;
-		this.params = [];
+		this.params = params;
 	}
 	
 	public writeToFile(cName : string, rootUri : string): void {
