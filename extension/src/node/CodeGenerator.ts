@@ -102,10 +102,11 @@ export class CodeGenerator {
 			}else if(key.includes("ConcreteCreator")){
 				let file2 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Creator.name);
 				Object.keys(obj).forEach((innerkey)=>{
-					var num = innerkey.match(/\d/g);
-					console.log(num);
-					if(innerkey.includes("ConcreteProduct") && key.match(/\d/g)==innerkey.match(/\d/g)){
-						file2.addMethod(new Method("create"+obj.Product.name,obj.Product.name,false,"public","\n \t \t return new "+ obj[innerkey].name + num+";",[]));
+					var match = key.match(/\d/g);
+					var innermatch = innerkey.match(/\d/g);
+					if(innerkey.includes("ConcreteProduct") && match === innermatch){
+						console.log("inner")
+						file2.addMethod(new Method("create"+obj.Product.name,obj.Product.name,false,"public","\n \t \t return new "+ obj[innerkey].name + innermatch+";",[]));
 					}
 				});
 				
