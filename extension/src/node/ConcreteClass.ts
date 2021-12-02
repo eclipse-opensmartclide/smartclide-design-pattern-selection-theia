@@ -13,6 +13,6 @@ export class ConcreteClass extends patternParticipatingClass {
 		fs.appendFileSync(filename, "public class " + this.cName + " extends " + this.superClass + " {");
 		this.writeAttributes(rootUri);
 		this.writeMethods(rootUri);
-		fs.appendFileSync(filename + ".java" , "\n}");
+		fs.appendFileSync(filename , "\n}");
 	}
 }
