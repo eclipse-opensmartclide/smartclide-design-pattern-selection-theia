@@ -101,7 +101,14 @@ export class CodeGenerator {
 				this.fillPromise(ppc, file1);
 			}else if(key.includes("ConcreteCreator")){
 				let file2 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Creator.name);
-				file2.addMethod(new Method("create"+obj.Product.name,obj.Product.name,false,"public","\n \t \t return new create"+obj.Product.name + obj[key].name.replace(/\D/g,''),[]));
+				Object.keys(obj).forEach((innerkey)=>{
+					var num = innerkey.match(/\d/g);
+					console.log(num);
+					if(innerkey.includes("ConcreteProduct") && key.match(/\d/g)==innerkey.match(/\d/g)){
+						file2.addMethod(new Method("create"+obj.Product.name,obj.Product.name,false,"public","\n \t \t return new "+ obj[innerkey].name + num+";",[]));
+					}
+				});
+				
 				this.fillPromise(ppc, file2);
 			}else if(key == "Product"){
 				let file3 : patternParticipatingClass = new abstractClass(obj[key].name);
