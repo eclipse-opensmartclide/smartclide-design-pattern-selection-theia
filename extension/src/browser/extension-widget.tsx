@@ -86,6 +86,9 @@ export class extensionWidget extends ReactWidget {
 				<button id="btn-refresh" type="button" title='Refresh' onClick={_a => this.refreshPage(document.getElementById('show_pattern_table') as HTMLTableElement)}> <i className = "fa fa-refresh" ></i></button>
 				<br /> 
 				<br /> 
+				<button id="btn-wizard" type="button" title='Wizard' onClick={_a => this.runWizard()}>Wizard</button>
+				<br /> 
+				<br />
 				<button id="btn-get-code" type="button" title='Assign roles to classes and methods' onClick={_a => this.runprocess()}>Assign roles to classes and methods</button>
 				<br /> 
 				<div id="show_pattern"> 
@@ -104,6 +107,9 @@ export class extensionWidget extends ReactWidget {
 					</div>
 				</div>
 			</div>
+			<div id="divWiz">
+
+			</div>
 			</div>
 	}
 	
@@ -119,7 +125,17 @@ export class extensionWidget extends ReactWidget {
 			var table = document.getElementById('show_pattern_table') as HTMLTableElement;
 			Object.keys(values).forEach(async (key) =>{
 				this.insertCells(table, key);
-				
+				let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values;
+				if(values[key].extension==1){
+					let cell3 = this.insertCell(2);
+					let t3 = document.createElement("button");
+					t3.innerHTML = "+";
+					t3.id = "btn"+ key;
+					cell3.appendChild(t3);
+					t3.addEventListener('click', (event) => {
+						this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
+					});	
+				}
 			});
 			(document.getElementById("elements") as HTMLElement).style.visibility = 'visible';
 			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
@@ -137,7 +153,7 @@ export class extensionWidget extends ReactWidget {
 		extensionWidget.state[key]  = e.currentTarget.value;
 	}
 	
-	async insertCells(table: HTMLTableElement, key: string){
+	insertCells(table: HTMLTableElement, key: string){
 		let index = 0;
 		for (var i=0; i<table.rows.length; i++){
 			let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
@@ -172,17 +188,6 @@ export class extensionWidget extends ReactWidget {
 		cell1.appendChild(label);
 		cell2.appendChild(txtbox);
 
-		let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values;
-		if(values[key].extension==1){
-			let cell3 = (await row).insertCell(2);
-			let t3 = document.createElement("button");
-			t3.innerHTML = "+";
-			t3.id = "btn"+ key;
-			cell3.appendChild(t3);
-			t3.addEventListener('click', (event) => {
-				this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
-			});	
-		}
 		return row;
 	}
 	//when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
@@ -424,6 +429,101 @@ export class extensionWidget extends ReactWidget {
 
 	}
 
+	runWizard(){
+		(document.getElementById("issues") as HTMLElement).style.visibility = 'hidden';
+		(document.getElementById("issues") as HTMLElement).style.height = '0px';
+		let divWiz = document.getElementById('divWiz') as HTMLDivElement;
+		let divCont = document.createElement('div');
+		let myForm = document.createElement('form');
+		let labelQuestion = document.createElement('label');
+		labelQuestion.innerHTML = 'Choose the type of the pattern: <br>';
+
+		let label1 = document.createElement('label');
+		label1.innerHTML = 'Creational';
+		let radio1 = document.createElement('input');
+		radio1.name = 'patternTypes';
+		radio1.id = 'radioCreatonal';
+		radio1.type = 'radio';
+		radio1.onclick = function(){
+			if (radio1.checked == true){
+				divCont.innerHTML = "";
+				let divCont2 = document.createElement('div');
+				let labelQuestion = document.createElement('label');
+					labelQuestion.innerHTML = '<br> Do you want to create a new Object or an already existed? <br>';
+				let label11 = document.createElement('label');
+					label11.innerHTML = 'New';
+				let radio11 = document.createElement('input');
+				radio11.name = 'new_existed';
+					radio11.id = 'radioNew';
+					radio11.type = 'radio';
+				radio11.onclick = function(){
+					if (radio11.checked == true){
+					divCont2.innerHTML = "";
+					let labelQuestion = document.createElement('label');
+					labelQuestion.innerHTML = '<br> You chose new <br>';
+					
+					divCont2.appendChild(labelQuestion);
+					}
+				}
+				let label12 = document.createElement('label');
+					label12.innerHTML = 'Existed';
+				let radio12 = document.createElement('input');
+				radio12.name = 'new_existed';
+					radio12.id = 'radioExisted';
+					radio12.type = 'radio';
+				radio12.onclick = function(){
+					if (radio12.checked == true){
+					divCont2.innerHTML = "";
+					let labelQuestion = document.createElement('label');
+					labelQuestion.innerHTML = '<br> You chose existed <br>';
+					
+					divCont2.appendChild(labelQuestion);
+					}
+				}
+				divCont.appendChild(labelQuestion);
+				divCont.appendChild(label11);divCont.appendChild(radio11);
+				divCont.appendChild(label12);divCont.appendChild(radio12);
+				divCont.appendChild(divCont2);
+			}
+		}
+
+		let label2 = document.createElement('label');
+		label2.innerHTML = 'Structural';
+		let radio2 = document.createElement('input');
+		radio2.name = 'patternTypes';
+		radio2.id = 'radioStructural';
+		radio2.type = 'radio';
+		radio2.onclick = function(){
+			if (radio2.checked == true){
+			divCont.innerHTML = "";
+			let labelQuestion = document.createElement('label');
+				labelQuestion.innerHTML = '<br> Do you want to ... <br>';
+			divCont.appendChild(labelQuestion);
+			}
+		}
+
+		let label3 = document.createElement('label');
+		label3.innerHTML = 'Behavioral';
+		let radio3 = document.createElement('input');
+		radio3.name = 'patternTypes';
+		radio3.id = 'radioBehavioral';
+		radio3.type = 'radio';
+		radio3.onclick = function(){
+			if (radio3.checked == true){
+			divCont.innerHTML = "";
+			let labelQuestion = document.createElement('label');
+				labelQuestion.innerHTML = '<br> Do you want to blablabla <br>';
+			divCont.appendChild(labelQuestion);
+			}
+		}
+
+		myForm.appendChild(label1);myForm.appendChild(radio1);
+		myForm.appendChild(label2);myForm.appendChild(radio2);
+		myForm.appendChild(label3);myForm.appendChild(radio3);
+		divWiz.appendChild(labelQuestion);
+		divWiz.appendChild(myForm);
+		divWiz.appendChild(divCont);
+
+	}
+
 }
-
-

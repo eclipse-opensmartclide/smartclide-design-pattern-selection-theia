@@ -89,6 +89,9 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     React.createElement("i", { className: "fa fa-refresh" })),
                 React.createElement("br", null),
                 React.createElement("br", null),
+                React.createElement("button", { id: "btn-wizard", type: "button", title: 'Wizard', onClick: _a => this.runWizard() }, "Wizard"),
+                React.createElement("br", null),
+                React.createElement("br", null),
                 React.createElement("button", { id: "btn-get-code", type: "button", title: 'Assign roles to classes and methods', onClick: _a => this.runprocess() }, "Assign roles to classes and methods"),
                 React.createElement("br", null),
                 React.createElement("div", { id: "show_pattern" }),
@@ -99,7 +102,8 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Code "),
                         React.createElement("p", { id: 'description' }),
                         React.createElement("p", { id: 'example' }),
-                        React.createElement("img", { id: "image", alt: "Class Diagram " })))));
+                        React.createElement("img", { id: "image", alt: "Class Diagram " })))),
+            React.createElement("div", { id: "divWiz" }));
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
@@ -111,6 +115,17 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             var table = document.getElementById('show_pattern_table');
             Object.keys(values).forEach(async (key) => {
                 this.insertCells(table, key);
+                let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values;
+                if (values[key].extension == 1) {
+                    let cell3 = this.insertCell(2);
+                    let t3 = document.createElement("button");
+                    t3.innerHTML = "+";
+                    t3.id = "btn" + key;
+                    cell3.appendChild(t3);
+                    t3.addEventListener('click', (event) => {
+                        this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
+                    });
+                }
             });
             document.getElementById("elements").style.visibility = 'visible';
             document.getElementById('image').className = extensionWidget_1.state.statePatternSelection;
@@ -127,7 +142,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         const key = e.currentTarget.name;
         extensionWidget_1.state[key] = e.currentTarget.value;
     }
-    async insertCells(table, key) {
+    insertCells(table, key) {
         let index = 0;
         for (var i = 0; i < table.rows.length; i++) {
             let label = document.getElementById('label' + (i + 1)).innerHTML;
@@ -160,17 +175,6 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         }
         cell1.appendChild(label);
         cell2.appendChild(txtbox);
-        let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values;
-        if (values[key].extension == 1) {
-            let cell3 = (await row).insertCell(2);
-            let t3 = document.createElement("button");
-            t3.innerHTML = "+";
-            t3.id = "btn" + key;
-            cell3.appendChild(t3);
-            t3.addEventListener('click', (event) => {
-                this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
-            });
-        }
         return row;
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
@@ -405,6 +409,100 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         table.innerHTML = "";
         document.getElementById("btn-get-code").style.visibility = 'visible';
         document.getElementById("elements").style.visibility = 'hidden';
+    }
+    runWizard() {
+        document.getElementById("issues").style.visibility = 'hidden';
+        document.getElementById("issues").style.height = '0px';
+        let divWiz = document.getElementById('divWiz');
+        let divCont = document.createElement('div');
+        let myForm = document.createElement('form');
+        let labelQuestion = document.createElement('label');
+        labelQuestion.innerHTML = 'Choose the type of the pattern: <br>';
+        let label1 = document.createElement('label');
+        label1.innerHTML = 'Creational';
+        let radio1 = document.createElement('input');
+        radio1.name = 'patternTypes';
+        radio1.id = 'radioCreatonal';
+        radio1.type = 'radio';
+        radio1.onclick = function () {
+            if (radio1.checked == true) {
+                divCont.innerHTML = "";
+                let divCont2 = document.createElement('div');
+                let labelQuestion = document.createElement('label');
+                labelQuestion.innerHTML = '<br> Do you want to create a new Object or an already existed? <br>';
+                let label11 = document.createElement('label');
+                label11.innerHTML = 'New';
+                let radio11 = document.createElement('input');
+                radio11.name = 'new_existed';
+                radio11.id = 'radioNew';
+                radio11.type = 'radio';
+                radio11.onclick = function () {
+                    if (radio11.checked == true) {
+                        divCont2.innerHTML = "";
+                        let labelQuestion = document.createElement('label');
+                        labelQuestion.innerHTML = '<br> You chose new <br>';
+                        divCont2.appendChild(labelQuestion);
+                    }
+                };
+                let label12 = document.createElement('label');
+                label12.innerHTML = 'Existed';
+                let radio12 = document.createElement('input');
+                radio12.name = 'new_existed';
+                radio12.id = 'radioExisted';
+                radio12.type = 'radio';
+                radio12.onclick = function () {
+                    if (radio12.checked == true) {
+                        divCont2.innerHTML = "";
+                        let labelQuestion = document.createElement('label');
+                        labelQuestion.innerHTML = '<br> You chose existed <br>';
+                        divCont2.appendChild(labelQuestion);
+                    }
+                };
+                divCont.appendChild(labelQuestion);
+                divCont.appendChild(label11);
+                divCont.appendChild(radio11);
+                divCont.appendChild(label12);
+                divCont.appendChild(radio12);
+                divCont.appendChild(divCont2);
+            }
+        };
+        let label2 = document.createElement('label');
+        label2.innerHTML = 'Structural';
+        let radio2 = document.createElement('input');
+        radio2.name = 'patternTypes';
+        radio2.id = 'radioStructural';
+        radio2.type = 'radio';
+        radio2.onclick = function () {
+            if (radio2.checked == true) {
+                divCont.innerHTML = "";
+                let labelQuestion = document.createElement('label');
+                labelQuestion.innerHTML = '<br> Do you want to ... <br>';
+                divCont.appendChild(labelQuestion);
+            }
+        };
+        let label3 = document.createElement('label');
+        label3.innerHTML = 'Behavioral';
+        let radio3 = document.createElement('input');
+        radio3.name = 'patternTypes';
+        radio3.id = 'radioBehavioral';
+        radio3.type = 'radio';
+        radio3.onclick = function () {
+            if (radio3.checked == true) {
+                divCont.innerHTML = "";
+                let labelQuestion = document.createElement('label');
+                labelQuestion.innerHTML = '<br> Do you want to blablabla <br>';
+                divCont.appendChild(labelQuestion);
+            }
+        };
+        myForm.appendChild(label1);
+        myForm.appendChild(radio1);
+        myForm.appendChild(label2);
+        myForm.appendChild(radio2);
+        myForm.appendChild(label3);
+        myForm.appendChild(radio3);
+        divWiz.appendChild(labelQuestion);
+        divWiz.appendChild(myForm);
+        divWiz.appendChild(divCont);
     }
 };
 extensionWidget.ID = 'extension:widget';
