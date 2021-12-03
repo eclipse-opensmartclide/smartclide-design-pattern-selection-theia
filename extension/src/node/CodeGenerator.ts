@@ -1,7 +1,5 @@
 import {patternParticipatingClass} from './patternParticipatingClass';
 import {abstractClass} from './abstractClass';
-//import {Attribute} from './Attribute';
-//import {Method} from './Method';
 //import {ConcreteClass} from './ConcreteClass';
 //import { NonHierarchyClass } from './NonHierarchyClass';
 //import { MidHierarchyClass } from './MidHierarchyClass';
@@ -84,13 +82,15 @@ export class CodeGenerator {
 				});
 				this.fillPromise(ppc, file3);
 			}else{
-				if(key.includes("BuilderMethod")== false){
+				if(key.includes("BuilderMethod") == false ){
 `					let file4 : patternParticipatingClass = new NonHierarchyClass(obj[key].name);
 					this.fillPromise(ppc, file4);`
 				}
 			}
 		});
-		return ppc.object;}
+		return ppc.object;
+	}
+	//method that creates the files for the factory method design pattern
 	public FactoryMethod(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
@@ -104,12 +104,11 @@ export class CodeGenerator {
 				Object.keys(obj).forEach((innerkey)=>{
 					var match = key.match(/\d/g);
 					var innermatch = innerkey.match(/\d/g);
-					if(innerkey.includes("ConcreteProduct") && match === innermatch){
-						console.log("inner")
-						file2.addMethod(new Method("create"+obj.Product.name,obj.Product.name,false,"public","\n \t \t return new "+ obj[innerkey].name + innermatch+";",[]));
+					//in order to create the method we have to get the name of the "ConcreteProduct" that is going to be returned in the method
+					if(innerkey.includes("ConcreteProduct") && (innermatch != null && match !=null && innermatch.join()=== match.join())){
+							file2.addMethod(new Method("create"+obj.Product.name, obj.Product.name, false, "public", "\n \t \t return new "+ obj[innerkey].name + ";",[]));
 					}
 				});
-				
 				this.fillPromise(ppc, file2);
 			}else if(key == "Product"){
 				let file3 : patternParticipatingClass = new abstractClass(obj[key].name);
@@ -130,7 +129,8 @@ export class CodeGenerator {
 		file1.addMethod(new Method("getInstance",obj.Singleton.name, false, "private", "\t \t if(instance == null) { \n \t\t instance = new "+obj.Singleton.name +"();\n \t \t}\n \t \t return instance;",[]));
 		this.fillPromise(ppc, file1);
 		return ppc.object;
-	}public Prototype(jsonObj: string): Array<patternParticipatingClass>{
+	}
+	public Prototype(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		Object.keys(obj).forEach((key)=>{
