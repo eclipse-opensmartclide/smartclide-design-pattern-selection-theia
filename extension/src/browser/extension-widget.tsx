@@ -395,36 +395,18 @@ export class extensionWidget extends ReactWidget {
 		let count = 0;
 		const table = document.getElementById('show_pattern_table') as HTMLTableElement;
 		if (this.checkInputsForSameValues()){
-			console.log(1)
 			return ("Inputs are invalid");
 		}else{
-			if(extensionWidget.state.statePatternSelection == "AbstractFactory"){
-				for(let i = 0 ; i < table.rows.length; i++){
-					const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
-					const labelvalue = (document.getElementById( 'label'+ (i + 1) ) as HTMLElement).innerHTML;
-					if (labelvalue.includes("AbstractProduct") && labelvalue.includes("Product")){
-						console.log(1)
-						if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]+[.]{1}[0-9]+)$")){//case for Products name
-							count++;
-						}
-					}else{
-						if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){//general case
-							count++;
-						}
+			for(let i = 0 ; i < table.rows.length; i++){
+				const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
+				const labelvalue = (document.getElementById( 'label'+ (i + 1) ) as HTMLElement).innerHTML;
+				if (labelvalue.includes("Method")){
+					if(txtbox.match("^([a-z]{1}[a-zA-Z]*[0-9]*)$")){//camel writing names of methods
+						count++;
 					}
-				}
-			}else{
-				for(let i = 0 ; i < table.rows.length; i++){
-					const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
-					const labelvalue = (document.getElementById( 'label'+ (i + 1) ) as HTMLElement).innerHTML;
-					if (labelvalue.includes("Method")){
-						if(txtbox.match("^([a-z]{1}[a-zA-Z]*[0-9]*)$")){//camel writing names of methods
-							count++;
-						}
-					}else{
-						if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){//general case
-							count++;
-						}
+				}else{
+					if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){//general case
+						count++;
 					}
 				}
 			}
