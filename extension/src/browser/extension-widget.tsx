@@ -118,8 +118,18 @@ export class extensionWidget extends ReactWidget {
 			let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
 			var table = document.getElementById('show_pattern_table') as HTMLTableElement;
 			Object.keys(values).forEach(async (key) =>{
-				this.insertCells(table, key);
-				
+				var row = this.insertCells(table, key);
+				let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values;
+				if(values[key].extension==1){
+					let cell3 = (await row).insertCell(2);
+					let t3 = document.createElement("button");
+					t3.innerHTML = "+";
+					t3.id = "btn"+ key;
+					cell3.appendChild(t3);
+					t3.addEventListener('click', (event) => {
+						this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
+					});	
+			}
 			});
 			(document.getElementById("elements") as HTMLElement).style.visibility = 'visible';
 			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
@@ -137,7 +147,7 @@ export class extensionWidget extends ReactWidget {
 		extensionWidget.state[key]  = e.currentTarget.value;
 	}
 	
-	async insertCells(table: HTMLTableElement, key: string){
+	insertCells(table: HTMLTableElement, key: string){
 		let index = 0;
 		for (var i=0; i<table.rows.length; i++){
 			let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
@@ -172,17 +182,7 @@ export class extensionWidget extends ReactWidget {
 		cell1.appendChild(label);
 		cell2.appendChild(txtbox);
 
-		let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values;
-		if(values[key].extension==1){
-			let cell3 = (await row).insertCell(2);
-			let t3 = document.createElement("button");
-			t3.innerHTML = "+";
-			t3.id = "btn"+ key;
-			cell3.appendChild(t3);
-			t3.addEventListener('click', (event) => {
-				this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
-			});	
-		}
+		
 		return row;
 	}
 	//when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
@@ -395,30 +395,69 @@ export class extensionWidget extends ReactWidget {
 		let count = 0;
 		const table = document.getElementById('show_pattern_table') as HTMLTableElement;
 		if (this.checkInputsForSameValues()){
+			console.log(1)
 			return ("Inputs are invalid");
 		}else{
-			for(let i = 0 ; i < table.rows.length; i++){
-				const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
-				const labelvalue = (document.getElementById( 'label'+ (i + 1) ) as HTMLElement).innerHTML;
-				if (labelvalue.includes("Method")){
-					if(txtbox.match("^([a-z]{1}[a-zA-Z]*[0-9]*)$")){//camel writing names of methods
-						count++;
+			if(extensionWidget.state.statePatternSelection == "AbstractFactory"){
+				for(let i = 0 ; i < table.rows.length; i++){
+					const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
+					const labelvalue = (document.getElementById( 'label'+ (i + 1) ) as HTMLElement).innerHTML;
+					if (labelvalue.includes("AbstractProduct") && labelvalue.includes("Product")){
+						console.log(1)
+						if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]+[.]{1}[0-9]+)$")){//case for Products name
+							count++;
+						}
+					}else{
+						if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){//general case
+							count++;
+						}
 					}
-				}else{
-					if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){
-						count++;
+				}
+			}else{
+				for(let i = 0 ; i < table.rows.length; i++){
+					const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
+					const labelvalue = (document.getElementById( 'label'+ (i + 1) ) as HTMLElement).innerHTML;
+					if (labelvalue.includes("Method")){
+						if(txtbox.match("^([a-z]{1}[a-zA-Z]*[0-9]*)$")){//camel writing names of methods
+							count++;
+						}
+					}else{
+						if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){//general case
+							count++;
+						}
 					}
 				}
 			}
 			return (count==table.rows.length ? "Inputs are valid" : "Inputs are invalid")
 		}	
 	}
-
+	//method that checks for duplicate values
 	checkInputsForSameValues(){
-		const uniqueElements = new Set(extensionWidget.textBoxValues);
-		return uniqueElements.size<extensionWidget.textBoxValues.length ? true : false;
-    	
+		const uniqueElements = extensionWidget.textBoxValues;
+		//return uniqueElements.size<extensionWidget.textBoxValues.length ? true : false;
+		let resultToReturn = false;
+		for (let i = 0; i < uniqueElements.length; i++) { // nested for loop
+			for (let j = 0; j < uniqueElements.length; j++) {
+				// prevents the element from comparing with itself
+				if (i !== j) {
+					// check if elements' values are equal
+					if (uniqueElements[i] === uniqueElements[j]) {
+						// duplicate element present                                
+						resultToReturn = true;
+						// terminate inner loop
+						break;
+					}
+				}
+			}
+			// terminate outer loop                                                                      
+			if (resultToReturn) {
+				break;
+			}
+		}
+		return(resultToReturn) 
 	}
+
+	
 	refreshPage(table: HTMLTableElement){
 		table.innerHTML = "";
 		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
