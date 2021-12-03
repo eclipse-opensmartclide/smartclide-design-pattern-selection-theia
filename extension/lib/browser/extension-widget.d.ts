@@ -21,7 +21,7 @@ export declare class extensionWidget extends ReactWidget {
     protected render(): React.ReactNode;
     protected runprocess(): Promise<void>;
     updateSelection(e: React.ChangeEvent<HTMLSelectElement>): void;
-    insertCells(table: HTMLTableElement, key: string): Promise<HTMLTableRowElement>;
+    insertCells(table: HTMLTableElement, key: string): HTMLTableRowElement;
     extensionButtonClick(table: HTMLTableElement, key: string, values: string): void;
     buttonClick2(rows: number): Promise<void>;
     updateLabel(value: string, count: number): string;
