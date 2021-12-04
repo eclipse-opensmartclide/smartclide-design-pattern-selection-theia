@@ -122,7 +122,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.id, "#widget-container{\r\n  max-width: 100%;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n\r\n#issues input{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n\r\n    max-width: 100%;\r\n    height: 20px;\r\n\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n  margin-right: 10px;\r\n  max-width: 100%;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  margin-top: 25px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n#btnFinalize{\r\n  margin-left: 10px;\r\n}\r\n#image{\r\n  max-width: 100%;\r\n  height: auto;\r\n}\r\n#elements{\r\n  max-width: 100%;\r\n  visibility: hidden;\r\n}\r\n.AbstractFactory{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AbstractFactoryIcon.jpg */ "../extension/src/browser/style/img/AbstractFactoryIcon.jpg")) + ");\r\n}\r\n.Adapter{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Bridge{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BridgeIcon.jpg */ "../extension/src/browser/style/img/BridgeIcon.jpg")) + ");\r\n}\r\n.Builder{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BuilderIcon.jpg */ "../extension/src/browser/style/img/BuilderIcon.jpg")) + ");\r\n}\r\n.Composite{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/CompositeIcon.jpg */ "../extension/src/browser/style/img/CompositeIcon.jpg")) + ");\r\n}\r\n.Decorator{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/DecoratorIcon.jpg */ "../extension/src/browser/style/img/DecoratorIcon.jpg")) + ");\r\n}\r\n.FactoryMethod{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Prototype{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/PrototypeIcon.jpg */ "../extension/src/browser/style/img/PrototypeIcon.jpg")) + ");\r\n}\r\n.Singleton{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/SingletonIcon.jpg */ "../extension/src/browser/style/img/SingletonIcon.jpg")) + ");\r\n}\r\n\r\n#divWiz input{\r\n  margin-right: 10px;\r\n}\r\n\r\n\r\n", ""]);
+exports.push([module.id, "#widget-container{\r\n  max-width: 100%;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n\r\n#issues input{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n\r\n    max-width: 100%;\r\n    height: 20px;\r\n\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n  margin-right: 10px;\r\n  max-width: 100%;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  margin-top: 25px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n#btnFinalize{\r\n  margin-left: 10px;\r\n}\r\n#image{\r\n  max-width: 100%;\r\n  height: auto;\r\n}\r\n#elements{\r\n  max-width: 100%;\r\n  visibility: hidden;\r\n}\r\n.AbstractFactory{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AbstractFactoryIcon.jpg */ "../extension/src/browser/style/img/AbstractFactoryIcon.jpg")) + ");\r\n}\r\n.Adapter{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Bridge{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BridgeIcon.jpg */ "../extension/src/browser/style/img/BridgeIcon.jpg")) + ");\r\n}\r\n.Builder{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BuilderIcon.jpg */ "../extension/src/browser/style/img/BuilderIcon.jpg")) + ");\r\n}\r\n.Composite{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/CompositeIcon.jpg */ "../extension/src/browser/style/img/CompositeIcon.jpg")) + ");\r\n}\r\n.Decorator{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/DecoratorIcon.jpg */ "../extension/src/browser/style/img/DecoratorIcon.jpg")) + ");\r\n}\r\n.FactoryMethod{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Prototype{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/PrototypeIcon.jpg */ "../extension/src/browser/style/img/PrototypeIcon.jpg")) + ");\r\n}\r\n.Singleton{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/SingletonIcon.jpg */ "../extension/src/browser/style/img/SingletonIcon.jpg")) + ");\r\n}\r\n\r\n#divWiz input{\r\n  margin-right: 20px;\r\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -710,6 +710,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         table.innerHTML = "";
         document.getElementById("btn-get-code").style.visibility = 'visible';
         document.getElementById("elements").style.visibility = 'hidden';
+        window.location.reload();
     }
     runWizard() {
         document.getElementById("issues").style.visibility = 'hidden';
@@ -726,74 +727,276 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         radio1.id = 'radioCreatonal';
         radio1.type = 'radio';
         radio1.onclick = function () {
-            if (radio1.checked == true) {
-                divCont.innerHTML = "";
-                let divCont2 = document.createElement('div');
+            divCont.innerHTML = "";
+            let divCont2 = document.createElement('div');
+            let labelQuestion = document.createElement('label');
+            labelQuestion.innerHTML = '<br> Do you want to create a completely new object or to create one by  reusing an existing one?<br>';
+            let label11 = document.createElement('label');
+            label11.innerHTML = 'Create new object';
+            let radio11 = document.createElement('input');
+            radio11.name = 'new_existed';
+            radio11.type = 'radio';
+            radio11.onclick = function () {
+                divCont2.innerHTML = "";
+                let divCont3 = document.createElement('div');
                 let labelQuestion = document.createElement('label');
-                labelQuestion.innerHTML = '<br> Do you want to create a new Object or an already existed? <br>';
-                let label11 = document.createElement('label');
-                label11.innerHTML = 'New';
-                let radio11 = document.createElement('input');
-                radio11.name = 'new_existed';
-                radio11.id = 'radioNew';
-                radio11.type = 'radio';
-                radio11.onclick = function () {
-                    if (radio11.checked == true) {
-                        divCont2.innerHTML = "";
+                labelQuestion.innerHTML = '<br> Give the name of the Product that you want to create (Let X the name of the product)<br>';
+                let prodName = document.createElement('input');
+                prodName.type = 'text';
+                let buttonNext = document.createElement('button');
+                buttonNext.innerHTML = 'Next';
+                buttonNext.onclick = function () {
+                    divCont3.innerHTML = "";
+                    let divCont4 = document.createElement('div');
+                    let labelQuestion = document.createElement('label');
+                    labelQuestion.innerHTML = '<br> Does the Product has sub-categories (Concrete Products)? <br>';
+                    let label31 = document.createElement('label');
+                    label31.innerHTML = 'Yes';
+                    let radio31 = document.createElement('input');
+                    radio31.name = 'yes_no';
+                    radio31.type = 'radio';
+                    radio31.onclick = function () {
+                        divCont4.innerHTML = "";
+                        let divCont5 = document.createElement('div');
                         let labelQuestion = document.createElement('label');
-                        labelQuestion.innerHTML = '<br> You chose new <br>';
-                        divCont2.appendChild(labelQuestion);
-                    }
-                };
-                let label12 = document.createElement('label');
-                label12.innerHTML = 'Existed';
-                let radio12 = document.createElement('input');
-                radio12.name = 'new_existed';
-                radio12.id = 'radioExisted';
-                radio12.type = 'radio';
-                radio12.onclick = function () {
-                    if (radio12.checked == true) {
-                        divCont2.innerHTML = "";
+                        labelQuestion.innerHTML = '<br> How many sub-categories exist? <br>';
+                        let subNum = document.createElement('input');
+                        subNum.id = 'subcategoriesNum';
+                        subNum.type = 'number';
+                        let buttonNext = document.createElement('button');
+                        buttonNext.innerHTML = 'Next';
+                        buttonNext.onclick = function () {
+                            divCont5.innerHTML = "";
+                            let divCont6 = document.createElement('div');
+                            let labelQuestion = document.createElement('label');
+                            labelQuestion.innerHTML = '<br> Please give the names of the Concrete Products <br>';
+                            divCont5.appendChild(labelQuestion);
+                            let num = parseInt(document.getElementById('subcategoriesNum').value);
+                            for (var i = 1; i <= num; i++) {
+                                let field = document.createElement('input');
+                                field.id = 'txtfield' + i;
+                                field.type = 'text';
+                                divCont5.appendChild(field);
+                            }
+                            let buttonNext = document.createElement('button');
+                            buttonNext.innerHTML = 'Next';
+                            buttonNext.onclick = function () {
+                                divCont6.innerHTML = "";
+                                let divCont7 = document.createElement('div');
+                                let labelQuestion = document.createElement('label');
+                                labelQuestion.innerHTML = '<br> Can the Products be classified in a Family? <br>';
+                                let label61 = document.createElement('label');
+                                label61.innerHTML = 'Yes';
+                                let radio61 = document.createElement('input');
+                                radio61.name = 'yes_no';
+                                radio61.type = 'radio';
+                                radio61.onclick = function () {
+                                    divCont7.innerHTML = "";
+                                    let divCont8 = document.createElement('div');
+                                    let labelQuestion = document.createElement('label');
+                                    labelQuestion.innerHTML = '<br> How many Families of Products exist? <br>';
+                                    let famNum = document.createElement('input');
+                                    famNum.id = 'familiesNum';
+                                    famNum.type = 'number';
+                                    let buttonNext = document.createElement('button');
+                                    buttonNext.innerHTML = 'Next';
+                                    buttonNext.onclick = function () {
+                                        divCont8.innerHTML = "";
+                                        let labelQuestion = document.createElement('label');
+                                        labelQuestion.innerHTML = '<br> Please give the names of the Components <br>';
+                                        divCont8.appendChild(labelQuestion);
+                                        let num = parseInt(document.getElementById('familiesNum').value);
+                                        for (var i = 1; i <= num; i++) {
+                                            let field = document.createElement('input');
+                                            field.id = 'txtfield' + i;
+                                            field.type = 'text';
+                                            divCont8.appendChild(field);
+                                        }
+                                        let buttonNext = document.createElement('button');
+                                        buttonNext.innerHTML = 'Next';
+                                        buttonNext.onclick = function () {
+                                            let labelQuestion = document.createElement('label');
+                                            labelQuestion.innerHTML = '<br> Abstract Factory Pattern ';
+                                            let buttonCode = document.createElement('button');
+                                            buttonCode.innerHTML = 'Get Code';
+                                            buttonCode.onclick = function () {
+                                                //code generation
+                                            };
+                                            divCont8.appendChild(labelQuestion);
+                                            divCont8.appendChild(buttonCode);
+                                        };
+                                        divCont8.appendChild(buttonNext);
+                                    };
+                                    divCont7.appendChild(labelQuestion);
+                                    divCont7.appendChild(famNum);
+                                    divCont7.appendChild(buttonNext);
+                                    divCont7.appendChild(divCont8);
+                                };
+                                let label62 = document.createElement('label');
+                                label62.innerHTML = 'No';
+                                let radio62 = document.createElement('input');
+                                radio62.name = 'yes_no';
+                                radio62.type = 'radio';
+                                radio62.onclick = function () {
+                                    divCont7.innerHTML = "";
+                                    let divCont8 = document.createElement('div');
+                                    let labelQuestion = document.createElement('label');
+                                    labelQuestion.innerHTML = '<br> Can Product be created as series of steps which is different in every subcategory? <br>';
+                                    let label71 = document.createElement('label');
+                                    label71.innerHTML = 'Yes';
+                                    let radio71 = document.createElement('input');
+                                    radio71.name = 'yes_no';
+                                    radio71.type = 'radio';
+                                    radio71.onclick = function () {
+                                        let labelQuestion = document.createElement('label');
+                                        labelQuestion.innerHTML = '<br> How many Steps are involved ?  <br>';
+                                        let stepsNum = document.createElement('input');
+                                        stepsNum.id = 'stepsNum';
+                                        stepsNum.type = 'number';
+                                        let buttonNext = document.createElement('button');
+                                        buttonNext.innerHTML = 'Next';
+                                        buttonNext.onclick = function () {
+                                            let labelQuestion = document.createElement('label');
+                                            labelQuestion.innerHTML = '<br> Please give the name of the steps  <br>';
+                                            divCont8.appendChild(labelQuestion);
+                                            let num = parseInt(document.getElementById('stepsNum').value);
+                                            for (var i = 1; i <= num; i++) {
+                                                let field = document.createElement('input');
+                                                field.id = 'txtfield' + i; //name
+                                                field.type = 'text';
+                                                divCont8.appendChild(field);
+                                            }
+                                            let buttonNext = document.createElement('button');
+                                            buttonNext.innerHTML = 'Next';
+                                            buttonNext.onclick = function () {
+                                                let labelQuestion = document.createElement('label');
+                                                labelQuestion.innerHTML = '<br> Builder Pattern ';
+                                                let buttonCode = document.createElement('button');
+                                                buttonCode.innerHTML = 'Get Code';
+                                                buttonCode.onclick = function () {
+                                                    //code generation
+                                                };
+                                                divCont8.appendChild(labelQuestion);
+                                                divCont8.appendChild(buttonCode);
+                                            };
+                                            divCont8.appendChild(buttonNext);
+                                        };
+                                        divCont8.appendChild(labelQuestion);
+                                        divCont8.appendChild(stepsNum);
+                                        divCont8.appendChild(buttonNext);
+                                    };
+                                    let label72 = document.createElement('label');
+                                    label72.innerHTML = 'No';
+                                    let radio72 = document.createElement('input');
+                                    radio72.name = 'yes_no';
+                                    radio72.type = 'radio';
+                                    radio72.onclick = function () {
+                                        let labelQuestion = document.createElement('label');
+                                        labelQuestion.innerHTML = '<br> What is the name of the Creator (e.g., Oven) of Product? <br>';
+                                        let field = document.createElement('input');
+                                        field.id = 'txtfield';
+                                        field.type = 'text';
+                                        let buttonNext = document.createElement('button');
+                                        buttonNext.innerHTML = 'Next';
+                                        buttonNext.onclick = function () {
+                                            let labelQuestion = document.createElement('label');
+                                            labelQuestion.innerHTML = '<br> Factory Method Pattern';
+                                            let buttonCode = document.createElement('button');
+                                            buttonCode.innerHTML = 'Get Code';
+                                            buttonCode.onclick = function () {
+                                                //code generation
+                                            };
+                                            divCont8.appendChild(labelQuestion);
+                                            divCont8.appendChild(buttonCode);
+                                        };
+                                        divCont8.appendChild(labelQuestion);
+                                        divCont8.appendChild(field);
+                                        divCont8.appendChild(buttonNext);
+                                    };
+                                    divCont7.appendChild(labelQuestion);
+                                    divCont7.appendChild(label71);
+                                    divCont7.appendChild(radio71);
+                                    divCont7.appendChild(label72);
+                                    divCont7.appendChild(radio72);
+                                    divCont7.appendChild(divCont8);
+                                };
+                                divCont6.appendChild(labelQuestion);
+                                divCont6.appendChild(label61);
+                                divCont6.appendChild(radio61);
+                                divCont6.appendChild(label62);
+                                divCont6.appendChild(radio62);
+                                divCont6.appendChild(divCont7);
+                            };
+                            divCont5.appendChild(buttonNext);
+                            divCont5.appendChild(divCont6);
+                        };
+                        divCont4.appendChild(labelQuestion);
+                        divCont4.appendChild(subNum);
+                        divCont4.appendChild(buttonNext);
+                        divCont4.appendChild(divCont5);
+                    };
+                    let label32 = document.createElement('label');
+                    label32.innerHTML = 'No';
+                    let radio32 = document.createElement('input');
+                    radio32.name = 'yes_no';
+                    radio32.type = 'radio';
+                    radio32.onclick = function () {
+                        divCont4.innerHTML = "";
                         let labelQuestion = document.createElement('label');
-                        labelQuestion.innerHTML = '<br> You chose existed <br>';
-                        divCont2.appendChild(labelQuestion);
-                    }
+                        labelQuestion.innerHTML = '<br> There is no pattern <br>';
+                        divCont4.appendChild(labelQuestion);
+                    };
+                    divCont3.appendChild(labelQuestion);
+                    divCont3.appendChild(label31);
+                    divCont3.appendChild(radio31);
+                    divCont3.appendChild(label32);
+                    divCont3.appendChild(radio32);
+                    divCont3.appendChild(divCont4);
                 };
-                divCont.appendChild(labelQuestion);
-                divCont.appendChild(label11);
-                divCont.appendChild(radio11);
-                divCont.appendChild(label12);
-                divCont.appendChild(radio12);
-                divCont.appendChild(divCont2);
-            }
+                divCont2.appendChild(labelQuestion);
+                divCont2.appendChild(prodName);
+                divCont2.appendChild(buttonNext);
+                divCont2.appendChild(divCont3);
+            };
+            let label12 = document.createElement('label');
+            label12.innerHTML = 'Reuse an existing one';
+            let radio12 = document.createElement('input');
+            radio12.name = 'new_existed';
+            radio12.type = 'radio';
+            radio12.onclick = function () {
+                divCont2.innerHTML = "";
+                let labelQuestion = document.createElement('label');
+                labelQuestion.innerHTML = '<br> You chose existed <br>';
+                divCont2.appendChild(labelQuestion);
+            };
+            divCont.appendChild(labelQuestion);
+            divCont.appendChild(label11);
+            divCont.appendChild(radio11);
+            divCont.appendChild(label12);
+            divCont.appendChild(radio12);
+            divCont.appendChild(divCont2);
         };
         let label2 = document.createElement('label');
         label2.innerHTML = 'Structural';
         let radio2 = document.createElement('input');
         radio2.name = 'patternTypes';
-        radio2.id = 'radioStructural';
         radio2.type = 'radio';
         radio2.onclick = function () {
-            if (radio2.checked == true) {
-                divCont.innerHTML = "";
-                let labelQuestion = document.createElement('label');
-                labelQuestion.innerHTML = '<br> Do you want to ... <br>';
-                divCont.appendChild(labelQuestion);
-            }
+            divCont.innerHTML = "";
+            let labelQuestion = document.createElement('label');
+            labelQuestion.innerHTML = '<br> Do you want to ... <br>';
+            divCont.appendChild(labelQuestion);
         };
         let label3 = document.createElement('label');
         label3.innerHTML = 'Behavioral';
         let radio3 = document.createElement('input');
         radio3.name = 'patternTypes';
-        radio3.id = 'radioBehavioral';
         radio3.type = 'radio';
         radio3.onclick = function () {
-            if (radio3.checked == true) {
-                divCont.innerHTML = "";
-                let labelQuestion = document.createElement('label');
-                labelQuestion.innerHTML = '<br> Do you want to blablabla <br>';
-                divCont.appendChild(labelQuestion);
-            }
+            divCont.innerHTML = "";
+            let labelQuestion = document.createElement('label');
+            labelQuestion.innerHTML = '<br> Do you want to blablabla <br>';
+            divCont.appendChild(labelQuestion);
         };
         myForm.appendChild(label1);
         myForm.appendChild(radio1);
