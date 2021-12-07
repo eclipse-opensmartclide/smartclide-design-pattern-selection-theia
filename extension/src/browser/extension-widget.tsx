@@ -318,6 +318,8 @@ export class extensionWidget extends ReactWidget {
 				}else if(extensionWidget.state.statePatternSelection == "AbstractFactory"){
 					this.updateJsonObject();
 					this.insertInputsIntoConProd();
+					this.messageService.info("Well done! Code is coming...");
+					await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
 				}else{
 					this.updateJsonObject();
 					this.messageService.info("Well done! Code is coming...");
@@ -387,7 +389,7 @@ export class extensionWidget extends ReactWidget {
 		for(let i = 0 ; i < table.rows.length ; i++){
 			let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
 			let txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
-			extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].name = txtbox;
+			if(txtbox!=undefined) extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].name = txtbox;
 			}
 	}
 
@@ -395,9 +397,10 @@ export class extensionWidget extends ReactWidget {
 		let count = 0;
 		const table = document.getElementById('show_pattern_table') as HTMLTableElement;
 		if (this.checkInputsForSameValues()){
-			console.log(1);
 			return ("Inputs are invalid");
 		}else{
+			console.log(1)
+			let countConPro = 0;
 			for(let i = 0 ; i < table.rows.length; i++){
 				const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
 				const labelvalue = (document.getElementById( 'label'+ (i + 1) ) as HTMLElement).innerHTML;
@@ -405,13 +408,15 @@ export class extensionWidget extends ReactWidget {
 					if(txtbox.match("^([a-z]{1}[a-zA-Z]*[0-9]*)$")){//camel writing names of methods
 						count++;
 					}
-				}else{
+				}else if(!labelvalue.includes("ConcreteProduct")){
 					if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){//general case
 						count++;
 					}
+				}else{
+					countConPro ++;
 				}
 			}
-			return (count==table.rows.length ? "Inputs are valid" : "Inputs are invalid")
+			return (count==(table.rows.length-countConPro) ? "Inputs are valid" : "Inputs are invalid")
 		}	
 	}
 	//method that checks for duplicate values
@@ -421,10 +426,12 @@ export class extensionWidget extends ReactWidget {
 		for (let i = 0; i < uniqueElements.length; i++) { // nested for loop
 			for (let j = 0; j < uniqueElements.length; j++) {
 				// prevents the element from comparing with itself
-				if (i !== j && !( uniqueElements[i]=="undefined" &&  uniqueElements[j]=="undefined")) {
+				if (i != j) {
 					// check if elements' values are equal
-					if (uniqueElements[i] === uniqueElements[j] ) {
-						// duplicate element present                         
+					if (uniqueElements[i] == uniqueElements[j] && uniqueElements[i]!=undefined) {
+						// duplicate element present  
+						console.log("first ="+uniqueElements[i])    
+						console.log("second ="+uniqueElements[j])                  
 						resultToReturn = true;
 						// terminate inner loop
 						break;
@@ -436,6 +443,7 @@ export class extensionWidget extends ReactWidget {
 				break;
 			}
 		}
+		console.log("flag"+resultToReturn)
 		return(resultToReturn) 
 	}
 
@@ -449,12 +457,12 @@ export class extensionWidget extends ReactWidget {
 
 	insertInputsIntoConProd():void{
 		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
-		let listofFamily: string[];
-		let listofProducts:string[];
+		let listofFamily: string[] = [];
+		let listofProducts:string[] = [];
 		Object.keys(values).forEach((key)=>{
 			if(key.includes("Family")){
 				listofFamily.push(values[key].name);
-			}else if(key.includes("Product")&& !key.includes("ConcreteProduct")){
+			}else if(key.includes("Product") && !key.includes("ConcreteProduct")){
 				listofProducts.push(values[key].name);
 			}
 			
@@ -463,7 +471,8 @@ export class extensionWidget extends ReactWidget {
 			if(key.includes("ConcreteProduct")){
 				let array = key.split('.')[0];
 				var numberofProduct = array[0].replace(/\D/g,'');
-				console.log( listofFamily[Number(array[1])].split("Factory")[0]+listofProducts[Number(numberofProduct)]);
+				console.log(array)
+				console.log( listofFamily[Number(array[1])])//.split("Factory")[0]+listofProducts[Number(numberofProduct)]);
 				values[key].name = listofFamily[Number(array[1])].split("Factory")[0]+listofProducts[Number(numberofProduct)];
 				console.log(key + " "+values[key].name);
 			}
