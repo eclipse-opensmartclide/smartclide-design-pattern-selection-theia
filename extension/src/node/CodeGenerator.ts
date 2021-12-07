@@ -16,23 +16,19 @@ export class CodeGenerator {
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		let file1 :patternParticipatingClass = new abstractClass(obj.AbstractFactory.name);
-		Object.keys(obj).forEach((key)=>{
-			if(key.includes("AbstractProduct")){
-				file1.addMethod(new Method("create"+obj[key].name,obj[key].name, true, "public", "",[]));
-			}
-		});
 		Object.keys(obj).forEach((key) =>{
 			if(key.includes("Family")){
 				let file2 :patternParticipatingClass =  new ConcreteClass(obj[key].name, obj.AbstractFactory.name) ;
 				Object.keys(obj).forEach((innerkey)=>{
-					if(key.includes("Product") && !innerkey.includes("ConcreteProduct")){
-						let first = obj[key].name.split("Factory")[0];
+					if(innerkey.includes("Product") && !innerkey.includes("ConcreteProduct")){
+						let first = obj[innerkey].name.split("Factory")[0];
 						file2.addMethod(new Method("create"+obj[innerkey].name,obj[innerkey].name, false, "public", "\t \t return new "+first+obj[innerkey].name+"();",[]));
+						file1.addMethod(new Method("create"+obj[innerkey].name,obj[innerkey].name, true, "public", "",[]));
 					}
 				});
 				this.fillPromise(ppc, file1);
 				this.fillPromise(ppc, file2);
-			}else if(key.includes("AbstractProduct")){
+			}else if(key.includes("Product") && !key.includes("ConcreteProduct") ){
 				let file3 :patternParticipatingClass = new NonHierarchyClass(obj[key].name);
 				this.fillPromise(ppc, file3);
 			}else{

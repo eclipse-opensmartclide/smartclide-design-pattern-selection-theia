@@ -469,11 +469,9 @@ export class extensionWidget extends ReactWidget {
 		});
 		Object.keys(values).forEach((key)=>{
 			if(key.includes("ConcreteProduct")){
-				let array = key.split('.')[0];
+				let array = key.split('.');
 				var numberofProduct = array[0].replace(/\D/g,'');
-				console.log(array)
-				console.log( listofFamily[Number(array[1])])//.split("Factory")[0]+listofProducts[Number(numberofProduct)]);
-				values[key].name = listofFamily[Number(array[1])].split("Factory")[0]+listofProducts[Number(numberofProduct)];
+				values[key].name = listofFamily[Number(array[1])-1].split("Factory")[0]+listofProducts[Number(numberofProduct)-1];
 				console.log(key + " "+values[key].name);
 			}
 		});

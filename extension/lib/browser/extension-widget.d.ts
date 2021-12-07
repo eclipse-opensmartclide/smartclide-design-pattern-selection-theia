@@ -32,5 +32,7 @@ export declare class extensionWidget extends ReactWidget {
     checkInputs(): "Inputs are invalid" | "Inputs are valid";
     checkInputsForSameValues(): boolean;
     refreshPage(table: HTMLTableElement): void;
+    insertInputsIntoConProd(): void;
+    checkEmptyInputs(rows: number): boolean;
 }
 //# sourceMappingURL=extension-widget.d.ts.map
