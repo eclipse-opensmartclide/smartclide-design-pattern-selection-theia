@@ -13,27 +13,27 @@
                 "name":"",
                 "extension":0
             },
-            "AbstractProduct1":{
+            "Product1":{
                 "name":"",
                 "extension":1
             },
-            "Product1.1":{
+            "ConcreteProduct1.1":{
                 "name":"",
                 "extension":0
             },
-            "Product1.2":{
+            "ConcreteProduct1.2":{
                 "name":"",
                 "extension":0
             },
-            "AbstractProduct2":{
+            "Product2":{
                 "name":"",
                 "extension":0
             },
-            "Product2.1":{
+            "ConcreteProduct2.1":{
                 "name":"",
                 "extension":0
             },
-            "Product2.2":{
+            "ConcreteProduct2.2":{
                 "name":"",
                 "extension":0
             }

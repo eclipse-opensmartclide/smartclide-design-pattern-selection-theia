@@ -15,15 +15,23 @@ export class CodeGenerator {
 	public AbstractFactory(jsonObj: string): Array<patternParticipatingClass>  {
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
+		let file1 :patternParticipatingClass = new abstractClass(obj.AbstractFactory.name);
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("AbstractProduct")){
+				file1.addMethod(new Method("create"+obj[key].name,obj[key].name, true, "public", "",[]));
+			}
+		});
 		Object.keys(obj).forEach((key) =>{
-			if(key.includes("AbstractFactory") || key.includes("Family")){
-				let file1 :patternParticipatingClass = (key.includes("Family")) ? new ConcreteClass(obj[key].name, obj.AbstractFactory.name) : new abstractClass(obj[key].name);
-				Object.keys(obj).forEach((key)=>{
-					if(key.includes("AbstractProduct")){
-						file1.addMethod(new Method("create"+obj[key].name,obj[key].name, true, "public", "",[]));
+			if(key.includes("Family")){
+				let file2 :patternParticipatingClass =  new ConcreteClass(obj[key].name, obj.AbstractFactory.name) ;
+				Object.keys(obj).forEach((innerkey)=>{
+					if(key.includes("Product") && !innerkey.includes("ConcreteProduct")){
+						let first = obj[key].name.split("Factory")[0];
+						file2.addMethod(new Method("create"+obj[innerkey].name,obj[innerkey].name, false, "public", "\t \t return new "+first+obj[innerkey].name+"();",[]));
 					}
 				});
 				this.fillPromise(ppc, file1);
+				this.fillPromise(ppc, file2);
 			}else if(key.includes("AbstractProduct")){
 				let file3 :patternParticipatingClass = new NonHierarchyClass(obj[key].name);
 				this.fillPromise(ppc, file3);
@@ -32,7 +40,7 @@ export class CodeGenerator {
 				var num = array[0].replace(/\D/g,''); // the number before the '.' states the existing class that the class we are creating going to inheritance from it 
 				let variable ="";
 				Object.keys(obj).forEach((key)=>{
-					if(key == "AbstractProduct"+num){
+					if(key == "Product"+num){
 						variable = obj[key].name;
 					}
 				})

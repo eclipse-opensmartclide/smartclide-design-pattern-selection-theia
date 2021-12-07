@@ -167,10 +167,13 @@ export class extensionWidget extends ReactWidget {
 		txtbox.onchange = function () { 
 				extensionWidget.textBoxValues[num-1] = txtbox.value;
 		};
-	
+		
 		txtbox.autocomplete = "off";
 		txtbox.placeholder = key;
-		if (!key.includes("Method")){
+		if(key.includes("ConcreteProduct")){
+			txtbox.readOnly = true;
+		}
+		if (!key.includes("Method") || (!key.includes("ConcreteProduct"))){
 			txtbox.addEventListener('keypress', (e: KeyboardEvent) =>{
 				this.showSuggestions(txtbox.value, extensionWidget.res, ( e.target as Element).id);
 				});
@@ -179,6 +182,7 @@ export class extensionWidget extends ReactWidget {
 			suggestions.className = "suggestions";
 			cell2.appendChild(suggestions);
 		}
+		
 		cell1.appendChild(label);
 		cell2.appendChild(txtbox);
 
@@ -192,23 +196,23 @@ export class extensionWidget extends ReactWidget {
 		let label = this.updateLabel(key.substr(3,), count+1);
 		console.log(label + "   count: " + count);
 		if(extensionWidget.state.statePatternSelection=="AbstractFactory"){
-			if(key.includes("AbstractProduct")){
+			if(key.includes("Product") && !key.includes("ConcreteProduct")){
 				newValues[label] = JSON.stringify({name:"",extension:0});
 				this.insertCells(table, label);
-				var numProd = (this.countKeys(values, "Product") / count)-1;// number of "Products" in each AbstractProduct
+				var numProd = (this.countKeys(values, "ConcreteProduct") / count)-1;// number of "Products" in each Product
 				console.log(numProd);
 				for(let j = 0 ; j < numProd; j++ ){
-					let labelProduct = "Product"+ (count+1) + "."+(j+1);
+					let labelProduct = "ConcreteProduct"+ (count+1) + "."+(j+1);
 					console.log(labelProduct);
 					this.insertCells(table, labelProduct);
 					newValues[labelProduct]= JSON.stringify({ "name":"", "extension":0});
 				}
 			}else{
 				this.insertCells(table, label);
-				let numAbstrProd = this.countKeys(newValues, "AbstractProduct"); 
+				let numProd = this.countKeys(newValues, "Product"); 
 				newValues[label] =  JSON.stringify({ "name":"", "extension":0});
-				for(let j = 0; j < numAbstrProd ; j++){
-					let labelProduct = "Product"+(j+1)+"." + (count+1);
+				for(let j = 0; j < numProd ; j++){
+					let labelProduct = "ConcreteProduct"+(j+1)+"." + (count+1);
 					this.insertCells(table, labelProduct);
 					newValues[labelProduct] = JSON.stringify({ "name":"", "extension":0});
 				}	
@@ -288,14 +292,7 @@ export class extensionWidget extends ReactWidget {
 	}
 
 	async buttonClick2 (rows : number):Promise<void>{
-		let flag = true;
-		let i=0;
-		while (i<rows && flag==true){
-			const txtvalue = (document.getElementById("txtbox"+(i+1)) as HTMLInputElement).value;
-			if (txtvalue=="") flag = false;
-			i++;
-		}
-		if (!flag){
+		if (!this.checkEmptyInputs(rows)){
 			this.messageService.info("You need to give name for ALL the classes!");
 		}else{
 			if (this.checkInputs() == "Inputs are valid"){
@@ -318,6 +315,9 @@ export class extensionWidget extends ReactWidget {
 					}else{
 						this.messageService.info("For Adaptee you need to choose a class name that already exists: "+extensionWidget.res);
 					}
+				}else if(extensionWidget.state.statePatternSelection == "AbstractFactory"){
+					this.updateJsonObject();
+					this.insertInputsIntoConProd();
 				}else{
 					this.updateJsonObject();
 					this.messageService.info("Well done! Code is coming...");
@@ -395,6 +395,7 @@ export class extensionWidget extends ReactWidget {
 		let count = 0;
 		const table = document.getElementById('show_pattern_table') as HTMLTableElement;
 		if (this.checkInputsForSameValues()){
+			console.log(1);
 			return ("Inputs are invalid");
 		}else{
 			for(let i = 0 ; i < table.rows.length; i++){
@@ -416,15 +417,14 @@ export class extensionWidget extends ReactWidget {
 	//method that checks for duplicate values
 	checkInputsForSameValues(){
 		const uniqueElements = extensionWidget.textBoxValues;
-		//return uniqueElements.size<extensionWidget.textBoxValues.length ? true : false;
 		let resultToReturn = false;
 		for (let i = 0; i < uniqueElements.length; i++) { // nested for loop
 			for (let j = 0; j < uniqueElements.length; j++) {
 				// prevents the element from comparing with itself
-				if (i !== j) {
+				if (i !== j && !( uniqueElements[i]=="undefined" &&  uniqueElements[j]=="undefined")) {
 					// check if elements' values are equal
-					if (uniqueElements[i] === uniqueElements[j]) {
-						// duplicate element present                                
+					if (uniqueElements[i] === uniqueElements[j] ) {
+						// duplicate element present                         
 						resultToReturn = true;
 						// terminate inner loop
 						break;
@@ -447,6 +447,44 @@ export class extensionWidget extends ReactWidget {
 
 	}
 
+	insertInputsIntoConProd():void{
+		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
+		let listofFamily: string[];
+		let listofProducts:string[];
+		Object.keys(values).forEach((key)=>{
+			if(key.includes("Family")){
+				listofFamily.push(values[key].name);
+			}else if(key.includes("Product")&& !key.includes("ConcreteProduct")){
+				listofProducts.push(values[key].name);
+			}
+			
+		});
+		Object.keys(values).forEach((key)=>{
+			if(key.includes("ConcreteProduct")){
+				let array = key.split('.')[0];
+				var numberofProduct = array[0].replace(/\D/g,'');
+				console.log( listofFamily[Number(array[1])].split("Factory")[0]+listofProducts[Number(numberofProduct)]);
+				values[key].name = listofFamily[Number(array[1])].split("Factory")[0]+listofProducts[Number(numberofProduct)];
+				console.log(key + " "+values[key].name);
+			}
+		});
+		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
+	}
+	checkEmptyInputs(rows : number): boolean{
+		let flag = true; 
+		let i = 0;
+		while (i<rows && flag==true){
+			const txtvalue = (document.getElementById("txtbox"+(i+1)) as HTMLInputElement).value;
+			const label = (document.getElementById("label"+(i+1)) as HTMLLabelElement).innerHTML;
+			if (txtvalue=="" && !label.includes("ConcreteProduct")) 
+				flag = false; //the inputs have to be non empty except for the input whose label contains the ConcreteProduct role
+			else {
+				i ++;
+			}
+		}
+		console.log(flag);
+		return flag;
+	}
 }
 
 
