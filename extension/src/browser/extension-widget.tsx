@@ -170,10 +170,10 @@ export class extensionWidget extends ReactWidget {
 		
 		txtbox.autocomplete = "off";
 		txtbox.placeholder = key;
-		if(key.includes("ConcreteProduct")){
+		if(key.includes("ConcreteProduct") && extensionWidget.state.statePatternSelection=="AbstractFactory"){
 			txtbox.readOnly = true;
 		}
-		if (!key.includes("Method") || (!key.includes("ConcreteProduct"))){
+		if (!key.includes("Method")){
 			txtbox.addEventListener('keypress', (e: KeyboardEvent) =>{
 				this.showSuggestions(txtbox.value, extensionWidget.res, ( e.target as Element).id);
 				});
@@ -197,7 +197,7 @@ export class extensionWidget extends ReactWidget {
 		console.log(label + "   count: " + count);
 		if(extensionWidget.state.statePatternSelection=="AbstractFactory"){
 			if(key.includes("Product") && !key.includes("ConcreteProduct")){
-				newValues[label] = JSON.stringify({name:"",extension:0});
+				newValues[label] = {name:"",extension:0};
 				this.insertCells(table, label);
 				var numProd = (this.countKeys(values, "ConcreteProduct") / count)-1;// number of "Products" in each Product
 				console.log(numProd);
@@ -205,31 +205,31 @@ export class extensionWidget extends ReactWidget {
 					let labelProduct = "ConcreteProduct"+ (count+1) + "."+(j+1);
 					console.log(labelProduct);
 					this.insertCells(table, labelProduct);
-					newValues[labelProduct]= JSON.stringify({ "name":"", "extension":0});
+					newValues[labelProduct]= { "name":"", "extension":0};
 				}
 			}else{
 				this.insertCells(table, label);
 				let numProd = this.countKeys(newValues, "Product"); 
-				newValues[label] =  JSON.stringify({ "name":"", "extension":0});
+				newValues[label] =  { "name":"", "extension":0};
 				for(let j = 0; j < numProd ; j++){
 					let labelProduct = "ConcreteProduct"+(j+1)+"." + (count+1);
 					this.insertCells(table, labelProduct);
-					newValues[labelProduct] = JSON.stringify({ "name":"", "extension":0});
+					newValues[labelProduct] = { "name":"", "extension":0};
 				}	
 			}
 		}else if(extensionWidget.state.statePatternSelection=="Builder" && key.includes("Product")){
 			let labelConBuilder = this.updateLabel("ConcreteBuilder ", count+1);
 
-			newValues[label] =  JSON.stringify({ "name":"", "extension":0});
-			newValues[labelConBuilder] = JSON.stringify({ "name":"", "extension":0});
+			newValues[label] =  { "name":"", "extension":0};
+			newValues[labelConBuilder] = { "name":"", "extension":0};
 				
 			this.insertCells(table, label); 
 			this.insertCells(table, labelConBuilder); 
 		}else if(extensionWidget.state.statePatternSelection=="Factory Method") {
 			let labelConCreator = this.updateLabel("ConcreteCreator ", count+1);
 
-			newValues[label] =  JSON.stringify({ "name":"", "extension":0});
-			newValues[labelConCreator] = JSON.stringify({ "name":"", "extension":0});
+			newValues[label] =  { "name":"", "extension":0};
+			newValues[labelConCreator] = { "name":"", "extension":0};
 			
 			this.insertCells(table, label);				 
 			this.insertCells(table, labelConCreator); 
@@ -239,8 +239,8 @@ export class extensionWidget extends ReactWidget {
 			console.log("label2" + labelConDec);
 			let labelmethod = labelConDec + "Method";
 			
-			newValues[label] =  JSON.stringify({ "name":"", "extension":0});
-			newValues[labelmethod] = JSON.stringify({ "name":"", "extension":0});
+			newValues[label] =  { "name":"", "extension":0};
+			newValues[labelmethod] = { "name":"", "extension":0};
 				
 			this.insertCells(table, labelConDec); 
 			this.insertCells(table, labelmethod); 
@@ -248,8 +248,8 @@ export class extensionWidget extends ReactWidget {
 			let label = this.updateLabel(key.substr(3,), count/2+1); 
 			let labelAttr = label + "Attribute";
 
-			newValues[label] = JSON.stringify({"name":"", "extension":0});
-			newValues[labelAttr] = JSON.stringify({"name":"", "extension":1});
+			newValues[label] = {"name":"", "extension":0};
+			newValues[labelAttr] = {"name":"", "extension":1};
 
 			this.insertCells(table, label);
 			this.insertCells(table, labelAttr);
@@ -267,7 +267,7 @@ export class extensionWidget extends ReactWidget {
 				});
 				console.log("count "+count);
 				let label = this.updateLabel(key, count+1);
-				newValues[label] = JSON.stringify({"name":"", "extension":0});
+				newValues[label] = {"name":"", "extension":0};
 				this.insertCells(table, label);
 			}else{
 				let count2 = this.countKeys(values, "MethodParameter");
@@ -279,12 +279,12 @@ export class extensionWidget extends ReactWidget {
 				this.insertCells(table, labelConComMeth);
 				this.insertCells(table, labelConComMethParam);
 
-				newValues[labelConCommand] = JSON.stringify({ "name":"", "extension":0});
-				newValues[labelConComMeth] =  JSON.stringify({ "name":"", "extension":0});
-				newValues[labelConComMethParam] = JSON.stringify({ "name":"", "extension":1});
+				newValues[labelConCommand] = { "name":"", "extension":0};
+				newValues[labelConComMeth] =  { "name":"", "extension":0};
+				newValues[labelConComMethParam] = { "name":"", "extension":1};
 			}
 		}else{
-			newValues[label] = JSON.stringify({"name":"", "extension":0});
+			newValues[label] = {"name":"", "extension":0};
 			this.insertCells(table, label); 
 		}
 		extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;
@@ -389,6 +389,7 @@ export class extensionWidget extends ReactWidget {
 		for(let i = 0 ; i < table.rows.length ; i++){
 			let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
 			let txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
+			console.log(txtbox)
 			if(txtbox!=undefined) extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].name = txtbox;
 			}
 	}
@@ -429,9 +430,7 @@ export class extensionWidget extends ReactWidget {
 				if (i != j) {
 					// check if elements' values are equal
 					if (uniqueElements[i] == uniqueElements[j] && uniqueElements[i]!=undefined) {
-						// duplicate element present  
-						console.log("first ="+uniqueElements[i])    
-						console.log("second ="+uniqueElements[j])                  
+						// duplicate element present                  
 						resultToReturn = true;
 						// terminate inner loop
 						break;
@@ -443,7 +442,6 @@ export class extensionWidget extends ReactWidget {
 				break;
 			}
 		}
-		console.log("flag"+resultToReturn)
 		return(resultToReturn) 
 	}
 
@@ -489,7 +487,6 @@ export class extensionWidget extends ReactWidget {
 				i ++;
 			}
 		}
-		console.log(flag);
 		return flag;
 	}
 }
