@@ -77,7 +77,7 @@ export class CodeGenerator {
 					var match = key.match(/\d/g);
 					var innermatch = innerkey.match(/\d/g);
 					if (innerkey.includes("Product") && (innermatch != null && match !=null && innermatch.join()=== match.join())){
-						file3.addAttribute(new Attribute("result",obj[innerkey].name,"private"));
+						file3.addAttribute(new Attribute(obj[innerkey].name.toLowerCase(),obj[innerkey].name,"private"));
 					}else if(innerkey.includes("BuilderMethod")){
 						file3.addMethod(new Method(obj[innerkey].name, "void",true, "public","",[]));
 					}else{
@@ -111,7 +111,7 @@ export class CodeGenerator {
 					var innermatch = innerkey.match(/\d/g);
 					//in order to create the method we have to get the name of the "ConcreteProduct" that is going to be returned in the method
 					if(innerkey.includes("ConcreteProduct") && (innermatch != null && match !=null && innermatch.join()=== match.join())){
-							file2.addMethod(new Method("create"+obj.Product.name, obj.Product.name, false, "public", "\n \t \t return new "+ obj[innerkey].name + ";",[]));
+							file2.addMethod(new Method("create"+obj.Product.name, obj.Product.name, false, "public", "\t \t return new "+ obj[innerkey].name + ";",[]));
 					}
 				});
 				this.fillPromise(ppc, file2);
