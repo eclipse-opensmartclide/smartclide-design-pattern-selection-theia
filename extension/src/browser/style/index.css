@@ -121,6 +121,12 @@
 
 #divWiz input{
   margin-right: 20px;
+  margin-left: 10px;
+	background: transparent;
+  border: none;
+  color: white;
+  height: 20px;
+  float: left;
 }
 
 

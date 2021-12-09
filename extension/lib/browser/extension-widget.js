@@ -415,12 +415,11 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         document.getElementById("issues").style.visibility = 'hidden';
         document.getElementById("issues").style.height = '0px';
         let divWiz = document.getElementById('divWiz');
+        divWiz.style.marginLeft = '10px';
         let divCont = document.createElement('div');
         let myForm = document.createElement('form');
-        let labelQuestion = document.createElement('label');
-        labelQuestion.innerHTML = 'Choose the type of the pattern: <br>';
-        let label1 = document.createElement('label');
-        label1.innerHTML = 'Creational';
+        createLabel('Choose the type of the pattern: <br>', 'label0', divWiz);
+        createLabel('Creational', 'label1', divWiz);
         let radio1 = document.createElement('input');
         radio1.name = 'patternTypes';
         radio1.id = 'radioCreatonal';
@@ -428,37 +427,32 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         radio1.onclick = function () {
             divCont.innerHTML = "";
             let divCont2 = document.createElement('div');
-            let labelQuestion = document.createElement('label');
-            labelQuestion.innerHTML = '<br> Do you want to create a completely new object or to create one by  reusing an existing one?<br>';
-            let label11 = document.createElement('label');
-            label11.innerHTML = 'Create new object';
+            createLabel('<br> Do you want to create a completely new object or to create one by reusing an existing one?<br>', 'label4', divCont);
+            createLabel('Create new object', 'label11', divCont);
             let radio11 = document.createElement('input');
             radio11.name = 'new_existed';
             radio11.type = 'radio';
             radio11.onclick = function () {
                 divCont2.innerHTML = "";
                 let divCont3 = document.createElement('div');
-                let labelQuestion = document.createElement('label');
-                labelQuestion.innerHTML = '<br> Give the name of the Product that you want to create (Let X the name of the product)<br>';
+                createLabel('<br> Give the name of the Product that you want to create (Let X the name of the product)<br>', 'labelQuestion3', divCont2);
                 let prodName = document.createElement('input');
+                prodName.name = 'txtPoductName';
                 prodName.type = 'text';
                 let buttonNext = document.createElement('button');
                 buttonNext.innerHTML = 'Next';
                 buttonNext.onclick = function () {
                     divCont3.innerHTML = "";
                     let divCont4 = document.createElement('div');
-                    let labelQuestion = document.createElement('label');
-                    labelQuestion.innerHTML = '<br> Does the Product has sub-categories (Concrete Products)? <br>';
-                    let label31 = document.createElement('label');
-                    label31.innerHTML = 'Yes';
+                    createLabel('<br> Does the Product has sub-categories (Concrete Products)? <br>', 'labelQuestion4', divCont3);
+                    createLabel('Yes', 'label31', divCont3);
                     let radio31 = document.createElement('input');
                     radio31.name = 'yes_no';
                     radio31.type = 'radio';
                     radio31.onclick = function () {
                         divCont4.innerHTML = "";
                         let divCont5 = document.createElement('div');
-                        let labelQuestion = document.createElement('label');
-                        labelQuestion.innerHTML = '<br> How many sub-categories exist? <br>';
+                        createLabel('<br> How many sub-categories exist? <br>', 'labelQuestion5', divCont4);
                         let subNum = document.createElement('input');
                         subNum.id = 'subcategoriesNum';
                         subNum.type = 'number';
@@ -467,13 +461,11 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         buttonNext.onclick = function () {
                             divCont5.innerHTML = "";
                             let divCont6 = document.createElement('div');
-                            let labelQuestion = document.createElement('label');
-                            labelQuestion.innerHTML = '<br> Please give the names of the Concrete Products <br>';
-                            divCont5.appendChild(labelQuestion);
+                            createLabel('<br> Please give the names of the Concrete Products <br>', 'labelQuestion6', divCont5);
                             let num = parseInt(document.getElementById('subcategoriesNum').value);
                             for (var i = 1; i <= num; i++) {
                                 let field = document.createElement('input');
-                                field.id = 'txtfield' + i;
+                                field.name = 'txtConcreteProductsName';
                                 field.type = 'text';
                                 divCont5.appendChild(field);
                             }
@@ -482,18 +474,15 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                             buttonNext.onclick = function () {
                                 divCont6.innerHTML = "";
                                 let divCont7 = document.createElement('div');
-                                let labelQuestion = document.createElement('label');
-                                labelQuestion.innerHTML = '<br> Can the Products be classified in a Family? <br>';
-                                let label61 = document.createElement('label');
-                                label61.innerHTML = 'Yes';
+                                createLabel('<br> Can the Products be classified in a Family? <br>', 'labelQuestion7', divCont6);
+                                createLabel('Yes', 'label61', divCont6);
                                 let radio61 = document.createElement('input');
                                 radio61.name = 'yes_no';
                                 radio61.type = 'radio';
                                 radio61.onclick = function () {
                                     divCont7.innerHTML = "";
                                     let divCont8 = document.createElement('div');
-                                    let labelQuestion = document.createElement('label');
-                                    labelQuestion.innerHTML = '<br> How many Families of Products exist? <br>';
+                                    createLabel('<br> How many Families of Products exist? <br>', 'labelQuestion8', divCont7);
                                     let famNum = document.createElement('input');
                                     famNum.id = 'familiesNum';
                                     famNum.type = 'number';
@@ -501,209 +490,171 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                                     buttonNext.innerHTML = 'Next';
                                     buttonNext.onclick = function () {
                                         divCont8.innerHTML = "";
-                                        let labelQuestion = document.createElement('label');
-                                        labelQuestion.innerHTML = '<br> Please give the names of the Components <br>';
-                                        divCont8.appendChild(labelQuestion);
+                                        let divCont9 = document.createElement('div');
+                                        createLabel('<br> Please give the names of the Components <br>', 'labelQuestion9', divCont8);
                                         let num = parseInt(document.getElementById('familiesNum').value);
                                         for (var i = 1; i <= num; i++) {
                                             let field = document.createElement('input');
-                                            field.id = 'txtfield' + i;
+                                            field.name = 'txtComponentsName';
                                             field.type = 'text';
                                             divCont8.appendChild(field);
                                         }
                                         let buttonNext = document.createElement('button');
                                         buttonNext.innerHTML = 'Next';
                                         buttonNext.onclick = function () {
-                                            let labelQuestion = document.createElement('label');
-                                            labelQuestion.innerHTML = '<br> Abstract Factory Pattern ';
+                                            createLabel('<br> Abstract Factory Pattern ', 'labelQuestion10', divCont9);
                                             let buttonCode = document.createElement('button');
                                             buttonCode.innerHTML = 'Get Code';
                                             buttonCode.onclick = function () {
                                                 //code generation
                                             };
-                                            divCont8.appendChild(labelQuestion);
-                                            divCont8.appendChild(buttonCode);
+                                            divCont9.appendChild(buttonCode);
                                         };
                                         divCont8.appendChild(buttonNext);
+                                        divCont8.appendChild(divCont9);
                                     };
-                                    divCont7.appendChild(labelQuestion);
                                     divCont7.appendChild(famNum);
                                     divCont7.appendChild(buttonNext);
                                     divCont7.appendChild(divCont8);
                                 };
-                                let label62 = document.createElement('label');
-                                label62.innerHTML = 'No';
+                                createLabel('No', 'label62', divCont6);
                                 let radio62 = document.createElement('input');
                                 radio62.name = 'yes_no';
                                 radio62.type = 'radio';
                                 radio62.onclick = function () {
                                     divCont7.innerHTML = "";
                                     let divCont8 = document.createElement('div');
-                                    let labelQuestion = document.createElement('label');
-                                    labelQuestion.innerHTML = '<br> Can Product be created as series of steps which is different in every subcategory? <br>';
-                                    let label71 = document.createElement('label');
-                                    label71.innerHTML = 'Yes';
+                                    createLabel('<br> Can Product be created as series of steps which is different in every subcategory? <br>', 'labelQuestion11', divCont7);
+                                    createLabel('Yes', 'label71', divCont7);
                                     let radio71 = document.createElement('input');
                                     radio71.name = 'yes_no';
                                     radio71.type = 'radio';
                                     radio71.onclick = function () {
-                                        let labelQuestion = document.createElement('label');
-                                        labelQuestion.innerHTML = '<br> How many Steps are involved ?  <br>';
+                                        divCont8.innerHTML = "";
+                                        let divCont9 = document.createElement('div');
+                                        createLabel('<br> How many Steps are involved ?  <br>', 'labelQuestion12', divCont8);
                                         let stepsNum = document.createElement('input');
                                         stepsNum.id = 'stepsNum';
                                         stepsNum.type = 'number';
                                         let buttonNext = document.createElement('button');
                                         buttonNext.innerHTML = 'Next';
                                         buttonNext.onclick = function () {
-                                            let labelQuestion = document.createElement('label');
-                                            labelQuestion.innerHTML = '<br> Please give the name of the steps  <br>';
-                                            divCont8.appendChild(labelQuestion);
+                                            divCont9.innerHTML = "";
+                                            let divCont10 = document.createElement('div');
+                                            createLabel('<br> Please give the name of the steps  <br>', 'labelQuestion13', divCont9);
                                             let num = parseInt(document.getElementById('stepsNum').value);
                                             for (var i = 1; i <= num; i++) {
                                                 let field = document.createElement('input');
-                                                field.id = 'txtfield' + i; //name
+                                                field.name = 'txtStepsName';
                                                 field.type = 'text';
-                                                divCont8.appendChild(field);
+                                                divCont9.appendChild(field);
                                             }
                                             let buttonNext = document.createElement('button');
                                             buttonNext.innerHTML = 'Next';
                                             buttonNext.onclick = function () {
-                                                let labelQuestion = document.createElement('label');
-                                                labelQuestion.innerHTML = '<br> Builder Pattern ';
+                                                createLabel('<br> Builder Pattern ', 'labelPattern1', divCont10);
                                                 let buttonCode = document.createElement('button');
                                                 buttonCode.innerHTML = 'Get Code';
                                                 buttonCode.onclick = function () {
                                                     //code generation
                                                 };
-                                                divCont8.appendChild(labelQuestion);
-                                                divCont8.appendChild(buttonCode);
+                                                divCont10.appendChild(buttonCode);
                                             };
-                                            divCont8.appendChild(buttonNext);
+                                            divCont9.appendChild(buttonNext);
+                                            divCont9.appendChild(divCont10);
                                         };
-                                        divCont8.appendChild(labelQuestion);
                                         divCont8.appendChild(stepsNum);
                                         divCont8.appendChild(buttonNext);
+                                        divCont8.appendChild(divCont9);
                                     };
-                                    let label72 = document.createElement('label');
-                                    label72.innerHTML = 'No';
+                                    createLabel('No', 'label72', divCont7);
                                     let radio72 = document.createElement('input');
                                     radio72.name = 'yes_no';
                                     radio72.type = 'radio';
                                     radio72.onclick = function () {
-                                        let labelQuestion = document.createElement('label');
-                                        labelQuestion.innerHTML = '<br> What is the name of the Creator (e.g., Oven) of Product? <br>';
+                                        divCont8.innerHTML = "";
+                                        let divCont9 = document.createElement('div');
+                                        createLabel('<br> What is the name of the Creator (e.g., Oven) of Product? <br>', 'labelQuestion14', divCont8);
                                         let field = document.createElement('input');
-                                        field.id = 'txtfield';
+                                        field.id = 'txtCreatorName';
                                         field.type = 'text';
                                         let buttonNext = document.createElement('button');
                                         buttonNext.innerHTML = 'Next';
                                         buttonNext.onclick = function () {
-                                            let labelQuestion = document.createElement('label');
-                                            labelQuestion.innerHTML = '<br> Factory Method Pattern';
+                                            createLabel('<br> Factory Method Pattern', 'labelQuestion15', divCont9);
                                             let buttonCode = document.createElement('button');
                                             buttonCode.innerHTML = 'Get Code';
                                             buttonCode.onclick = function () {
                                                 //code generation
                                             };
-                                            divCont8.appendChild(labelQuestion);
-                                            divCont8.appendChild(buttonCode);
+                                            divCont9.appendChild(buttonCode);
                                         };
-                                        divCont8.appendChild(labelQuestion);
                                         divCont8.appendChild(field);
                                         divCont8.appendChild(buttonNext);
+                                        divCont8.appendChild(divCont9);
                                     };
-                                    divCont7.appendChild(labelQuestion);
-                                    divCont7.appendChild(label71);
                                     divCont7.appendChild(radio71);
-                                    divCont7.appendChild(label72);
                                     divCont7.appendChild(radio72);
                                     divCont7.appendChild(divCont8);
                                 };
-                                divCont6.appendChild(labelQuestion);
-                                divCont6.appendChild(label61);
                                 divCont6.appendChild(radio61);
-                                divCont6.appendChild(label62);
                                 divCont6.appendChild(radio62);
                                 divCont6.appendChild(divCont7);
                             };
                             divCont5.appendChild(buttonNext);
                             divCont5.appendChild(divCont6);
                         };
-                        divCont4.appendChild(labelQuestion);
                         divCont4.appendChild(subNum);
                         divCont4.appendChild(buttonNext);
                         divCont4.appendChild(divCont5);
                     };
-                    let label32 = document.createElement('label');
-                    label32.innerHTML = 'No';
+                    createLabel('No', 'label32', divCont3);
                     let radio32 = document.createElement('input');
                     radio32.name = 'yes_no';
                     radio32.type = 'radio';
                     radio32.onclick = function () {
                         divCont4.innerHTML = "";
-                        let labelQuestion = document.createElement('label');
-                        labelQuestion.innerHTML = '<br> There is no pattern <br>';
-                        divCont4.appendChild(labelQuestion);
+                        createLabel('<br> There is no pattern <br>', 'labelQuestion16', divCont4);
                     };
-                    divCont3.appendChild(labelQuestion);
-                    divCont3.appendChild(label31);
                     divCont3.appendChild(radio31);
-                    divCont3.appendChild(label32);
                     divCont3.appendChild(radio32);
                     divCont3.appendChild(divCont4);
                 };
-                divCont2.appendChild(labelQuestion);
                 divCont2.appendChild(prodName);
                 divCont2.appendChild(buttonNext);
                 divCont2.appendChild(divCont3);
             };
-            let label12 = document.createElement('label');
-            label12.innerHTML = 'Reuse an existing one';
+            createLabel('Reuse an existing one', 'label12', divCont);
             let radio12 = document.createElement('input');
             radio12.name = 'new_existed';
             radio12.type = 'radio';
             radio12.onclick = function () {
                 divCont2.innerHTML = "";
-                let labelQuestion = document.createElement('label');
-                labelQuestion.innerHTML = '<br> You chose existed <br>';
-                divCont2.appendChild(labelQuestion);
+                createLabel('<br> You chose existed <br>', 'labelQuestion17', divCont2);
             };
-            divCont.appendChild(labelQuestion);
-            divCont.appendChild(label11);
             divCont.appendChild(radio11);
-            divCont.appendChild(label12);
             divCont.appendChild(radio12);
             divCont.appendChild(divCont2);
         };
-        let label2 = document.createElement('label');
-        label2.innerHTML = 'Structural';
+        createLabel('Structural', 'label2', divWiz);
         let radio2 = document.createElement('input');
         radio2.name = 'patternTypes';
         radio2.type = 'radio';
         radio2.onclick = function () {
             divCont.innerHTML = "";
-            let labelQuestion = document.createElement('label');
-            labelQuestion.innerHTML = '<br> Do you want to ... <br>';
-            divCont.appendChild(labelQuestion);
+            createLabel('<br> Do you want to ... <br>', 'labelQuestion18', divCont);
         };
-        let label3 = document.createElement('label');
-        label3.innerHTML = 'Behavioral';
+        createLabel('Behavioral', 'label3', divWiz);
         let radio3 = document.createElement('input');
         radio3.name = 'patternTypes';
         radio3.type = 'radio';
         radio3.onclick = function () {
             divCont.innerHTML = "";
-            let labelQuestion = document.createElement('label');
-            labelQuestion.innerHTML = '<br> Do you want to blablabla <br>';
-            divCont.appendChild(labelQuestion);
+            createLabel('<br> Do you want to blablabla <br>', 'labelQuestion19', divCont);
         };
-        myForm.appendChild(label1);
         myForm.appendChild(radio1);
-        myForm.appendChild(label2);
         myForm.appendChild(radio2);
-        myForm.appendChild(label3);
         myForm.appendChild(radio3);
-        divWiz.appendChild(labelQuestion);
         divWiz.appendChild(myForm);
         divWiz.appendChild(divCont);
     }
@@ -734,4 +685,10 @@ extensionWidget = extensionWidget_1 = __decorate([
     inversify_1.injectable()
 ], extensionWidget);
 exports.extensionWidget = extensionWidget;
+function createLabel(innerMesagge, id, parent) {
+    let labelQuestion = document.createElement('label');
+    labelQuestion.innerHTML = innerMesagge;
+    labelQuestion.id = id;
+    parent.appendChild(labelQuestion);
+}
 //# sourceMappingURL=extension-widget.js.map
