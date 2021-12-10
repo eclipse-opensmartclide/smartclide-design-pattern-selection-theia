@@ -80,15 +80,15 @@
 .suggestions ul li:hover {
   background: #eee;
 }
-#btnFinalize{
-  margin-left: 10px;
-}
+
 #image{
   max-width: 100%;
   height: auto;
 }
 #elements{
   max-width: 100%;
+}
+#result{
   visibility: hidden;
 }
 .AbstractFactory{
@@ -121,12 +121,12 @@
 
 #divWiz input{
   margin-right: 20px;
-  margin-left: 10px;
 	background: transparent;
   border: none;
   color: white;
   height: 20px;
-  float: left;
+  display:flex;
+  flex-direction: column;
 }
 
 

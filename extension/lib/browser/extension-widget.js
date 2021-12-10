@@ -97,12 +97,14 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 React.createElement("div", { id: "show_pattern" }),
                 React.createElement("br", null),
                 React.createElement("div", { id: "result" },
+                    React.createElement("fieldset", null,
+                        React.createElement("details", null,
+                            React.createElement("summary", { id: 'description' }),
+                            React.createElement("p", { id: 'example' }),
+                            React.createElement("img", { id: "image", alt: "Class Diagram " }))),
                     React.createElement("table", { id: "show_pattern_table" }),
                     React.createElement("div", { id: "elements" },
-                        React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Code "),
-                        React.createElement("p", { id: 'description' }),
-                        React.createElement("p", { id: 'example' }),
-                        React.createElement("img", { id: "image", alt: "Class Diagram " })))),
+                        React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Code ")))),
             React.createElement("div", { id: "divWiz" }));
     }
     async runprocess() {
@@ -110,6 +112,10 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             document.getElementById("btn-get-code").style.visibility = 'hidden';
             var getUrl = window.location.href;
             extensionWidget_1.res = await this.helloBackendService.sayHelloTo(getUrl);
+            document.getElementById("result").style.visibility = 'visible';
+            document.getElementById('image').className = extensionWidget_1.state.statePatternSelection;
+            document.getElementById('description').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].description;
+            document.getElementById('example').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].example;
             //show the JSON values for the chosen key-pattern
             let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
             var table = document.getElementById('show_pattern_table');
@@ -127,11 +133,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     });
                 }
             });
-            document.getElementById("elements").style.visibility = 'visible';
-            document.getElementById('image').className = extensionWidget_1.state.statePatternSelection;
-            document.getElementById('description').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].description;
-            document.getElementById('example').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].example;
-            await this.helloBackendService.main();
+            //await this.helloBackendService.main();
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
