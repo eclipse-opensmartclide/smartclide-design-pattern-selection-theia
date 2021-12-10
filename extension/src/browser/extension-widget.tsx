@@ -118,18 +118,7 @@ export class extensionWidget extends ReactWidget {
 			let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
 			var table = document.getElementById('show_pattern_table') as HTMLTableElement;
 			Object.keys(values).forEach(async (key) =>{
-				var row = this.insertCells(table, key);
-				let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values;
-				if(values[key].extension==1){
-					let cell3 = (await row).insertCell(2);
-					let t3 = document.createElement("button");
-					t3.innerHTML = "+";
-					t3.id = "btn"+ key;
-					cell3.appendChild(t3);
-					t3.addEventListener('click', (event) => {
-						this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
-					});	
-			}
+				this.insertCells(table, key);
 			});
 			(document.getElementById("elements") as HTMLElement).style.visibility = 'visible';
 			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
@@ -148,46 +137,52 @@ export class extensionWidget extends ReactWidget {
 	}
 	
 	insertCells(table: HTMLTableElement, key: string){
-		let index = 0;
-		for (var i=0; i<table.rows.length; i++){
-			let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
-			if (key>label) index++;
-		}
-		let row = table.insertRow(index);
-		let cell1 = row.insertCell(0);
-		let cell2 = row.insertCell(1);
-		cell2.id = "cell2";
-		let label = document.createElement("label");
-		label.id = "label"+ table.rows.length;
-		label.innerHTML = key;
+		if(this.check(key)){
+			let index = 0;
+			for (var i=0; i<table.rows.length; i++){
+				let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
+				if (key>label) index++;
+			}
+			let row = table.insertRow(index);
+			let cell1 = row.insertCell(0);
+			let cell2 = row.insertCell(1);
+			cell2.id = "cell2";
+			let label = document.createElement("label");
+			label.id = "label"+ table.rows.length;
+			label.innerHTML = key;
 	
-		let txtbox = document.createElement("input");
-		txtbox.id = "txtbox"+ table.rows.length;
-		let num = table.rows.length;
-		txtbox.onchange = function () { 
+			let txtbox = document.createElement("input");
+			txtbox.id = "txtbox"+ table.rows.length;
+			let num = table.rows.length;
+			txtbox.onchange = function () { 
 				extensionWidget.textBoxValues[num-1] = txtbox.value;
-		};
-		
-		txtbox.autocomplete = "off";
-		txtbox.placeholder = key;
-		if(key.includes("ConcreteProduct") && extensionWidget.state.statePatternSelection=="AbstractFactory"){
-			txtbox.readOnly = true;
-		}
-		if (!key.includes("Method")){
-			txtbox.addEventListener('keypress', (e: KeyboardEvent) =>{
-				this.showSuggestions(txtbox.value, extensionWidget.res, ( e.target as Element).id);
-				});
-			let suggestions = document.createElement("div");
-			suggestions.id = "suggestions"+table.rows.length;
-			suggestions.className = "suggestions";
-			cell2.appendChild(suggestions);
-		}
-		
-		cell1.appendChild(label);
-		cell2.appendChild(txtbox);
+			};
+			txtbox.autocomplete = "off";
+			txtbox.placeholder = key;
+			if (!key.includes("Method")){
+				txtbox.addEventListener('keypress', (e: KeyboardEvent) =>{
+					this.showSuggestions(txtbox.value, extensionWidget.res, ( e.target as Element).id);
+					});
+				let suggestions = document.createElement("div");
+				suggestions.id = "suggestions"+table.rows.length;
+				suggestions.className = "suggestions";
+				cell2.appendChild(suggestions);
+			}
+			cell1.appendChild(label);
+			cell2.appendChild(txtbox);
+			let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values;
+				if(values[key].extension==1){
+					let cell3 = row.insertCell(2);
+					let t3 = document.createElement("button");
+					t3.innerHTML = "+";
+					t3.id = "btn"+ key;
+					cell3.appendChild(t3);
+					t3.addEventListener('click', (event) => {
+						this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
+					});	
+			}
 
-		
-		return row;
+		}
 	}
 	//when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
 	extensionButtonClick (table: HTMLTableElement, key: string, values: string) {
@@ -317,7 +312,12 @@ export class extensionWidget extends ReactWidget {
 					}
 				}else if(extensionWidget.state.statePatternSelection == "AbstractFactory"){
 					this.updateJsonObject();
-					this.insertInputsIntoConProd();
+					this.insertInputsAbstractFactory();
+					this.messageService.info("Well done! Code is coming...");
+					await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
+				}else if(extensionWidget.state.statePatternSelection == "FactoryMethod"){
+					this.updateJsonObject();
+					this.insertInputsFactoryMethod();
 					this.messageService.info("Well done! Code is coming...");
 					await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
 				}else{
@@ -453,7 +453,7 @@ export class extensionWidget extends ReactWidget {
 
 	}
 
-	insertInputsIntoConProd():void{
+	insertInputsAbstractFactory():void{
 		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
 		let listofFamily: string[] = [];
 		let listofProducts:string[] = [];
@@ -475,6 +475,35 @@ export class extensionWidget extends ReactWidget {
 		});
 		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
 	}
+	insertInputsFactoryMethod():void{
+		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
+		let listofConCreators:string[] = [];
+		Object.keys(values).forEach((key)=>{
+			if(key.includes("ConcreteCreator")) listofConCreators.push(values[key].name);
+		});
+		Object.keys(values).forEach((key)=>{
+			if(key.includes("ConcreteProduct")){
+				var numofConCreator = key.match(/\d/g);
+				values[key].name = listofConCreators[Number(numofConCreator)-1].split('Dialog')[0] + values.Product.name;
+			}
+		});
+		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
+	}
+	insertInputsBuilder():void{
+		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
+		let listofProducts:string[] = [];
+		Object.keys(values).forEach((key)=>{
+			if(key.includes("Product")) listofProducts.push(values[key].name);
+		});
+		Object.keys(values).forEach((key)=>{
+			if(key.includes("ConcreteBuilder")){
+				var numofConBuilder = key.match(/\d/g);
+				console.log(listofProducts[Number(numofConBuilder)-1])
+				values[key].name = listofProducts[Number(numofConBuilder)-1] + "Builder";
+			}
+		});
+		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
+	}
 	checkEmptyInputs(rows : number): boolean{
 		let flag = true; 
 		let i = 0;
@@ -488,6 +517,9 @@ export class extensionWidget extends ReactWidget {
 			}
 		}
 		return flag;
+	}
+	check(key: string){
+		return (!key.includes("ConcreteProduct") || extensionWidget.state.statePatternSelection!="AbstractFactory") && (!key.includes("ConcreteProduct") || extensionWidget.state.statePatternSelection!="FactoryMethod") && (!key.includes("ConcreteBuilder") || extensionWidget.state.statePatternSelection!="Builder")
 	}
 }
 
