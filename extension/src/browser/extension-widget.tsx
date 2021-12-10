@@ -320,6 +320,11 @@ export class extensionWidget extends ReactWidget {
 					this.insertInputsFactoryMethod();
 					this.messageService.info("Well done! Code is coming...");
 					await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
+				}else if(extensionWidget.state.statePatternSelection == "Builder"){
+					this.updateJsonObject();
+					this.insertInputsBuilder();
+					this.messageService.info("Well done! Code is coming...");
+					await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
 				}else{
 					this.updateJsonObject();
 					this.messageService.info("Well done! Code is coming...");
@@ -495,10 +500,10 @@ export class extensionWidget extends ReactWidget {
 		Object.keys(values).forEach((key)=>{
 			if(key.includes("Product")) listofProducts.push(values[key].name);
 		});
+		console.log(listofProducts)
 		Object.keys(values).forEach((key)=>{
 			if(key.includes("ConcreteBuilder")){
 				var numofConBuilder = key.match(/\d/g);
-				console.log(listofProducts[Number(numofConBuilder)-1])
 				values[key].name = listofProducts[Number(numofConBuilder)-1] + "Builder";
 			}
 		});

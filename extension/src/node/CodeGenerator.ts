@@ -79,7 +79,7 @@ export class CodeGenerator {
 					if (innerkey.includes("Product") && (innermatch != null && match !=null && innermatch.join()=== match.join())){
 						file3.addAttribute(new Attribute(obj[innerkey].name.toLowerCase(),obj[innerkey].name,"private"));
 					}else if(innerkey.includes("BuilderMethod")){
-						file3.addMethod(new Method(obj[innerkey].name, "void",true, "public","",[]));
+						file3.addMethod(new Method(obj[innerkey].name, "void",false, "public","",[]));
 					}else{
 
 					}

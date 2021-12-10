@@ -21,7 +21,7 @@ export declare class extensionWidget extends ReactWidget {
     protected render(): React.ReactNode;
     protected runprocess(): Promise<void>;
     updateSelection(e: React.ChangeEvent<HTMLSelectElement>): void;
-    insertCells(table: HTMLTableElement, key: string): HTMLTableRowElement;
+    insertCells(table: HTMLTableElement, key: string): void;
     extensionButtonClick(table: HTMLTableElement, key: string, values: string): void;
     buttonClick2(rows: number): Promise<void>;
     updateLabel(value: string, count: number): string;
@@ -32,7 +32,10 @@ export declare class extensionWidget extends ReactWidget {
     checkInputs(): "Inputs are invalid" | "Inputs are valid";
     checkInputsForSameValues(): boolean;
     refreshPage(table: HTMLTableElement): void;
-    insertInputsIntoConProd(): void;
+    insertInputsAbstractFactory(): void;
+    insertInputsFactoryMethod(): void;
+    insertInputsBuilder(): void;
     checkEmptyInputs(rows: number): boolean;
+    check(key: string): boolean;
 }
 //# sourceMappingURL=extension-widget.d.ts.map
