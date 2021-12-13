@@ -1,6 +1,5 @@
 import {patternParticipatingClass} from './patternParticipatingClass';
 import {abstractClass} from './abstractClass';
-//import { NonHierarchyClass } from './NonHierarchyClass';
 import { MidHierarchyClass } from './MidHierarchyClass';
 import { ConcreteClass } from './ConcreteClass';
 import { NonHierarchyClass } from './NonHierarchyClass';
@@ -73,6 +72,7 @@ export class CodeGenerator {
 		Object.keys(obj).forEach((key)=>{
 			if(key.includes("ConcreteBuilder")){
 				let file3 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Builder.name);
+				let count = 1;
 				Object.keys(obj).forEach((innerkey)=>{
 					var match = key.match(/\d/g);
 					var innermatch = innerkey.match(/\d/g);
@@ -80,6 +80,7 @@ export class CodeGenerator {
 						file3.addAttribute(new Attribute(obj[innerkey].name.toLowerCase(),obj[innerkey].name,"private"));
 					}else if(innerkey.includes("BuilderMethod")){
 						file3.addMethod(new Method(obj[innerkey].name, "void",false, "public","",[]));
+						file3.addMethod(new Method("buildPart"+count,"void",false,"public","",[]))
 					}else{
 
 					}
@@ -148,6 +149,7 @@ export class CodeGenerator {
 		Object.keys(obj).forEach((key)=>{
 			if(key.includes("ConcretePrototype")){
 				let file2 :patternParticipatingClass = new ConcreteClass(obj[key].name,obj.Prototype.name);
+				//file2.addAttribute(new Attribute("field1","",""));
 				file2.addMethod(new Method("clone",obj.Prototype.name, false,"public","\t \t return new "+obj[key].name + "(this);",[]));
 				file2.addMethod(new Method("concrete"+obj[key].name,obj.Prototype.name, false,"public","\t \t this.field1 = prototype.field",[new Attribute("prototype",obj.Prototype.name,"public")]));
 				this.fillPromise(ppc, file2);
@@ -204,7 +206,7 @@ export class CodeGenerator {
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		Object.keys(obj).forEach((key)=>{
-			if(key.includes("Component")){
+			if(key=="Component"){
 				let file1 :patternParticipatingClass = new abstractClass(obj[key].name);
 				file1.addMethod(new Method(obj.ComponentMethod.name,"void",true, "public", "",[]));
 				this.fillPromise(ppc, file1);
@@ -213,14 +215,15 @@ export class CodeGenerator {
 				file2.addMethod(new Method(obj.ComponentMethod.name,"void",false, "public", "",[]));
 				this.fillPromise(ppc, file2);
 			}else if(key == ("Composite")){
-					let file3 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Component.name);
-					file3.addAttribute(new Attribute("children", "ArrayList<"+obj.Component.name+">", "private"))
-					file3.addMethod(new Method(obj.Composite.name,"",false,"public","\t \t children = new ArrayList<"+obj.Component.name +">();",[]));
-					file3.addMethod(new Method(obj.ComponentMethod.name,"void",false, "public", "",[]));
-					file3.addMethod(new Method("add","void",false,"public","",[new Attribute("c",obj.Composite.name,"")]));
-					file3.addMethod(new Method("remove","void",false,"public","",[new Attribute("c",obj.Composite.name,"")]));
-					file3.addMethod(new Method("getChildern","ArrayList<"+obj.Component.name+">",false,"public","",[]));
-					this.fillPromise(ppc, file3);
+				let file3 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Component.name);
+				file3.addAttribute(new Attribute("children", "ArrayList<"+obj.Component.name+">", "private"));
+				//constructor
+				file3.addMethod(new Method(obj.Composite.name,"",false,"public","\t \t children = new ArrayList<"+obj.Component.name +">();",[]));
+				file3.addMethod(new Method(obj.ComponentMethod.name,"void",false, "public", "",[]));
+				file3.addMethod(new Method("add","void",false,"public","",[new Attribute("c",obj.Composite.name,"")]));
+				file3.addMethod(new Method("remove","void",false,"public","",[new Attribute("c",obj.Composite.name,"")]));
+				file3.addMethod(new Method("getChildern","ArrayList<"+obj.Component.name+">",false,"public","",[]));
+				this.fillPromise(ppc, file3);
 			}
 		});
 		return ppc.object;

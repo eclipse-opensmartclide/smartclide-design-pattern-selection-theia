@@ -405,8 +405,6 @@ export class extensionWidget extends ReactWidget {
 		if (this.checkInputsForSameValues()){
 			return ("Inputs are invalid");
 		}else{
-			console.log(1)
-			let countConPro = 0;
 			for(let i = 0 ; i < table.rows.length; i++){
 				const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
 				const labelvalue = (document.getElementById( 'label'+ (i + 1) ) as HTMLElement).innerHTML;
@@ -414,15 +412,13 @@ export class extensionWidget extends ReactWidget {
 					if(txtbox.match("^([a-z]{1}[a-zA-Z]*[0-9]*)$")){//camel writing names of methods
 						count++;
 					}
-				}else if(!labelvalue.includes("ConcreteProduct")){
+				}else {
 					if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){//general case
 						count++;
 					}
-				}else{
-					countConPro ++;
 				}
 			}
-			return (count==(table.rows.length-countConPro) ? "Inputs are valid" : "Inputs are invalid")
+			return (count==(table.rows.length) ? "Inputs are valid" : "Inputs are invalid")
 		}	
 	}
 	//method that checks for duplicate values
