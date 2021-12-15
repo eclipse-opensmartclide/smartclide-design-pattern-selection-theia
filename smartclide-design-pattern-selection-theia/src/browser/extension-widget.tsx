@@ -14,8 +14,8 @@ export class extensionWidget extends ReactWidget {
 	
 	[x: string]: any;
 
-    static readonly ID = 'extension:widget';
-    static readonly LABEL = 'Extension Widget';
+    static readonly ID = 'smartclide-design-pattern-selection-theia:widget';
+    static readonly LABEL = 'Smartclide Design Pattern Selection';
 	
     static state = {
 		statePatternSelection: ''

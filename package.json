@@ -12,7 +12,7 @@
     "lerna": "2.4.0"
   },
   "workspaces": [
-    "extension",
+    "smartclide-design-pattern-selection-theia",
     "browser-app",
     "electron-app"
   ],
