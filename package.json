@@ -17,7 +17,6 @@
     "electron-app"
   ],
   "dependencies": {
-    "@theia/file-search": "^1.18.0",
     "@types/node": "^16.11.6",
     "@types/react": "^17.0.19",
     "update-json-file": "^1.1.1"

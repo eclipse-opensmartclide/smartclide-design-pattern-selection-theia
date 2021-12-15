@@ -1,12 +1,14 @@
 import { HelloBackendService } from "../common/protocol";
-import { FileSearchService } from "@theia/file-search/lib/common/file-search-service";
 interface LabeledValue {
     label: string[];
 }
 export declare class HelloBackendServiceImpl implements HelloBackendService {
-    protected readonly fileSearchService: FileSearchService;
+    Path: any;
+    FS: any;
+    static Files: string[];
     static index: number;
     static array: string[];
+    ThroughDirectory(Directory: string): void;
     sayHelloTo(url: string): Promise<string[]>;
     getMethods(url: string, fileName: string): Promise<string[]>;
     fillPromise(labelObj: LabeledValue, item: string): void;

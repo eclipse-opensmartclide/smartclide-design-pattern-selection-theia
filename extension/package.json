@@ -9,8 +9,7 @@
     "src"
   ],
   "dependencies": {
-    "@theia/core": "latest",
-    "@theia/file-search": "1.18.0"
+    "@theia/core": "latest"
   },
   "devDependencies": {
     "rimraf": "latest",

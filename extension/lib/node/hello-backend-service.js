@@ -5,32 +5,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var HelloBackendServiceImpl_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HelloBackendServiceImpl = void 0;
 const inversify_1 = require("inversify");
-const file_search_service_1 = require("@theia/file-search/lib/common/file-search-service");
 const CodeGenerator_1 = require("./CodeGenerator");
 let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServiceImpl {
+    constructor() {
+        this.Path = require("path");
+        this.FS = require("fs");
+    }
+    ThroughDirectory(Directory) {
+        this.FS.readdirSync(Directory).forEach((File) => {
+            var Absolute = this.Path.join(Directory, File);
+            if (this.FS.statSync(Absolute).isDirectory())
+                return this.ThroughDirectory(Absolute);
+            else if (Absolute.endsWith(".java"))
+                return HelloBackendServiceImpl_1.Files.push(File);
+        });
+    }
     async sayHelloTo(url) {
         //string manipulation to get the right form of url string
         var lastL = url.indexOf("/#/");
         var rootUri = url.substr(lastL + 3);
-        //console.log(rootUri);
-        //prepare file-search, define search pattern
-        const roots = {};
-        //const rootUri = "C:\\Users\\test\\Downloads\\src\\src";
-        roots[rootUri] = {};
-        const opts = {
-            rootOptions: roots
-        };
-        opts.includePatterns = ['**/*.java'];
         //search for every file name in textbox values
         //index=-1 if not found
-        var res = await this.fileSearchService.find('', opts);
+        this.ThroughDirectory(rootUri);
+        var res = HelloBackendServiceImpl_1.Files;
         HelloBackendServiceImpl_1.array = res;
         for (let i = 0; i < res.length; i++) {
             let lastW = res[i].lastIndexOf("/");
@@ -256,11 +257,8 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
         return new Promise(resolve => resolve(message));
     }
 };
+HelloBackendServiceImpl.Files = [];
 HelloBackendServiceImpl.index = -1;
-__decorate([
-    inversify_1.inject(file_search_service_1.FileSearchService),
-    __metadata("design:type", Object)
-], HelloBackendServiceImpl.prototype, "fileSearchService", void 0);
 HelloBackendServiceImpl = HelloBackendServiceImpl_1 = __decorate([
     inversify_1.injectable()
 ], HelloBackendServiceImpl);

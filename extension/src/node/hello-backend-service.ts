@@ -1,6 +1,5 @@
-import { injectable, inject } from "inversify";
+import { injectable } from "inversify";
 import { HelloBackendService } from "../common/protocol";
-import {FileSearchService } from "@theia/file-search/lib/common/file-search-service";
 import { CodeGenerator } from "./CodeGenerator";
 import {patternParticipatingClass} from './patternParticipatingClass';
 interface LabeledValue{
@@ -10,31 +9,33 @@ interface LabeledValue{
 
 @injectable()
 export class HelloBackendServiceImpl implements HelloBackendService {
+    
+    Path = require("path");
+    FS = require("fs");
+    static Files : string[] = [];
 
-    @inject(FileSearchService)
-    protected readonly fileSearchService!:FileSearchService;
-      
     static index = -1;
     static array: string[];
+
+    ThroughDirectory(Directory: string){
+        this.FS.readdirSync(Directory).forEach((File: any) => {
+            var Absolute = this.Path.join(Directory, File);
+            if (this.FS.statSync(Absolute).isDirectory())
+                return this.ThroughDirectory(Absolute);
+            else if(Absolute.endsWith(".java"))
+                return HelloBackendServiceImpl.Files.push(File);
+        });
+    }
 
     async sayHelloTo(url: string): Promise<string[]> {
         //string manipulation to get the right form of url string
         var lastL = url.indexOf("/#/");
         var rootUri = url.substr(lastL+3);
-        //console.log(rootUri);
-
-        //prepare file-search, define search pattern
-        const roots: FileSearchService.RootOptions = {};
-        //const rootUri = "C:\\Users\\test\\Downloads\\src\\src";
-        roots[rootUri] = {};
-        const opts: FileSearchService.Options = {
-            rootOptions: roots
-        };
-        opts.includePatterns = ['**/*.java'];
-       
+        
         //search for every file name in textbox values
         //index=-1 if not found
-        var res= await this.fileSearchService.find('',opts);
+        this.ThroughDirectory(rootUri);
+        var res= HelloBackendServiceImpl.Files;
         HelloBackendServiceImpl.array = res;
         for (let i=0; i<res.length; i++){
             let lastW = res[i].lastIndexOf("/");
