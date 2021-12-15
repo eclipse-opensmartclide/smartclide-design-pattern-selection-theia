@@ -303,7 +303,7 @@ export class extensionWidget extends ReactWidget {
 						if (methodNames.includes(methodName)){
 							this.updateJsonObject();
 							this.messageService.info("Well done! Code is coming...");
-							await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
+							await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
 						}else{
 							this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: "+methodNames);
 						}
@@ -314,21 +314,21 @@ export class extensionWidget extends ReactWidget {
 					this.updateJsonObject();
 					this.insertInputsAbstractFactory();
 					this.messageService.info("Well done! Code is coming...");
-					await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
+					await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
 				}else if(extensionWidget.state.statePatternSelection == "FactoryMethod"){
 					this.updateJsonObject();
 					this.insertInputsFactoryMethod();
 					this.messageService.info("Well done! Code is coming...");
-					await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
+					await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
 				}else if(extensionWidget.state.statePatternSelection == "Builder"){
 					this.updateJsonObject();
 					this.insertInputsBuilder();
 					this.messageService.info("Well done! Code is coming...");
-					await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
+					await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
 				}else{
 					this.updateJsonObject();
 					this.messageService.info("Well done! Code is coming...");
-					await this.helloBackendService.main(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
+					await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
 				}
 			}else{
 				this.messageService.info("Inputs are invalid");

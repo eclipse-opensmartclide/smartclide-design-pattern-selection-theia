@@ -126,51 +126,52 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         const key = e.currentTarget.name;
         extensionWidget_1.state[key] = e.currentTarget.value;
     }
-    async insertCells(table, key) {
-        let index = 0;
-        for (var i = 0; i < table.rows.length; i++) {
-            let label = document.getElementById('label' + (i + 1)).innerHTML;
-            if (key > label)
-                index++;
+    insertCells(table, key) {
+        if (this.check(key)) {
+            let index = 0;
+            for (var i = 0; i < table.rows.length; i++) {
+                let label = document.getElementById('label' + (i + 1)).innerHTML;
+                if (key > label)
+                    index++;
+            }
+            let row = table.insertRow(index);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            cell2.id = "cell2";
+            let label = document.createElement("label");
+            label.id = "label" + table.rows.length;
+            label.innerHTML = key;
+            let txtbox = document.createElement("input");
+            txtbox.id = "txtbox" + table.rows.length;
+            let num = table.rows.length;
+            txtbox.onchange = function () {
+                extensionWidget_1.textBoxValues[num - 1] = txtbox.value;
+            };
+            txtbox.autocomplete = "off";
+            txtbox.placeholder = key;
+            if (!key.includes("Method")) {
+                txtbox.addEventListener('keypress', (e) => {
+                    this.showSuggestions(txtbox.value, extensionWidget_1.res, e.target.id);
+                });
+                let suggestions = document.createElement("div");
+                suggestions.id = "suggestions" + table.rows.length;
+                suggestions.className = "suggestions";
+                cell2.appendChild(suggestions);
+            }
+            cell1.appendChild(label);
+            cell2.appendChild(txtbox);
+            let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values;
+            if (values[key].extension == 1) {
+                let cell3 = row.insertCell(2);
+                let t3 = document.createElement("button");
+                t3.innerHTML = "+";
+                t3.id = "btn" + key;
+                cell3.appendChild(t3);
+                t3.addEventListener('click', (event) => {
+                    this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
+                });
+            }
         }
-        let row = table.insertRow(index);
-        let cell1 = row.insertCell(0);
-        let cell2 = row.insertCell(1);
-        cell2.id = "cell2";
-        let label = document.createElement("label");
-        label.id = "label" + table.rows.length;
-        label.innerHTML = key;
-        let txtbox = document.createElement("input");
-        txtbox.id = "txtbox" + table.rows.length;
-        let num = table.rows.length;
-        txtbox.onchange = function () {
-            extensionWidget_1.textBoxValues[num - 1] = txtbox.value;
-        };
-        txtbox.autocomplete = "off";
-        txtbox.placeholder = key;
-        if (!key.includes("Method")) {
-            txtbox.addEventListener('keypress', (e) => {
-                this.showSuggestions(txtbox.value, extensionWidget_1.res, e.target.id);
-            });
-            let suggestions = document.createElement("div");
-            suggestions.id = "suggestions" + table.rows.length;
-            suggestions.className = "suggestions";
-            cell2.appendChild(suggestions);
-        }
-        cell1.appendChild(label);
-        cell2.appendChild(txtbox);
-        let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values;
-        if (values[key].extension == 1) {
-            let cell3 = (await row).insertCell(2);
-            let t3 = document.createElement("button");
-            t3.innerHTML = "+";
-            t3.id = "btn" + key;
-            cell3.appendChild(t3);
-            t3.addEventListener('click', (event) => {
-                this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
-            });
-        }
-        return row;
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
     extensionButtonClick(table, key, values) {
@@ -179,40 +180,40 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         let label = this.updateLabel(key.substr(3), count + 1);
         console.log(label + "   count: " + count);
         if (extensionWidget_1.state.statePatternSelection == "AbstractFactory") {
-            if (key.includes("AbstractProduct")) {
-                newValues[label] = JSON.stringify({ name: "", extension: 0 });
+            if (key.includes("Product") && !key.includes("ConcreteProduct")) {
+                newValues[label] = { name: "", extension: 0 };
                 this.insertCells(table, label);
-                var numProd = (this.countKeys(values, "Product") / count) - 1; // number of "Products" in each AbstractProduct
+                var numProd = (this.countKeys(values, "ConcreteProduct") / count) - 1; // number of "Products" in each Product
                 console.log(numProd);
                 for (let j = 0; j < numProd; j++) {
-                    let labelProduct = "Product" + (count + 1) + "." + (j + 1);
+                    let labelProduct = "ConcreteProduct" + (count + 1) + "." + (j + 1);
                     console.log(labelProduct);
                     this.insertCells(table, labelProduct);
-                    newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 0 });
+                    newValues[labelProduct] = { "name": "", "extension": 0 };
                 }
             }
             else {
                 this.insertCells(table, label);
-                let numAbstrProd = this.countKeys(newValues, "AbstractProduct");
-                newValues[label] = JSON.stringify({ "name": "", "extension": 0 });
-                for (let j = 0; j < numAbstrProd; j++) {
-                    let labelProduct = "Product" + (j + 1) + "." + (count + 1);
+                let numProd = this.countKeys(newValues, "Product");
+                newValues[label] = { "name": "", "extension": 0 };
+                for (let j = 0; j < numProd; j++) {
+                    let labelProduct = "ConcreteProduct" + (j + 1) + "." + (count + 1);
                     this.insertCells(table, labelProduct);
-                    newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 0 });
+                    newValues[labelProduct] = { "name": "", "extension": 0 };
                 }
             }
         }
         else if (extensionWidget_1.state.statePatternSelection == "Builder" && key.includes("Product")) {
             let labelConBuilder = this.updateLabel("ConcreteBuilder ", count + 1);
-            newValues[label] = JSON.stringify({ "name": "", "extension": 0 });
-            newValues[labelConBuilder] = JSON.stringify({ "name": "", "extension": 0 });
+            newValues[label] = { "name": "", "extension": 0 };
+            newValues[labelConBuilder] = { "name": "", "extension": 0 };
             this.insertCells(table, label);
             this.insertCells(table, labelConBuilder);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Factory Method") {
             let labelConCreator = this.updateLabel("ConcreteCreator ", count + 1);
-            newValues[label] = JSON.stringify({ "name": "", "extension": 0 });
-            newValues[labelConCreator] = JSON.stringify({ "name": "", "extension": 0 });
+            newValues[label] = { "name": "", "extension": 0 };
+            newValues[labelConCreator] = { "name": "", "extension": 0 };
             this.insertCells(table, label);
             this.insertCells(table, labelConCreator);
         }
@@ -221,16 +222,16 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
             let labelConDec = this.updateLabel(key.substr(3), (count / 2 + 1));
             console.log("label2" + labelConDec);
             let labelmethod = labelConDec + "Method";
-            newValues[label] = JSON.stringify({ "name": "", "extension": 0 });
-            newValues[labelmethod] = JSON.stringify({ "name": "", "extension": 0 });
+            newValues[label] = { "name": "", "extension": 0 };
+            newValues[labelmethod] = { "name": "", "extension": 0 };
             this.insertCells(table, labelConDec);
             this.insertCells(table, labelmethod);
         }
         else if (extensionWidget_1.state.statePatternSelection == "Flyweight") {
             let label = this.updateLabel(key.substr(3), count / 2 + 1);
             let labelAttr = label + "Attribute";
-            newValues[label] = JSON.stringify({ "name": "", "extension": 0 });
-            newValues[labelAttr] = JSON.stringify({ "name": "", "extension": 1 });
+            newValues[label] = { "name": "", "extension": 0 };
+            newValues[labelAttr] = { "name": "", "extension": 1 };
             this.insertCells(table, label);
             this.insertCells(table, labelAttr);
         }
@@ -248,7 +249,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 });
                 console.log("count " + count);
                 let label = this.updateLabel(key, count + 1);
-                newValues[label] = JSON.stringify({ "name": "", "extension": 0 });
+                newValues[label] = { "name": "", "extension": 0 };
                 this.insertCells(table, label);
             }
             else {
@@ -259,28 +260,20 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 this.insertCells(table, labelConCommand);
                 this.insertCells(table, labelConComMeth);
                 this.insertCells(table, labelConComMethParam);
-                newValues[labelConCommand] = JSON.stringify({ "name": "", "extension": 0 });
-                newValues[labelConComMeth] = JSON.stringify({ "name": "", "extension": 0 });
-                newValues[labelConComMethParam] = JSON.stringify({ "name": "", "extension": 1 });
+                newValues[labelConCommand] = { "name": "", "extension": 0 };
+                newValues[labelConComMeth] = { "name": "", "extension": 0 };
+                newValues[labelConComMethParam] = { "name": "", "extension": 1 };
             }
         }
         else {
-            newValues[label] = JSON.stringify({ "name": "", "extension": 0 });
+            newValues[label] = { "name": "", "extension": 0 };
             this.insertCells(table, label);
         }
         extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = newValues;
         console.log(JSON.stringify(newValues));
     }
     async buttonClick2(rows) {
-        let flag = true;
-        let i = 0;
-        while (i < rows && flag == true) {
-            const txtvalue = document.getElementById("txtbox" + (i + 1)).value;
-            if (txtvalue == "")
-                flag = false;
-            i++;
-        }
-        if (!flag) {
+        if (!this.checkEmptyInputs(rows)) {
             this.messageService.info("You need to give name for ALL the classes!");
         }
         else {
@@ -296,7 +289,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         if (methodNames.includes(methodName)) {
                             this.updateJsonObject();
                             this.messageService.info("Well done! Code is coming...");
-                            await this.helloBackendService.main(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
+                            await this.helloBackendService.codeGeneration(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
                         }
                         else {
                             this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: " + methodNames);
@@ -306,10 +299,28 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         this.messageService.info("For Adaptee you need to choose a class name that already exists: " + extensionWidget_1.res);
                     }
                 }
+                else if (extensionWidget_1.state.statePatternSelection == "AbstractFactory") {
+                    this.updateJsonObject();
+                    this.insertInputsAbstractFactory();
+                    this.messageService.info("Well done! Code is coming...");
+                    await this.helloBackendService.codeGeneration(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
+                }
+                else if (extensionWidget_1.state.statePatternSelection == "FactoryMethod") {
+                    this.updateJsonObject();
+                    this.insertInputsFactoryMethod();
+                    this.messageService.info("Well done! Code is coming...");
+                    await this.helloBackendService.codeGeneration(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
+                }
+                else if (extensionWidget_1.state.statePatternSelection == "Builder") {
+                    this.updateJsonObject();
+                    this.insertInputsBuilder();
+                    this.messageService.info("Well done! Code is coming...");
+                    await this.helloBackendService.codeGeneration(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
+                }
                 else {
                     this.updateJsonObject();
                     this.messageService.info("Well done! Code is coming...");
-                    await this.helloBackendService.main(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
+                    await this.helloBackendService.codeGeneration(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
                 }
             }
             else {
@@ -371,7 +382,9 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         for (let i = 0; i < table.rows.length; i++) {
             let label = document.getElementById('label' + (i + 1)).innerHTML;
             let txtbox = document.getElementById('txtbox' + (i + 1)).value;
-            extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[label].name = txtbox;
+            console.log(txtbox);
+            if (txtbox != undefined)
+                extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[label].name = txtbox;
         }
     }
     checkInputs() {
@@ -390,22 +403,112 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     }
                 }
                 else {
-                    if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) {
+                    if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) { //general case
                         count++;
                     }
                 }
             }
-            return (count == table.rows.length ? "Inputs are valid" : "Inputs are invalid");
+            return (count == (table.rows.length) ? "Inputs are valid" : "Inputs are invalid");
         }
     }
+    //method that checks for duplicate values
     checkInputsForSameValues() {
-        const uniqueElements = new Set(extensionWidget_1.textBoxValues);
-        return uniqueElements.size < extensionWidget_1.textBoxValues.length ? true : false;
+        const uniqueElements = extensionWidget_1.textBoxValues;
+        let resultToReturn = false;
+        for (let i = 0; i < uniqueElements.length; i++) { // nested for loop
+            for (let j = 0; j < uniqueElements.length; j++) {
+                // prevents the element from comparing with itself
+                if (i != j) {
+                    // check if elements' values are equal
+                    if (uniqueElements[i] == uniqueElements[j] && uniqueElements[i] != undefined) {
+                        // duplicate element present                  
+                        resultToReturn = true;
+                        // terminate inner loop
+                        break;
+                    }
+                }
+            }
+            // terminate outer loop                                                                      
+            if (resultToReturn) {
+                break;
+            }
+        }
+        return (resultToReturn);
     }
     refreshPage(table) {
         table.innerHTML = "";
         document.getElementById("btn-get-code").style.visibility = 'visible';
         document.getElementById("elements").style.visibility = 'hidden';
+    }
+    insertInputsAbstractFactory() {
+        let values = JSON.parse(JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
+        let listofFamily = [];
+        let listofProducts = [];
+        Object.keys(values).forEach((key) => {
+            if (key.includes("Family")) {
+                listofFamily.push(values[key].name);
+            }
+            else if (key.includes("Product") && !key.includes("ConcreteProduct")) {
+                listofProducts.push(values[key].name);
+            }
+        });
+        Object.keys(values).forEach((key) => {
+            if (key.includes("ConcreteProduct")) {
+                let array = key.split('.');
+                var numberofProduct = array[0].replace(/\D/g, '');
+                values[key].name = listofFamily[Number(array[1]) - 1].split("Factory")[0] + listofProducts[Number(numberofProduct) - 1];
+                console.log(key + " " + values[key].name);
+            }
+        });
+        extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = values;
+    }
+    insertInputsFactoryMethod() {
+        let values = JSON.parse(JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
+        let listofConCreators = [];
+        Object.keys(values).forEach((key) => {
+            if (key.includes("ConcreteCreator"))
+                listofConCreators.push(values[key].name);
+        });
+        Object.keys(values).forEach((key) => {
+            if (key.includes("ConcreteProduct")) {
+                var numofConCreator = key.match(/\d/g);
+                values[key].name = listofConCreators[Number(numofConCreator) - 1].split('Dialog')[0] + values.Product.name;
+            }
+        });
+        extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = values;
+    }
+    insertInputsBuilder() {
+        let values = JSON.parse(JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
+        let listofProducts = [];
+        Object.keys(values).forEach((key) => {
+            if (key.includes("Product"))
+                listofProducts.push(values[key].name);
+        });
+        console.log(listofProducts);
+        Object.keys(values).forEach((key) => {
+            if (key.includes("ConcreteBuilder")) {
+                var numofConBuilder = key.match(/\d/g);
+                values[key].name = listofProducts[Number(numofConBuilder) - 1] + "Builder";
+            }
+        });
+        extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = values;
+    }
+    checkEmptyInputs(rows) {
+        let flag = true;
+        let i = 0;
+        while (i < rows && flag == true) {
+            const txtvalue = document.getElementById("txtbox" + (i + 1)).value;
+            const label = document.getElementById("label" + (i + 1)).innerHTML;
+            if (txtvalue == "" && !label.includes("ConcreteProduct"))
+                flag = false; //the inputs have to be non empty except for the input whose label contains the ConcreteProduct role
+            else {
+                i++;
+            }
+        }
+        return flag;
+    }
+    check(key) {
+        return (!key.includes("ConcreteProduct") || extensionWidget_1.state.statePatternSelection != "AbstractFactory") && (!key.includes("ConcreteProduct") || extensionWidget_1.state.statePatternSelection != "FactoryMethod") && (!key.includes("ConcreteBuilder") || extensionWidget_1.state.statePatternSelection != "Builder");
     }
 };
 extensionWidget.ID = 'extension:widget';

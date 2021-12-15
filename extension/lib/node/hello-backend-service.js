@@ -66,80 +66,105 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
     fillPromise(labelObj, item) {
         labelObj.label.push(item);
     }
-    async main(url, jsonObj, statePatternSelection) {
+    async codeGeneration(url, jsonObj, statePatternSelection) {
         let cg = new CodeGenerator_1.CodeGenerator();
         var lastL = url.indexOf("/#/");
         var rootUri = url.substr(lastL + 3);
+        let message = "";
         if (statePatternSelection == "AbstractFactory") {
             let ppc = cg.AbstractFactory(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Builder") {
             let ppc = cg.Builder(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "FactoryMethod") {
             let ppc = cg.FactoryMethod(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Prototype") {
             let ppc = cg.Prototype(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Singleton") {
             let ppc = cg.Singleton(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Adapter") {
             let ppc = cg.Adapter(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Bridge") {
             let ppc = cg.Bridge(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Composite") {
             let ppc = cg.Composite(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Decorator") {
             let ppc = cg.Decorator(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Facade") {
             let ppc = cg.Facade(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Flyweight") {
             let ppc = cg.Flyweight(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Proxy") {
             let ppc = cg.Proxy(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "ChainofResponsibility") {
@@ -151,63 +176,84 @@ let HelloBackendServiceImpl = HelloBackendServiceImpl_1 = class HelloBackendServ
         else if (statePatternSelection == "Command") {
             let ppc = cg.ChainofResponsibility(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Interpreter") {
             let ppc = cg.ChainofResponsibility(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Iterator") {
             let ppc = cg.ChainofResponsibility(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Mediator") {
             let ppc = cg.ChainofResponsibility(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Memento") {
             let ppc = cg.ChainofResponsibility(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Observer") {
             let ppc = cg.Observer(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "State") {
             let ppc = cg.State(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "Strategy") {
             let ppc = cg.Strategy(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else if (statePatternSelection == "TemplateMethod") {
             let ppc = cg.TemplateMethod(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
         else {
             let ppc = cg.Visitor(jsonObj);
             for (let i = 0; i < ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if (message != "")
+                    return new Promise(resolve => resolve(message));
             }
         }
+        return new Promise(resolve => resolve(message));
     }
 };
 HelloBackendServiceImpl.index = -1;

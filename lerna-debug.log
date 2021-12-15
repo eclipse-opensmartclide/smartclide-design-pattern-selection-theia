@@ -1,14 +1,14 @@
 0 silly input [ 'prepare' ]
 1 silly flags { _: [ 'run' ], script: 'prepare', args: [] }
-2 verbose rootPath C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia
+2 verbose rootPath C:\Users\Nikos\Desktop\smartclide-design-pattern-selection-theia
 3 info version 2.4.0
-4 silly existsSync C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\VERSION
+4 silly existsSync C:\Users\Nikos\Desktop\smartclide-design-pattern-selection-theia\VERSION
 5 silly initialize attempt
 6 silly initialize success
 7 silly execute attempt
 8 silly runScriptInPackageStreaming [ 'prepare', [], 'extension' ]
 9 silly getExecOpts {
-9 silly getExecOpts   cwd: 'C:\\Users\\user\\Desktop\\Theia-DesignPatterns\\smartclide-design-pattern-selection-theia\\extension'
+9 silly getExecOpts   cwd: 'C:\\Users\\Nikos\\Desktop\\smartclide-design-pattern-selection-theia\\extension'
 9 silly getExecOpts }
 10 error execute callback with error
 11 error Error: Command failed: npm run prepare
@@ -24,19 +24,22 @@
 11 error npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
 11 error
 11 error npm ERR! A complete log of this run can be found in:
-11 error npm ERR!     C:\Users\user\AppData\Roaming\npm-cache\_logs\2021-11-27T10_38_35_262Z-debug.log
+11 error npm ERR!     C:\Users\Nikos\AppData\Roaming\npm-cache\_logs\2021-12-15T13_00_26_565Z-debug.log
 11 error
 11 error
-11 error > extension@0.0.0 prepare C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\extension
+11 error > extension@0.0.0 prepare C:\Users\Nikos\Desktop\smartclide-design-pattern-selection-theia\extension
 11 error > yarn run clean && yarn run build
 11 error
-11 error yarn run v1.22.10
+11 error yarn run v1.22.11
 11 error $ rimraf lib
-11 error Done in 0.85s.
-11 error yarn run v1.22.10
+11 error Done in 0.28s.
+11 error yarn run v1.22.11
 11 error $ tsc
-11 error src/node/patternParticipatingClass.ts(18,18): error TS2554: Expected 2 arguments, but got 1.
-11 error src/node/patternParticipatingClass.ts(23,18): error TS2554: Expected 2 arguments, but got 1.
+11 error src/browser/extension-widget.tsx(306,39): error TS2339: Property 'main' does not exist on type 'HelloBackendService'.
+11 error src/browser/extension-widget.tsx(317,37): error TS2339: Property 'main' does not exist on type 'HelloBackendService'.
+11 error src/browser/extension-widget.tsx(322,37): error TS2339: Property 'main' does not exist on type 'HelloBackendService'.
+11 error src/browser/extension-widget.tsx(327,37): error TS2339: Property 'main' does not exist on type 'HelloBackendService'.
+11 error src/browser/extension-widget.tsx(331,37): error TS2339: Property 'main' does not exist on type 'HelloBackendService'.
 11 error info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 11 error
-11 error     at C:\Users\user\Desktop\Theia-DesignPatterns\smartclide-design-pattern-selection-theia\node_modules\execa\index.js:236:11
+11 error     at C:\Users\Nikos\Desktop\smartclide-design-pattern-selection-theia\node_modules\execa\index.js:236:11

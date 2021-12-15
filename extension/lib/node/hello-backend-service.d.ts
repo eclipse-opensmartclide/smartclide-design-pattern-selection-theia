@@ -10,7 +10,7 @@ export declare class HelloBackendServiceImpl implements HelloBackendService {
     sayHelloTo(url: string): Promise<string[]>;
     getMethods(url: string, fileName: string): Promise<string[]>;
     fillPromise(labelObj: LabeledValue, item: string): void;
-    main(url: string, jsonObj: string, statePatternSelection: string): Promise<void>;
+    codeGeneration(url: string, jsonObj: string, statePatternSelection: string): Promise<string>;
 }
 export {};
 //# sourceMappingURL=hello-backend-service.d.ts.map

@@ -179,6 +179,11 @@ export class CodeGenerator {
 	public Bridge(jsonObj: string): Array<patternParticipatingClass>  {		
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
+		console.log(JSON.stringify(jsonObj))
+		console.log("Abstraction:"+obj.Abstraction.name);
+		console.log("AbstractionMethod:"+obj.AbstractionMethod.name);
+		console.log("Implementation:"+obj.Implementation.name);
+		console.log("ImplementationMethod:"+obj.ImplementationMethod.name);
 
 		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Abstraction.name);
 		file1.addAttribute(new Attribute(obj.Implementation.name.toLowerCase(), obj.Implementation.name, "private"));
@@ -186,18 +191,21 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file1);
 
 		let file2 :patternParticipatingClass = new abstractClass(obj.Implementation.name);
-		file2.addMethod(new Method(obj.IpmlementationMethod.name, "void", true, "public", "", []));
+		file2.addMethod(new Method(obj.ImplementationMethod.name, "void", true, "public", "", []));
 		this.fillPromise(ppc, file2);
-
 		Object.keys(obj).forEach((key) =>{
+			console.log("k");
+			console.log("ey");
 			if(key.includes("RefinedAbstraction")){
 				let file3 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Abstraction.name);
 				file3.addMethod(new Method(obj.AbstractionMethod.name, "void", false, "public", "", []));
 				this.fillPromise(ppc, file3);
 			}else if(key.includes("ConcreteImplementation")){
 				let file4 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Implementation.name);
-				file4.addMethod(new Method(obj.IpmlementationMethod.name, "void", false, "public", "",[]));
+				file4.addMethod(new Method(obj.ImplementationMethod.name, "void", false, "public", "",[]));
 				this.fillPromise(ppc, file4);
+			}else{
+
 			}
 		});
 		return ppc.object;		
@@ -205,6 +213,7 @@ export class CodeGenerator {
 	public Composite(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
+		console.log(JSON.stringify(jsonObj));
 		Object.keys(obj).forEach((key)=>{
 			if(key=="Component"){
 				let file1 :patternParticipatingClass = new abstractClass(obj[key].name);

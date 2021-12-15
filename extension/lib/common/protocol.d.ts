@@ -4,7 +4,7 @@ export declare const HELLO_BACKEND_PATH = "/services/helloBackend";
 export interface HelloBackendService {
     getMethods(getUrl: string, fileName: string): Promise<string[]>;
     sayHelloTo(url: string): Promise<string[]>;
-    main(cName: string, jsonObj: string, statePatternSelection: string): Promise<void>;
+    codeGeneration(cName: string, jsonObj: string, statePatternSelection: string): Promise<string>;
 }
 export declare const HelloBackendWithClientService: unique symbol;
 export declare const HELLO_BACKEND_WITH_CLIENT_PATH = "/services/withClient";
