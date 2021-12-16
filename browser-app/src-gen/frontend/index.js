@@ -60,8 +60,7 @@ module.exports = Promise.resolve()
     .then(function () { return import('@theia/preferences/lib/browser/preference-frontend-module').then(load) })
     .then(function () { return import('@theia/process/lib/common/process-common-module').then(load) })
     .then(function () { return import('@theia/terminal/lib/browser/terminal-frontend-module').then(load) })
-    .then(function () { return import('@theia/file-search/lib/browser/file-search-frontend-module').then(load) })
-    .then(function () { return import('extension/lib/browser/extension-frontend-module').then(load) })
+    .then(function () { return import('smartclide-design-pattern-selection-theia/lib/browser/extension-frontend-module').then(load) })
     .then(start).catch(reason => {
         console.error('Failed to start the frontend application.');
         if (reason) {

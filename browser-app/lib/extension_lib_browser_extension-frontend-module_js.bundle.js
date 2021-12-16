@@ -7,7 +7,106 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"Abstract Factory":{"values":{"AbstractFactory":{"name":"","extension":0,"classes":{"ConcreteFactory1":{"name":"","extension":1},"ConcreteFactory2":{"name":"","extension":1}}},"AbstractProduct1":{"name":"","extension":1,"classes":{"Product1.1":{"name":"","extension":0},"Product1.2":{"name":"","extension":0}}},"AbstractProduct2":{"name":"","extension":1,"classes":{"Product2.1":{"name":"","extension":0},"Product2.2":{"name":"","extension":0}}},"Client":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0,"classes":{"ConcreteBuilder1":{"name":"","extension":1}}},"Product1":{"name":"","extension":1}}},"Factory Method":{"values":{"Creator":{"name":"","extension":0,"classes":{"ConcreteCreator1":{"name":"","extension":1}}},"Product":{"name":"","extension":0,"classes":{"ConcreteProduct1":{"name":"","extension":1}}}}},"Prototype":{"values":{"Client":{"name":"","extension":0},"Prototype":{"name":"","extension":0,"classes":{"ConcretePrototype1":{"name":"","extension":1},"ConcretePrototype2":{"name":"","extension":1}}}}},"Singleton":{"values":{"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"Client":{"name":"","extension":0},"Target":{"name":"","extension":0,"classes":{"Adapter1":{"name":"","extension":1}}},"Adaptee":{"name":"","extension":0}}},"Bridge":{"values":{"Abstraction":{"name":"","extension":0,"classes":{"RefinedAbstraction1":{"name":"","extension":1}}},"Client":{"name":"","extension":0},"Implementor":{"name":"","extension":0,"classes":{"ConcreteImplementor1":{"name":"","extension":1},"ConcreteImplementor2":{"name":"","extension":1}}}}},"Composite":{"values":{"Client":{"name":"","extension":0},"Component":{"name":"","extension":0,"classes":{"Leaf1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}}}},"Decorator":{"values":{"Component":{"name":"","extension":0,"classes":{"ConcreteComponent1":{"name":"","extension":1},"Decorator":{"name":"","extension":0,"classes":{"ConcreteDecorator1":{"name":"","extension":1},"ConcreteDecorator2":{"name":"","extension":1}}}}}}},"Facade":{"values":{"Director":""}},"Flyweight":{"values":{"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0,"classes":{"ConcreteFlyweight1":{"name":"","extension":1},"UnsharedConcreteFlyweight1":{"name":"","extension":1}}},"Client":{"name":"","extension":0}}},"Proxy":{"values":{"Client":{"name":"","extension":0},"Subject":{"name":"","extension":0,"classes":{"RealSubject":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}}}},"Chain of Responsibility":{"values":{"Client":{"name":"","extension":0},"Handler":{"name":"","extension":0,"classes":{"ConcreteHandler1":{"name":"","extension":1},"ConcreteHandler2":{"name":"","extension":1}}}}},"Command":{"values":{"Client":{"name":"","extension":0},"Receiver1":{"name":"","extension":1},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0,"classes":{"ConcreteCommand1":{"name":"","extension":1}}}}},"Interpreter":{"values":{"Client":{"name":"","extension":0},"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0,"classes":{"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}}}},"Iterator":{"values":{"Client":{"name":"","extension":0},"Aggregate":{"name":"","extension":0,"classes":{"ConcreteAggregate1":{"name":"","extension":1}}},"Iterator":{"name":"","extension":0,"classes":{"ConcreteIterator1":{"name":"","extension":1}}}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0,"classes":{"ConcreteMediator":{"name":"","extension":0}}},"Colleague":{"name":"","extension":0,"classes":{"ConcreteColleague1":{"name":"","extension":1},"ConcreteColleague2":{"name":"","extension":1}}}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"Memento":{"name":"","extension":0},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0,"classes":{"ConcreteSubject1":{"name":"","extension":1}}},"Observer":{"name":"","extension":0,"classes":{"ConcreteObserver1":{"name":"","extension":1}}}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0,"classes":{"ConcreteState1":{"name":"","extension":1},"ConcreteState2":{"name":"","extension":1}}}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0,"classes":{"name":"","extension":0,"classes":{"ConcreteStrategy1":{"name":"","extension":1},"ConcreteStrategy2":{"name":"","extension":1}}}}}},"Template Method":{"values":{"AbstractClass":{"name":"","extension":0,"classes":{"ConcreteClass1":{"name":"","extension":1}}}}},"Visitor":{"values":{"Client":{"name":"","extension":0},"Visitor":{"name":"","extension":0,"classes":{"ConcreteVisitor1":{"name":"","extension":1},"ConcreteVisitor2":{"name":"","extension":1}}},"ObjectStructure":{"name":"","extension":0},"Element":{"name":"","extension":0,"classes":{"name":"","extension":0,"classes":{"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":1}}}}}}}');
+module.exports = JSON.parse('{"AbstractFactory":{"values":{"AbstractFactory":{"name":"","extension":0},"Family1":{"name":"","extension":1},"Family2":{"name":"","extension":0},"Product1":{"name":"","extension":1},"ConcreteProduct1.1":{"name":"","extension":0},"ConcreteProduct1.2":{"name":"","extension":0},"Product2":{"name":"","extension":0},"ConcreteProduct2.1":{"name":"","extension":0},"ConcreteProduct2.2":{"name":"","extension":0}}},"Builder":{"values":{"Director":{"name":"","extension":0},"Builder":{"name":"","extension":0},"BuilderMethod1":{"name":"","extension":1},"ConcreteBuilder1":{"name":"","extension":0},"Product1":{"name":"","extension":1}}},"FactoryMethod":{"values":{"Creator":{"name":"","extension":0},"ConcreteCreator1":{"name":"","extension":1},"Product":{"name":"","extension":0},"ConcreteProduct1":{"name":"","extension":1}}},"Prototype":{"values":{"Prototype":{"name":"","extension":0},"ConcretePrototype1":{"name":"","extension":1}}},"Singleton":{"values":{"Singleton":{"name":"","extension":0}}},"Adapter":{"values":{"ClientInterface":{"name":"","extension":0},"Adapter":{"name":"","extension":0},"AdapterMethod":{"name":"","extension":0},"Adaptee":{"name":"","extension":0},"AdapteeMethod":{"name":"","extension":0}}},"Bridge":{"values":{"Abstraction":{"name":"","extension":0},"AbstractionMethod":{"name":"","extension":0},"RefinedAbstraction1":{"name":"","extension":1},"Implementation":{"name":"","extension":0},"ImplementationMethod":{"name":"","extension":0},"ConcreteImplementation1":{"name":"","extension":1}}},"Composite":{"values":{"Component":{"name":"","extension":0},"ComponentMethod":{"name":"","extension":0},"ConcreteComponent1":{"name":"","extension":1},"Composite":{"name":"","extension":0}}},"Decorator":{"values":{"Component":{"name":"","extension":0},"ComponentMethod":{"name":"","extension":0},"ConcreteComponent1":{"name":"","extension":1},"Decorator":{"name":"","extension":0},"ConcreteDecorator1":{"name":"","extension":1},"ConcreteDecorator1Method":{"name":"","extension":0}}},"Facade":{"values":{"Facade":{"name":"","extension":0},"AdditionalFacade1":{"name":"","extension":1}}},"Flyweight":{"values":{"FlyweightFactory":{"name":"","extension":0},"Flyweight":{"name":"","extension":0},"ConcreteFlyweight1":{"name":"","extension":1},"ConcreteFlyweight1Attribute":{"name":"","extension":0},"Client":{"name":"","extension":0}}},"Proxy":{"values":{"ServiceInterface":{"name":"","extension":0},"ServiceInterfaceMethod":{"name":"","extension":0},"Service":{"name":"","extension":0},"Proxy":{"name":"","extension":0}}},"ChainofResponsibility":{"values":{"Handler":{"name":"","extension":0},"ConcreteHandler1":{"name":"","extension":1}}},"Command":{"values":{"Receiver":{"name":"","extension":0},"Invoker":{"name":"","extension":0},"Command":{"name":"","extension":0},"ConcreteCommand1":{"name":"","extension":1},"ConcreteCommand1Method":{"name":"","extension":0},"ConcreteCommand1MethodParameter1":{"name":"","extension":1}}},"Interpreter":{"values":{"Context":{"name":"","extension":0},"AbstractExpression":{"name":"","extension":0},"TerminalExpression1":{"name":"","extension":1},"NonterminalExpression1":{"name":"","extension":1}}},"Mediator":{"values":{"Mediator":{"name":"","extension":0},"ConcreteMediator1":{"name":"","extension":1},"Component1":{"name":"","extension":1},"Component2":{"name":"","extension":0}}},"Memento":{"values":{"Originator":{"name":"","extension":0},"OriginatorAttribute1":{"name":"","extension":1},"Memento":{"name":"","extension":0},"MementoAttribute1":{"name":"","extension":1},"Caretaker":{"name":"","extension":0}}},"Observer":{"values":{"Subject":{"name":"","extension":0},"ConcreteSubject1":{"name":"","extension":1},"Observer":{"name":"","extension":0},"ConcreteObserver1":{"name":"","extension":1}}},"State":{"values":{"Context":{"name":"","extension":0},"State":{"name":"","extension":0},"ConcreteState1":{"name":"","extension":1}}},"Strategy":{"values":{"Context":{"name":"","extension":0},"Strategy":{"name":"","extension":0},"StrategyMethod":{"name":"","extension":0},"ConcreteStrategy1":{"name":"","extension":1}}},"TemplateMethod":{"values":{"AbstractClass":{"name":"","extension":0},"AbstractClassMethod1":{"name":"","extension":1},"ConcreteClass1":{"name":"","extension":1}}},"Visitor":{"values":{"Visitor":{"name":"","extension":0},"ConcreteVisitor1":{"name":"","extension":1},"Element":{"name":"","extension":0},"ConcreteElement1":{"name":"","extension":1},"ConcreteElement2":{"name":"","extension":0}}}}');
+
+/***/ }),
+
+/***/ "../extension/lib/browser/explanation.json":
+/*!*************************************************!*\
+  !*** ../extension/lib/browser/explanation.json ***!
+  \*************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"AbstractFactory":{"description":"Abstract Factory lets you produce families of related objects without specifying their concrete classes.","example":"Example: Consider a case that you want to develop a system that creates various types of furniture (e.g., Chairs and Sofas). Furniture belong to two families (e.g., Victorian and Modern. For each family, a dedicated factory class is developed, being responsible for creating the concrete type of each product."},"Builder":{"description":"Builder is a creational design pattern that lets you construct complex objects step by step (by ConcreteBuilders methods). The pattern allows you to produce different types and representations of an object (Product) using the same construction code.","example":"Example: Consider a case that you want to build cars and their manuals. The client can delegate the assembly to the director class, which knows how to use a builder to construct several models of cars. As a car model diverse from another, the same way a manual diverse from car to car. So you can use the same builder for constructing both Car and Manual, but you need another ConcreteBuilder (CarManualBuilder) to describe car parts. Finally, you get from the ConcreteBuilders the final products (Car and Manual)."},"FactoryMethod":{"description":"Factory Method provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects (ConcreteProducts) that will be created.","example":"Example: Factory Method can be used for creating cross-platform UI elements without coupling the client code to concrete UI classes.ConcreteCreators (WindowsDialog and WebDialog) override the base factory method (Dialog) so it returns a different type of product (WindowsButton or HTMLButton)."},"Prototype":{"description":"Prototype lets you copy existing objects without making your code dependent on their classes.","example":"Example: Consider the case that you want to produce exact copies of geometric objects, without coupling the code to their classes. All shape classes (Rectangle and Circle) follow the same interface (Shape), which provides a cloning method. A subclass may call the parent’s cloning method before copying its own field values to the resulting object."},"Singleton":{"description":"Singleton lets you ensure that a class has only one instance, while providing a global access point to this instance.Just like a global variable, the Singleton pattern lets you access some object from anywhere in the program. However, it also protects that instance from being overwritten by other code.","example":"Example: The database connection class acts as a Singleton. This class doesn’t have a public constructor (Database()), so the only way to get its object is to call the getInstance() method. This method caches the first created object and returns it in all subsequent calls."},"Adapter":{"description":"Adapter allows objects with incompatible interfaces to collaborate. Τhe adapter implements the interface of one object and wraps the other one.","example":"Example: Consider the case that you have a SquarePeg and you need to fit it in a RoundHole. You need to create an adapter, which receives calls from the client (RoundHole) via the adapter interface (RoundPeg) and translates them into calls to the wrapped service object (SquarePeg) in a format it can understand"},"Bridge":{"description":"Bridge lets you split a large class or a set of closely related classes into two separate hierarchies—abstraction and implementation—which can be developed independently of each other.","example":"Example: Consider a case that you need to remotely control more than one device. Instead of creating a different class for controlling every device, you can create a bridge between Remote (Abstraction) and Device (Implementation), which allows you to hande many devices by the Device interface."},"Composite":{"description":"Composite lets you compose objects into tree structures and then work with these structures as if they were individual objects.","example":"Example: Consider the case that you need to draw an image consisted of dots or circles.  A compound shape (CompoundGraphic) passes the request recursively to all its children and “sums up” the result."},"Decorator":{"description":"Decorator lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.","example":"Example: The application wraps the data source object (FileDataSource) with a pair of decorators (EncryptionDecorator and CompressionDecorator). Both wrappers change the way the data is written to and read from the disk. Just before the data is written to disk, the decorators encrypt and compress it. Right after the data is read from disk, it goes through the same decorators, which decompress and decode it. "},"Facade":{"description":"Facade is a simplified interface to a library, a framework, or any other complex set of classes(complex subsystem) and provides only the features that the client cares about.","example":"Example: Consider a case you want your code to interact with a complex video conversion framework. A facade class encapsulates that functionality and hides it from the rest of the code."},"Flyweight":{"description":"","example":""},"Proxy":{"description":"","example":""},"ChainofResponsibility":{},"Command":{"description":"","example":""},"Interpeter":{"description":"","example":""},"Iterator":{"description":"","example":""},"Mediator":{"description":"","example":""},"Memento":{"description":"","example":""},"Observer":{"description":"","example":""},"State":{"description":"","example":""},"Strategy":{"description":"","example":""},"TemplateMethod":{"description":"","example":""},"Visitor":{"description":"","example":""}}');
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/AbstractFactoryIcon.jpg":
+/*!******************************************************************!*\
+  !*** ../extension/src/browser/style/img/AbstractFactoryIcon.jpg ***!
+  \******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "ab84da3818bcb2f28ccb..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/AdapterIcon.jpg":
+/*!**********************************************************!*\
+  !*** ../extension/src/browser/style/img/AdapterIcon.jpg ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "0a17945d72c03c04273c..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/BridgeIcon.jpg":
+/*!*********************************************************!*\
+  !*** ../extension/src/browser/style/img/BridgeIcon.jpg ***!
+  \*********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "8137fb52632a86d7c037..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/BuilderIcon.jpg":
+/*!**********************************************************!*\
+  !*** ../extension/src/browser/style/img/BuilderIcon.jpg ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "46cfd581428cc3061e59..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/CompositeIcon.jpg":
+/*!************************************************************!*\
+  !*** ../extension/src/browser/style/img/CompositeIcon.jpg ***!
+  \************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "37d1b01e0a96837f023c..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/DecoratorIcon.jpg":
+/*!************************************************************!*\
+  !*** ../extension/src/browser/style/img/DecoratorIcon.jpg ***!
+  \************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "4b83a266267417554fea..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/PrototypeIcon.jpg":
+/*!************************************************************!*\
+  !*** ../extension/src/browser/style/img/PrototypeIcon.jpg ***!
+  \************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "81f123ed48bc8ef24775..jpg";
+
+/***/ }),
+
+/***/ "../extension/src/browser/style/img/SingletonIcon.jpg":
+/*!************************************************************!*\
+  !*** ../extension/src/browser/style/img/SingletonIcon.jpg ***!
+  \************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "774412fc12308efad6e1..jpg";
 
 /***/ }),
 
@@ -17,12 +116,13 @@ module.exports = JSON.parse('{"Abstract Factory":{"values":{"AbstractFactory":{"
   \************************************************************************************/
 /***/ ((module, exports, __webpack_require__) => {
 
+var escape = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/url/escape.js */ "../node_modules/css-loader/lib/url/escape.js");
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "../node_modules/css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.id, "#widget-container{\r\n\twidth: 550px;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n#label-URL-project{\r\n\tmargin-left: 10px;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n    width: 190px;\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n", ""]);
+exports.push([module.id, "#widget-container{\r\n  max-width: 100%;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n\r\n    width: 250px;\r\n    height: 20px;\r\n\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n  margin-right: 10px;\r\n  max-width: 100%;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  margin-top: 25px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n#btnFinalize{\r\n  margin-left: 10px;\r\n}\r\n#image{\r\n  max-width: 100%;\r\n  height: auto;\r\n}\r\n#elements{\r\n  max-width: 100%;\r\n  visibility: hidden;\r\n}\r\n.AbstractFactory{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AbstractFactoryIcon.jpg */ "../extension/src/browser/style/img/AbstractFactoryIcon.jpg")) + ");\r\n}\r\n.Adapter{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Bridge{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BridgeIcon.jpg */ "../extension/src/browser/style/img/BridgeIcon.jpg")) + ");\r\n}\r\n.Builder{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BuilderIcon.jpg */ "../extension/src/browser/style/img/BuilderIcon.jpg")) + ");\r\n}\r\n.Composite{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/CompositeIcon.jpg */ "../extension/src/browser/style/img/CompositeIcon.jpg")) + ");\r\n}\r\n.Decorator{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/DecoratorIcon.jpg */ "../extension/src/browser/style/img/DecoratorIcon.jpg")) + ");\r\n}\r\n.FactoryMethod{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Prototype{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/PrototypeIcon.jpg */ "../extension/src/browser/style/img/PrototypeIcon.jpg")) + ");\r\n}\r\n.Singleton{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/SingletonIcon.jpg */ "../extension/src/browser/style/img/SingletonIcon.jpg")) + ");\r\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -241,6 +341,7 @@ const react_widget_1 = __webpack_require__(/*! @theia/core/lib/browser/widgets/r
 const core_1 = __webpack_require__(/*! @theia/core */ "../node_modules/@theia/core/lib/common/index.js");
 const protocol_1 = __webpack_require__(/*! ../common/protocol */ "../extension/lib/common/protocol.js");
 const data_json_1 = __importDefault(__webpack_require__(/*! ./data.json */ "../extension/lib/browser/data.json"));
+const explanation_json_1 = __importDefault(__webpack_require__(/*! ./explanation.json */ "../extension/lib/browser/explanation.json"));
 let extensionWidget = extensionWidget_1 = class extensionWidget extends react_widget_1.ReactWidget {
     async init() {
         this.id = extensionWidget_1.ID;
@@ -259,9 +360,9 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                 React.createElement("select", { id: "drop-down-patterns", onChange: this.updateSelection, name: "statePatternSelection" },
                     React.createElement("option", { id: "empty-choice", value: "Choose_pattern" }, "Choose pattern"),
                     React.createElement("optgroup", { label: "Creational" },
-                        React.createElement("option", { value: "Abstract Factory" }, "Abstract Factory"),
+                        React.createElement("option", { value: "AbstractFactory" }, "Abstract Factory"),
                         React.createElement("option", { value: "Builder" }, "Builder"),
-                        React.createElement("option", { value: "Factory Method" }, "Factory Method"),
+                        React.createElement("option", { value: "FactoryMethod" }, "Factory Method"),
                         React.createElement("option", { value: "Prototype" }, "Prototype"),
                         React.createElement("option", { value: "Singleton" }, "Singleton")),
                     React.createElement("optgroup", { label: "Structural" },
@@ -273,7 +374,7 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         React.createElement("option", { value: "Flyweight" }, "Flyweight"),
                         React.createElement("option", { value: "Proxy" }, "Proxy")),
                     React.createElement("optgroup", { label: "Behavioral" },
-                        React.createElement("option", { value: "Chain of Responsibility" }, "Chain of Responsibility"),
+                        React.createElement("option", { value: "ChainofResponsibility" }, "Chain of Responsibility"),
                         React.createElement("option", { value: "Command" }, "Command"),
                         React.createElement("option", { value: "Interpreter" }, "Interpreter"),
                         React.createElement("option", { value: "Iterator" }, "Iterator"),
@@ -282,262 +383,443 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                         React.createElement("option", { value: "Observer" }, "Observer"),
                         React.createElement("option", { value: "State" }, "State"),
                         React.createElement("option", { value: "Strategy" }, "Strategy"),
-                        React.createElement("option", { value: "Template Method" }, "Template Method"),
+                        React.createElement("option", { value: "TemplateMethod" }, "Template Method"),
                         React.createElement("option", { value: "Visitor" }, "Visitor"))),
+                React.createElement("button", { id: "btn-refresh", type: "button", title: 'Refresh', onClick: _a => this.refreshPage(document.getElementById('show_pattern_table')) },
+                    " ",
+                    React.createElement("i", { className: "fa fa-refresh" })),
                 React.createElement("br", null),
                 React.createElement("br", null),
-                React.createElement("button", { id: "btn-get-code", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.runprocess() }, " Get Code "),
+                React.createElement("button", { id: "btn-get-code", type: "button", title: 'Assign roles to classes and methods', onClick: _a => this.runprocess() }, "Assign roles to classes and methods"),
                 React.createElement("br", null),
                 React.createElement("div", { id: "show_pattern" }),
                 React.createElement("br", null),
                 React.createElement("div", { id: "result" },
-                    React.createElement("table", { id: "show_pattern_table" }))));
+                    React.createElement("table", { id: "show_pattern_table" }),
+                    React.createElement("div", { id: "elements" },
+                        React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Code "),
+                        React.createElement("p", { id: 'description' }),
+                        React.createElement("p", { id: 'example' }),
+                        React.createElement("img", { id: "image", alt: "Class Diagram " })))));
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
             document.getElementById("btn-get-code").style.visibility = 'hidden';
             var getUrl = window.location.href;
             extensionWidget_1.res = await this.helloBackendService.sayHelloTo(getUrl);
-            for (var i = 0; i < extensionWidget_1.res.length; i++) {
-                var lastW = extensionWidget_1.res[i].lastIndexOf("/");
-                var file = extensionWidget_1.res[i].substr(lastW + 1);
-                file = file.substr(0, file.indexOf("."));
-                console.log(file);
-                extensionWidget_1.res[i] = file;
-            }
-            console.log("FRONT " + extensionWidget_1.res);
             //show the JSON values for the chosen key-pattern
-            var values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
+            let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
             var table = document.getElementById('show_pattern_table');
-            Object.keys(values).forEach((key) => {
-                var row = this.insertCells(table, key);
-                if (values[key].extension == 1) {
-                    var cell3 = row.insertCell(2);
-                    var t3 = document.createElement("button");
-                    t3.innerHTML = "+";
-                    t3.id = "btn" + key;
-                    cell3.appendChild(t3);
-                    t3.addEventListener('click', (event) => {
-                        this.buttonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, "");
-                    });
-                }
-                if (("classes" in values[key]) == true) {
-                    var classes = values[key]["classes"];
-                    Object.keys(classes).forEach((key1) => {
-                        var row = this.insertCells(table, key1);
-                        if (classes[key1].extension == 1) {
-                            var cell3 = row.insertCell(2);
-                            var t3 = document.createElement("button");
-                            t3.innerHTML = "+";
-                            t3.id = "btn" + key1;
-                            cell3.appendChild(t3);
-                            t3.addEventListener('click', (event) => {
-                                this.buttonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[key].classes);
-                            });
-                        }
-                    });
-                }
+            Object.keys(values).forEach(async (key) => {
+                this.insertCells(table, key);
             });
-            var d = document.getElementById("result");
-            var b = document.createElement("button");
-            b.id = "btnFinalize";
-            b.innerHTML = "Finally Get Code";
-            b.addEventListener('click', (_event) => {
-                this.buttonClick2(table.rows.length);
-            });
-            d.appendChild(b);
+            document.getElementById("elements").style.visibility = 'visible';
+            document.getElementById('image').className = extensionWidget_1.state.statePatternSelection;
+            document.getElementById('description').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].description;
+            document.getElementById('example').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].example;
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
         }
     }
-    //update the state
+    //update the state of dropdown
     updateSelection(e) {
         const key = e.currentTarget.name;
         extensionWidget_1.state[key] = e.currentTarget.value;
     }
-    //update the state
-    updateInput(e) {
-        const key = e.currentTarget.name;
-        extensionWidget_1.state[key] = e.currentTarget.value;
-    }
     insertCells(table, key) {
-        var row = table.insertRow(table.rows.length);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var t1 = document.createElement("label");
-        t1.id = "label" + table.rows.length;
-        t1.innerHTML = key;
-        var t2 = document.createElement("input");
-        t2.id = "txtbox" + table.rows.length;
-        var num = table.rows.length;
-        t2.onchange = function () {
-            extensionWidget_1.textBoxValues[num - 1] = t2.value;
-        };
-        t2.autocomplete = "off";
-        t2.placeholder = key;
-        t2.addEventListener('keypress', (e) => {
-            //You have yout key code here
-            this.showSuggestions(t2.value, e.target.id);
-        });
-        var t3 = document.createElement("div");
-        t3.id = "suggestions" + table.rows.length;
-        t3.className = "suggestions";
-        cell1.appendChild(t1);
-        cell2.appendChild(t2);
-        cell2.appendChild(t3);
-        return row;
+        if (this.check(key)) {
+            let index = 0;
+            for (var i = 0; i < table.rows.length; i++) {
+                let label = document.getElementById('label' + (i + 1)).innerHTML;
+                if (key > label)
+                    index++;
+            }
+            let row = table.insertRow(index);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            cell2.id = "cell2";
+            let label = document.createElement("label");
+            label.id = "label" + table.rows.length;
+            label.innerHTML = key;
+            let txtbox = document.createElement("input");
+            txtbox.id = "txtbox" + table.rows.length;
+            let num = table.rows.length;
+            txtbox.onchange = function () {
+                extensionWidget_1.textBoxValues[num - 1] = txtbox.value;
+            };
+            txtbox.autocomplete = "off";
+            txtbox.placeholder = key;
+            if (!key.includes("Method")) {
+                txtbox.addEventListener('keypress', (e) => {
+                    this.showSuggestions(txtbox.value, extensionWidget_1.res, e.target.id);
+                });
+                let suggestions = document.createElement("div");
+                suggestions.id = "suggestions" + table.rows.length;
+                suggestions.className = "suggestions";
+                cell2.appendChild(suggestions);
+            }
+            cell1.appendChild(label);
+            cell2.appendChild(txtbox);
+            let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values;
+            if (values[key].extension == 1) {
+                let cell3 = row.insertCell(2);
+                let t3 = document.createElement("button");
+                t3.innerHTML = "+";
+                t3.id = "btn" + key;
+                cell3.appendChild(t3);
+                t3.addEventListener('click', (event) => {
+                    this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
+                });
+            }
+        }
     }
     //when button is clicked adds one label and one input of the specific class that the user wants to insert one more 
-    buttonClick(table, key, values, classes) {
-        console.log(JSON.stringify(values));
-        if (extensionWidget_1.state.statePatternSelection == "Abstract Factory") {
-            if (key.includes("AbstractProduct")) {
-                var newValues = JSON.parse(JSON.stringify(values));
-                var count = this.countKeys(values, key.substr(3));
-                var labelAbstrProd = this.updateLabel(key.substr(3), count);
-                newValues[labelAbstrProd] = { name: "", extension: 1, classes: {} };
-                var count2 = this.countKeys(newValues[key.substr(3)]["classes"], "Product") - 1;
-                for (var j = 0; j < count2; j++) {
-                    var labelProduct = "Product" + count + "." + (j + 1);
+    extensionButtonClick(table, key, values) {
+        let newValues = JSON.parse(JSON.stringify(values));
+        let count = this.countKeys(values, key.substr(3));
+        let label = this.updateLabel(key.substr(3), count + 1);
+        console.log(label + "   count: " + count);
+        if (extensionWidget_1.state.statePatternSelection == "AbstractFactory") {
+            if (key.includes("Product") && !key.includes("ConcreteProduct")) {
+                newValues[label] = { name: "", extension: 0 };
+                this.insertCells(table, label);
+                var numProd = (this.countKeys(values, "ConcreteProduct") / count) - 1; // number of "Products" in each Product
+                console.log(numProd);
+                for (let j = 0; j < numProd; j++) {
+                    let labelProduct = "ConcreteProduct" + (count + 1) + "." + (j + 1);
+                    console.log(labelProduct);
                     this.insertCells(table, labelProduct);
-                    newValues[labelAbstrProd]["classes"][labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+                    newValues[labelProduct] = { "name": "", "extension": 0 };
                 }
             }
             else {
-                var count = this.countKeys(classes, key.substr(3));
-                var labelConFactory = this.updateLabel("ConcreteFactory ", count);
-                this.insertCells(table, labelConFactory);
-                var newValues = JSON.parse(JSON.stringify(values));
-                var numAbstrProd = this.countKeys(newValues, "AbstractProduct") - 1;
-                newValues["AbstractFactory"]["classes"][labelConFactory] = JSON.stringify({ "name": "", "extension": 1 });
-                for (var j = 0; j < numAbstrProd; j++) {
-                    var labelProduct = "Product" + (j + 1) + "." + count;
+                this.insertCells(table, label);
+                let numProd = this.countKeys(newValues, "Product");
+                newValues[label] = { "name": "", "extension": 0 };
+                for (let j = 0; j < numProd; j++) {
+                    let labelProduct = "ConcreteProduct" + (j + 1) + "." + (count + 1);
                     this.insertCells(table, labelProduct);
-                    newValues["AbstractProduct" + (j + 1)]["classes"][labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
+                    newValues[labelProduct] = { "name": "", "extension": 0 };
                 }
             }
         }
-        else if (extensionWidget_1.state.statePatternSelection == "Builder") {
-            if (key.includes("Product")) {
-                var count = this.countKeys(values, key.substr(3));
-            }
-            else {
-                var count = this.countKeys(classes, key.substr(3));
-            }
-            var labelProduct = this.updateLabel("Product ", count);
-            var labelConBuilder = this.updateLabel("ConcreteBuilder ", count);
-            var newValues = JSON.parse(JSON.stringify(values));
-            newValues[labelProduct] = JSON.stringify({ "name": "", "extension": 1 });
-            newValues["Builder"]["classes"][labelConBuilder] = JSON.stringify({ "name": "", "extension": 1 });
-            this.insertCells(table, labelProduct);
+        else if (extensionWidget_1.state.statePatternSelection == "Builder" && key.includes("Product")) {
+            let labelConBuilder = this.updateLabel("ConcreteBuilder ", count + 1);
+            newValues[label] = { "name": "", "extension": 0 };
+            newValues[labelConBuilder] = { "name": "", "extension": 0 };
+            this.insertCells(table, label);
             this.insertCells(table, labelConBuilder);
         }
+        else if (extensionWidget_1.state.statePatternSelection == "Factory Method") {
+            let labelConCreator = this.updateLabel("ConcreteCreator ", count + 1);
+            newValues[label] = { "name": "", "extension": 0 };
+            newValues[labelConCreator] = { "name": "", "extension": 0 };
+            this.insertCells(table, label);
+            this.insertCells(table, labelConCreator);
+        }
+        else if (extensionWidget_1.state.statePatternSelection == "Decorator" && key.includes("ConcreteDecorator")) {
+            console.log("label1" + key.substr(3));
+            let labelConDec = this.updateLabel(key.substr(3), (count / 2 + 1));
+            console.log("label2" + labelConDec);
+            let labelmethod = labelConDec + "Method";
+            newValues[label] = { "name": "", "extension": 0 };
+            newValues[labelmethod] = { "name": "", "extension": 0 };
+            this.insertCells(table, labelConDec);
+            this.insertCells(table, labelmethod);
+        }
+        else if (extensionWidget_1.state.statePatternSelection == "Flyweight") {
+            let label = this.updateLabel(key.substr(3), count / 2 + 1);
+            let labelAttr = label + "Attribute";
+            newValues[label] = { "name": "", "extension": 0 };
+            newValues[labelAttr] = { "name": "", "extension": 1 };
+            this.insertCells(table, label);
+            this.insertCells(table, labelAttr);
+        }
         else if (extensionWidget_1.state.statePatternSelection == "Command") {
-            if (key.includes("Receiver")) {
-                var count = this.countKeys(values, key.substr(3));
+            if (key.includes("MethodParameter")) {
+                let count = 0;
+                key = key.substr(3);
+                let nkey = key.substr(0, key.length - 1);
+                console.log("key.length " + key.length);
+                console.log("nkey " + nkey);
+                Object.keys(newValues).forEach((vkey) => {
+                    if (vkey.includes(nkey)) {
+                        count++;
+                    }
+                });
+                console.log("count " + count);
+                let label = this.updateLabel(key, count + 1);
+                newValues[label] = { "name": "", "extension": 0 };
+                this.insertCells(table, label);
             }
             else {
-                var count = this.countKeys(classes, key.substr(3));
+                let count2 = this.countKeys(values, "MethodParameter");
+                let labelConCommand = this.updateLabel("ConcreteCommand ", (count - count2) / 2 + 1);
+                let labelConComMeth = labelConCommand + "Method";
+                let labelConComMethParam = labelConCommand + "MethodParameter1";
+                this.insertCells(table, labelConCommand);
+                this.insertCells(table, labelConComMeth);
+                this.insertCells(table, labelConComMethParam);
+                newValues[labelConCommand] = { "name": "", "extension": 0 };
+                newValues[labelConComMeth] = { "name": "", "extension": 0 };
+                newValues[labelConComMethParam] = { "name": "", "extension": 1 };
             }
-            var labelReceiver = this.updateLabel("Receiver ", count);
-            var labelConCommand = this.updateLabel("ConcreteCommand ", count);
-            this.insertCells(table, labelReceiver);
-            this.insertCells(table, labelConCommand);
-            //inserts new attributes in json
-            var newValues = JSON.parse(JSON.stringify(values));
-            newValues[labelReceiver] = JSON.stringify({ "name": "", "extension": 1 });
-            newValues["Command"]["classes"][labelConCommand] = JSON.stringify({ "name": "", "extension": 1 });
-            console.log(JSON.stringify(newValues));
-        }
-        else if (extensionWidget_1.state.statePatternSelection == "Iterator") {
-            var count = this.countKeys(classes, key.substr(3));
-            var labelConAggregate = this.updateLabel("ConcreteAggregate ", count);
-            var labelConIterator = this.updateLabel("ConcreteIterator ", count);
-            //button insertion 
-            this.insertCells(table, labelConAggregate);
-            this.insertCells(table, labelConIterator);
-            var newValues = JSON.parse(JSON.stringify(values));
-            newValues["Aggregate"]["classes"][labelConAggregate] = JSON.stringify({ "name": "", "extension": 1 }); //attribute "classes" in Aggreagate attribute gets new json value
-            newValues["Iterator"]["classes"][labelConIterator] = JSON.stringify({ "name": "", "extension": 1 });
-            console.log(JSON.stringify(newValues));
         }
         else {
-            if (classes == "") {
-                var count = this.countKeys(values, key.substr(3));
-                var label = this.updateLabel(key.substr(3), count);
-                var newValues = JSON.parse(JSON.stringify(values));
-                newValues[label] = JSON.stringify({ "name": "", "extension": 1 }); //attribute "classes" in Aggreagate attribute gets new json value
-            }
-            else {
-                var count = this.countKeys(classes, key.substr(3));
-                var label = this.updateLabel(key.substr(3), count);
-                var newClasses = JSON.parse(JSON.stringify(classes));
-                newClasses[label] = JSON.stringify({ "name": "", "extension": 1 });
-            }
+            newValues[label] = { "name": "", "extension": 0 };
             this.insertCells(table, label);
         }
-        //console.log(JSON.stringify(newValues));
         extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = newValues;
+        console.log(JSON.stringify(newValues));
     }
-    buttonClick2(rows) {
-        if (rows != extensionWidget_1.textBoxValues.length) {
+    async buttonClick2(rows) {
+        if (!this.checkEmptyInputs(rows)) {
             this.messageService.info("You need to give name for ALL the classes!");
         }
         else {
-            this.messageService.info("Well done! Code is coming...");
+            if (this.checkInputs() == "Inputs are valid") {
+                if (extensionWidget_1.state.statePatternSelection == "Adapter") {
+                    let adapteeName = document.getElementById("txtbox4").value;
+                    var getUrl = window.location.href;
+                    var methodNames = await this.helloBackendService.getMethods(getUrl, adapteeName);
+                    console.log(methodNames);
+                    if (extensionWidget_1.res.includes(adapteeName)) {
+                        //call function to get methods (methodNames) of adapteeName class 
+                        let methodName = document.getElementById("txtbox5").value;
+                        if (methodNames.includes(methodName)) {
+                            this.updateJsonObject();
+                            this.messageService.info("Well done! Code is coming...");
+                            await this.helloBackendService.codeGeneration(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
+                        }
+                        else {
+                            this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: " + methodNames);
+                        }
+                    }
+                    else {
+                        this.messageService.info("For Adaptee you need to choose a class name that already exists: " + extensionWidget_1.res);
+                    }
+                }
+                else if (extensionWidget_1.state.statePatternSelection == "AbstractFactory") {
+                    this.updateJsonObject();
+                    this.insertInputsAbstractFactory();
+                    this.messageService.info("Well done! Code is coming...");
+                    await this.helloBackendService.codeGeneration(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
+                }
+                else if (extensionWidget_1.state.statePatternSelection == "FactoryMethod") {
+                    this.updateJsonObject();
+                    this.insertInputsFactoryMethod();
+                    this.messageService.info("Well done! Code is coming...");
+                    await this.helloBackendService.codeGeneration(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
+                }
+                else if (extensionWidget_1.state.statePatternSelection == "Builder") {
+                    this.updateJsonObject();
+                    this.insertInputsBuilder();
+                    this.messageService.info("Well done! Code is coming...");
+                    await this.helloBackendService.codeGeneration(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
+                }
+                else {
+                    this.updateJsonObject();
+                    this.messageService.info("Well done! Code is coming...");
+                    await this.helloBackendService.codeGeneration(window.location.href, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values, extensionWidget_1.state.statePatternSelection);
+                }
+            }
+            else {
+                this.messageService.info("Inputs are invalid");
+            }
         }
     }
     updateLabel(value, count) {
-        if (value.includes('.')) {
-            return value.substring(0, value.length - 2) + '.' + count;
-        }
-        return value.slice(0, -1) + count;
+        return (value.includes('.') ? value.substring(0, value.length - 2) + '.' + count : value.slice(0, -1) + count);
     }
     countKeys(values, keyString) {
         let count = 0;
-        keyString = keyString.slice(0, -1);
+        let str = keyString.replace(/\d/g, ''); //removes the numbers from the string and returns a new one
         Object.keys(values).forEach((key) => {
-            if (key.includes(keyString)) {
+            if (key.includes(str)) {
                 count++;
             }
         });
-        return count + 1;
+        return count;
     }
-    showSuggestions(value, id) {
-        var res = document.getElementById("suggestions" + id.substr(6));
+    //autocomplete
+    showSuggestions(value, table, id) {
+        let res = document.getElementById("suggestions" + id.substr(6));
         let list = '';
-        let terms = this.autocompleteMatch(value);
+        let terms = this.autocompleteMatch(value, table);
         for (var i = 0; i < terms.length; i++) {
             list += '<li>' + terms[i] + '</li>';
         }
         res.innerHTML = "<ul id='list" + id.substr(6) + "'> " + list + "</ul>";
-        var ul = document.getElementById("list" + id.substr(6));
+        let ul = document.getElementById("list" + id.substr(6));
+        let input = document.getElementById("txtbox" + id.substr(6));
         ul.onclick = function (event) {
-            var input = document.getElementById("txtbox" + id.substr(6));
             input.value = event.target.innerHTML;
             res.style.visibility = 'hidden';
         };
+        let hideBlock = function () {
+            res.style.visibility = 'hidden';
+        };
+        ul.addEventListener('mouseleave', hideBlock);
+        input.addEventListener('keypress', (e) => {
+            res.style.visibility = 'visible';
+            this.showSuggestions(document.getElementById("txtbox" + id.substr(6)).value, table, e.target.id);
+        });
     }
-    autocompleteMatch(input) {
+    //autocomplete
+    autocompleteMatch(input, table) {
         if (input == '') {
             return [];
         }
-        var reg = new RegExp(input);
-        return extensionWidget_1.res.filter(function (term) {
+        let reg = new RegExp('^' + input);
+        return table.filter(function (term) {
             if (term.match(reg)) {
                 return term;
             }
         });
     }
+    updateJsonObject() {
+        let table = document.getElementById('show_pattern_table');
+        for (let i = 0; i < table.rows.length; i++) {
+            let label = document.getElementById('label' + (i + 1)).innerHTML;
+            let txtbox = document.getElementById('txtbox' + (i + 1)).value;
+            console.log(txtbox);
+            if (txtbox != undefined)
+                extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values[label].name = txtbox;
+        }
+    }
+    checkInputs() {
+        let count = 0;
+        const table = document.getElementById('show_pattern_table');
+        if (this.checkInputsForSameValues()) {
+            return ("Inputs are invalid");
+        }
+        else {
+            for (let i = 0; i < table.rows.length; i++) {
+                const txtbox = document.getElementById('txtbox' + (i + 1)).value;
+                const labelvalue = document.getElementById('label' + (i + 1)).innerHTML;
+                if (labelvalue.includes("Method")) {
+                    if (txtbox.match("^([a-z]{1}[a-zA-Z]*[0-9]*)$")) { //camel writing names of methods
+                        count++;
+                    }
+                }
+                else {
+                    if (txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) { //general case
+                        count++;
+                    }
+                }
+            }
+            return (count == (table.rows.length) ? "Inputs are valid" : "Inputs are invalid");
+        }
+    }
+    //method that checks for duplicate values
+    checkInputsForSameValues() {
+        const uniqueElements = extensionWidget_1.textBoxValues;
+        let resultToReturn = false;
+        for (let i = 0; i < uniqueElements.length; i++) { // nested for loop
+            for (let j = 0; j < uniqueElements.length; j++) {
+                // prevents the element from comparing with itself
+                if (i != j) {
+                    // check if elements' values are equal
+                    if (uniqueElements[i] == uniqueElements[j] && uniqueElements[i] != undefined) {
+                        // duplicate element present                  
+                        resultToReturn = true;
+                        // terminate inner loop
+                        break;
+                    }
+                }
+            }
+            // terminate outer loop                                                                      
+            if (resultToReturn) {
+                break;
+            }
+        }
+        return (resultToReturn);
+    }
+    refreshPage(table) {
+        table.innerHTML = "";
+        document.getElementById("btn-get-code").style.visibility = 'visible';
+        document.getElementById("elements").style.visibility = 'hidden';
+    }
+    insertInputsAbstractFactory() {
+        let values = JSON.parse(JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
+        let listofFamily = [];
+        let listofProducts = [];
+        Object.keys(values).forEach((key) => {
+            if (key.includes("Family")) {
+                listofFamily.push(values[key].name);
+            }
+            else if (key.includes("Product") && !key.includes("ConcreteProduct")) {
+                listofProducts.push(values[key].name);
+            }
+        });
+        Object.keys(values).forEach((key) => {
+            if (key.includes("ConcreteProduct")) {
+                let array = key.split('.');
+                var numberofProduct = array[0].replace(/\D/g, '');
+                values[key].name = listofFamily[Number(array[1]) - 1].split("Factory")[0] + listofProducts[Number(numberofProduct) - 1];
+                console.log(key + " " + values[key].name);
+            }
+        });
+        extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = values;
+    }
+    insertInputsFactoryMethod() {
+        let values = JSON.parse(JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
+        let listofConCreators = [];
+        Object.keys(values).forEach((key) => {
+            if (key.includes("ConcreteCreator"))
+                listofConCreators.push(values[key].name);
+        });
+        Object.keys(values).forEach((key) => {
+            if (key.includes("ConcreteProduct")) {
+                var numofConCreator = key.match(/\d/g);
+                values[key].name = listofConCreators[Number(numofConCreator) - 1].split('Dialog')[0] + values.Product.name;
+            }
+        });
+        extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = values;
+    }
+    insertInputsBuilder() {
+        let values = JSON.parse(JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
+        let listofProducts = [];
+        Object.keys(values).forEach((key) => {
+            if (key.includes("Product"))
+                listofProducts.push(values[key].name);
+        });
+        console.log(listofProducts);
+        Object.keys(values).forEach((key) => {
+            if (key.includes("ConcreteBuilder")) {
+                var numofConBuilder = key.match(/\d/g);
+                values[key].name = listofProducts[Number(numofConBuilder) - 1] + "Builder";
+            }
+        });
+        extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values = values;
+    }
+    checkEmptyInputs(rows) {
+        let flag = true;
+        let i = 0;
+        while (i < rows && flag == true) {
+            const txtvalue = document.getElementById("txtbox" + (i + 1)).value;
+            const label = document.getElementById("label" + (i + 1)).innerHTML;
+            if (txtvalue == "" && !label.includes("ConcreteProduct"))
+                flag = false; //the inputs have to be non empty except for the input whose label contains the ConcreteProduct role
+            else {
+                i++;
+            }
+        }
+        return flag;
+    }
+    check(key) {
+        return (!key.includes("ConcreteProduct") || extensionWidget_1.state.statePatternSelection != "AbstractFactory") && (!key.includes("ConcreteProduct") || extensionWidget_1.state.statePatternSelection != "FactoryMethod") && (!key.includes("ConcreteBuilder") || extensionWidget_1.state.statePatternSelection != "Builder");
+    }
 };
 extensionWidget.ID = 'extension:widget';
 extensionWidget.LABEL = 'Extension Widget';
 extensionWidget.state = {
-    statePatternSelection: '',
+    statePatternSelection: ''
 };
 extensionWidget.textBoxValues = [];
 extensionWidget.data = JSON.parse(JSON.stringify(data_json_1.default));
+extensionWidget.explanation = JSON.parse(JSON.stringify(explanation_json_1.default));
 __decorate([
     inversify_1.inject(core_1.MessageService),
     __metadata("design:type", core_1.MessageService)
