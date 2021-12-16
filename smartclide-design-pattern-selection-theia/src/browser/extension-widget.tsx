@@ -394,7 +394,6 @@ export class extensionWidget extends ReactWidget {
 		for(let i = 0 ; i < table.rows.length ; i++){
 			let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
 			let txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
-			console.log(txtbox)
 			if(txtbox!=undefined) extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].name = txtbox;
 			}
 	}
@@ -460,6 +459,7 @@ export class extensionWidget extends ReactWidget {
 		let listofProducts:string[] = [];
 		Object.keys(values).forEach((key)=>{
 			if(key.includes("Family")){
+				values[key].name = values[key].name + "Factory";
 				listofFamily.push(values[key].name);
 			}else if(key.includes("Product") && !key.includes("ConcreteProduct")){
 				listofProducts.push(values[key].name);
@@ -480,7 +480,10 @@ export class extensionWidget extends ReactWidget {
 		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
 		let listofConCreators:string[] = [];
 		Object.keys(values).forEach((key)=>{
-			if(key.includes("ConcreteCreator")) listofConCreators.push(values[key].name);
+			if(key.includes("ConcreteCreator")) {
+				values[key].name = values[key].name + values.Creator.name;
+				listofConCreators.push(values[key].name);
+			}
 		});
 		Object.keys(values).forEach((key)=>{
 			if(key.includes("ConcreteProduct")){
@@ -489,6 +492,7 @@ export class extensionWidget extends ReactWidget {
 			}
 		});
 		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
+		console.log(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values))
 	}
 	insertInputsBuilder():void{
 		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
