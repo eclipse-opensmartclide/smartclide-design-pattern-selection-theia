@@ -62,6 +62,7 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file);
 
 		let file2 : patternParticipatingClass = new abstractClass(obj.Builder.name);
+		file2.addMethod(new Method("reset","void",true,"public","",[]));
 		Object.keys(obj).forEach((key)=>{
 			if(key.includes("BuilderMethod")){
 				file2.addMethod(new Method(obj[key].name, "void",true, "public","",[]));
@@ -72,19 +73,20 @@ export class CodeGenerator {
 		Object.keys(obj).forEach((key)=>{
 			if(key.includes("ConcreteBuilder")){
 				let file3 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Builder.name);
-				let count = 1;
+				let attributeName = "";
 				Object.keys(obj).forEach((innerkey)=>{
 					var match = key.match(/\d/g);
 					var innermatch = innerkey.match(/\d/g);
 					if (innerkey.includes("Product") && (innermatch != null && match !=null && innermatch.join()=== match.join())){
 						file3.addAttribute(new Attribute(obj[innerkey].name.toLowerCase(),obj[innerkey].name,"private"));
+						attributeName = obj[innerkey].name;
 					}else if(innerkey.includes("BuilderMethod")){
 						file3.addMethod(new Method(obj[innerkey].name, "void",false, "public","",[]));
-						file3.addMethod(new Method("buildPart"+count,"void",false,"public","",[]))
 					}else{
 
 					}
 				});
+				file3.addMethod(new Method("reset","void",false,"public","\t \t this."+attributeName.toLowerCase()+" = new "+attributeName+"();",[]));
 				this.fillPromise(ppc, file3);
 			}else{
 				if(!key.includes("BuilderMethod") && !key.includes("Director") && !key.includes("Builder")){
@@ -133,7 +135,7 @@ export class CodeGenerator {
 		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Singleton.name);
 		file1.addAttribute(new Attribute("instance",obj.Singleton.name,"private"));
 		file1.addMethod(new Method(obj.Singleton.name,"", false, "private", "\t \t instance  =  new "+obj.Singleton.name + "();",[]));
-		file1.addMethod(new Method("getInstance",obj.Singleton.name, false, "private", "\t \t if(instance == null) { \n \t\t instance = new "+obj.Singleton.name +"();\n \t \t}\n \t \t return instance;",[]));
+		file1.addMethod(new Method("getInstance",obj.Singleton.name, false, "private", "\t \t if(instance == null) { \n \t \t instance = new "+obj.Singleton.name +"();\n \t \t}\n \t \t return instance;",[]));
 		this.fillPromise(ppc, file1);
 		
 		return ppc.object;
@@ -149,9 +151,7 @@ export class CodeGenerator {
 		Object.keys(obj).forEach((key)=>{
 			if(key.includes("ConcretePrototype")){
 				let file2 :patternParticipatingClass = new ConcreteClass(obj[key].name,obj.Prototype.name);
-				//file2.addAttribute(new Attribute("field1","",""));
 				file2.addMethod(new Method("clone",obj.Prototype.name, false,"public","\t \t return new "+obj[key].name + "(this);",[]));
-				file2.addMethod(new Method("concrete"+obj[key].name,obj.Prototype.name, false,"public","\t \t this.field1 = prototype.field",[new Attribute("prototype",obj.Prototype.name,"public")]));
 				this.fillPromise(ppc, file2);
 			}
 		});
