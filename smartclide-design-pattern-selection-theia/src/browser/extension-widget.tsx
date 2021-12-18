@@ -86,6 +86,9 @@ export class extensionWidget extends ReactWidget {
 				<button id="btn-refresh" type="button" title='Refresh' onClick={_a => this.refreshPage(document.getElementById('show_pattern_table') as HTMLTableElement)}> <i className = "fa fa-refresh" ></i></button>
 				<br /> 
 				<br /> 
+				<button id="btn-wizard" type="button" title='Wizard' onClick={_a => this.runWizard()}>Wizard</button>
+				<br /> 
+				<br />
 				<button id="btn-get-code" type="button" title='Assign roles to classes and methods' onClick={_a => this.runprocess()}>Assign roles to classes and methods</button>
 				<br /> 
 				<div id="show_pattern"> 
@@ -93,16 +96,23 @@ export class extensionWidget extends ReactWidget {
 				</div>
 				<br /> 
 				<div id="result">
-					
+					<fieldset>
+						<details>
+							<summary id={'description'}></summary>
+							<p id={'example'}></p>
+							<img id = "image" alt= "Class Diagram " ></img>
+						</details>
+					</fieldset>
 					<table id="show_pattern_table">
 					</table>
 					<div id="elements">
 						<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Code </button>
-						<p id={'description'}></p>
-						<p id={'example'}></p>
-						<img id = "image" alt= "Class Diagram " ></img>
 					</div>
 				</div>
+			</div>
+
+			<div id="divWiz">
+
 			</div>
 			</div>
 	}
@@ -114,17 +124,29 @@ export class extensionWidget extends ReactWidget {
 			var getUrl = window.location.href;
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
 
+			(document.getElementById("result") as HTMLElement).style.visibility = 'visible';
+			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
+			(document.getElementById('description') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].description;
+			(document.getElementById('example') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].example;
+
 			//show the JSON values for the chosen key-pattern
 			let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
 			var table = document.getElementById('show_pattern_table') as HTMLTableElement;
 			Object.keys(values).forEach(async (key) =>{
 				this.insertCells(table, key);
+				let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values;
+				if(values[key].extension==1){
+					let cell3 = this.insertCell(2);
+					let t3 = document.createElement("button");
+					t3.innerHTML = "+";
+					t3.id = "btn"+ key;
+					cell3.appendChild(t3);
+					t3.addEventListener('click', (event) => {
+						this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
+					});	
+				}
 			});
-			(document.getElementById("elements") as HTMLElement).style.visibility = 'visible';
-			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
-			(document.getElementById('description') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].description;
-			(document.getElementById('example') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].example;
-			
+			//await this.helloBackendService.main();
 		}else{
 			this.messageService.info('You need to choose a software pattern!');
 		}
@@ -466,7 +488,196 @@ export class extensionWidget extends ReactWidget {
 		table.innerHTML = "";
 		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
 		(document.getElementById("elements") as HTMLElement).style.visibility = 'hidden';
+		window.location.reload();
+	}
 
+	runWizard(){
+		(document.getElementById("issues") as HTMLElement).style.visibility = 'hidden';
+		(document.getElementById("issues") as HTMLElement).style.height = '0px';
+		let divWiz = document.getElementById('divWiz') as HTMLDivElement;
+		divWiz.style.marginLeft = '10px';
+		let divCont = document.createElement('div');
+		createLabel('Choose the type of the pattern: <br>', 'label0', divWiz);
+		createLabel('Creational', 'label1', divWiz)
+		createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);
+		let radio1 = document.getElementById('radio1') as HTMLInputElement;
+		radio1.onclick = function(){	
+				divCont.innerHTML = "";
+				let divCont2 = document.createElement('div');
+				createLabel('<br> Do you want to create a completely new object or to create one by reusing an existing one?<br>', 'label4', divCont);
+				createLabel('Create new object', 'label11',divCont);
+				createInput('', 'radio11', '', 'new_existed', 'radio', divCont);
+				let radio11 = document.getElementById('radio11') as HTMLInputElement;
+				radio11.onclick = function(){	
+						divCont2.innerHTML = "";
+						let divCont3 = document.createElement('div');
+						createLabel('<br> Give the name of the Product that you want to create (Let X the name of the product)<br>', 'labelQuestion3', divCont2);
+						createInput('Product name', 'product_name', 'infoField', '', 'text', divCont2);
+						createButton('Next', 'buttonNext1', divCont2);
+						let buttonNext1 = document.getElementById('buttonNext1') as HTMLButtonElement;
+						buttonNext1.onclick = function(){
+							divCont3.innerHTML = "";
+							let divCont4 = document.createElement('div');
+							createLabel('<br> Does the Product has sub-categories (Concrete Products)? <br>', 'labelQuestion4', divCont3);
+							createLabel('Yes', 'label31', divCont3);
+							createInput('', 'radio31', '', 'yes_no', 'radio', divCont3);
+							let radio31 = document.getElementById('radio31') as HTMLInputElement;
+							radio31.onclick = function(){
+								divCont4.innerHTML = "";
+								let divCont5 = document.createElement('div');
+								createLabel('<br> How many sub-categories exist? <br>', 'labelQuestion5', divCont4);
+								createInput('0', 'subcategoriesNum', '', '', 'number', divCont4);
+								createButton('Next', 'buttonNext2', divCont4);
+								let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
+								buttonNext2.onclick = function(){
+									divCont5.innerHTML = "";
+									let divCont6 = document.createElement('div');
+									createLabel('<br> Please give the names of the Concrete Products <br>', 'labelQuestion6', divCont5);
+									let num = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+									for (var i=1; i<=num; i++){
+										createInput('Concrete Product name '+i, 'txtConcreteProductsName'+i, 'infoField', '', 'text', divCont5);
+									}
+									createButton('Next', 'buttonNext3', divCont5);
+									let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
+									buttonNext3.onclick = function(){
+										divCont6.innerHTML = "";
+										let divCont7 = document.createElement('div');
+										createLabel('<br> Can the Products be classified in a Family? <br>', 'labelQuestion7', divCont6);
+										createLabel('Yes', 'label61', divCont6);
+										createInput('', 'radio61', '', 'yes_no', 'radio', divCont6);
+										let radio61 = document.getElementById('radio61') as HTMLInputElement;
+										radio61.onclick = function(){
+											divCont7.innerHTML = "";
+											let divCont8 = document.createElement('div');
+											createLabel('<br> How many Families of Products exist? <br>', 'labelQuestion8', divCont7);
+											createInput('0', 'familiesNum', '', '', 'number', divCont7);
+											createButton('Next', 'buttonNext4', divCont7);
+											let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
+											buttonNext4.onclick = function(){
+												divCont8.innerHTML = "";
+												let divCont9 = document.createElement('div');
+												createLabel('<br> Please give the names of the Components <br>', 'labelQuestion9', divCont8);
+												let num = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
+												for (var i=1; i<=num; i++){
+													createInput('Component name '+i, 'txtComponentName', 'infoField', '', 'text', divCont8);
+												}
+												createButton('Next', 'buttonNext5', divCont8);
+												let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
+												buttonNext5.onclick = function(){
+													createLabel('<br> Abstract Factory Pattern   ', 'labelQuestion10', divCont9);
+													createButton('Get Code', 'getcodeAbstractFactoryPattern', divCont9);
+													let buttonCodeAFP = document.getElementById('getcodeAbstractFactoryPattern') as HTMLButtonElement;
+													buttonCodeAFP.onclick = function(){
+														//code generation
+													}
+												}
+												divCont8.appendChild(divCont9);
+											}
+											divCont7.appendChild(divCont8);
+										}
+										createLabel('No', 'label62', divCont6);
+										createInput('', 'radio62', '', 'yes_no', 'radio', divCont6);
+										let radio62 = document.getElementById('radio62') as HTMLInputElement;
+										radio62.onclick = function(){
+											divCont7.innerHTML = "";
+											let divCont8 = document.createElement('div');
+											createLabel('<br> Can Product be created as series of steps which is different in every subcategory? <br>', 'labelQuestion11', divCont7);
+											createLabel('Yes', 'label71', divCont7);
+											createInput('', 'radio71', '', 'yes_no', 'radio', divCont7);
+											let radio71 = document.getElementById('radio71') as HTMLInputElement;
+											radio71.onclick = function(){
+												divCont8.innerHTML = "";
+												let divCont9 = document.createElement('div');
+												createLabel('<br> How many Steps are involved ?  <br>', 'labelQuestion12', divCont8);
+												createInput('0', 'stepsNum', '', '', 'number', divCont8);
+												createButton('Next', 'buttonNext6', divCont8);
+												let buttonNext6 = document.getElementById('buttonNext6') as HTMLButtonElement;
+												buttonNext6.onclick = function(){
+													divCont9.innerHTML = "";
+													let divCont10 = document.createElement('div');
+													createLabel('<br> Please give the name of the steps  <br>', 'labelQuestion13', divCont9);
+													let num = parseInt((document.getElementById('stepsNum') as HTMLInputElement).value);
+													for (var i=1; i<=num; i++){
+														createInput('Step name '+i, 'txtStepName'+i, 'infoField', 'txtStepsName', 'text', divCont9);
+													}
+													createButton('Next', 'buttonNext7', divCont9);
+													let buttonNext7 = document.getElementById('buttonNext7') as HTMLButtonElement;
+													buttonNext7.onclick = function(){
+														createLabel('<br> Builder Pattern   ', 'labelPattern1', divCont10);
+														createButton('Get Code', 'getcodeBuildPattern', divCont10);
+														let buttonCodeBP = document.getElementById('getcodeBuildPattern') as HTMLButtonElement;
+														buttonCodeBP.onclick = function(){
+														//code generation
+														}
+													}
+													divCont9.appendChild(divCont10);
+												}
+												divCont8.appendChild(divCont9);
+											}
+											createLabel('No', 'label72', divCont7);
+											createInput('', 'radio72', '', 'yes_no', 'radio', divCont7);
+											let radio72 = document.getElementById('radio72') as HTMLInputElement;
+											radio72.onclick = function(){
+												divCont8.innerHTML = "";
+												let divCont9 = document.createElement('div');
+												createLabel('<br> What is the name of the Creator (e.g., Oven) of Product? <br>', 'labelQuestion14', divCont8);
+												createInput('Creator name', 'txtCreatorName', 'infoField', 'txtCreatorName', 'text', divCont8);
+												createButton('Next', 'buttonNext8', divCont8);
+												let buttonNext8 = document.getElementById('buttonNext8') as HTMLButtonElement;
+												buttonNext8.onclick = function(){
+													createLabel('<br> Factory Method Pattern   ', 'labelQuestion15', divCont9);
+													createButton('Get Code', 'getcodeFactoryMethodPattern', divCont9);
+													let buttonCodeFMP = document.getElementById('getcodeFactoryMethodPattern') as HTMLButtonElement;
+													buttonCodeFMP.onclick = function(){
+														//code generation
+													}
+												}
+												divCont8.appendChild(divCont9);
+											}
+											divCont7.appendChild(divCont8);
+										}
+										divCont6.appendChild(divCont7);										
+									}
+									divCont5.appendChild(divCont6);
+								}
+								divCont4.appendChild(divCont5);
+							}
+							createLabel('No', 'label32', divCont3);
+							createInput('', 'radio32', '', 'yes_no', 'radio', divCont3);
+							let radio32 = document.getElementById('radio32') as HTMLInputElement;
+							radio32.onclick = function(){
+								divCont4.innerHTML = "";
+								createLabel('<br> There is no pattern <br>', 'labelQuestion16', divCont4);
+							}
+							divCont3.appendChild(divCont4);
+						}
+						divCont2.appendChild(divCont3);
+				}
+				createLabel('Reuse an existing one', 'label12', divCont);
+				createInput('', 'radio12', '', 'new_existed', 'radio', divCont);
+				let radio12 = document.getElementById('radio12') as HTMLInputElement;
+				radio12.onclick = function(){	
+					divCont2.innerHTML = "";
+					createLabel('<br> You chose existed <br>', 'labelQuestion17', divCont2);
+				}
+				divCont.appendChild(divCont2);
+		}
+		createLabel('Structural', 'label2', divWiz);
+		createInput('', 'radio2', '', 'patternTypes', 'radio', divWiz);
+		let radio2 = document.getElementById('radio2') as HTMLInputElement;
+		radio2.onclick = function(){
+			divCont.innerHTML = "";
+			createLabel('<br> Do you want to ... <br>', 'labelQuestion18', divCont);
+		}
+		createLabel('Behavioral', 'label3', divWiz);
+		createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
+		let radio3 = document.getElementById('radio3') as HTMLInputElement;
+		radio3.onclick = function(){
+			divCont.innerHTML = "";
+			createLabel('<br> Do you want to ... <br>', 'labelQuestion19', divCont);
+		}
+		
+		divWiz.appendChild(divCont);
 	}
 
 	insertInputsAbstractFactory():void{
@@ -544,4 +755,28 @@ export class extensionWidget extends ReactWidget {
 	}
 }
 
+function createLabel(innerMessage: string, id: string, parent: HTMLElement){
+	let labelQuestion = document.createElement('label');
+	labelQuestion.innerHTML = innerMessage;
+	labelQuestion.id = id;
+	parent.appendChild(labelQuestion);
+}
 
+function createInput(innerMessage: string, id: string, classname: string, name: string, type: string, parent: HTMLElement){
+	let inputField = document.createElement('input');
+	inputField.innerHTML = innerMessage;
+	inputField.id = id;
+	if (!id.includes('radio') && !id.includes('Num')){
+		inputField.className = classname;
+	}
+	inputField.name = name;
+	inputField.type = type;
+	parent.appendChild(inputField);
+}
+
+function createButton(innerMessage: string, id: string, parent: HTMLElement){
+	let button = document.createElement('button');
+	button.innerHTML = innerMessage;
+	button.id = id;
+	parent.appendChild(button);
+}

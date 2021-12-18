@@ -12,6 +12,13 @@
 9 silly getExecOpts }
 10 silly runScriptInPackageStreaming [ 'prepare', [], 'browser-app' ]
 11 silly getExecOpts {
+<<<<<<< HEAD
+11 silly getExecOpts   cwd: 'C:\\Users\\test\\Desktop\\smartclide-design-pattern-selection-theia\\browser-app'
+11 silly getExecOpts }
+12 error execute callback with error
+13 error Error: Command failed: npm run prepare
+13 error Assertion failed: new_time >= loop->time, file c:\ws\deps\uv\src\win\core.c, line 324
+=======
 11 silly getExecOpts   cwd: 'C:\\Users\\toninom\\Desktop\\DesignPatters\\smartclide-design-pattern-selection-theia\\browser-app'
 11 silly getExecOpts }
 12 error execute callback with error
@@ -27,11 +34,16 @@
 13 error     at ChildProcess.emit (node:events:390:28)
 13 error     at maybeClose (node:internal/child_process:1064:16)
 13 error     at Process.ChildProcess._handle.onexit (node:internal/child_process:301:5)
+>>>>>>> b35742b4171056ec77ccfcb9fe5aa08f6841aa4b
 13 error
 13 error
 13 error > browser-app@0.0.0 prepare
 13 error > theia build --mode development
 13 error
+<<<<<<< HEAD
+13 error
+13 error     at C:\Users\test\Desktop\smartclide-design-pattern-selection-theia\node_modules\execa\index.js:236:11
+=======
 13 error assets by status 1.98 MiB [1m[32m[cached][39m[22m 16 assets
 13 error assets by status 40 MiB [1m[33m[compared for emit][39m[22m
 13 error   assets by path [1m[32m*.gz[39m[22m 4.75 MiB 85 assets
@@ -427,3 +439,4 @@
 13 error
 13 error
 13 error     at C:\Users\toninom\Desktop\DesignPatters\smartclide-design-pattern-selection-theia\node_modules\execa\index.js:236:11
+>>>>>>> b35742b4171056ec77ccfcb9fe5aa08f6841aa4b
