@@ -146,7 +146,7 @@ export class extensionWidget extends ReactWidget {
 					});	
 				}
 			});
-			//await this.helloBackendService.main();
+
 		}else{
 			this.messageService.info('You need to choose a software pattern!');
 		}
@@ -367,13 +367,7 @@ export class extensionWidget extends ReactWidget {
 			}
 		}
 	}
-	checkMessage(message: string){
-		if(message!=""){
-			this.messageService.info("Something went wrong");
-		}else{
-			this.messageService.info("Code generation has been completed");
-		}
-	}
+	
 	updateLabel(value: string, count: number){
 		return (value.includes('.') ? value.substring(0,value.length-2) + '.' + count : value.slice(0,-1) + count);
 	}
@@ -388,44 +382,8 @@ export class extensionWidget extends ReactWidget {
 		});
 		return count;
 	}
-	//autocomplete
-	showSuggestions(value: string, table: string[], id: string){
-		let res = document.getElementById("suggestions"+id.substr(6,))as HTMLElement;
-		
-  		let list = '';
-  		let terms = this.autocompleteMatch(value, table);
-  		for (var i=0; i<terms.length; i++) {
-    		list += '<li>' + terms[i] + '</li>';
-  		}
-  		res.innerHTML = "<ul id='list" + id.substr(6,) + "'> "+ list + "</ul>";
-		let ul = document.getElementById("list"+id.substr(6,))as HTMLElement;
-		let input = document.getElementById("txtbox"+id.substr(6,))as HTMLInputElement;
-		ul.onclick = function(event) {
-			input.value = (event.target as HTMLLIElement).innerHTML ;
-			res.style.visibility = 'hidden';
-		}	
-		let hideBlock = function(){
-			res.style.visibility = 'hidden';
-		};
-		ul.addEventListener('mouseleave', hideBlock);
-		input.addEventListener('keypress', (e: KeyboardEvent) =>{
-			res.style.visibility = 'visible';
-			this.showSuggestions((document.getElementById("txtbox"+id.substr(6,))as HTMLInputElement).value, table, ( e.target as Element).id);
-		});
-
-	}
-	//autocomplete
-	autocompleteMatch(input: string, table: string[]) {
-		if (input == '') {
-			return [];
-	  	}
-	  	let reg = new RegExp('^' + input);
-	  	return table.filter(function(term) {
-		  	if (term.match(reg)) {
-				return term;
-		 	 }
-	 	 });
-	}
+	
+	
 
 	updateJsonObject(){
 		let table = document.getElementById('show_pattern_table') as HTMLTableElement;
@@ -491,7 +449,10 @@ export class extensionWidget extends ReactWidget {
 		window.location.reload();
 	}
 
-	runWizard(){
+	async runWizard(){
+		var getUrl = window.location.href;
+		extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
+		
 		(document.getElementById("issues") as HTMLElement).style.visibility = 'hidden';
 		(document.getElementById("issues") as HTMLElement).style.height = '0px';
 		let divWiz = document.getElementById('divWiz') as HTMLDivElement;
@@ -527,6 +488,8 @@ export class extensionWidget extends ReactWidget {
 								let divCont5 = document.createElement('div');
 								createLabel('<br> How many sub-categories exist? <br>', 'labelQuestion5', divCont4);
 								createInput('0', 'subcategoriesNum', '', '', 'number', divCont4);
+								let numCat = document.getElementById('subcategoriesNum') as HTMLInputElement;
+								numCat.min = '2';
 								createButton('Next', 'buttonNext2', divCont4);
 								let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
 								buttonNext2.onclick = function(){
@@ -551,15 +514,17 @@ export class extensionWidget extends ReactWidget {
 											let divCont8 = document.createElement('div');
 											createLabel('<br> How many Families of Products exist? <br>', 'labelQuestion8', divCont7);
 											createInput('0', 'familiesNum', '', '', 'number', divCont7);
+											let numFam = document.getElementById('familiesNum') as HTMLInputElement;
+											numFam.min = '2';
 											createButton('Next', 'buttonNext4', divCont7);
 											let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
 											buttonNext4.onclick = function(){
 												divCont8.innerHTML = "";
 												let divCont9 = document.createElement('div');
-												createLabel('<br> Please give the names of the Components <br>', 'labelQuestion9', divCont8);
+												createLabel('<br> Please give the names of the Components (Families) <br>', 'labelQuestion9', divCont8);
 												let num = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
 												for (var i=1; i<=num; i++){
-													createInput('Component name '+i, 'txtComponentName', 'infoField', '', 'text', divCont8);
+													createInput('Component name '+i, 'txtComponentName'+i, 'infoField', '', 'text', divCont8);
 												}
 												createButton('Next', 'buttonNext5', divCont8);
 												let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
@@ -568,7 +533,27 @@ export class extensionWidget extends ReactWidget {
 													createButton('Get Code', 'getcodeAbstractFactoryPattern', divCont9);
 													let buttonCodeAFP = document.getElementById('getcodeAbstractFactoryPattern') as HTMLButtonElement;
 													buttonCodeAFP.onclick = function(){
-														//code generation
+														let infoList = document.getElementsByClassName('infoField');
+														/*for (var i=0; i<infoList.length; i++){
+															console.log('value'+i +(infoList.item(i) as HTMLInputElement).value);
+														}*/
+														extensionWidget.data["AbstractFactory"].values["AbstractFactory"].name = (infoList.item(0) as HTMLInputElement).value;
+														let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+														let numFam = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
+														for (var i=1; i<=numCat; i++){
+															extensionWidget.data["AbstractFactory"].values["Product"+i] = { "name":"", "extension":0};
+															extensionWidget.data["AbstractFactory"].values["Product"+i].name = (infoList.item(i) as HTMLInputElement).value;
+															
+														}
+														for (var j=1; j<=numFam; j++){
+															extensionWidget.data["AbstractFactory"].values["Family"+j] = { "name":"", "extension":0};
+															extensionWidget.data["AbstractFactory"].values["Family"+j].name = (infoList.item(i) as HTMLInputElement).value;
+															i++;
+														}
+														insertInputsAbstractFactory();
+														//console.log("JSON:	" + JSON.stringify(extensionWidget.data["AbstractFactory"].values));
+														callCodeGenerationForWiz(extensionWidget, extensionWidget.data["AbstractFactory"].values, "AbstractFactory");
+														//await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["AbstractFactory"].values, "AbstractFactory");
 													}
 												}
 												divCont8.appendChild(divCont9);
@@ -604,10 +589,14 @@ export class extensionWidget extends ReactWidget {
 													let buttonNext7 = document.getElementById('buttonNext7') as HTMLButtonElement;
 													buttonNext7.onclick = function(){
 														createLabel('<br> Builder Pattern   ', 'labelPattern1', divCont10);
-														createButton('Get Code', 'getcodeBuildPattern', divCont10);
-														let buttonCodeBP = document.getElementById('getcodeBuildPattern') as HTMLButtonElement;
+														createButton('Get Code', 'getcodeBuilderPattern', divCont10);
+														let buttonCodeBP = document.getElementById('getcodeBuilderPattern') as HTMLButtonElement;
 														buttonCodeBP.onclick = function(){
-														//code generation
+															let infoList = document.getElementsByClassName('infoField');
+															for (var i=0; i<infoList.length; i++){
+																console.log(infoList.item(i)?.innerHTML);
+															}
+															insertInputsBuilder();
 														}
 													}
 													divCont9.appendChild(divCont10);
@@ -629,7 +618,10 @@ export class extensionWidget extends ReactWidget {
 													createButton('Get Code', 'getcodeFactoryMethodPattern', divCont9);
 													let buttonCodeFMP = document.getElementById('getcodeFactoryMethodPattern') as HTMLButtonElement;
 													buttonCodeFMP.onclick = function(){
-														//code generation
+														let infoList = document.getElementsByClassName('infoField');
+														for (var i=0; i<infoList.length; i++){
+															console.log(infoList.item(i)?.innerHTML);
+														}
 													}
 												}
 												divCont8.appendChild(divCont9);
@@ -680,29 +672,7 @@ export class extensionWidget extends ReactWidget {
 		divWiz.appendChild(divCont);
 	}
 
-	insertInputsAbstractFactory():void{
-		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
-		let listofFamily: string[] = [];
-		let listofProducts:string[] = [];
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("Family")){
-				values[key].name = values[key].name + "Factory";
-				listofFamily.push(values[key].name);
-			}else if(key.includes("Product") && !key.includes("ConcreteProduct")){
-				listofProducts.push(values[key].name);
-			}
-			
-		});
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("ConcreteProduct")){
-				let array = key.split('.');
-				var numberofProduct = array[0].replace(/\D/g,'');
-				values[key].name = listofFamily[Number(array[1])-1].split("Factory")[0]+listofProducts[Number(numberofProduct)-1];
-				console.log(key + " "+values[key].name);
-			}
-		});
-		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
-	}
+	
 	insertInputsFactoryMethod():void{
 		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
 		let listofConCreators:string[] = [];
@@ -721,21 +691,7 @@ export class extensionWidget extends ReactWidget {
 		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
 		console.log(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values))
 	}
-	insertInputsBuilder():void{
-		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
-		let listofProducts:string[] = [];
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("Product")) listofProducts.push(values[key].name);
-		});
-		console.log(listofProducts)
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("ConcreteBuilder")){
-				var numofConBuilder = key.match(/\d/g);
-				values[key].name = listofProducts[Number(numofConBuilder)-1] + "Builder";
-			}
-		});
-		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
-	}
+	
 	checkEmptyInputs(rows : number): boolean{
 		let flag = true; 
 		let i = 0;
@@ -768,10 +724,55 @@ function createInput(innerMessage: string, id: string, classname: string, name: 
 	inputField.id = id;
 	if (!id.includes('radio') && !id.includes('Num')){
 		inputField.className = classname;
+		inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
+			console.log('id target event: '+( e.target as Element).id);
+			showSuggestions(inputField.value, extensionWidget.res, ( e.target as Element).id);
+			});
+		let suggestions = document.createElement("div");
+		parent.appendChild(suggestions);
 	}
+
 	inputField.name = name;
 	inputField.type = type;
 	parent.appendChild(inputField);
+}
+//autocomplete
+function showSuggestions(value: string, table: string[], id: string){
+	let res = document.getElementById("suggestions"+id.substr(6,))as HTMLElement;
+	
+	  let list = '';
+	  let terms = autocompleteMatch(value, table);
+	  for (var i=0; i<terms.length; i++) {
+		list += '<li>' + terms[i] + '</li>';
+	  }
+	  res.innerHTML = "<ul id='list" + id.substr(6,) + "'> "+ list + "</ul>";
+	let ul = document.getElementById("list"+id.substr(6,))as HTMLElement;
+	let input = document.getElementById("txtbox"+id.substr(6,))as HTMLInputElement;
+	ul.onclick = function(event) {
+		input.value = (event.target as HTMLLIElement).innerHTML ;
+		res.style.visibility = 'hidden';
+	}	
+	let hideBlock = function(){
+		res.style.visibility = 'hidden';
+	};
+	ul.addEventListener('mouseleave', hideBlock);
+	input.addEventListener('keypress', (e: KeyboardEvent) =>{
+		res.style.visibility = 'visible';
+		showSuggestions((document.getElementById("txtbox"+id.substr(6,))as HTMLInputElement).value, table, ( e.target as Element).id);
+	});
+
+}
+//autocomplete
+function autocompleteMatch(input: string, table: string[]) {
+	if (input == '') {
+		return [];
+	  }
+	  let reg = new RegExp('^' + input);
+	  return table.filter(function(term) {
+		  if (term.match(reg)) {
+			return term;
+		  }
+	  });
 }
 
 function createButton(innerMessage: string, id: string, parent: HTMLElement){
@@ -780,3 +781,50 @@ function createButton(innerMessage: string, id: string, parent: HTMLElement){
 	button.id = id;
 	parent.appendChild(button);
 }
+
+function insertInputsAbstractFactory():void{
+	let values = JSON.parse(JSON.stringify(extensionWidget.data["AbstractFactory"].values));
+	let listofFamily: string[] = [];
+	let listofProducts:string[] = [];
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("Family")){
+			values[key].name = values[key].name + "Factory";
+			listofFamily.push(values[key].name);
+		}else if(key.includes("Product") && !key.includes("ConcreteProduct")){
+			listofProducts.push(values[key].name);
+		}
+		
+	});
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("ConcreteProduct")){
+			let array = key.split('.');
+			var numberofProduct = array[0].replace(/\D/g,'');
+			values[key].name = listofFamily[Number(array[1])-1].split("Factory")[0]+listofProducts[Number(numberofProduct)-1];
+			console.log(key + " "+values[key].name);
+		}
+	});
+	extensionWidget.data["AbstractFactory"].values = values;
+}
+
+function insertInputsBuilder():void{
+	let values = JSON.parse(JSON.stringify(extensionWidget.data["Builder"].values));
+	let listofProducts:string[] = [];
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("Product")) listofProducts.push(values[key].name);
+	});
+	console.log(listofProducts)
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("ConcreteBuilder")){
+			var numofConBuilder = key.match(/\d/g);
+			values[key].name = listofProducts[Number(numofConBuilder)-1] + "Builder";
+		}
+	});
+	extensionWidget.data["Builder"].values = values;
+}
+
+async function callCodeGenerationForWiz(extWidg: any, values: string, pattern: string){
+	console.log("JSON:	" + JSON.stringify(values));
+	await extWidg.helloBackendService.codeGeneration(window.location.href, values, pattern);
+	
+}
+
