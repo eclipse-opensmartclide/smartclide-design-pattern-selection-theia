@@ -119,7 +119,7 @@
   content : url(./img/SingletonIcon.jpg);
 }
 
-#divWiz input{
+.infoField{
   margin-right: 20px;
 	background: transparent;
   border: none;
