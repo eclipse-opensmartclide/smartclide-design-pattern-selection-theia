@@ -183,7 +183,6 @@ export class extensionWidget extends ReactWidget {
 				suggestions.className = "suggestions";
 				cell2.appendChild(suggestions);
 				txtbox.addEventListener('keypress', (e: KeyboardEvent) =>{
-					console.log('id target event: '+( e.target as Element).id);
 					showSuggestions(txtbox.value, extensionWidget.res, ( e.target as Element).id);
 					});
 			}
@@ -246,13 +245,13 @@ export class extensionWidget extends ReactWidget {
 			this.insertCells(table, label); 
 			this.insertCells(table, labelConBuilder); 
 		}else if(extensionWidget.state.statePatternSelection=="FactoryMethod") {
-			let labelConPro = this.updateLabel("ConcreteProduct ", count+1);
+			let labelConCr = this.updateLabel("ConcreteCreator ", count+1);
 			
 			newValues[label] = { "name":"", "extension":0};
-			newValues[labelConPro] = { "name":"", "extension":0};
+			newValues[labelConCr] = { "name":"", "extension":0};
 			extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;
 			this.insertCells(table, label);				 
-			this.insertCells(table, labelConPro); 
+			this.insertCells(table, labelConCr); 
 		}else if(extensionWidget.state.statePatternSelection=="Decorator" && key.includes("ConcreteDecorator")) {
 			console.log("label1" + key.substr(3,));
 			let labelConDec = this.updateLabel(key.substr(3,), (count/2+1));
@@ -346,12 +345,12 @@ export class extensionWidget extends ReactWidget {
 					this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection));
 				}else if(extensionWidget.state.statePatternSelection == "FactoryMethod"){
 					this.updateJsonObject();
-					this.insertInputsFactoryMethod();
+					insertInputsFactoryMethod();
 					this.messageService.info("Well done! Code is coming...");
 					this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection));
 				}else if(extensionWidget.state.statePatternSelection == "Builder"){
 					this.updateJsonObject();
-					this.insertInputsBuilder();
+					insertInputsBuilder();
 					this.messageService.info("Well done! Code is coming...");
 					this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection));
 				}else{
@@ -387,8 +386,6 @@ export class extensionWidget extends ReactWidget {
 		return count;
 	}
 	
-	
-
 	updateJsonObject(){
 		let table = document.getElementById('show_pattern_table') as HTMLTableElement;
 		for(let i = 0 ; i < table.rows.length ; i++){
@@ -485,7 +482,7 @@ export class extensionWidget extends ReactWidget {
 						buttonNext1.addEventListener('click', async (e: Event) =>{
 							divCont3.innerHTML = "";
 							let divCont4 = document.createElement('div');
-							createLabel('<br> Does the Product has sub-categories (Products)? <br>', 'labelQuestion4', divCont3);
+							createLabel('<br> Does the Product has sub-categories? <br>', 'labelQuestion4', divCont3);
 							createLabel('Yes', 'label31', divCont3);
 							createInput('', 'radio31', '', 'yes_no', 'radio', divCont3);
 							let radio31 = document.getElementById('radio31') as HTMLInputElement;
@@ -501,7 +498,7 @@ export class extensionWidget extends ReactWidget {
 								buttonNext2.addEventListener('click', async (e: Event) =>{
 									divCont5.innerHTML = "";
 									let divCont6 = document.createElement('div');
-									createLabel('<br> Please give the names of the sub-categories (Products) <br>', 'labelQuestion6', divCont5);
+									createLabel('<br> Please give the names of the sub-categories <br>', 'labelQuestion6', divCont5);
 									let num = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
 									for (var i=1; i<=num; i++){
 										createInput('Concrete Product name '+i, 'txtboxConcreteProductsName'+i, 'infoField', '', 'text', divCont5);
@@ -556,7 +553,8 @@ export class extensionWidget extends ReactWidget {
 															i++;
 														}
 														insertInputsAbstractFactory();
-														console.log(JSON.stringify(extensionWidget.data["AbstractFactory"].values));
+														//console.log(JSON.stringify(extensionWidget.data["AbstractFactory"].values));
+
 														this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["AbstractFactory"].values, "AbstractFactory"));
 													});
 												});
@@ -612,7 +610,7 @@ export class extensionWidget extends ReactWidget {
 																i++;
 															}
 															insertInputsBuilder();
-															console.log(JSON.stringify(extensionWidget.data["Builder"].values));
+															//console.log(JSON.stringify(extensionWidget.data["Builder"].values));
 															this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["Builder"].values, "Builder"));
 														});
 													});
@@ -635,10 +633,18 @@ export class extensionWidget extends ReactWidget {
 													createButton('Get Code', 'getcodeFactoryMethodPattern', divCont9);
 													let buttonCodeFMP = document.getElementById('getcodeFactoryMethodPattern') as HTMLButtonElement;
 													buttonCodeFMP.addEventListener('click', async (e: Event) =>{
-														let infoList = document.getElementsByClassName('infoField');
-														for (var i=0; i<infoList.length; i++){
-															console.log(infoList.item(i)?.innerHTML);
-														}
+															let infoList = document.getElementsByClassName('infoField');
+															extensionWidget.data["FactoryMethod"].values["Product"].name = (infoList.item(0) as HTMLInputElement).value;
+															let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+															for (var i=1; i<=numCat; i++){
+																extensionWidget.data["FactoryMethod"].values["ConcreteProduct"+i] = { "name":"", "extension":0};
+																extensionWidget.data["FactoryMethod"].values["ConcreteProduct"+i].name = (infoList.item(i) as HTMLInputElement).value;
+																extensionWidget.data["FactoryMethod"].values["ConcreteCreator"+i] = { "name":"", "extension":0};
+															}
+															extensionWidget.data["FactoryMethod"].values["Creator"].name = (infoList.item(i) as HTMLInputElement).value;
+															insertInputsFactoryMethod();
+															//console.log(JSON.stringify(extensionWidget.data["FactoryMethod"].values));
+															this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["FactoryMethod"].values, "FactoryMethod"));
 													});
 												});
 												divCont8.appendChild(divCont9);
@@ -689,26 +695,6 @@ export class extensionWidget extends ReactWidget {
 		divWiz.appendChild(divCont);
 	}
 
-	
-	insertInputsFactoryMethod():void{
-		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
-		let listofConCreators:string[] = [];
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("ConcreteCreator")) {
-				values[key].name = values[key].name + values.Creator.name;
-				listofConCreators.push(values[key].name);
-			}
-		});
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("ConcreteProduct")){
-				var numofConCreator = key.match(/\d/g);
-				values[key].name = listofConCreators[Number(numofConCreator)-1].split('Dialog')[0] + values.Product.name;
-			}
-		});
-		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
-		console.log(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values))
-	}
-	
 	checkEmptyInputs(rows : number): boolean{
 		let flag = true; 
 		let i = 0;
@@ -724,7 +710,7 @@ export class extensionWidget extends ReactWidget {
 		return flag;
 	}
 	check(key: string){
-		return (!key.includes("ConcreteProduct") || extensionWidget.state.statePatternSelection!="AbstractFactory") && (!key.includes("ConcreteProduct") || extensionWidget.state.statePatternSelection!="FactoryMethod") && (!key.includes("ConcreteBuilder") || extensionWidget.state.statePatternSelection!="Builder")
+		return (!key.includes("ConcreteProduct") || extensionWidget.state.statePatternSelection!="AbstractFactory") && (!key.includes("ConcreteCreator") || extensionWidget.state.statePatternSelection!="FactoryMethod") && (!key.includes("ConcreteBuilder") || extensionWidget.state.statePatternSelection!="Builder")
 	}
 }
 
@@ -838,4 +824,22 @@ function insertInputsBuilder():void{
 		}
 	});
 	extensionWidget.data["Builder"].values = values;
+}
+
+function insertInputsFactoryMethod():void{
+	let values = JSON.parse(JSON.stringify(extensionWidget.data["FactoryMethod"].values));
+	let listofConProducts:string[] = [];
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("ConcreteProduct")) {
+			values[key].name = values[key].name + values.Product.name;
+			listofConProducts.push(values[key].name);
+		}
+	});
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("ConcreteCreator")){
+			var numofConProduct = key.match(/\d/g);
+			values[key].name = listofConProducts[Number(numofConProduct)-1].split(values.Product.name)[0] + values.Creator.name;
+		}
+	});
+	extensionWidget.data["FactoryMethod"].values = values;
 }
