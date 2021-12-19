@@ -115,6 +115,7 @@ export class extensionWidget extends ReactWidget {
     protected async runprocess(): Promise<void> {
 		if (extensionWidget.state.statePatternSelection!="Choose_pattern" && extensionWidget.state.statePatternSelection!=""){
 			(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'hidden';
+			(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'hidden';
 
 			var getUrl = window.location.href;
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
@@ -484,7 +485,7 @@ export class extensionWidget extends ReactWidget {
 						buttonNext1.addEventListener('click', async (e: Event) =>{
 							divCont3.innerHTML = "";
 							let divCont4 = document.createElement('div');
-							createLabel('<br> Does the Product has sub-categories (Concrete Products)? <br>', 'labelQuestion4', divCont3);
+							createLabel('<br> Does the Product has sub-categories (Products)? <br>', 'labelQuestion4', divCont3);
 							createLabel('Yes', 'label31', divCont3);
 							createInput('', 'radio31', '', 'yes_no', 'radio', divCont3);
 							let radio31 = document.getElementById('radio31') as HTMLInputElement;
@@ -534,15 +535,11 @@ export class extensionWidget extends ReactWidget {
 												createButton('Next', 'buttonNext5', divCont8);
 												let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
 												buttonNext5.addEventListener('click', async (e: Event) =>{
-													createLabel('<br> Abstract Factory Pattern   ', 'labelQuestion10', divCont9);
+													createLabel('<br> <b>Abstract Factory Pattern</b>   ', 'labelQuestion10', divCont9);
 													createButton('Get Code', 'getcodeAbstractFactoryPattern', divCont9);
 													let buttonCodeAFP = document.getElementById('getcodeAbstractFactoryPattern') as HTMLButtonElement;
 													buttonCodeAFP.addEventListener('click', async (e: Event) =>{
-														
 														let infoList = document.getElementsByClassName('infoField');
-														/*for (var i=0; i<infoList.length; i++){
-															console.log('value'+i +(infoList.item(i) as HTMLInputElement).value);
-														}*/
 														extensionWidget.data["AbstractFactory"].values["AbstractFactory"].name = (infoList.item(0) as HTMLInputElement).value;
 														let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
 														let numFam = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
@@ -560,7 +557,7 @@ export class extensionWidget extends ReactWidget {
 														}
 														insertInputsAbstractFactory();
 														console.log(JSON.stringify(extensionWidget.data["AbstractFactory"].values));
-														await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["AbstractFactory"].values, "AbstractFactory");
+														this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["AbstractFactory"].values, "AbstractFactory"));
 													});
 												});
 												divCont8.appendChild(divCont9);
@@ -595,15 +592,28 @@ export class extensionWidget extends ReactWidget {
 													createButton('Next', 'buttonNext7', divCont9);
 													let buttonNext7 = document.getElementById('buttonNext7') as HTMLButtonElement;
 													buttonNext7.addEventListener('click', async (e: Event) =>{
-														createLabel('<br> Builder Pattern   ', 'labelPattern1', divCont10);
+														createLabel('<br> <b>Builder Pattern</b>   ', 'labelPattern1', divCont10);
 														createButton('Get Code', 'getcodeBuilderPattern', divCont10);
 														let buttonCodeBP = document.getElementById('getcodeBuilderPattern') as HTMLButtonElement;
 														buttonCodeBP.addEventListener('click', async (e: Event) =>{
 															let infoList = document.getElementsByClassName('infoField');
-															for (var i=0; i<infoList.length; i++){
-																console.log(infoList.item(i)?.innerHTML);
+															extensionWidget.data["Builder"].values["Builder"].name = (document.getElementById('txtboxProduct_name') as HTMLInputElement).value + "Builder";
+															extensionWidget.data["Builder"].values["Director"].name = "Director";
+															let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+															let numSteps = parseInt((document.getElementById('stepsNum') as HTMLInputElement).value);
+															for (var i=1; i<=numCat; i++){
+																extensionWidget.data["Builder"].values["Product"+i] = { "name":"", "extension":0};
+																extensionWidget.data["Builder"].values["Product"+i].name = (infoList.item(i) as HTMLInputElement).value;
+																extensionWidget.data["Builder"].values["ConcreteBuilder"+i] = { "name":"", "extension":0};
+															}
+															for (var j=1; j<=numSteps; j++){
+																extensionWidget.data["Builder"].values["BuilderMethod"+j] = { "name":"", "extension":0};
+																extensionWidget.data["Builder"].values["BuilderMethod"+j].name = (infoList.item(i) as HTMLInputElement).value;
+																i++;
 															}
 															insertInputsBuilder();
+															console.log(JSON.stringify(extensionWidget.data["Builder"].values));
+															this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["Builder"].values, "Builder"));
 														});
 													});
 													divCont9.appendChild(divCont10);
@@ -621,7 +631,7 @@ export class extensionWidget extends ReactWidget {
 												createButton('Next', 'buttonNext8', divCont8);
 												let buttonNext8 = document.getElementById('buttonNext8') as HTMLButtonElement;
 												buttonNext8.addEventListener('click', async (e: Event) =>{
-													createLabel('<br> Factory Method Pattern   ', 'labelQuestion15', divCont9);
+													createLabel('<br> <b>Factory Method Pattern</b>   ', 'labelQuestion15', divCont9);
 													createButton('Get Code', 'getcodeFactoryMethodPattern', divCont9);
 													let buttonCodeFMP = document.getElementById('getcodeFactoryMethodPattern') as HTMLButtonElement;
 													buttonCodeFMP.addEventListener('click', async (e: Event) =>{
@@ -737,12 +747,9 @@ function createInput(innerMessage: string, id: string, classname: string, name: 
 		suggestions.className = "suggestions";
 		parent.appendChild(suggestions);
 		inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
-			console.log('id target event: '+( e.target as Element).id);
 			showSuggestions(inputField.value, extensionWidget.res, ( e.target as Element).id);
 			});
-		
 	}
-
 	inputField.name = name;
 	inputField.type = type;
 	parent.appendChild(inputField);
