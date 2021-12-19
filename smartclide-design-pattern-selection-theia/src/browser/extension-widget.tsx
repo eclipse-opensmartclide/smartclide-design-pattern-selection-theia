@@ -51,7 +51,7 @@ export class extensionWidget extends ReactWidget {
 		
 		<div id='issues'>
 				<br />
-				<select id="drop-down-patterns" onChange={this.updateSelection} name="statePatternSelection">
+				<select id="drop-down-patterns" onChange={this.updateSelection } name="statePatternSelection">
 						<option id="empty-choice" value="Choose_pattern">Choose pattern</option>
 					<optgroup label="Creational">
 						<option value="AbstractFactory">Abstract Factory</option>
@@ -134,17 +134,6 @@ export class extensionWidget extends ReactWidget {
 			var table = document.getElementById('show_pattern_table') as HTMLTableElement;
 			Object.keys(values).forEach(async (key) =>{
 				this.insertCells(table, key);
-				let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values;
-				if(values[key].extension==1){
-					let cell3 = this.insertCell(2);
-					let t3 = document.createElement("button");
-					t3.innerHTML = "+";
-					t3.id = "btn"+ key;
-					cell3.appendChild(t3);
-					t3.addEventListener('click', (event) => {
-						this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
-					});	
-				}
 			});
 			//await this.helloBackendService.main();
 		}else{
@@ -212,14 +201,16 @@ export class extensionWidget extends ReactWidget {
 		let label = this.updateLabel(key.substring(3,), count+1);
 		if(extensionWidget.state.statePatternSelection=="AbstractFactory"){
 			if(key.includes("Product") && !key.includes("ConcreteProduct")){
-				count = count - this.countKeys(values,"ConcreteProduct")
+				count = count - this.countKeys(values,"ConcreteProduct");
+				console.log("count-Add Product"+count);
 				label = this.updateLabel(key.substring(3,), count+1);
 
 				newValues[label] = {name:"",extension:0};
 				extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;	
 				this.insertCells(table, label);
-				var numProd = (this.countKeys(values, "ConcreteProduct") / count)-1;// number of "Products" in each Product
+				var numProd = (this.countKeys(values, "ConcreteProduct") / count);// number of "Products" in each Product
 				for(let j = 0 ; j < numProd; j++ ){
+					console.log(1)
 					let labelProduct = "ConcreteProduct"+ (count+1) + "."+(j+1);
 					newValues[labelProduct]= { "name":"", "extension":0};
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;
@@ -238,6 +229,7 @@ export class extensionWidget extends ReactWidget {
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;	
 					this.insertCells(table, labelProduct);
 				}	
+				console.log(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values))
 
 			}
 		}else if(extensionWidget.state.statePatternSelection=="Builder" && key.includes("Product")){
@@ -345,21 +337,17 @@ export class extensionWidget extends ReactWidget {
 				}else if(extensionWidget.state.statePatternSelection == "AbstractFactory"){
 					this.updateJsonObject();
 					this.insertInputsAbstractFactory();
-					this.messageService.info("Well done! Code is coming...");
 					this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection));
 				}else if(extensionWidget.state.statePatternSelection == "FactoryMethod"){
 					this.updateJsonObject();
 					this.insertInputsFactoryMethod();
-					this.messageService.info("Well done! Code is coming...");
 					this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection));
 				}else if(extensionWidget.state.statePatternSelection == "Builder"){
 					this.updateJsonObject();
 					this.insertInputsBuilder();
-					this.messageService.info("Well done! Code is coming...");
 					this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection));
 				}else{
 					this.updateJsonObject();
-					this.messageService.info("Well done! Code is coming...");
 					this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection));
 				}
 			}else{
@@ -487,8 +475,8 @@ export class extensionWidget extends ReactWidget {
 	refreshPage(table: HTMLTableElement){
 		table.innerHTML = "";
 		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
-		(document.getElementById("elements") as HTMLElement).style.visibility = 'hidden';
-		window.location.reload();
+		//(document.getElementById("elements") as HTMLElement).style.visibility = 'hidden';
+		(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
 	}
 
 	runWizard(){
