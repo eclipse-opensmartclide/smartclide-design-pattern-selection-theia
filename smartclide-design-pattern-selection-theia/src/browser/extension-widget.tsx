@@ -398,7 +398,7 @@ export class extensionWidget extends ReactWidget {
 	checkInputs(){
 		let count = 0;
 		const table = document.getElementById('show_pattern_table') as HTMLTableElement;
-		if (this.checkInputsForSameValues()){
+		if (this.checkInputsForSameValues(extensionWidget.textBoxValues)){
 			return ("Inputs are invalid");
 		}else{
 			for(let i = 0 ; i < table.rows.length; i++){
@@ -418,8 +418,8 @@ export class extensionWidget extends ReactWidget {
 		}	
 	}
 	//method that checks for duplicate values
-	checkInputsForSameValues(){
-		const uniqueElements = extensionWidget.textBoxValues;
+	checkInputsForSameValues(table: string[]){
+		const uniqueElements = table;
 		let resultToReturn = false;
 		for (let i = 0; i < uniqueElements.length; i++) { // nested for loop
 			for (let j = 0; j < uniqueElements.length; j++) {
@@ -442,7 +442,25 @@ export class extensionWidget extends ReactWidget {
 		return(resultToReturn) 
 	}
 
-	
+	checkEmptyInputs(rows : number): boolean{
+		let flag = true; 
+		let i = 0;
+		while (i<rows && flag==true){
+			const txtvalue = (document.getElementById("txtbox"+(i+1)) as HTMLInputElement).value;
+			const label = (document.getElementById("label"+(i+1)) as HTMLLabelElement).innerHTML;
+			if (txtvalue=="" && !label.includes("ConcreteProduct")) 
+				flag = false; //the inputs have to be non empty except for the input whose label contains the ConcreteProduct role
+			else {
+				i ++;
+			}
+		}
+		return flag;
+	}
+
+	check(key: string){
+		return (!key.includes("ConcreteProduct") || extensionWidget.state.statePatternSelection!="AbstractFactory") && (!key.includes("ConcreteCreator") || extensionWidget.state.statePatternSelection!="FactoryMethod") && (!key.includes("ConcreteBuilder") || extensionWidget.state.statePatternSelection!="Builder")
+	}
+
 	refreshPage(table: HTMLTableElement){
 		table.innerHTML = "";
 		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
@@ -536,7 +554,7 @@ export class extensionWidget extends ReactWidget {
 													createButton('Get Code', 'getcodeAbstractFactoryPattern', divCont9);
 													let buttonCodeAFP = document.getElementById('getcodeAbstractFactoryPattern') as HTMLButtonElement;
 													buttonCodeAFP.addEventListener('click', async (e: Event) =>{
-														let infoList = document.getElementsByClassName('infoField');
+														let infoList = document.getElementsByClassName('infoField') as HTMLCollection;
 														extensionWidget.data["AbstractFactory"].values["AbstractFactory"].name = (infoList.item(0) as HTMLInputElement).value;
 														let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
 														let numFam = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
@@ -553,9 +571,18 @@ export class extensionWidget extends ReactWidget {
 															i++;
 														}
 														insertInputsAbstractFactory();
-														//console.log(JSON.stringify(extensionWidget.data["AbstractFactory"].values));
-
-														this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["AbstractFactory"].values, "AbstractFactory"));
+														var arr: string[];
+														arr = [];
+														for (var i=0; i<infoList.length; i++){
+															arr.push((infoList.item(i) as HTMLInputElement).value);
+														}
+														console.log(arr);
+														let flag = this.checkInputsForSameValues(arr);
+														if (flag || arr.indexOf("")!=-1){
+															this.messageService.info("Invalid input!");
+														}else{
+															this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["AbstractFactory"].values, "AbstractFactory"));
+														}
 													});
 												});
 												divCont8.appendChild(divCont9);
@@ -610,8 +637,18 @@ export class extensionWidget extends ReactWidget {
 																i++;
 															}
 															insertInputsBuilder();
-															//console.log(JSON.stringify(extensionWidget.data["Builder"].values));
-															this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["Builder"].values, "Builder"));
+															var arr: string[];
+															arr = [];
+															for (var i=0; i<infoList.length; i++){
+																arr.push((infoList.item(i) as HTMLInputElement).value);
+															}
+															//console.log(arr);
+															let flag = this.checkInputsForSameValues(arr);
+															if (flag || arr.indexOf("")!=-1){
+																this.messageService.info("Invalid input!");
+															}else{
+																this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["Builder"].values, "Builder"));
+															}
 														});
 													});
 													divCont9.appendChild(divCont10);
@@ -643,8 +680,19 @@ export class extensionWidget extends ReactWidget {
 															}
 															extensionWidget.data["FactoryMethod"].values["Creator"].name = (infoList.item(i) as HTMLInputElement).value;
 															insertInputsFactoryMethod();
-															//console.log(JSON.stringify(extensionWidget.data["FactoryMethod"].values));
-															this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["FactoryMethod"].values, "FactoryMethod"));
+															insertInputsBuilder();
+															var arr: string[];
+															arr = [];
+															for (var i=0; i<infoList.length; i++){
+																arr.push((infoList.item(i) as HTMLInputElement).value);
+															}
+															//console.log(arr);
+															let flag = this.checkInputsForSameValues(arr);
+															if (flag || arr.indexOf("")!=-1){
+																this.messageService.info("Invalid input!");
+															}else{
+																this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["FactoryMethod"].values, "FactoryMethod"));
+															}
 													});
 												});
 												divCont8.appendChild(divCont9);
@@ -695,23 +743,7 @@ export class extensionWidget extends ReactWidget {
 		divWiz.appendChild(divCont);
 	}
 
-	checkEmptyInputs(rows : number): boolean{
-		let flag = true; 
-		let i = 0;
-		while (i<rows && flag==true){
-			const txtvalue = (document.getElementById("txtbox"+(i+1)) as HTMLInputElement).value;
-			const label = (document.getElementById("label"+(i+1)) as HTMLLabelElement).innerHTML;
-			if (txtvalue=="" && !label.includes("ConcreteProduct")) 
-				flag = false; //the inputs have to be non empty except for the input whose label contains the ConcreteProduct role
-			else {
-				i ++;
-			}
-		}
-		return flag;
-	}
-	check(key: string){
-		return (!key.includes("ConcreteProduct") || extensionWidget.state.statePatternSelection!="AbstractFactory") && (!key.includes("ConcreteCreator") || extensionWidget.state.statePatternSelection!="FactoryMethod") && (!key.includes("ConcreteBuilder") || extensionWidget.state.statePatternSelection!="Builder")
-	}
+	
 }
 
 function createLabel(innerMessage: string, id: string, parent: HTMLElement){
@@ -727,6 +759,15 @@ function createInput(innerMessage: string, id: string, classname: string, name: 
 	inputField.id = id;
 	if (!id.includes('radio') && !id.includes('Num')){
 		inputField.className = classname;
+		var form = document.createElement('form');
+
+		form.appendChild(inputField);
+		inputField.minLength = 1;
+		if (!id.includes('Method')){
+			inputField.pattern = "^([A-Z]{1}[a-zA-Z]*[0-9]*)$";
+		}else{
+			inputField.pattern = "^([a-z]{1}[a-zA-Z]*[0-9]*)$"; //camel
+		}
 		let suggestions = document.createElement("div");
 		suggestions.id = "suggestions"+id.substring(6,);
 		console.log("suggestions"+id.substring(6,));
