@@ -340,7 +340,7 @@ export class extensionWidget extends ReactWidget {
 					}
 				}else if(extensionWidget.state.statePatternSelection == "AbstractFactory"){
 					this.updateJsonObject();
-					this.insertInputsAbstractFactory();
+					insertInputsAbstractFactory();
 					this.messageService.info("Well done! Code is coming...");
 					this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection));
 				}else if(extensionWidget.state.statePatternSelection == "FactoryMethod"){
@@ -361,6 +361,13 @@ export class extensionWidget extends ReactWidget {
 			}else{
 				this.messageService.info("Inputs are invalid");
 			}
+		}
+	}
+	checkMessage(message: string){
+		if(message!=""){
+			this.messageService.info("Something went wrong");
+		}else{
+			this.messageService.info("Code generation has been completed");
 		}
 	}
 	
@@ -447,12 +454,12 @@ export class extensionWidget extends ReactWidget {
 
 	async runWizard(){
 		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'hidden';
-		(document.getElementById('result') as HTMLDivElement).style.visibility = 'hidden';
+		(document.getElementById('issues') as HTMLDivElement).style.height = '0';
+		(document.getElementById('result') as HTMLDivElement).style.height = '0';
+		
 		var getUrl = window.location.href;
 		extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
 		
-		(document.getElementById("issues") as HTMLElement).style.visibility = 'hidden';
-		(document.getElementById("issues") as HTMLElement).style.height = '0px';
 		let divWiz = document.getElementById('divWiz') as HTMLDivElement;
 		divWiz.style.marginLeft = '10px';
 		let divCont = document.createElement('div');
@@ -485,7 +492,7 @@ export class extensionWidget extends ReactWidget {
 								divCont4.innerHTML = "";
 								let divCont5 = document.createElement('div');
 								createLabel('<br> How many sub-categories exist? <br>', 'labelQuestion5', divCont4);
-								createInput('0', 'subcategoriesNum', '', '', 'number', divCont4);
+								createInput('2', 'subcategoriesNum', '', '', 'number', divCont4);
 								let numCat = document.getElementById('subcategoriesNum') as HTMLInputElement;
 								numCat.min = '2';
 								createButton('Next', 'buttonNext2', divCont4);
@@ -511,7 +518,7 @@ export class extensionWidget extends ReactWidget {
 											divCont7.innerHTML = "";
 											let divCont8 = document.createElement('div');
 											createLabel('<br> How many Families of Products exist? <br>', 'labelQuestion8', divCont7);
-											createInput('0', 'familiesNum', '', '', 'number', divCont7);
+											createInput('2', 'familiesNum', '', '', 'number', divCont7);
 											let numFam = document.getElementById('familiesNum') as HTMLInputElement;
 											numFam.min = '2';
 											createButton('Next', 'buttonNext4', divCont7);
@@ -542,7 +549,9 @@ export class extensionWidget extends ReactWidget {
 														for (var i=1; i<=numCat; i++){
 															extensionWidget.data["AbstractFactory"].values["Product"+i] = { "name":"", "extension":0};
 															extensionWidget.data["AbstractFactory"].values["Product"+i].name = (infoList.item(i) as HTMLInputElement).value;
-															
+															for (var j=1; j<=numFam; j++){
+																extensionWidget.data["AbstractFactory"].values["ConcreteProduct"+i+"."+j] = { "name":"", "extension":0};
+															}
 														}
 														for (var j=1; j<=numFam; j++){
 															extensionWidget.data["AbstractFactory"].values["Family"+j] = { "name":"", "extension":0};
@@ -550,7 +559,7 @@ export class extensionWidget extends ReactWidget {
 															i++;
 														}
 														insertInputsAbstractFactory();
-
+														console.log(JSON.stringify(extensionWidget.data["AbstractFactory"].values));
 														await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["AbstractFactory"].values, "AbstractFactory");
 													});
 												});
@@ -572,7 +581,7 @@ export class extensionWidget extends ReactWidget {
 												divCont8.innerHTML = "";
 												let divCont9 = document.createElement('div');
 												createLabel('<br> How many Steps are involved ?  <br>', 'labelQuestion12', divCont8);
-												createInput('0', 'stepsNum', '', '', 'number', divCont8);
+												createInput('1', 'stepsNum', '', '', 'number', divCont8);
 												createButton('Next', 'buttonNext6', divCont8);
 												let buttonNext6 = document.getElementById('buttonNext6') as HTMLButtonElement;
 												buttonNext6.addEventListener('click', async (e: Event) =>{
