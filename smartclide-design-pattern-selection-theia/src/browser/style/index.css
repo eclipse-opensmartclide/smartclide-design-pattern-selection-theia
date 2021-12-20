@@ -118,7 +118,10 @@
 .Singleton{
   content : url(./img/SingletonIcon.jpg);
 }
-
+#btn-wizard{
+  float: right;
+  
+}
 .infoField{
   margin-right: 20px;
 	background: transparent;
@@ -127,6 +130,9 @@
   height: 20px;
   display:flex;
   flex-direction: column;
+}
+#divWiz input{
+  margin-right: 20px;
 }
 
 

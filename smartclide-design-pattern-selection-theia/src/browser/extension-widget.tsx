@@ -86,15 +86,10 @@ export class extensionWidget extends ReactWidget {
 				<button id="btn-refresh" type="button" title='Refresh' onClick={_a => this.refreshPage(document.getElementById('show_pattern_table') as HTMLTableElement)}> <i className = "fa fa-refresh" ></i></button>
 				<br /> 
 				<br /> 
-				<button id="btn-wizard" type="button" title='Wizard' onClick={_a => this.runWizard()}>Wizard</button>
-				<br /> 
-				<br />
 				<button id="btn-get-code" type="button" title='Assign roles to classes and methods' onClick={_a => this.runprocess()}>Assign roles to classes and methods</button>
-				<br /> 
-				<div id="show_pattern"> 
-					
-				</div>
-				<br /> 
+				<button id="btn-wizard" type="button" title='Wizard' onClick={_a => this.runWizard()}>Wizard</button>
+				<br />
+				<br />
 				<div id="result">
 					<fieldset>
 						<details>
@@ -120,6 +115,7 @@ export class extensionWidget extends ReactWidget {
     protected async runprocess(): Promise<void> {
 		if (extensionWidget.state.statePatternSelection!="Choose_pattern" && extensionWidget.state.statePatternSelection!=""){
 			(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'hidden';
+			(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'hidden';
 
 			var getUrl = window.location.href;
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
@@ -135,7 +131,7 @@ export class extensionWidget extends ReactWidget {
 			Object.keys(values).forEach(async (key) =>{
 				this.insertCells(table, key);
 			});
-			//await this.helloBackendService.main();
+
 		}else{
 			this.messageService.info('You need to choose a software pattern!');
 		}
@@ -171,13 +167,13 @@ export class extensionWidget extends ReactWidget {
 			txtbox.autocomplete = "off";
 			txtbox.placeholder = key;
 			if (!key.includes("Method")){
-				txtbox.addEventListener('keypress', (e: KeyboardEvent) =>{
-					this.showSuggestions(txtbox.value, extensionWidget.res, ( e.target as Element).id);
-					});
 				let suggestions = document.createElement("div");
 				suggestions.id = "suggestions"+table.rows.length;
 				suggestions.className = "suggestions";
 				cell2.appendChild(suggestions);
+				txtbox.addEventListener('keypress', (e: KeyboardEvent) =>{
+					showSuggestions(txtbox.value, extensionWidget.res, ( e.target as Element).id);
+					});
 			}
 			cell1.appendChild(label);
 			cell2.appendChild(txtbox);
@@ -241,13 +237,13 @@ export class extensionWidget extends ReactWidget {
 			this.insertCells(table, label); 
 			this.insertCells(table, labelConBuilder); 
 		}else if(extensionWidget.state.statePatternSelection=="FactoryMethod") {
-			let labelConPro = this.updateLabel("ConcreteProduct ", count+1);
+			let labelConCr = this.updateLabel("ConcreteCreator ", count+1);
 			
 			newValues[label] = { "name":"", "extension":0};
-			newValues[labelConPro] = { "name":"", "extension":0};
+			newValues[labelConCr] = { "name":"", "extension":0};
 			extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;
 			this.insertCells(table, label);				 
-			this.insertCells(table, labelConPro); 
+			this.insertCells(table, labelConCr); 
 		}else if(extensionWidget.state.statePatternSelection=="Decorator" && key.includes("ConcreteDecorator")) {
 			console.log("label1" + key.substr(3,));
 			let labelConDec = this.updateLabel(key.substr(3,), (count/2+1));
@@ -362,6 +358,7 @@ export class extensionWidget extends ReactWidget {
 			this.messageService.info("Code generation has been completed");
 		}
 	}
+	
 	updateLabel(value: string, count: number){
 		return (value.includes('.') ? value.substring(0,value.length-2) + '.' + count : value.slice(0,-1) + count);
 	}
@@ -376,45 +373,7 @@ export class extensionWidget extends ReactWidget {
 		});
 		return count;
 	}
-	//autocomplete
-	showSuggestions(value: string, table: string[], id: string){
-		let res = document.getElementById("suggestions"+id.substr(6,))as HTMLElement;
-		
-  		let list = '';
-  		let terms = this.autocompleteMatch(value, table);
-  		for (var i=0; i<terms.length; i++) {
-    		list += '<li>' + terms[i] + '</li>';
-  		}
-  		res.innerHTML = "<ul id='list" + id.substr(6,) + "'> "+ list + "</ul>";
-		let ul = document.getElementById("list"+id.substr(6,))as HTMLElement;
-		let input = document.getElementById("txtbox"+id.substr(6,))as HTMLInputElement;
-		ul.onclick = function(event) {
-			input.value = (event.target as HTMLLIElement).innerHTML ;
-			res.style.visibility = 'hidden';
-		}	
-		let hideBlock = function(){
-			res.style.visibility = 'hidden';
-		};
-		ul.addEventListener('mouseleave', hideBlock);
-		input.addEventListener('keypress', (e: KeyboardEvent) =>{
-			res.style.visibility = 'visible';
-			this.showSuggestions((document.getElementById("txtbox"+id.substr(6,))as HTMLInputElement).value, table, ( e.target as Element).id);
-		});
-
-	}
-	//autocomplete
-	autocompleteMatch(input: string, table: string[]) {
-		if (input == '') {
-			return [];
-	  	}
-	  	let reg = new RegExp('^' + input);
-	  	return table.filter(function(term) {
-		  	if (term.match(reg)) {
-				return term;
-		 	 }
-	 	 });
-	}
-
+	
 	updateJsonObject(){
 		let table = document.getElementById('show_pattern_table') as HTMLTableElement;
 		for(let i = 0 ; i < table.rows.length ; i++){
@@ -427,7 +386,7 @@ export class extensionWidget extends ReactWidget {
 	checkInputs(){
 		let count = 0;
 		const table = document.getElementById('show_pattern_table') as HTMLTableElement;
-		if (this.checkInputsForSameValues()){
+		if (this.checkInputsForSameValues(extensionWidget.textBoxValues)){
 			return ("Inputs are invalid");
 		}else{
 			for(let i = 0 ; i < table.rows.length; i++){
@@ -447,8 +406,8 @@ export class extensionWidget extends ReactWidget {
 		}	
 	}
 	//method that checks for duplicate values
-	checkInputsForSameValues(){
-		const uniqueElements = extensionWidget.textBoxValues;
+	checkInputsForSameValues(table: string[]){
+		const uniqueElements = table;
 		let resultToReturn = false;
 		for (let i = 0; i < uniqueElements.length; i++) { // nested for loop
 			for (let j = 0; j < uniqueElements.length; j++) {
@@ -471,259 +430,6 @@ export class extensionWidget extends ReactWidget {
 		return(resultToReturn) 
 	}
 
-	
-	refreshPage(table: HTMLTableElement){
-		table.innerHTML = "";
-		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
-		//(document.getElementById("elements") as HTMLElement).style.visibility = 'hidden';
-		(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
-	}
-
-	runWizard(){
-		(document.getElementById("issues") as HTMLElement).style.visibility = 'hidden';
-		(document.getElementById("issues") as HTMLElement).style.height = '0px';
-		let divWiz = document.getElementById('divWiz') as HTMLDivElement;
-		divWiz.style.marginLeft = '10px';
-		let divCont = document.createElement('div');
-		createLabel('Choose the type of the pattern: <br>', 'label0', divWiz);
-		createLabel('Creational', 'label1', divWiz)
-		createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);
-		let radio1 = document.getElementById('radio1') as HTMLInputElement;
-		radio1.onclick = function(){	
-				divCont.innerHTML = "";
-				let divCont2 = document.createElement('div');
-				createLabel('<br> Do you want to create a completely new object or to create one by reusing an existing one?<br>', 'label4', divCont);
-				createLabel('Create new object', 'label11',divCont);
-				createInput('', 'radio11', '', 'new_existed', 'radio', divCont);
-				let radio11 = document.getElementById('radio11') as HTMLInputElement;
-				radio11.onclick = function(){	
-						divCont2.innerHTML = "";
-						let divCont3 = document.createElement('div');
-						createLabel('<br> Give the name of the Product that you want to create (Let X the name of the product)<br>', 'labelQuestion3', divCont2);
-						createInput('Product name', 'product_name', 'infoField', '', 'text', divCont2);
-						createButton('Next', 'buttonNext1', divCont2);
-						let buttonNext1 = document.getElementById('buttonNext1') as HTMLButtonElement;
-						buttonNext1.onclick = function(){
-							divCont3.innerHTML = "";
-							let divCont4 = document.createElement('div');
-							createLabel('<br> Does the Product has sub-categories (Concrete Products)? <br>', 'labelQuestion4', divCont3);
-							createLabel('Yes', 'label31', divCont3);
-							createInput('', 'radio31', '', 'yes_no', 'radio', divCont3);
-							let radio31 = document.getElementById('radio31') as HTMLInputElement;
-							radio31.onclick = function(){
-								divCont4.innerHTML = "";
-								let divCont5 = document.createElement('div');
-								createLabel('<br> How many sub-categories exist? <br>', 'labelQuestion5', divCont4);
-								createInput('0', 'subcategoriesNum', '', '', 'number', divCont4);
-								createButton('Next', 'buttonNext2', divCont4);
-								let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
-								buttonNext2.onclick = function(){
-									divCont5.innerHTML = "";
-									let divCont6 = document.createElement('div');
-									createLabel('<br> Please give the names of the Concrete Products <br>', 'labelQuestion6', divCont5);
-									let num = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
-									for (var i=1; i<=num; i++){
-										createInput('Concrete Product name '+i, 'txtConcreteProductsName'+i, 'infoField', '', 'text', divCont5);
-									}
-									createButton('Next', 'buttonNext3', divCont5);
-									let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
-									buttonNext3.onclick = function(){
-										divCont6.innerHTML = "";
-										let divCont7 = document.createElement('div');
-										createLabel('<br> Can the Products be classified in a Family? <br>', 'labelQuestion7', divCont6);
-										createLabel('Yes', 'label61', divCont6);
-										createInput('', 'radio61', '', 'yes_no', 'radio', divCont6);
-										let radio61 = document.getElementById('radio61') as HTMLInputElement;
-										radio61.onclick = function(){
-											divCont7.innerHTML = "";
-											let divCont8 = document.createElement('div');
-											createLabel('<br> How many Families of Products exist? <br>', 'labelQuestion8', divCont7);
-											createInput('0', 'familiesNum', '', '', 'number', divCont7);
-											createButton('Next', 'buttonNext4', divCont7);
-											let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
-											buttonNext4.onclick = function(){
-												divCont8.innerHTML = "";
-												let divCont9 = document.createElement('div');
-												createLabel('<br> Please give the names of the Components <br>', 'labelQuestion9', divCont8);
-												let num = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
-												for (var i=1; i<=num; i++){
-													createInput('Component name '+i, 'txtComponentName', 'infoField', '', 'text', divCont8);
-												}
-												createButton('Next', 'buttonNext5', divCont8);
-												let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
-												buttonNext5.onclick = function(){
-													createLabel('<br> Abstract Factory Pattern   ', 'labelQuestion10', divCont9);
-													createButton('Get Code', 'getcodeAbstractFactoryPattern', divCont9);
-													let buttonCodeAFP = document.getElementById('getcodeAbstractFactoryPattern') as HTMLButtonElement;
-													buttonCodeAFP.onclick = function(){
-														//code generation
-													}
-												}
-												divCont8.appendChild(divCont9);
-											}
-											divCont7.appendChild(divCont8);
-										}
-										createLabel('No', 'label62', divCont6);
-										createInput('', 'radio62', '', 'yes_no', 'radio', divCont6);
-										let radio62 = document.getElementById('radio62') as HTMLInputElement;
-										radio62.onclick = function(){
-											divCont7.innerHTML = "";
-											let divCont8 = document.createElement('div');
-											createLabel('<br> Can Product be created as series of steps which is different in every subcategory? <br>', 'labelQuestion11', divCont7);
-											createLabel('Yes', 'label71', divCont7);
-											createInput('', 'radio71', '', 'yes_no', 'radio', divCont7);
-											let radio71 = document.getElementById('radio71') as HTMLInputElement;
-											radio71.onclick = function(){
-												divCont8.innerHTML = "";
-												let divCont9 = document.createElement('div');
-												createLabel('<br> How many Steps are involved ?  <br>', 'labelQuestion12', divCont8);
-												createInput('0', 'stepsNum', '', '', 'number', divCont8);
-												createButton('Next', 'buttonNext6', divCont8);
-												let buttonNext6 = document.getElementById('buttonNext6') as HTMLButtonElement;
-												buttonNext6.onclick = function(){
-													divCont9.innerHTML = "";
-													let divCont10 = document.createElement('div');
-													createLabel('<br> Please give the name of the steps  <br>', 'labelQuestion13', divCont9);
-													let num = parseInt((document.getElementById('stepsNum') as HTMLInputElement).value);
-													for (var i=1; i<=num; i++){
-														createInput('Step name '+i, 'txtStepName'+i, 'infoField', 'txtStepsName', 'text', divCont9);
-													}
-													createButton('Next', 'buttonNext7', divCont9);
-													let buttonNext7 = document.getElementById('buttonNext7') as HTMLButtonElement;
-													buttonNext7.onclick = function(){
-														createLabel('<br> Builder Pattern   ', 'labelPattern1', divCont10);
-														createButton('Get Code', 'getcodeBuildPattern', divCont10);
-														let buttonCodeBP = document.getElementById('getcodeBuildPattern') as HTMLButtonElement;
-														buttonCodeBP.onclick = function(){
-														//code generation
-														}
-													}
-													divCont9.appendChild(divCont10);
-												}
-												divCont8.appendChild(divCont9);
-											}
-											createLabel('No', 'label72', divCont7);
-											createInput('', 'radio72', '', 'yes_no', 'radio', divCont7);
-											let radio72 = document.getElementById('radio72') as HTMLInputElement;
-											radio72.onclick = function(){
-												divCont8.innerHTML = "";
-												let divCont9 = document.createElement('div');
-												createLabel('<br> What is the name of the Creator (e.g., Oven) of Product? <br>', 'labelQuestion14', divCont8);
-												createInput('Creator name', 'txtCreatorName', 'infoField', 'txtCreatorName', 'text', divCont8);
-												createButton('Next', 'buttonNext8', divCont8);
-												let buttonNext8 = document.getElementById('buttonNext8') as HTMLButtonElement;
-												buttonNext8.onclick = function(){
-													createLabel('<br> Factory Method Pattern   ', 'labelQuestion15', divCont9);
-													createButton('Get Code', 'getcodeFactoryMethodPattern', divCont9);
-													let buttonCodeFMP = document.getElementById('getcodeFactoryMethodPattern') as HTMLButtonElement;
-													buttonCodeFMP.onclick = function(){
-														//code generation
-													}
-												}
-												divCont8.appendChild(divCont9);
-											}
-											divCont7.appendChild(divCont8);
-										}
-										divCont6.appendChild(divCont7);										
-									}
-									divCont5.appendChild(divCont6);
-								}
-								divCont4.appendChild(divCont5);
-							}
-							createLabel('No', 'label32', divCont3);
-							createInput('', 'radio32', '', 'yes_no', 'radio', divCont3);
-							let radio32 = document.getElementById('radio32') as HTMLInputElement;
-							radio32.onclick = function(){
-								divCont4.innerHTML = "";
-								createLabel('<br> There is no pattern <br>', 'labelQuestion16', divCont4);
-							}
-							divCont3.appendChild(divCont4);
-						}
-						divCont2.appendChild(divCont3);
-				}
-				createLabel('Reuse an existing one', 'label12', divCont);
-				createInput('', 'radio12', '', 'new_existed', 'radio', divCont);
-				let radio12 = document.getElementById('radio12') as HTMLInputElement;
-				radio12.onclick = function(){	
-					divCont2.innerHTML = "";
-					createLabel('<br> You chose existed <br>', 'labelQuestion17', divCont2);
-				}
-				divCont.appendChild(divCont2);
-		}
-		createLabel('Structural', 'label2', divWiz);
-		createInput('', 'radio2', '', 'patternTypes', 'radio', divWiz);
-		let radio2 = document.getElementById('radio2') as HTMLInputElement;
-		radio2.onclick = function(){
-			divCont.innerHTML = "";
-			createLabel('<br> Do you want to ... <br>', 'labelQuestion18', divCont);
-		}
-		createLabel('Behavioral', 'label3', divWiz);
-		createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
-		let radio3 = document.getElementById('radio3') as HTMLInputElement;
-		radio3.onclick = function(){
-			divCont.innerHTML = "";
-			createLabel('<br> Do you want to ... <br>', 'labelQuestion19', divCont);
-		}
-		
-		divWiz.appendChild(divCont);
-	}
-
-	insertInputsAbstractFactory():void{
-		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
-		let listofFamily: string[] = [];
-		let listofProducts:string[] = [];
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("Family")){
-				values[key].name = values[key].name + "Factory";
-				listofFamily.push(values[key].name);
-			}else if(key.includes("Product") && !key.includes("ConcreteProduct")){
-				listofProducts.push(values[key].name);
-			}
-			
-		});
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("ConcreteProduct")){
-				let array = key.split('.');
-				var numberofProduct = array[0].replace(/\D/g,'');
-				values[key].name = listofFamily[Number(array[1])-1].split("Factory")[0]+listofProducts[Number(numberofProduct)-1];
-				console.log(key + " "+values[key].name);
-			}
-		});
-		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
-	}
-	insertInputsFactoryMethod():void{
-		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
-		let listofConCreators:string[] = [];
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("ConcreteCreator")) {
-				values[key].name = values[key].name + values.Creator.name;
-				listofConCreators.push(values[key].name);
-			}
-		});
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("ConcreteProduct")){
-				var numofConCreator = key.match(/\d/g);
-				values[key].name = listofConCreators[Number(numofConCreator)-1].split('Dialog')[0] + values.Product.name;
-			}
-		});
-		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
-		console.log(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values))
-	}
-	insertInputsBuilder():void{
-		let values = JSON.parse(JSON.stringify(extensionWidget.data[extensionWidget.state.statePatternSelection].values));
-		let listofProducts:string[] = [];
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("Product")) listofProducts.push(values[key].name);
-		});
-		console.log(listofProducts)
-		Object.keys(values).forEach((key)=>{
-			if(key.includes("ConcreteBuilder")){
-				var numofConBuilder = key.match(/\d/g);
-				values[key].name = listofProducts[Number(numofConBuilder)-1] + "Builder";
-			}
-		});
-		extensionWidget.data[extensionWidget.state.statePatternSelection].values = values;
-	}
 	checkEmptyInputs(rows : number): boolean{
 		let flag = true; 
 		let i = 0;
@@ -738,9 +444,328 @@ export class extensionWidget extends ReactWidget {
 		}
 		return flag;
 	}
+
 	check(key: string){
-		return (!key.includes("ConcreteProduct") || extensionWidget.state.statePatternSelection!="AbstractFactory") && (!key.includes("ConcreteProduct") || extensionWidget.state.statePatternSelection!="FactoryMethod") && (!key.includes("ConcreteBuilder") || extensionWidget.state.statePatternSelection!="Builder")
+		return (!key.includes("ConcreteProduct") || extensionWidget.state.statePatternSelection!="AbstractFactory") && (!key.includes("ConcreteCreator") || extensionWidget.state.statePatternSelection!="FactoryMethod") && (!key.includes("ConcreteBuilder") || extensionWidget.state.statePatternSelection!="Builder")
 	}
+
+	refreshPage(table: HTMLTableElement){
+		table.innerHTML = "";
+		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
+		(document.getElementById("elements") as HTMLElement).style.visibility = 'hidden';
+		window.location.reload();
+	}
+
+	async runWizard(){
+		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'hidden';
+		(document.getElementById('issues') as HTMLDivElement).style.height = '0';
+		(document.getElementById('result') as HTMLDivElement).style.height = '0';
+		
+		var getUrl = window.location.href;
+		extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
+		
+		let divWiz = document.getElementById('divWiz') as HTMLDivElement;
+		divWiz.style.marginLeft = '10px';
+		let divCont = document.createElement('div');
+		createLabel('Choose the type of the pattern: <br>', 'label0', divWiz);
+		createLabel('Creational', 'label1', divWiz)
+		createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);
+		let radio1 = document.getElementById('radio1') as HTMLInputElement;
+		radio1.addEventListener('click', async (e: Event) =>{	
+				divCont.innerHTML = "";
+				let divCont2 = document.createElement('div');
+				createLabel('<br> Do you want to create a completely new object or to create one by reusing an existing one?<br>', 'label4', divCont);
+				createLabel('Create new object', 'label11',divCont);
+				createInput('', 'radio11', '', 'new_existed', 'radio', divCont);
+				let radio11 = document.getElementById('radio11') as HTMLInputElement;
+				radio11.addEventListener('click', async (e: Event) =>{	
+						divCont2.innerHTML = "";
+						let divCont3 = document.createElement('div');
+						createLabel('<br> Give the name of the Product that you want to create <br>', 'labelQuestion3', divCont2);
+						createInput('Product name', 'txtboxProduct_name', 'infoField', '', 'text', divCont2);
+						createButton('Next', 'buttonNext1', divCont2);
+						let buttonNext1 = document.getElementById('buttonNext1') as HTMLButtonElement;
+						buttonNext1.addEventListener('click', async (e: Event) =>{
+							divCont3.innerHTML = "";
+							let divCont4 = document.createElement('div');
+							createLabel('<br> Does the Product has sub-categories? <br>', 'labelQuestion4', divCont3);
+							createLabel('Yes', 'label31', divCont3);
+							createInput('', 'radio31', '', 'yes_no', 'radio', divCont3);
+							let radio31 = document.getElementById('radio31') as HTMLInputElement;
+							radio31.addEventListener('click', async (e: Event) =>{
+								divCont4.innerHTML = "";
+								let divCont5 = document.createElement('div');
+								createLabel('<br> How many sub-categories exist? <br>', 'labelQuestion5', divCont4);
+								createInput('2', 'subcategoriesNum', '', '', 'number', divCont4);
+								let numCat = document.getElementById('subcategoriesNum') as HTMLInputElement;
+								numCat.min = '2';
+								createButton('Next', 'buttonNext2', divCont4);
+								let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
+								buttonNext2.addEventListener('click', async (e: Event) =>{
+									divCont5.innerHTML = "";
+									let divCont6 = document.createElement('div');
+									createLabel('<br> Please give the names of the sub-categories <br>', 'labelQuestion6', divCont5);
+									let num = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+									for (var i=1; i<=num; i++){
+										createInput('Concrete Product name '+i, 'txtboxConcreteProductsName'+i, 'infoField', '', 'text', divCont5);
+									}
+									createButton('Next', 'buttonNext3', divCont5);
+									let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
+									buttonNext3.addEventListener('click', async (e: Event) =>{
+										divCont6.innerHTML = "";
+										let divCont7 = document.createElement('div');
+										createLabel('<br> Can the Products be classified in a Family? <br>', 'labelQuestion7', divCont6);
+										createLabel('Yes', 'label61', divCont6);
+										createInput('', 'radio61', '', 'yes_no', 'radio', divCont6);
+										let radio61 = document.getElementById('radio61') as HTMLInputElement;
+										radio61.addEventListener('click', async (e: Event) =>{
+											divCont7.innerHTML = "";
+											let divCont8 = document.createElement('div');
+											createLabel('<br> How many Families of Products exist? <br>', 'labelQuestion8', divCont7);
+											createInput('2', 'familiesNum', '', '', 'number', divCont7);
+											let numFam = document.getElementById('familiesNum') as HTMLInputElement;
+											numFam.min = '2';
+											createButton('Next', 'buttonNext4', divCont7);
+											let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
+											buttonNext4.addEventListener('click', async (e: Event) =>{
+												divCont8.innerHTML = "";
+												let divCont9 = document.createElement('div');
+												createLabel('<br> Please give the names of the Components (Families) <br>', 'labelQuestion9', divCont8);
+												let num = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
+												for (var i=1; i<=num; i++){
+													createInput('Component name '+i, 'txtboxComponentName'+i, 'infoField', '', 'text', divCont8);
+												}
+												createButton('Next', 'buttonNext5', divCont8);
+												let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
+												buttonNext5.addEventListener('click', async (e: Event) =>{
+													createLabel('<br> <b>Abstract Factory Pattern</b>   ', 'labelQuestion10', divCont9);
+													createButton('Get Code', 'getcodeAbstractFactoryPattern', divCont9);
+													let buttonCodeAFP = document.getElementById('getcodeAbstractFactoryPattern') as HTMLButtonElement;
+													buttonCodeAFP.addEventListener('click', async (e: Event) =>{
+														let infoList = document.getElementsByClassName('infoField') as HTMLCollection;
+														extensionWidget.data["AbstractFactory"].values["AbstractFactory"].name = (infoList.item(0) as HTMLInputElement).value;
+														let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+														let numFam = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
+														for (var i=1; i<=numCat; i++){
+															extensionWidget.data["AbstractFactory"].values["Product"+i] = { "name":"", "extension":0};
+															extensionWidget.data["AbstractFactory"].values["Product"+i].name = (infoList.item(i) as HTMLInputElement).value;
+															for (var j=1; j<=numFam; j++){
+																extensionWidget.data["AbstractFactory"].values["ConcreteProduct"+i+"."+j] = { "name":"", "extension":0};
+															}
+														}
+														for (var j=1; j<=numFam; j++){
+															extensionWidget.data["AbstractFactory"].values["Family"+j] = { "name":"", "extension":0};
+															extensionWidget.data["AbstractFactory"].values["Family"+j].name = (infoList.item(i) as HTMLInputElement).value;
+															i++;
+														}
+														insertInputsAbstractFactory();
+														var arr: string[];
+														arr = [];
+														for (var i=0; i<infoList.length; i++){
+															arr.push((infoList.item(i) as HTMLInputElement).value);
+														}
+														console.log(arr);
+														let flag = this.checkInputsForSameValues(arr);
+														if (flag || arr.indexOf("")!=-1){
+															this.messageService.info("Invalid input!");
+														}else{
+															this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["AbstractFactory"].values, "AbstractFactory"));
+														}
+													});
+												});
+												divCont8.appendChild(divCont9);
+											});
+											divCont7.appendChild(divCont8);
+										});
+										createLabel('No', 'label62', divCont6);
+										createInput('', 'radio62', '', 'yes_no', 'radio', divCont6);
+										let radio62 = document.getElementById('radio62') as HTMLInputElement;
+										radio62.addEventListener('click', async (e: Event) =>{
+											divCont7.innerHTML = "";
+											let divCont8 = document.createElement('div');
+											createLabel('<br> Can Product be created as series of steps which is different in every subcategory? <br>', 'labelQuestion11', divCont7);
+											createLabel('Yes', 'label71', divCont7);
+											createInput('', 'radio71', '', 'yes_no', 'radio', divCont7);
+											let radio71 = document.getElementById('radio71') as HTMLInputElement;
+											radio71.addEventListener('click', async (e: Event) =>{
+												divCont8.innerHTML = "";
+												let divCont9 = document.createElement('div');
+												createLabel('<br> How many Steps are involved ?  <br>', 'labelQuestion12', divCont8);
+												createInput('1', 'stepsNum', '', '', 'number', divCont8);
+												createButton('Next', 'buttonNext6', divCont8);
+												let buttonNext6 = document.getElementById('buttonNext6') as HTMLButtonElement;
+												buttonNext6.addEventListener('click', async (e: Event) =>{
+													divCont9.innerHTML = "";
+													let divCont10 = document.createElement('div');
+													createLabel('<br> Please give the name of the steps  <br>', 'labelQuestion13', divCont9);
+													let num = parseInt((document.getElementById('stepsNum') as HTMLInputElement).value);
+													for (var i=1; i<=num; i++){
+														createInput('Step name '+i, 'txtboxStepName'+i, 'infoField', 'txtStepsName', 'text', divCont9);
+													}
+													createButton('Next', 'buttonNext7', divCont9);
+													let buttonNext7 = document.getElementById('buttonNext7') as HTMLButtonElement;
+													buttonNext7.addEventListener('click', async (e: Event) =>{
+														createLabel('<br> <b>Builder Pattern</b>   ', 'labelPattern1', divCont10);
+														createButton('Get Code', 'getcodeBuilderPattern', divCont10);
+														let buttonCodeBP = document.getElementById('getcodeBuilderPattern') as HTMLButtonElement;
+														buttonCodeBP.addEventListener('click', async (e: Event) =>{
+															let infoList = document.getElementsByClassName('infoField');
+															extensionWidget.data["Builder"].values["Builder"].name = (document.getElementById('txtboxProduct_name') as HTMLInputElement).value + "Builder";
+															extensionWidget.data["Builder"].values["Director"].name = "Director";
+															let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+															let numSteps = parseInt((document.getElementById('stepsNum') as HTMLInputElement).value);
+															for (var i=1; i<=numCat; i++){
+																extensionWidget.data["Builder"].values["Product"+i] = { "name":"", "extension":0};
+																extensionWidget.data["Builder"].values["Product"+i].name = (infoList.item(i) as HTMLInputElement).value;
+																extensionWidget.data["Builder"].values["ConcreteBuilder"+i] = { "name":"", "extension":0};
+															}
+															for (var j=1; j<=numSteps; j++){
+																extensionWidget.data["Builder"].values["BuilderMethod"+j] = { "name":"", "extension":0};
+																extensionWidget.data["Builder"].values["BuilderMethod"+j].name = (infoList.item(i) as HTMLInputElement).value;
+																i++;
+															}
+															insertInputsBuilder();
+															var arr: string[];
+															arr = [];
+															for (var i=0; i<infoList.length; i++){
+																arr.push((infoList.item(i) as HTMLInputElement).value);
+															}
+															//console.log(arr);
+															let flag = this.checkInputsForSameValues(arr);
+															if (flag || arr.indexOf("")!=-1){
+																this.messageService.info("Invalid input!");
+															}else{
+																this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["Builder"].values, "Builder"));
+															}
+														});
+													});
+													divCont9.appendChild(divCont10);
+												});
+												divCont8.appendChild(divCont9);
+											});
+											createLabel('No', 'label72', divCont7);
+											createInput('', 'radio72', '', 'yes_no', 'radio', divCont7);
+											let radio72 = document.getElementById('radio72') as HTMLInputElement;
+											radio72.addEventListener('click', async (e: Event) =>{
+												divCont8.innerHTML = "";
+												let divCont9 = document.createElement('div');
+												createLabel('<br> What is the name of the Creator (e.g., Oven) of Product? <br>', 'labelQuestion14', divCont8);
+												createInput('Creator name', 'txtboxCreatorName', 'infoField', 'txtCreatorName', 'text', divCont8);
+												createButton('Next', 'buttonNext8', divCont8);
+												let buttonNext8 = document.getElementById('buttonNext8') as HTMLButtonElement;
+												buttonNext8.addEventListener('click', async (e: Event) =>{
+													createLabel('<br> <b>Factory Method Pattern</b>   ', 'labelQuestion15', divCont9);
+													createButton('Get Code', 'getcodeFactoryMethodPattern', divCont9);
+													let buttonCodeFMP = document.getElementById('getcodeFactoryMethodPattern') as HTMLButtonElement;
+													buttonCodeFMP.addEventListener('click', async (e: Event) =>{
+															let infoList = document.getElementsByClassName('infoField');
+															extensionWidget.data["FactoryMethod"].values["Product"].name = (infoList.item(0) as HTMLInputElement).value;
+															let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+															for (var i=1; i<=numCat; i++){
+																extensionWidget.data["FactoryMethod"].values["ConcreteProduct"+i] = { "name":"", "extension":0};
+																extensionWidget.data["FactoryMethod"].values["ConcreteProduct"+i].name = (infoList.item(i) as HTMLInputElement).value;
+																extensionWidget.data["FactoryMethod"].values["ConcreteCreator"+i] = { "name":"", "extension":0};
+															}
+															extensionWidget.data["FactoryMethod"].values["Creator"].name = (infoList.item(i) as HTMLInputElement).value;
+															insertInputsFactoryMethod();
+															insertInputsBuilder();
+															var arr: string[];
+															arr = [];
+															for (var i=0; i<infoList.length; i++){
+																arr.push((infoList.item(i) as HTMLInputElement).value);
+															}
+															//console.log(arr);
+															let flag = this.checkInputsForSameValues(arr);
+															if (flag || arr.indexOf("")!=-1){
+																this.messageService.info("Invalid input!");
+															}else{
+																this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["FactoryMethod"].values, "FactoryMethod"));
+															}
+													});
+												});
+												divCont8.appendChild(divCont9);
+											});
+											divCont7.appendChild(divCont8);
+										});
+										divCont6.appendChild(divCont7);										
+									});
+									divCont5.appendChild(divCont6);
+								});
+								divCont4.appendChild(divCont5);
+							});
+							createLabel('No', 'label32', divCont3);
+							createInput('', 'radio32', '', 'yes_no', 'radio', divCont3);
+							let radio32 = document.getElementById('radio32') as HTMLInputElement;
+							radio32.addEventListener('click', async (e: Event) =>{
+								divCont4.innerHTML = "";
+								createLabel('<br> There is no pattern <br>', 'labelQuestion16', divCont4);
+							});
+							divCont3.appendChild(divCont4);
+						});
+						divCont2.appendChild(divCont3);
+				});
+				createLabel('Reuse an existing one', 'label12', divCont);
+				createInput('', 'radio12', '', 'new_existed', 'radio', divCont);
+				let radio12 = document.getElementById('radio12') as HTMLInputElement;
+				radio12.addEventListener('click', async (e: Event) =>{	
+					divCont2.innerHTML = "";
+					let divCont3 = document.createElement('div');
+					createLabel('<br> Do you want the object to be unique or clone? <br>', 'labelQuestion17', divCont2);
+					createLabel('Unique', 'label121', divCont2);
+					createInput('', 'radio121', '', 'unique_cloned', 'radio', divCont2);
+					let radio121 = document.getElementById('radio121') as HTMLInputElement;
+					radio121.addEventListener('click', async (e: Event) =>{
+						divCont3.innerHTML = "";
+						let divCont4 = document.createElement('div');
+						createLabel('<br> Please provide the name of the Single class <br>', 'labelQuestion18', divCont3);
+						createInput('Singleton name', 'txtboxSingletonName', 'infoField', 'txtSingletonName', 'text', divCont3);
+						createButton('Next', 'buttonNext9', divCont3);
+						let buttonNext9 = document.getElementById('buttonNext9') as HTMLButtonElement;
+						buttonNext9.addEventListener('click', async (e: Event) =>{
+							createLabel('<br> <b>Singleton Pattern</b>   ', 'labelQuestion19', divCont4);
+							createButton('Get Code', 'getcodeSingletonPattern', divCont4);
+							let buttonCodeSP = document.getElementById('getcodeSingletonPattern') as HTMLButtonElement;
+							buttonCodeSP.addEventListener('click', async (e: Event) =>{
+								let singlName = (document.getElementById('txtboxSingletonName') as HTMLInputElement).value;
+								extensionWidget.data["Singleton"].values["Singleton"].name = singlName;
+								if (singlName==""){
+									this.messageService.info("Invalid input!");
+								}else{
+									this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["Singleton"].values, "Singleton"));
+								}
+							});
+						});
+						divCont3.appendChild(divCont4);
+					});
+					createLabel('Cloned', 'label122', divCont2);
+					createInput('', 'radio122', '', 'unique_cloned', 'radio', divCont2);
+					let radio122 = document.getElementById('radio122') as HTMLInputElement;
+					radio122.addEventListener('click', async (e: Event) =>{
+
+					});
+					divCont2.appendChild(divCont3);
+				});
+				divCont.appendChild(divCont2);
+		});
+		createLabel('Structural', 'label2', divWiz);
+		createInput('', 'radio2', '', 'patternTypes', 'radio', divWiz);
+		let radio2 = document.getElementById('radio2') as HTMLInputElement;
+		radio2.addEventListener('click', async (e: Event) =>{
+			divCont.innerHTML = "";
+			createLabel('<br> Do you want to ... <br>', 'labelQuestion18', divCont);
+		});
+		createLabel('Behavioral', 'label3', divWiz);
+		createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
+		let radio3 = document.getElementById('radio3') as HTMLInputElement;
+		radio3.addEventListener('click', async (e: Event) =>{
+			divCont.innerHTML = "";
+			createLabel('<br> Do you want to ... <br>', 'labelQuestion19', divCont);
+		});
+		
+		divWiz.appendChild(divCont);
+	}
+
+	
 }
 
 function createLabel(innerMessage: string, id: string, parent: HTMLElement){
@@ -752,14 +777,66 @@ function createLabel(innerMessage: string, id: string, parent: HTMLElement){
 
 function createInput(innerMessage: string, id: string, classname: string, name: string, type: string, parent: HTMLElement){
 	let inputField = document.createElement('input');
-	inputField.innerHTML = innerMessage;
+	inputField.placeholder = innerMessage;
 	inputField.id = id;
 	if (!id.includes('radio') && !id.includes('Num')){
 		inputField.className = classname;
+		if (!id.includes('Method')){
+			inputField.pattern = "^([A-Z]{1}[a-zA-Z]*[0-9]*)$";
+		}else{
+			inputField.pattern = "^([a-z]{1}[a-zA-Z]*[0-9]*)$"; //camel
+		}
+		let suggestions = document.createElement("div");
+		suggestions.id = "suggestions"+id.substring(6,);
+		console.log("suggestions"+id.substring(6,));
+		suggestions.className = "suggestions";
+		parent.appendChild(suggestions);
+		inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
+			showSuggestions(inputField.value, extensionWidget.res, ( e.target as Element).id);
+			});
+		inputField.autocomplete = "off";
 	}
 	inputField.name = name;
 	inputField.type = type;
 	parent.appendChild(inputField);
+}
+//autocomplete
+function showSuggestions(value: string, table: string[], id: string){
+	let res = document.getElementById("suggestions"+id.substring(6,))as HTMLElement;
+		
+  		let list = '';
+  		let terms = autocompleteMatch(value, table);
+  		for (var i=0; i<terms.length; i++) {
+    		list += '<li>' + terms[i] + '</li>';
+  		}
+  		res.innerHTML = "<ul id='list" + id.substring(6,) + "'> "+ list + "</ul>";
+		let ul = document.getElementById("list"+id.substring(6,))as HTMLElement;
+		let input = document.getElementById("txtbox"+id.substring(6,))as HTMLInputElement;
+		ul.onclick = function(event) {
+			input.value = (event.target as HTMLLIElement).innerHTML ;
+			res.style.visibility = 'hidden';
+		}	
+		let hideBlock = function(){
+			res.style.visibility = 'hidden';
+		};
+		ul.addEventListener('mouseleave', hideBlock);
+		input.addEventListener('keypress', (e: KeyboardEvent) =>{
+			res.style.visibility = 'visible';
+			showSuggestions((document.getElementById("txtbox"+id.substring(6,))as HTMLInputElement).value, table, ( e.target as Element).id);
+		});
+
+}
+//autocomplete
+function autocompleteMatch(input: string, table: string[]) {
+	if (input == '') {
+		return [];
+	  }
+	  let reg = new RegExp('^' + input);
+	  return table.filter(function(term) {
+		  if (term.match(reg)) {
+			return term;
+		  }
+	  });
 }
 
 function createButton(innerMessage: string, id: string, parent: HTMLElement){
@@ -767,4 +844,62 @@ function createButton(innerMessage: string, id: string, parent: HTMLElement){
 	button.innerHTML = innerMessage;
 	button.id = id;
 	parent.appendChild(button);
+}
+
+function insertInputsAbstractFactory():void{
+	let values = JSON.parse(JSON.stringify(extensionWidget.data["AbstractFactory"].values));
+	let listofFamily: string[] = [];
+	let listofProducts:string[] = [];
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("Family")){
+			values[key].name = values[key].name + "Factory";
+			listofFamily.push(values[key].name);
+		}else if(key.includes("Product") && !key.includes("ConcreteProduct")){
+			listofProducts.push(values[key].name);
+		}
+		
+	});
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("ConcreteProduct")){
+			let array = key.split('.');
+			var numberofProduct = array[0].replace(/\D/g,'');
+			values[key].name = listofFamily[Number(array[1])-1].split("Factory")[0]+listofProducts[Number(numberofProduct)-1];
+			console.log(key + " "+values[key].name);
+		}
+	});
+	extensionWidget.data["AbstractFactory"].values = values;
+}
+
+function insertInputsBuilder():void{
+	let values = JSON.parse(JSON.stringify(extensionWidget.data["Builder"].values));
+	let listofProducts:string[] = [];
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("Product")) listofProducts.push(values[key].name);
+	});
+	console.log(listofProducts)
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("ConcreteBuilder")){
+			var numofConBuilder = key.match(/\d/g);
+			values[key].name = listofProducts[Number(numofConBuilder)-1] + "Builder";
+		}
+	});
+	extensionWidget.data["Builder"].values = values;
+}
+
+function insertInputsFactoryMethod():void{
+	let values = JSON.parse(JSON.stringify(extensionWidget.data["FactoryMethod"].values));
+	let listofConProducts:string[] = [];
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("ConcreteProduct")) {
+			values[key].name = values[key].name + values.Product.name;
+			listofConProducts.push(values[key].name);
+		}
+	});
+	Object.keys(values).forEach((key)=>{
+		if(key.includes("ConcreteCreator")){
+			var numofConProduct = key.match(/\d/g);
+			values[key].name = listofConProducts[Number(numofConProduct)-1].split(values.Product.name)[0] + values.Creator.name;
+		}
+	});
+	extensionWidget.data["FactoryMethod"].values = values;
 }
