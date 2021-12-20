@@ -57,7 +57,7 @@
                 "name":"",
                 "extension":0
             },
-            "Product1":{
+            "ConcreteProduct1":{
                 "name":"",
                 "extension":1
             }
@@ -89,7 +89,7 @@
                 "name":"",
                 "extension":0
             },
-            "Object1":{
+            "ConcretePrototype1":{
                 "name":"",
                 "extension":1
             }
