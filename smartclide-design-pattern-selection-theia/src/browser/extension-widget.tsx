@@ -721,7 +721,41 @@ export class extensionWidget extends ReactWidget {
 				let radio12 = document.getElementById('radio12') as HTMLInputElement;
 				radio12.addEventListener('click', async (e: Event) =>{	
 					divCont2.innerHTML = "";
-					createLabel('<br> You chose existed <br>', 'labelQuestion17', divCont2);
+					let divCont3 = document.createElement('div');
+					createLabel('<br> Do you want the object to be unique or clone? <br>', 'labelQuestion17', divCont2);
+					createLabel('Unique', 'label121', divCont2);
+					createInput('', 'radio121', '', 'unique_cloned', 'radio', divCont2);
+					let radio121 = document.getElementById('radio121') as HTMLInputElement;
+					radio121.addEventListener('click', async (e: Event) =>{
+						divCont3.innerHTML = "";
+						let divCont4 = document.createElement('div');
+						createLabel('<br> Please provide the name of the Single class <br>', 'labelQuestion18', divCont3);
+						createInput('Singleton name', 'txtboxSingletonName', 'infoField', 'txtSingletonName', 'text', divCont3);
+						createButton('Next', 'buttonNext9', divCont3);
+						let buttonNext9 = document.getElementById('buttonNext9') as HTMLButtonElement;
+						buttonNext9.addEventListener('click', async (e: Event) =>{
+							createLabel('<br> <b>Singleton Pattern</b>   ', 'labelQuestion19', divCont4);
+							createButton('Get Code', 'getcodeSingletonPattern', divCont4);
+							let buttonCodeSP = document.getElementById('getcodeSingletonPattern') as HTMLButtonElement;
+							buttonCodeSP.addEventListener('click', async (e: Event) =>{
+								let singlName = (document.getElementById('txtboxSingletonName') as HTMLInputElement).value;
+								extensionWidget.data["Singleton"].values["Singleton"].name = singlName;
+								if (singlName==""){
+									this.messageService.info("Invalid input!");
+								}else{
+									this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["Singleton"].values, "Singleton"));
+								}
+							});
+						});
+						divCont3.appendChild(divCont4);
+					});
+					createLabel('Cloned', 'label122', divCont2);
+					createInput('', 'radio122', '', 'unique_cloned', 'radio', divCont2);
+					let radio122 = document.getElementById('radio122') as HTMLInputElement;
+					radio122.addEventListener('click', async (e: Event) =>{
+
+					});
+					divCont2.appendChild(divCont3);
 				});
 				divCont.appendChild(divCont2);
 		});
@@ -759,10 +793,6 @@ function createInput(innerMessage: string, id: string, classname: string, name: 
 	inputField.id = id;
 	if (!id.includes('radio') && !id.includes('Num')){
 		inputField.className = classname;
-		var form = document.createElement('form');
-
-		form.appendChild(inputField);
-		inputField.minLength = 1;
 		if (!id.includes('Method')){
 			inputField.pattern = "^([A-Z]{1}[a-zA-Z]*[0-9]*)$";
 		}else{
@@ -776,6 +806,7 @@ function createInput(innerMessage: string, id: string, classname: string, name: 
 		inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
 			showSuggestions(inputField.value, extensionWidget.res, ( e.target as Element).id);
 			});
+		inputField.autocomplete = "off";
 	}
 	inputField.name = name;
 	inputField.type = type;
