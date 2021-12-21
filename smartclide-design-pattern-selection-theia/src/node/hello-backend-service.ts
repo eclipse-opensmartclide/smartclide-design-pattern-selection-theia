@@ -30,7 +30,13 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     async sayHelloTo(url: string): Promise<string[]> {
         //string manipulation to get the right form of url string
         var lastL = url.indexOf("/#/");
-        var rootUri = url.substr(lastL+3);
+        var rootUri;
+        if(url.match("\/#\/.:\/")){
+            rootUri = url.substr(lastL+3);
+        }
+        else{
+            rootUri = url.substr(lastL+2);
+        }
         
         //search for every file name in textbox values
         //index=-1 if not found
@@ -51,11 +57,17 @@ export class HelloBackendServiceImpl implements HelloBackendService {
 
     async getMethods(url: string, fileName: string): Promise<string[]>{
         var lastL = url.indexOf("/#/");
-        var rootUri = url.substr(lastL+3);
+        var rootUri;
+        if(url.match("\/#\/.:\/")){
+            rootUri = url.substr(lastL+3);
+        }
+        else{
+            rootUri = url.substr(lastL+2);
+        }
         var fs = require("fs");
         let lO = {label: []};
         try {
-            const data = fs.readFileSync(rootUri+"\\src\\"+ fileName +".java", 'utf8')
+            const data = fs.readFileSync(rootUri+"/src/"+ fileName +".java", 'utf8')
             const regex = new RegExp(/(?:(?:public|private|protected|static|final|native|synchronized|abstract|transient)+\s+)+[$_\w<>\[\]\s]*\s+[\$_\w]+\([^\)]*\)?\s*/gm);
             const array = [...data.matchAll(regex)];
             for(var i = 0; i<array.length; i++){
@@ -80,7 +92,13 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     async codeGeneration(url : string, jsonObj : string, statePatternSelection: string): Promise<string>{ 
         let cg : CodeGenerator  = new CodeGenerator();
         var lastL = url.indexOf("/#/");
-        var rootUri = url.substr(lastL+3);
+        var rootUri;
+        if(url.match("\/#\/.:\/")){
+            rootUri = url.substr(lastL+3);
+        }
+        else{
+            rootUri = url.substr(lastL+2);
+        }
         let message = "";
         if(statePatternSelection == "AbstractFactory"){
             let ppc : Array<patternParticipatingClass> = cg.AbstractFactory(jsonObj);
