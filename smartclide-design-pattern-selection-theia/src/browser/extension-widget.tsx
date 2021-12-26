@@ -87,7 +87,7 @@ export class extensionWidget extends ReactWidget {
 				<br /> 
 				<br /> 
 				<button id="btn-get-code" type="button" title='Assign roles to classes and methods' onClick={_a => this.runprocess()}>Assign roles to classes and methods</button>
-				<button id="btn-wizard" type="button" title='Wizard' onClick={_a => this.runWizard()}>Wizard</button>
+				<button id="btn-wizzard" type="button" title='Wizzard' onClick={_a => this.runWizzard()}>Wizzard</button>
 				<br />
 				<br />
 				<div id="result">
@@ -115,7 +115,7 @@ export class extensionWidget extends ReactWidget {
     protected async runprocess(): Promise<void> {
 		if (extensionWidget.state.statePatternSelection!="Choose_pattern" && extensionWidget.state.statePatternSelection!=""){
 			(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'hidden';
-			(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'hidden';
+			(document.getElementById("btn-wizzard") as HTMLButtonElement).style.visibility = 'hidden';
 
 			var getUrl = window.location.href;
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
@@ -514,7 +514,7 @@ export class extensionWidget extends ReactWidget {
 		extensionWidget.data["FactoryMethod"].values = values;
 	}
 
-	async runWizard(){
+	async runWizzard(){
 		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'hidden';
 		(document.getElementById('issues') as HTMLDivElement).style.height = '0';
 		(document.getElementById('result') as HTMLDivElement).style.height = '0';
