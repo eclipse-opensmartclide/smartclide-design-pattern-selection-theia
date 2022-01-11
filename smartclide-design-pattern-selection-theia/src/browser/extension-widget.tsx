@@ -353,7 +353,7 @@ export class extensionWidget extends ReactWidget {
 	}
 	checkMessage(message: string){
 		if(message!=""){
-			this.messageService.info("Something went wrong");
+			this.messageService.info(message);
 		}else{
 			this.messageService.info("Code generation has been completed");
 		}
