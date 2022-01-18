@@ -154,36 +154,21 @@ export class extensionWidget extends ReactWidget {
 			let cell1 = row.insertCell(0);
 			let cell2 = row.insertCell(1);
 			cell2.id = "cell2";
-			let label = document.createElement("label");
-			label.id = "label"+ table.rows.length;
-			label.innerHTML = key;
-	
-			let txtbox = document.createElement("input");
-			txtbox.id = "txtbox"+ table.rows.length;
+			
+			createLabel(key,"label"+ table.rows.length,table);
+			createInput(key, "txtbox"+ table.rows.length,"", "txtbox"+ table.rows.length,"text",table)
+
 			let num = table.rows.length;
-			txtbox.onchange = function () { 
-				extensionWidget.textBoxValues[num-1] = txtbox.value;
+			(document.getElementById('txtbox'+ table.rows.length) as HTMLInputElement).onchange = function () { 
+				extensionWidget.textBoxValues[num-1] = (document.getElementById('label'+ table.rows.length) as HTMLInputElement).value;
 			};
-			txtbox.autocomplete = "off";
-			txtbox.placeholder = key;
-			if (!key.includes("Method")){
-				let suggestions = document.createElement("div");
-				suggestions.id = "suggestions"+table.rows.length;
-				suggestions.className = "suggestions";
-				cell2.appendChild(suggestions);
-				txtbox.addEventListener('keypress', (e: KeyboardEvent) =>{
-					showSuggestions(txtbox.value, extensionWidget.res, ( e.target as Element).id);
-					});
-			}
-			cell1.appendChild(label);
-			cell2.appendChild(txtbox);
+			cell1.appendChild((document.getElementById('label'+ table.rows.length) as HTMLInputElement));
+			cell2.appendChild((document.getElementById('txtbox'+ table.rows.length) as HTMLInputElement));
 			if(extensionWidget.data[extensionWidget.state.statePatternSelection].values[key].extension==1){
 				let cell3 = row.insertCell(2);
-				let t3 = document.createElement("button");
-				t3.innerHTML = "+";
-				t3.id = "btn"+ key;
-				cell3.appendChild(t3);
-				t3.addEventListener('click', (event) => {
+				createButton("+","btn"+ key,table)
+				cell3.appendChild(document.getElementById("btn"+ key) as HTMLButtonElement);
+				(document.getElementById("btn"+ key) as HTMLButtonElement).addEventListener('click', (event) => {
 					this.extensionButtonClick(table, ( event.target as Element).id, extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 				});	
 		}	
@@ -912,19 +897,16 @@ function createInput(innerMessage: string, id: string, classname: string, name: 
 	inputField.id = id;
 	if (!id.includes('radio') && !id.includes('Num')){
 		inputField.className = classname;
-		if (!id.includes('Method')){
-			inputField.pattern = "^([A-Z]{1}[a-zA-Z]*[0-9]*)$";
-		}else{
-			inputField.pattern = "^([a-z]{1}[a-zA-Z]*[0-9]*)$"; //camel
-		}
-		let suggestions = document.createElement("div");
-		suggestions.id = "suggestions"+id.substring(6,);
-		console.log("suggestions"+id.substring(6,));
-		suggestions.className = "suggestions";
-		parent.appendChild(suggestions);
-		inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
-			showSuggestions(inputField.value, extensionWidget.res, ( e.target as Element).id);
+		if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
+			let suggestions = document.createElement("div");
+			suggestions.id = "suggestions"+id.substring(6,);
+			console.log("suggestions"+id.substring(6,));
+			suggestions.className = "suggestions";
+			parent.appendChild(suggestions);
+			inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
+				showSuggestions(inputField.value, extensionWidget.res, ( e.target as Element).id);
 			});
+		}
 		inputField.autocomplete = "off";
 	}
 	inputField.name = name;
