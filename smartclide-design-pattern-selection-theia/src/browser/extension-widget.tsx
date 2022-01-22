@@ -9,6 +9,11 @@ import { HelloBackendService } from '../common/protocol';
 import data from './data.json';
 import explanation from './explanation.json';
 
+interface Textfield{
+	ident: number;
+	value: string;
+  };
+
 @injectable()
 export class extensionWidget extends ReactWidget {
 	
@@ -43,6 +48,7 @@ export class extensionWidget extends ReactWidget {
 	static textBoxValues: Array<string> = [];
 	static data = JSON.parse(JSON.stringify(data));
 	static explanation = JSON.parse(JSON.stringify(explanation));
+	
 	protected render(): React.ReactNode {
 		const header = `Choose a Design Pattern and get the code. `;
 		
@@ -87,7 +93,7 @@ export class extensionWidget extends ReactWidget {
 				<br /> 
 				<br /> 
 				<button id="btn-get-code" type="button" title='Assign roles to classes and methods' onClick={_a => this.runprocess()}>Assign roles to classes and methods</button>
-				<button id="btn-wizzard" type="button" title='Wizzard' onClick={_a => this.runWizzard()}>Wizzard</button>
+				<button id="btn-wizard" type="button" title='Wizard' onClick={_a => this.runWizard()}>Wizard</button>
 				<br />
 				<br />
 				<div id="result">
@@ -101,7 +107,7 @@ export class extensionWidget extends ReactWidget {
 					<table id="show_pattern_table">
 					</table>
 					<div id="elements">
-						<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement).rows.length)}> Get Code </button>
+						<button id ="btnFinalize" type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement))}> Get Code </button>
 					</div>
 				</div>
 			</div>
@@ -115,7 +121,7 @@ export class extensionWidget extends ReactWidget {
     protected async runprocess(): Promise<void> {
 		if (extensionWidget.state.statePatternSelection!="Choose_pattern" && extensionWidget.state.statePatternSelection!=""){
 			(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'hidden';
-			(document.getElementById("btn-wizzard") as HTMLButtonElement).style.visibility = 'hidden';
+			(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'hidden';
 
 			var getUrl = window.location.href;
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
@@ -306,11 +312,24 @@ export class extensionWidget extends ReactWidget {
 		
 	}
 
-	async buttonClick2 (rows : number):Promise<void>{
-		if (!this.checkEmptyInputs(rows)){
-			this.messageService.info("You need to give name for ALL the classes!");
-		}else{
-			if (this.checkInputs() == "Inputs are valid"){
+	async buttonClick2 (table: HTMLTableElement):Promise<void>{
+			let textfieldArray: Array<Textfield> = [];
+			for (var i=0; i<table.rows.length; i++){
+				let label = (document.getElementById('label'+(i+1)) as HTMLLabelElement).innerHTML;
+				let v = (document.getElementById('txtbox'+(i+1)) as HTMLInputElement).value;
+				if (label.includes('Method')){
+					let textfield:  Textfield={ ident: 2, value: v };
+					textfieldArray.push(textfield);
+				}else if (label.includes('Attribute')) {
+					let textfield:  Textfield={ ident: 3, value: v };
+					textfieldArray.push(textfield);
+				}else{
+					let textfield:  Textfield={ ident: 1, value: v };
+					textfieldArray.push(textfield);
+				}
+			}
+			let message = this.checkInputs(textfieldArray);
+			if (message.includes("Input is valid")){
 				if (extensionWidget.state.statePatternSelection=="Adapter"){
 					let adapteeName = (document.getElementById("txtbox4") as HTMLInputElement).value;
 					var getUrl = window.location.href;
@@ -347,13 +366,13 @@ export class extensionWidget extends ReactWidget {
 					this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection));
 				}
 			}else{
-				this.messageService.info("Inputs are invalid");
+				this.messageService.info(message);
 			}
-		}
+		
 	}
 	checkMessage(message: string){
 		if(message!=""){
-			this.messageService.info(message);
+			this.messageService.info("Something went wrong");
 		}else{
 			this.messageService.info("Code generation has been completed");
 		}
@@ -383,38 +402,55 @@ export class extensionWidget extends ReactWidget {
 			}
 	}
 
-	checkInputs(){
-		let count = 0;
-		const table = document.getElementById('show_pattern_table') as HTMLTableElement;
-		if (this.checkInputsForSameValues(extensionWidget.textBoxValues)){
-			return ("Inputs are invalid");
-		}else{
-			for(let i = 0 ; i < table.rows.length; i++){
-				const txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
-				const labelvalue = (document.getElementById( 'label'+ (i + 1) ) as HTMLElement).innerHTML;
-				if (labelvalue.includes("Method")){
-					if(txtbox.match("^([a-z]{1}[a-zA-Z]*[0-9]*)$")){//camel writing names of methods
-						count++;
-					}
-				}else {
-					if(txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){//general case
-						count++;
-					}
-				}
-			}
-			return (count==(table.rows.length) ? "Inputs are valid" : "Inputs are invalid")
+	checkInputs(array: Array<Textfield>){
+		let returncode1 = this.checkEmptyInputs(array);
+		let returncode2 = this.checkWritingInput(array);
+		let returncode3 = this.checkInputsForSameValues(array);
+		console.log('returncode1: ', returncode1);
+		console.log('returncode2: ', returncode2);
+		console.log('returncode3: ', returncode3);
+		if (returncode1+returncode2+returncode3==0){
+			return "Input is valid";
+		}else if (returncode1==1){
+			return "You need to fill all the fields!";
+		}else if (returncode2==2){
+			return "Class's name must start with a capital letter!";
+		}else if (returncode2==3){
+			return "Method's name must follow camel writing!";
+		}else if (returncode2==4){
+			return "Attribute's name must contain only small letters!";
+		}else {
+			return "There are duplicated names in the fields!";
 		}	
 	}
+
+	//method that checks the writing of class name, method name and attribute name
+	checkWritingInput(array: Array<Textfield>){
+		for(let i = 0 ; i < array.length; i++){
+			let txtbox = array[i].value;
+			let labelcode = array[i].ident;
+			if (labelcode == 1 && !txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){ //class case
+					return 2;
+			}
+			if (labelcode == 2 && !txtbox.match("^[a-z]+[a-z|0-9]*([A-Z][a-z|0-9]*)*")){ //method case
+					return 3;
+			}
+			if (labelcode == 3 && !txtbox.match("^([a-z]*[0-9]*)$")){ //attribute case
+					return 4;
+			}	
+		}
+		return 0;
+	}
+
 	//method that checks for duplicate values
-	checkInputsForSameValues(table: string[]){
-		const uniqueElements = table;
+	checkInputsForSameValues(array: Array<Textfield>){
 		let resultToReturn = false;
-		for (let i = 0; i < uniqueElements.length; i++) { // nested for loop
-			for (let j = 0; j < uniqueElements.length; j++) {
+		for (let i = 0; i < array.length; i++) { // nested for loop
+			for (let j = 0; j < array.length; j++) {
 				// prevents the element from comparing with itself
 				if (i != j) {
 					// check if elements' values are equal
-					if (uniqueElements[i] == uniqueElements[j] && uniqueElements[i]!=undefined) {
+					if (array[i].value == array[j].value && array[i].value!=undefined) {
 						// duplicate element present                  
 						resultToReturn = true;
 						// terminate inner loop
@@ -427,22 +463,19 @@ export class extensionWidget extends ReactWidget {
 				break;
 			}
 		}
-		return(resultToReturn) 
+		if (!resultToReturn){
+			return 0;
+		}else{
+			return 5;
+		}
 	}
 
-	checkEmptyInputs(rows : number): boolean{
-		let flag = true; 
-		let i = 0;
-		while (i<rows && flag==true){
-			const txtvalue = (document.getElementById("txtbox"+(i+1)) as HTMLInputElement).value;
-			const label = (document.getElementById("label"+(i+1)) as HTMLLabelElement).innerHTML;
-			if (txtvalue=="" && !label.includes("ConcreteProduct")) 
-				flag = false; //the inputs have to be non empty except for the input whose label contains the ConcreteProduct role
-			else {
-				i ++;
-			}
+	//method that search for empty textfields
+	checkEmptyInputs(array: Array<Textfield>){
+		for (var i=0; i<array.length; i++){
+			if (array[i].value == "") return 1;
 		}
-		return flag;
+		return 0;
 	}
 
 	check(key: string){
@@ -514,7 +547,7 @@ export class extensionWidget extends ReactWidget {
 		extensionWidget.data["FactoryMethod"].values = values;
 	}
 
-	async runWizzard(){
+	async runWizard(){
 		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'hidden';
 		(document.getElementById('issues') as HTMLDivElement).style.height = '0';
 		(document.getElementById('result') as HTMLDivElement).style.height = '0';
@@ -602,33 +635,37 @@ export class extensionWidget extends ReactWidget {
 													let buttonCodeAFP = document.getElementById('getcodeAbstractFactoryPattern') as HTMLButtonElement;
 													buttonCodeAFP.addEventListener('click', async (e: Event) =>{
 														let infoList = document.getElementsByClassName('infoField') as HTMLCollection;
+														let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
 														extensionWidget.data["AbstractFactory"].values["AbstractFactory"].name = (infoList.item(0) as HTMLInputElement).value;
+														let textfield:  Textfield={ ident: 1, value: (infoList.item(0) as HTMLInputElement).value };
+														textfieldArray.push(textfield);
 														let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
 														let numFam = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
 														for (var i=1; i<=numCat; i++){
 															extensionWidget.data["AbstractFactory"].values["Product"+i] = { "name":"", "extension":0};
-															extensionWidget.data["AbstractFactory"].values["Product"+i].name = (infoList.item(i) as HTMLInputElement).value;
+															let v1 = (infoList.item(i) as HTMLInputElement).value;
+															extensionWidget.data["AbstractFactory"].values["Product"+i].name = v1;
+															let textfield:  Textfield={ ident: 1, value: v1 };
+															textfieldArray.push(textfield);
 															for (var j=1; j<=numFam; j++){
 																extensionWidget.data["AbstractFactory"].values["ConcreteProduct"+i+"."+j] = { "name":"", "extension":0};
 															}
 														}
 														for (var j=1; j<=numFam; j++){
 															extensionWidget.data["AbstractFactory"].values["Family"+j] = { "name":"", "extension":0};
-															extensionWidget.data["AbstractFactory"].values["Family"+j].name = (infoList.item(i) as HTMLInputElement).value;
+															let v2 = (infoList.item(i) as HTMLInputElement).value;
+															extensionWidget.data["AbstractFactory"].values["Family"+j].name = v2;
+															let textfield:  Textfield={ ident: 1, value: v2 };
+															textfieldArray.push(textfield);
 															i++;
 														}
 														this.insertInputsAbstractFactory();
-														var arr: string[];
-														arr = [];
-														for (var i=0; i<infoList.length; i++){
-															arr.push((infoList.item(i) as HTMLInputElement).value);
-														}
-														console.log(arr);
-														let flag = this.checkInputsForSameValues(arr);
-														if (flag || arr.indexOf("")!=-1){
-															this.messageService.info("Invalid input!");
-														}else{
+														
+														let message = this.checkInputs(textfieldArray);
+														if (message.includes("Input is valid")){
 															this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["AbstractFactory"].values, "AbstractFactory"));
+														}else{
+															this.messageService.info(message);
 														}
 													});
 												});
@@ -691,12 +728,12 @@ export class extensionWidget extends ReactWidget {
 																arr.push((infoList.item(i) as HTMLInputElement).value);
 															}
 															//console.log(arr);
-															let flag = this.checkInputsForSameValues(arr);
+															/*let flag = this.checkInputsForSameValues(arr);
 															if (flag || arr.indexOf("")!=-1){
 																this.messageService.info("Invalid input!");
 															}else{
 																this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["Builder"].values, "Builder"));
-															}
+															}*/
 														});
 													});
 													divCont9.appendChild(divCont10);
@@ -735,12 +772,12 @@ export class extensionWidget extends ReactWidget {
 																arr.push((infoList.item(i) as HTMLInputElement).value);
 															}
 															//console.log(arr);
-															let flag = this.checkInputsForSameValues(arr);
+															/*let flag = this.checkInputsForSameValues(arr);
 															if (flag || arr.indexOf("")!=-1){
 																this.messageService.info("Invalid input!");
 															}else{
 																this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["FactoryMethod"].values, "FactoryMethod"));
-															}
+															}*/
 													});
 												});
 												divCont8.appendChild(divCont9);
@@ -790,7 +827,9 @@ export class extensionWidget extends ReactWidget {
 								let singlName = (document.getElementById('txtboxSingletonName') as HTMLInputElement).value;
 								extensionWidget.data["Singleton"].values["Singleton"].name = singlName;
 								if (singlName==""){
-									this.messageService.info("Invalid input!");
+									this.messageService.info("You need to fill all the fields!");
+								}else if (!singlName.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){
+									this.messageService.info("Class's name must start with a capital letter!");
 								}else{
 									this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["Singleton"].values, "Singleton"));
 								}
@@ -851,12 +890,12 @@ export class extensionWidget extends ReactWidget {
 												arr.push((infoList.item(i) as HTMLInputElement).value);
 											}
 											//console.log(arr);
-											let flag = this.checkInputsForSameValues(arr);
+											/*let flag = this.checkInputsForSameValues(arr);
 											if (flag || arr.indexOf("")!=-1){
 												this.messageService.info("Invalid input!");
 											}else{
 												this.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data["Prototype"].values, "Prototype"));
-											}
+											}*/
 										});
 									});
 									divCont6.appendChild(divCont7);
