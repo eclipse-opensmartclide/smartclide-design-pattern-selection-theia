@@ -275,7 +275,24 @@ export class CodeGenerator {
 	}	
 	public Flyweight(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+
+		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Flyweight.name);
+		file1.addAttribute(new Attribute("cache","ArrayList<"+obj.Flyweight.name+">", "private")); //list of Flyweights
+		file1.addMethod(new Method(obj.Flyweight.name,'',false,"public","\t \t this.cache = new ArrayList<"+obj.Flyweight.name+">",[])); //constructor of FlyweightFactory class
+		file1.addMethod(new Method("getFlyweight",obj.Flyweight.name,false,"public","",[new Attribute("key","string","")])); //δεν έχω συμπληρώσει το body της μεθόδου
+		this.fillPromise(ppc, file1);
+
+		let file2 :patternParticipatingClass = new NonHierarchyClass(obj.Flyweight.name);
+		file2.addAttribute(new Attribute(obj.ConcreteFlyweight1Attribute.name,"string", "private")); 
+		this.fillPromise(ppc, file2);
+
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteFlyweight")){
+				let file3 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Flyweight.name);
+				this.fillPromise(ppc, file3);
+			}
+		});
 		return ppc.object;
 	}	
 	public Proxy(jsonObj: string): Array<patternParticipatingClass>{
