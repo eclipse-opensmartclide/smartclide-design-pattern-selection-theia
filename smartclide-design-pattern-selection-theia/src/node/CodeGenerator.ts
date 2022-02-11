@@ -6,6 +6,7 @@ import { NonHierarchyClass } from './NonHierarchyClass';
 import { Attribute } from './Attribute';
 import { Method } from './Method';
 
+
 interface Object{
     object :Array<patternParticipatingClass>;
 }
@@ -288,11 +289,14 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file2);
 
 		Object.keys(obj).forEach((key)=>{
-			if(key.includes("ConcreteFlyweight")){
+			if(key.includes("ConcreteFlyweight") && !key.includes("ConcreteFlyweight1Attribute")){
 				let file3 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Flyweight.name);
 				this.fillPromise(ppc, file3);
 			}
 		});
+		let file4 :patternParticipatingClass = new NonHierarchyClass(obj.Client.name); 
+		this.fillPromise(ppc, file4);
+
 		return ppc.object;
 	}	
 	public Proxy(jsonObj: string): Array<patternParticipatingClass>{
@@ -320,17 +324,76 @@ export class CodeGenerator {
 	//Behavioral Patterns
 	public ChainofResponsibility(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+
+		let file1 :patternParticipatingClass = new abstractClass(obj.Handler.name);
+		file1.addMethod(new Method("setNext","void",true,"public","",[new Attribute((obj.Handler.name).charAt() ,obj.Handler.name,"")]));
+		file1.addMethod(new Method("handle","void",true,"public","",[new Attribute("request","","")]));
+		this.fillPromise(ppc, file1);
+
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteHandler")){
+				let file2 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Handler.name);
+				this.fillPromise(ppc, file2);
+			}
+		});
 		return ppc.object;
 	}	
 	public Command(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+
+		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Receiver.name);
+		this.fillPromise(ppc, file1);
+
+		let file2 :patternParticipatingClass = new NonHierarchyClass(obj.Invoker.name);
+		this.fillPromise(ppc, file2);
+
+		let file3 :patternParticipatingClass = new abstractClass(obj.Command.name);
+		//file3.addMethod(new Method(obj.ConcreteCommand1Method.name,))
+		this.fillPromise(ppc, file3);
+
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteCommand") && !key.includes("ConcreteCommand1Method") && !key.includes("ConcreteCommand1MethodParameter1")){
+				let file4 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Command.name);
+				file4.addAttribute(new Attribute((obj.Receiver.name).toLowerCase, obj.Receiver.name, ""));
+
+				var aList: Array<Attribute> = [];
+				aList.push(new Attribute((obj.Receiver.name).toLowerCase(),obj.Receiver.name,""));	
+				Object.keys(obj).forEach((innerkey)=>{
+					if(innerkey.includes("ConcreteCommand1MethodParameter")){
+						file4.addAttribute(new Attribute(obj[key].name, "string", ""));
+						aList.push(new Attribute(obj[key].name, "string", ""));
+					}
+				});
+				file4.addMethod(new Method(obj[key].name,"",false,"private","\t \t this."+(obj.Receiver.name).toLowerCase+" = "+(obj.Receiver.name).toLowerCase +"; \n \t \t",aList));
+				//concreteCommandMethod?
+
+				this.fillPromise(ppc, file4);
+
+			}
+		});
+
 		return ppc.object;
 	}
 	public Interpreter(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+
+		let file1 :patternParticipatingClass =  new abstractClass(obj.Mediator.name);
+		this.fillPromise(ppc, file1);
+		
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteMediator")){
+				let file2 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Mediator.name);
+				this.fillPromise(ppc, file2);
+			}else if(key.includes("Component")){
+				let file3 : patternParticipatingClass = new NonHierarchyClass(obj[key].name);
+				this.fillPromise(ppc, file3);
+			}else{
+
+			}
+		});
 		return ppc.object;
 	}	
 	public Mediator(jsonObj: string): Array<patternParticipatingClass>{
