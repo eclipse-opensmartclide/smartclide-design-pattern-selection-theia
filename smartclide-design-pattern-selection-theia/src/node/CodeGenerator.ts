@@ -378,6 +378,12 @@ export class CodeGenerator {
 	}
 	public Interpreter(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
+		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		return ppc.object;
+	}	
+	public Mediator(jsonObj: string): Array<patternParticipatingClass>{
+		let ppc : Object ={object: []}
+		
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
 		let file1 :patternParticipatingClass =  new abstractClass(obj.Mediator.name);
@@ -396,24 +402,90 @@ export class CodeGenerator {
 		});
 		return ppc.object;
 	}	
-	public Mediator(jsonObj: string): Array<patternParticipatingClass>{
-		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
-		return ppc.object;
-	}	
 	public Memento(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+
+		let file1 :patternParticipatingClass =  new NonHierarchyClass(obj.Originator.name);
+		let file2 :patternParticipatingClass =  new NonHierarchyClass(obj.Memento.name);
+		let file3 :patternParticipatingClass =  new NonHierarchyClass(obj.Caretaker.name);
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("OriginatorAttribute")){
+				file1.addAttribute(new Attribute(obj[key].name,"string","private"));
+			}else if(key.includes("MementoAttribute")){
+				file2.addAttribute(new Attribute(obj[key].name,"string","private"));
+			}else{
+
+			}
+		});
+		file1.addMethod(new Method(obj.Memento.name,"",false,"public","",[]));//memento constructor
+		file1.addMethod(new Method("getState","string",false,"private","\t \t return (this.",[]));// unfinished
+		
+		file2.addMethod(new Method("save",obj.Memento.name,false,"public","",[]));
+		file2.addMethod(new Method("restore","void",false,"public","",[new Attribute(obj.Memento.name.charAt(0),obj.Memento.name,"")]));
+		
+		file3.addAttribute(new Attribute((obj.Originator.name).toLowerCase(), obj.Originator.name,"private"));
+		file3.addAttribute(new Attribute("history","ArrayList<"+obj.Memento.name+">","private"));
+		file3.addMethod(new Method("doSomething","void",false,"public","\t \t "+obj.Memento.name+""+ obj.Memento.name.toLowercase().charAt(0)+" =  "+(obj.Originator.name).toLowerCase()+".save();\n \t \t history.push(m);",[]));
+		file3.addMethod(new Method("undo","void",false,"public","\t \t "+obj.Memento.name+""+ obj.Memento.name.toLowercase().charAt(0)+" =  history.remove();\n \t \t "+(obj.Originator.name).toLowerCase()+".restore(m);",[]));
+		
+		this.fillPromise(ppc, file1);
+		this.fillPromise(ppc, file2);
+		this.fillPromise(ppc, file3);
 		return ppc.object;
 	}		
 	public Observer(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+		let file1 :patternParticipatingClass =  new NonHierarchyClass(obj.Subject.name);
+		file1.addAttribute(new Attribute(obj.Observer.name.toLowerCase()+"s", "ArrayList<"+obj.Observer.name+">","private"));
+		file1.addMethod(new Method("attach","void",false,"public","\t \t "+ obj.Observer.name.toLowerCase()+"s.add("+obj.Observer.name.toLowerCase().charAt(0)+");",[new Attribute(obj.Observer.name.toLowerCase().charAt(0), obj.Observer.name,"")]));
+		file1.addMethod(new Method("detach","void",false,"public","\t \t "+ obj.Observer.name.toLowerCase()+"s.remove("+obj.Observer.name.toLowerCase().charAt(0)+");",[new Attribute(obj.Observer.name.toLowerCase().charAt(0), obj.Observer.name,"")]));
+		file1.addMethod(new Method("notify","void",false,"public","\t \t for(int i=0; i<"+obj.Observer.name.toLowerCase()+"s"+".size(); i++){\n \t \t \t this."+obj.Observer.name.toLowerCase()+"s.get(i).update();",[]));
+		
+		let file2 :patternParticipatingClass =  new abstractClass(obj.Observer.name);
+		file2.addMethod(new Method("update","void",true,"public","",[]));
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteSubject")){
+				let file3 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Subject.name);
+				file3.addAttribute(new Attribute(obj[key].name+"State","string","private"));
+				file3.addMethod(new Method("getState","string",false,"public","\t \t return (this."+obj[key].name+"State);",[]));
+				file3.addMethod(new Method("setState","void",false,"public","\t \t this."+obj[key].name+"State = state;",[new Attribute("state","string","")]));
+				this.fillPromise(ppc, file3);
+			}else if(key.includes("ConcreteObserver")){
+				let file4 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Observer.name);
+				file4.addAttribute( new Attribute(obj.Observer.name+"state","string","private"));
+				this.fillPromise(ppc, file4);
+			}else{
+
+			}
+		});
+		this.fillPromise(ppc, file1);
+		this.fillPromise(ppc, file2);
+		
+		
+		
 		return ppc.object;
 	}	
 	public State(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Context.name);
+		file1.addAttribute(new Attribute(obj.State.name.toLowerCase(),obj.State.name,"private"));
+		file1.addMethod(new Method(obj.Context.name,"",false,"public","\t \t this."+obj.State.name.toLowerCase()+" = "+obj.State.name.toLowerCase()+";",[new Attribute(obj.State.name.toLowerCase(),obj.State.name,"")]));
+		file1.addMethod(new Method("changeState","void",false,"public","\t \t this."+obj.State.name.toLowerCase()+" = "+obj.State.name.toLowerCase()+";",[new Attribute(obj.State.name.toLowerCase(),obj.State.name,"")]));
+		let file2 :patternParticipatingClass = new abstractClass(obj.State.name);
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteState")){
+				let file3 :patternParticipatingClass = new abstractClass(obj[key].name);
+				file1.addAttribute(new Attribute(obj.Context.name.toLowerCase(),obj.Context.name,"private"));
+				file3.addMethod(new Method("setContext","void",false,"public","\t \t this."+obj.Context.name.toLowerCase()+" = "+obj.Context.name.toLowerCase()+";",[new Attribute(obj.Context.name.toLowerCase(),obj.Context.name,"")]));
+				this.fillPromise(ppc, file3);
+			}
+		});
+		this.fillPromise(ppc, file1);
+		this.fillPromise(ppc, file2);
+		
 		return ppc.object;
 	}	
 	public Strategy(jsonObj: string): Array<patternParticipatingClass>{
