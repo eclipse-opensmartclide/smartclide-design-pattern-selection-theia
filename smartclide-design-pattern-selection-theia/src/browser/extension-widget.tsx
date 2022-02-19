@@ -541,68 +541,48 @@ export class extensionWidget extends ReactWidget {
 		radio1.addEventListener('click', async (e: Event) =>{	
 				divCont.innerHTML = "";
 				let divCont2 = document.createElement('div');
-				createLabel('<br> Do you want to create a completely new object or to create one by reusing an existing one?<br>', 'label4', divCont);
-				createLabel('Create new object', 'label11',divCont);
-				createInput('', 'radio11', '', 'new_existed', 'radio', divCont);
+				radioQuestion('<br> Do you want to create a completely new object or to create one by reusing an existing one?<br>', 'Create new object', 'Reuse an existing one', 'radio11', 'radio12', divCont);
 				let radio11 = document.getElementById('radio11') as HTMLInputElement;
 				radio11.addEventListener('click', async (e: Event) =>{	
 						divCont2.innerHTML = "";
 						let divCont3 = document.createElement('div');
-						createLabel('<br> Give the name of the Product that you want to create <br>', 'labelQuestion3', divCont2);
-						createInput('Product name', 'txtboxProduct_name', 'infoField', '', 'text', divCont2);
-						createButton('Next', 'buttonNext1', divCont2);
+						textfieldQuestion('<br> Give the name of the Product that you want to create <br>', 1, 'text', 'Product name', 'txtboxProduct_name', 'infoField', 'buttonNext1', divCont2);
 						let buttonNext1 = document.getElementById('buttonNext1') as HTMLButtonElement;
 						buttonNext1.addEventListener('click', async (e: Event) =>{
 							divCont3.innerHTML = "";
 							let divCont4 = document.createElement('div');
-							createLabel('<br> Does the Product has sub-categories (ConcreteProducts)?  <br>', 'labelQuestion4', divCont3);
-							createLabel('Yes', 'label31', divCont3);
-							createInput('', 'radio31', '', 'yes_no', 'radio', divCont3);
+							radioQuestion('<br> Does the Product has sub-categories (ConcreteProducts)?  <br>', 'Yes', 'No', 'radio31', 'radio32', divCont3);
 							let radio31 = document.getElementById('radio31') as HTMLInputElement;
 							radio31.addEventListener('click', async (e: Event) =>{
 								divCont4.innerHTML = "";
 								let divCont5 = document.createElement('div');
-								createLabel('<br> How many sub-categories (ConcreteProducts) exist? <br>', 'labelQuestion5', divCont4);
-								createInput('2', 'subcategoriesNum', '', '', 'number', divCont4);
+								textfieldQuestion('<br> How many sub-categories (ConcreteProducts) exist? <br>', 1, 'number', '2', 'subcategoriesNum', '', 'buttonNext2', divCont4);
 								let numCat = document.getElementById('subcategoriesNum') as HTMLInputElement;
 								numCat.min = '2';
-								createButton('Next', 'buttonNext2', divCont4);
 								let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
 								buttonNext2.addEventListener('click', async (e: Event) =>{
 									divCont5.innerHTML = "";
 									let divCont6 = document.createElement('div');
-									createLabel('<br> Please give the names of the sub-categories (ConcreteProducts) <br>', 'labelQuestion6', divCont5);
 									let num = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
-									for (var i=1; i<=num; i++){
-										createInput('Concrete Product name '+i, 'txtboxConcreteProductsName'+i, 'infoField', '', 'text', divCont5);
-									}
-									createButton('Next', 'buttonNext3', divCont5);
+									textfieldQuestion('<br> Please give the names of the sub-categories (ConcreteProducts) <br>', num, 'text', 'Concrete Product name ', 'txtboxConcreteProductsName', 'infoField', 'buttonNext3', divCont5);
 									let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
 									buttonNext3.addEventListener('click', async (e: Event) =>{
 										divCont6.innerHTML = "";
 										let divCont7 = document.createElement('div');
-										createLabel('<br> Can the Products be classified in a Family? <br>', 'labelQuestion7', divCont6);
-										createLabel('Yes', 'label61', divCont6);
-										createInput('', 'radio61', '', 'yes_no', 'radio', divCont6);
+										radioQuestion('<br> Can the Products be classified in a Family? <br>', 'Yes', 'No', 'radio61', 'radio62', divCont6);
 										let radio61 = document.getElementById('radio61') as HTMLInputElement;
 										radio61.addEventListener('click', async (e: Event) =>{
 											divCont7.innerHTML = "";
 											let divCont8 = document.createElement('div');
-											createLabel('<br> How many Families of Products exist? <br>', 'labelQuestion8', divCont7);
-											createInput('2', 'familiesNum', '', '', 'number', divCont7);
+											textfieldQuestion('<br> How many Families of Products exist? <br>', 1, 'number', '2', 'familiesNum', '', 'buttonNext4', divCont7);
 											let numFam = document.getElementById('familiesNum') as HTMLInputElement;
 											numFam.min = '2';
-											createButton('Next', 'buttonNext4', divCont7);
 											let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
 											buttonNext4.addEventListener('click', async (e: Event) =>{
 												divCont8.innerHTML = "";
 												let divCont9 = document.createElement('div');
-												createLabel('<br> Please give the names of the Components (Families) <br>', 'labelQuestion9', divCont8);
 												let num = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
-												for (var i=1; i<=num; i++){
-													createInput('Component name '+i, 'txtboxComponentName'+i, 'infoField', '', 'text', divCont8);
-												}
-												createButton('Next', 'buttonNext5', divCont8);
+												textfieldQuestion('<br> Please give the names of the Components (Families) <br>', num, 'text', 'Component name ', 'txtboxComponentName', 'infoField', 'buttonNext5', divCont8);
 												let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
 												buttonNext5.addEventListener('click', async (e: Event) =>{
 													divCont9.innerHTML = "";
@@ -648,32 +628,22 @@ export class extensionWidget extends ReactWidget {
 											});
 											divCont7.appendChild(divCont8);
 										});
-										createLabel('No', 'label62', divCont6);
-										createInput('', 'radio62', '', 'yes_no', 'radio', divCont6);
 										let radio62 = document.getElementById('radio62') as HTMLInputElement;
 										radio62.addEventListener('click', async (e: Event) =>{
 											divCont7.innerHTML = "";
 											let divCont8 = document.createElement('div');
-											createLabel('<br> Can Product be created as series of steps which is different in every subcategory? <br>', 'labelQuestion11', divCont7);
-											createLabel('Yes', 'label71', divCont7);
-											createInput('', 'radio71', '', 'yes_no', 'radio', divCont7);
+											radioQuestion('<br> Can Product be created as series of steps which is different in every subcategory? <br>', 'Yes', 'No', 'radio71', 'radio72', divCont7);
 											let radio71 = document.getElementById('radio71') as HTMLInputElement;
 											radio71.addEventListener('click', async (e: Event) =>{
 												divCont8.innerHTML = "";
 												let divCont9 = document.createElement('div');
-												createLabel('<br> How many Steps are involved ?  <br>', 'labelQuestion12', divCont8);
-												createInput('1', 'stepsNum', '', '', 'number', divCont8);
-												createButton('Next', 'buttonNext6', divCont8);
+												textfieldQuestion('<br> How many Steps are involved ?  <br>', 1, 'number', '1', 'stepsNum', '', 'buttonNext6', divCont8);
 												let buttonNext6 = document.getElementById('buttonNext6') as HTMLButtonElement;
 												buttonNext6.addEventListener('click', async (e: Event) =>{
 													divCont9.innerHTML = "";
 													let divCont10 = document.createElement('div');
-													createLabel('<br> Please give the name of the steps  <br>', 'labelQuestion13', divCont9);
 													let num = parseInt((document.getElementById('stepsNum') as HTMLInputElement).value);
-													for (var i=1; i<=num; i++){
-														createInput('Step name '+i, 'txtboxStepName'+i, 'infoField', 'txtStepsName', 'text', divCont9);
-													}
-													createButton('Next', 'buttonNext7', divCont9);
+													textfieldQuestion('<br> Please give the name of the steps  <br>', num, 'text', 'Step name ', 'txtboxStepName', 'infoField', 'buttonNext7', divCont9);
 													let buttonNext7 = document.getElementById('buttonNext7') as HTMLButtonElement;
 													buttonNext7.addEventListener('click', async (e: Event) =>{
 														divCont10.innerHTML = "";
@@ -719,15 +689,11 @@ export class extensionWidget extends ReactWidget {
 												});
 												divCont8.appendChild(divCont9);
 											});
-											createLabel('No', 'label72', divCont7);
-											createInput('', 'radio72', '', 'yes_no', 'radio', divCont7);
 											let radio72 = document.getElementById('radio72') as HTMLInputElement;
 											radio72.addEventListener('click', async (e: Event) =>{
 												divCont8.innerHTML = "";
 												let divCont9 = document.createElement('div');
-												createLabel('<br> What is the name of the Creator (e.g., Oven) of Product? <br>', 'labelQuestion14', divCont8);
-												createInput('Creator name', 'txtboxCreatorName', 'infoField', 'txtCreatorName', 'text', divCont8);
-												createButton('Next', 'buttonNext8', divCont8);
+												textfieldQuestion('<br> What is the name of the Creator (e.g., Oven) of Product? <br>', 1, 'text', 'Creator name', 'txtboxCreatorName', 'infoField', 'buttonNext8', divCont8);
 												let buttonNext8 = document.getElementById('buttonNext8') as HTMLButtonElement;
 												buttonNext8.addEventListener('click', async (e: Event) =>{
 													divCont9.innerHTML = "";
@@ -770,9 +736,7 @@ export class extensionWidget extends ReactWidget {
 									divCont5.appendChild(divCont6);
 								});
 								divCont4.appendChild(divCont5);
-							});
-							createLabel('No', 'label32', divCont3);
-							createInput('', 'radio32', '', 'yes_no', 'radio', divCont3);
+							});				
 							let radio32 = document.getElementById('radio32') as HTMLInputElement;
 							radio32.addEventListener('click', async (e: Event) =>{
 								divCont4.innerHTML = "";
@@ -782,22 +746,16 @@ export class extensionWidget extends ReactWidget {
 						});
 						divCont2.appendChild(divCont3);
 				});
-				createLabel('Reuse an existing one', 'label12', divCont);
-				createInput('', 'radio12', '', 'new_existed', 'radio', divCont);
 				let radio12 = document.getElementById('radio12') as HTMLInputElement;
 				radio12.addEventListener('click', async (e: Event) =>{	
 					divCont2.innerHTML = "";
 					let divCont3 = document.createElement('div');
-					createLabel('<br> Do you want the object to be unique or clone? <br>', 'labelQuestion17', divCont2);
-					createLabel('Unique', 'label121', divCont2);
-					createInput('', 'radio121', '', 'unique_cloned', 'radio', divCont2);
+					radioQuestion('<br> Do you want the object to be unique or clone? <br>', 'Unique', 'Cloned', 'radio121', 'radio122', divCont2);
 					let radio121 = document.getElementById('radio121') as HTMLInputElement;
 					radio121.addEventListener('click', async (e: Event) =>{
 						divCont3.innerHTML = "";
 						let divCont4 = document.createElement('div');
-						createLabel('<br> Please provide the name of the Single class <br>', 'labelQuestion18', divCont3);
-						createInput('Singleton name', 'txtboxSingletonName', 'infoField', 'txtSingletonName', 'text', divCont3);
-						createButton('Next', 'buttonNext9', divCont3);
+						textfieldQuestion('<br> Please provide the name of the Single class <br>', 1, 'text', 'Singleton name', 'txtboxSingletonName', 'infoField', 'buttonNext9', divCont3);
 						let buttonNext9 = document.getElementById('buttonNext9') as HTMLButtonElement;
 						buttonNext9.addEventListener('click', async (e: Event) =>{
 							divCont4.innerHTML = "";
@@ -818,39 +776,27 @@ export class extensionWidget extends ReactWidget {
 						});
 						divCont3.appendChild(divCont4);
 					});
-					createLabel('Cloned', 'label122', divCont2);
-					createInput('', 'radio122', '', 'unique_cloned', 'radio', divCont2);
 					let radio122 = document.getElementById('radio122') as HTMLInputElement;
 					radio122.addEventListener('click', async (e: Event) =>{
 						divCont3.innerHTML = "";
 						let divCont4 = document.createElement('div');
-						createLabel('<br> Give the name of the Product that you want to create clones from  <br>', 'labelQuestion19', divCont3);
-						createInput('Product name', 'txtboxProductName', 'infoField', 'txtProductName', 'text', divCont3);
-						createButton('Next', 'buttonNext10', divCont3);
+						textfieldQuestion('<br> Give the name of the Product that you want to create clones from  <br>', 1, 'text', 'Product name', 'txtboxProductName', 'infoField', 'buttonNext10', divCont3);
 						let buttonNext10 = document.getElementById('buttonNext10') as HTMLButtonElement;
 						buttonNext10.addEventListener('click', async (e: Event) =>{
 							divCont4.innerHTML = "";
 							let divCont5 = document.createElement('div');
-							createLabel('<br> Does the Product has sub-categories (Concrete Prototypes)? <br>', 'labelQuestion20', divCont4);
-							createLabel('Yes', 'label1221', divCont4);
-							createInput('', 'radio1221', '', 'yes_no', 'radio', divCont4);
+							radioQuestion('<br> Does the Product has sub-categories (Concrete Prototypes)? <br>', 'Yes', 'No', 'radio1221', 'radio1222', divCont4);
 							let radio1221 = document.getElementById('radio1221') as HTMLInputElement;
 							radio1221.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
 								let divCont6 = document.createElement('div');
-								createLabel('<br> How many sub-categories exist? <br>', 'labelQuestion21', divCont5);
-								createInput('1', 'subcategoriesNum', '', '', 'number', divCont5);
-								createButton('Next', 'buttonNext11', divCont5);
+								textfieldQuestion('<br> How many sub-categories exist? <br>', 1, 'number', '1', 'subcategoriesNum', '', 'buttonNext11', divCont5);
 								let buttonNext11 = document.getElementById('buttonNext11') as HTMLButtonElement;
 								buttonNext11.addEventListener('click', async (e: Event) =>{
 									divCont6.innerHTML = "";
 									let divCont7 = document.createElement('div');
-									createLabel('<br> Please give the names of the Concrete Prototypes <br>', 'labelQuestion23', divCont6);
 									let num = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
-									for (var i=1; i<=num; i++){
-										createInput('Concrete Prototype name '+i, 'txtboxConcretePrototypesName'+i, 'infoField', '', 'text', divCont6);
-									}
-									createButton('Next', 'buttonNext12', divCont6);
+									textfieldQuestion('<br> Please give the names of the Concrete Prototypes <br>', num, 'text', 'Concrete Prototype name ', 'txtboxConcretePrototypesName', 'infoField', 'buttonNext12', divCont6);
 									let buttonNext12 = document.getElementById('buttonNext12') as HTMLButtonElement;
 									buttonNext12.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
@@ -883,8 +829,6 @@ export class extensionWidget extends ReactWidget {
 								});
 								divCont5.appendChild(divCont6);
 							});
-							createLabel('No', 'label1222', divCont4);
-							createInput('', 'radio1222', '', 'yes_no', 'radio', divCont4);
 							let radio1222 = document.getElementById('radio1222') as HTMLInputElement;
 							radio1222.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
@@ -914,9 +858,27 @@ export class extensionWidget extends ReactWidget {
 		});
 		
 		divWiz.appendChild(divCont);
-	}
+	}	
+}
 
-	
+function radioQuestion(questionLabel: string, labelRadio1: string, labelRadio2: string, radioId1: string, radioId2: string, parent: HTMLElement){
+	createLabel(questionLabel, '', parent);
+	createLabel(labelRadio1, '', parent);
+	createInput('', radioId1, '', 'yes_no', 'radio', parent);
+	createLabel(labelRadio2, '', parent);
+	createInput('', radioId2, '', 'yes_no', 'radio', parent);
+}
+
+function textfieldQuestion(questionLabel: string, num: number, inputType: string, inputMessage: string, inputId: string, inputClassname: string, buttonId: string, parent: HTMLElement){
+	createLabel(questionLabel, '', parent);
+	if (num==1){
+		createInput(inputMessage, inputId, inputClassname, inputId, inputType, parent);
+	}else{
+		for (let i=1; i<=num; i++){
+			createInput(inputMessage+i, inputId+i, inputClassname, inputId+i, inputType, parent);
+		}
+	}
+	createButton('Next', buttonId, parent);
 }
 
 function createLabel(innerMessage: string, id: string, parent: HTMLElement){
