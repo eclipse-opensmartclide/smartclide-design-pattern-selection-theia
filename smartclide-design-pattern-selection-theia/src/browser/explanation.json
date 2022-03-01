@@ -11,7 +11,7 @@
 	"Facade":{"description":"Facade is a simplified interface to a library, a framework, or any other complex set of classes(complex subsystem) and provides only the features that the client cares about.","example":"Example: Consider a case you want your code to interact with a complex video conversion framework. A facade class encapsulates that functionality and hides it from the rest of the code."},
 	"Flyweight":{"description":"","example":""},
 	"Proxy":{"description":"","example":""},
-	"ChainofResponsibility":{},
+	"ChainofResponsibility":{"description":"","example":""},
 	"Command":{"description":"","example":""},
 	"Interpeter":{"description":"","example":""},
 	"Iterator":{"description":"","example":""},

@@ -534,24 +534,40 @@ export class CodeGenerator {
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		let file1 : patternParticipatingClass = new abstractClass(obj.Visitor.name);
+		
 		this.fillPromise(ppc, file1);
 
 		let file2 : patternParticipatingClass = new abstractClass(obj.Element.name);
+		file2.addMethod(new Method("accept","void",true,"public","",[new Attribute(obj.Visitor.name.toLowerCase().charAt(0),obj.Visitor.name,"")]))
 		this.fillPromise(ppc, file2);
-
+		var cList: Array<patternParticipatingClass> = [];//list of ConcreteVisitors
+		var eList: Array<Method> = [];//list of ConcreteElement method 
 		Object.keys(obj).forEach((key)=>{
 			if(key.includes("ConcreteVisitor")){
 				let file3 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Visitor.name);
-				this.fillPromise(ppc, file3);
+				cList.push(file3);
+				//this.fillPromise(ppc, file3);
 			}else if(key.includes("ConcreteElement")){
 				let file4 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Element.name);
+				file1.addMethod(new Method("visit"+obj[key].name,"void",true,"public","",[new  Attribute(obj[key].name.toLowerCase().charAt(0),obj[key].name,"")]));
+				file4.addMethod(new Method("accept","void",false,"public","",[new Attribute(obj.Visitor.name.toLowerCase().charAt(0),obj.Visitor.name,"")]));
+				file4.addMethod(new Method("feature","void",false,"public","",[]));
+				eList.push(new Method("visit"+obj[key].name,"void",false,"public","",[new  Attribute(obj[key].name.toLowerCase().charAt(0),obj[key].name,"")]));
 				this.fillPromise(ppc, file4);
 			}else{
 
 			}
 		});
-		let file4 : patternParticipatingClass = new abstractClass(obj.Visitor.name);
-		this.fillPromise(ppc, file4);
+		
+		for(var i=0;i<cList.length;i++){
+			for(var j=0;j<eList.length;j++){
+				cList[i].addMethod(eList[j]); // each one ConcreteVisitor has a method for each one ConcreteElement
+			}
+			this.fillPromise(ppc,cList[i]);
+		}
+		
+		let file5 : patternParticipatingClass = new abstractClass(obj.Visitor.name);
+		this.fillPromise(ppc, file5);
 		return ppc.object;
 	}	
 	fillPromise(labelObj: Object, item: patternParticipatingClass){
