@@ -6,8 +6,6 @@ import { NonHierarchyClass } from './NonHierarchyClass';
 import { Attribute } from './Attribute';
 import { Method } from './Method';
 
-
-
 interface Object{
     object :Array<patternParticipatingClass>;
 }
@@ -279,7 +277,7 @@ export class CodeGenerator {
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
-		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Flyweight.name);
+		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.FlyweightFactory.name);
 		file1.addAttribute(new Attribute("cache","ArrayList<"+obj.Flyweight.name+">", "private")); //list of Flyweights
 		file1.addMethod(new Method(obj.Flyweight.name,'',false,"public","\t \t this.cache = new ArrayList<"+obj.Flyweight.name+">",[])); //constructor of FlyweightFactory class
 		file1.addMethod(new Method("getFlyweight",obj.Flyweight.name,false,"public","",[new Attribute("key","string","")])); //δεν έχω συμπληρώσει το body της μεθόδου
@@ -315,7 +313,7 @@ export class CodeGenerator {
 		let file3 :patternParticipatingClass = new ConcreteClass(obj.Proxy.name ,obj.ServiceInterface.name);
 		file3.addAttribute(new Attribute(obj.Service.name.toLowerCase(), obj.Service.name, "private"))
 		file3.addMethod(new Method(obj.Proxy.name,"",false,"public","\t \t this."+obj.Service.name.toLowerCase()+"=" + obj.Service.name.toLowerCase()+";",[new Attribute(obj.Service.name.toLowerCase(), obj.Service.name, "")]));
-		file3.addMethod(new Method("checkAccess","",false,"public","\t \t this."+obj.Service.name.toLowerCase()+"=" + obj.Service.name.toLowerCase()+";",[new Attribute(obj.Service.name.toLowerCase(), obj.Service.name, "")]));
+		file3.addMethod(new Method("checkAccess","void",false,"public","",[new Attribute(obj.Service.name.toLowerCase(), obj.Service.name, "")]));
 		file3.addMethod(new Method(obj.ServiceInterfaceMethod.name,"void",false,"public","\t \t if(this.checkAccess){\n \t \t \t \t this."+obj.Service.name.toLowerCase()+"."+obj.ServiceInterfaceMethod.name+"();\n \t \t} ",[]));
 		this.fillPromise(ppc, file3);
 
@@ -335,6 +333,8 @@ export class CodeGenerator {
 		Object.keys(obj).forEach((key)=>{
 			if(key.includes("ConcreteHandler")){
 				let file2 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Handler.name);
+				file2.addMethod(new Method("setNext","void",false,"public","",[new Attribute((obj.Handler.name).charAt() ,obj.Handler.name,"")]));
+				file2.addMethod(new Method("handle","void",false,"public","",[new Attribute("request","","")]));
 				this.fillPromise(ppc, file2);
 			}
 		});
@@ -379,7 +379,20 @@ export class CodeGenerator {
 	}
 	public Interpreter(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+		let file1 :patternParticipatingClass =  new NonHierarchyClass(obj.Context.name);
+		file1.addMethod(new Method("Interpreter","void",false,"public","",[new Attribute(obj.Context.name.toLowerCase(),obj.Context.name,"")]));
+		this.fillPromise(ppc, file1);
+
+		let file2 :patternParticipatingClass =  new NonHierarchyClass(obj.AbstractExpression.name);
+		this.fillPromise(ppc, file2);
+		Object.keys(obj).forEach((key) => {
+			if(key.includes("TerminalExpression") || key.includes("NonterminalExpression")){
+				let file3 :patternParticipatingClass =  new ConcreteClass(obj[key].name, obj.AbstractExpression.name);
+				file3.addMethod(new Method("Interpreter","void",false,"public","",[new Attribute(obj.Context.name.toLowerCase(),obj.Context.name,"")]));
+				this.fillPromise(ppc, file3);
+			}
+		});
 		return ppc.object;
 	}	
 	public Mediator(jsonObj: string): Array<patternParticipatingClass>{

@@ -13,7 +13,7 @@
 	"Proxy":{"description":"","example":""},
 	"ChainofResponsibility":{"description":"","example":""},
 	"Command":{"description":"","example":""},
-	"Interpeter":{"description":"","example":""},
+	"Interpreter":{"description":"","example":""},
 	"Iterator":{"description":"","example":""},
 	"Mediator":{"description":"","example":""},
 	"Memento":{"description":"","example":""},
