@@ -76,7 +76,7 @@ export class extensionWidget extends ReactWidget {
 						<option value="Proxy">Proxy</option>
 					</optgroup>
 					<optgroup label="Behavioral">
-						<option value="ChainofResponsibility">Chain of Responsibility</option>
+						<option value="ChainOfResponsibility">Chain of Responsibility</option>
 						<option value="Command">Command</option>
 						<option value="Interpreter">Interpreter</option>
 						<option value="Iterator">Iterator</option>
@@ -128,8 +128,8 @@ export class extensionWidget extends ReactWidget {
 
 			(document.getElementById("result") as HTMLElement).style.visibility = 'visible';
 			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
-			(document.getElementById('description') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].description;
-			(document.getElementById('example') as HTMLElement).innerHTML = extensionWidget.explanation[extensionWidget.state.statePatternSelection].example;
+			(document.getElementById('description') as HTMLElement).innerHTML = "<b>"+extensionWidget.state.statePatternSelection.split(/(?=[A-Z])/).join(" ")+"</b> "+extensionWidget.explanation[extensionWidget.state.statePatternSelection].description;
+			(document.getElementById('example') as HTMLElement).innerHTML = "<b>Example:</b> "+extensionWidget.explanation[extensionWidget.state.statePatternSelection].example;
 
 			//show the JSON values for the chosen key-pattern
 			let values = extensionWidget.data[extensionWidget.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
@@ -142,6 +142,7 @@ export class extensionWidget extends ReactWidget {
 			this.messageService.info('You need to choose a software pattern!');
 		}
 	}
+	
 
     //update the state of dropdown
     updateSelection(e:React.ChangeEvent<HTMLSelectElement>){
@@ -449,7 +450,7 @@ export class extensionWidget extends ReactWidget {
 		table.innerHTML = "";
 		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
 		(document.getElementById("elements") as HTMLElement).style.visibility = 'hidden';
-		window.location.reload();
+		
 	}
 
 	insertInputsAbstractFactory():void{
