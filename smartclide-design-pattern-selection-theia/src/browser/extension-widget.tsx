@@ -10,7 +10,7 @@ import data from './data.json';
 import explanation from './explanation.json';
 import {Functions} from './functions';
 import { CreationalPatterns } from './CreationalPatternsWizard';
-
+import { StructuralPatterns} from './StructuralPatternsWizard';
 
 interface Textfield{
 	ident: number;
@@ -54,7 +54,7 @@ export class extensionWidget extends ReactWidget {
 
 	static functions = new Functions();
 	static creationalPatterns = new CreationalPatterns();
-
+	static structuralPatterns = new StructuralPatterns();
 	protected render(): React.ReactNode {
 		const header = `Choose a Design Pattern and get the code. `;
 		
@@ -375,15 +375,14 @@ export class extensionWidget extends ReactWidget {
 		extensionWidget.functions.createLabel('Creational', 'label1', divWiz)
 		extensionWidget.functions.createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);
 		let radio1 = document.getElementById('radio1') as HTMLInputElement;
-		radio1.addEventListener('click', async (e: Event) =>{	
-				extensionWidget.creationalPatterns.creationalPatternswizard();
+		radio1.addEventListener('click', async (event)=>{
+			extensionWidget.creationalPatterns.creationalPatternswizard();
 		});
 		extensionWidget.functions.createLabel('Structural', 'label2', divWiz);
 		extensionWidget.functions.createInput('', 'radio2', '', 'patternTypes', 'radio', divWiz);
 		let radio2 = document.getElementById('radio2') as HTMLInputElement;
 		radio2.addEventListener('click', async (e: Event) =>{
-			divCont.innerHTML = "";
-			extensionWidget.functions.createLabel('<br> Do you want to ... <br>', 'labelQuestion18', divCont);
+			extensionWidget.structuralPatterns.structuralPatternswizard();
 		});
 		extensionWidget.functions.createLabel('Behavioral', 'label3', divWiz);
 		extensionWidget.functions.createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
