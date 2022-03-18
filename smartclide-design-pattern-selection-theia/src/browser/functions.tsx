@@ -1,15 +1,17 @@
-import { extensionWidget } from "./extension-widget";
 import { MessageService } from '@theia/core';
 import { inject } from 'inversify';
-
+import autocomplete,{ AutocompleteItem} from 'autocompleter';
 interface Textfield{
 	ident: number;
 	value: string;
   };
 
+
+
 export class Functions{
     @inject(MessageService)
     protected readonly messageService!: MessageService;
+	static listOfClassNames : string[];
 
     radioQuestion(questionLabel: string, labelRadio1: string, labelRadio2: string, radioId1: string, radioId2: string, parent: HTMLElement){
         this.createLabel(questionLabel, '', parent);
@@ -45,13 +47,13 @@ export class Functions{
         if (!id.includes('radio') && !id.includes('Num')){
             inputField.className = classname;
             if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
-                let suggestions = document.createElement("div");
+				let suggestions = document.createElement("div");
                 suggestions.id = "suggestions"+id.substring(6,);
                 console.log("suggestions"+id.substring(6,));
                 suggestions.className = "suggestions";
                 parent.appendChild(suggestions);
                 inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
-                    this.showSuggestions(inputField.value, extensionWidget.res, ( e.target as Element).id);
+                    this.showSuggestions(inputField.value, Functions.listOfClassNames, ( e.target as Element).id,parent);
                 });
             }
             inputField.autocomplete = "off";
@@ -61,31 +63,40 @@ export class Functions{
         parent.appendChild(inputField);
     }
     //autocomplete
-    showSuggestions(value: string, table: string[], id: string){
-        let res = document.getElementById("suggestions"+id.substring(6,))as HTMLElement;
-            
-              let list = '';
-              let terms = this.autocompleteMatch(value, table);
-              for (var i=0; i<terms.length; i++) {
-                list += '<li>' + terms[i] + '</li>';
-              }
-              res.innerHTML = "<ul id='list" + id.substring(6,) + "'> "+ list + "</ul>";
-            let ul = document.getElementById("list"+id.substring(6,))as HTMLElement;
-            let input = document.getElementById("txtbox"+id.substring(6,))as HTMLInputElement;
-            ul.onclick = function(event) {
-                input.value = (event.target as HTMLLIElement).innerHTML ;
-                res.style.visibility = 'hidden';
-            }	
-            let hideBlock = function(){
-                res.style.visibility = 'hidden';
-            };
-            ul.addEventListener('mouseleave', hideBlock);
-            input.addEventListener('keypress', (e: KeyboardEvent) =>{
-                res.style.visibility = 'visible';
-                this.showSuggestions((document.getElementById("txtbox"+id.substring(6,))as HTMLInputElement).value, table, ( e.target as Element).id);
-            });
-    
-    }
+    showSuggestions(value: string, table: string[], id: string,parent :HTMLElement){
+
+		var items = Functions.listOfClassNames.map(function (n) { return { label: n }});
+
+		autocomplete({
+			input: document.getElementById('txtbox'+id.substring(6,)) as HTMLInputElement,
+			minLength: 1,
+			onSelect: function (item: AutocompleteItem, inputfield: HTMLInputElement ) {
+				inputfield.value = item.label!;
+			},
+			fetch: function (text, callback) {
+				var match = text;
+				callback(items.filter(function(n) { return n.label.indexOf(match) !== -1; }));
+			},
+			render: function(item, value) {
+				var itemElement = document.createElement("div");
+				itemElement.id = "suggestions"+id.substring(6,);
+				itemElement.className = "suggestions";
+				var regex = new RegExp('^'+ value);
+				var inner = item.label!.replace(regex, function(match) { return  match  });
+				itemElement.innerHTML = inner;
+				parent.appendChild(itemElement);
+				return itemElement;
+			},
+			customize: function(input, inputRect, container, maxHeight) {
+				if (maxHeight < 100) {
+					container.style.visibility = 'visible';
+					container.style.top = "";
+					container.style.bottom = (window.innerHeight - inputRect.bottom + input.offsetHeight) + "px";
+					container.style.maxHeight = "140px";
+				}
+			}
+		})
+	}
     //autocomplete
     autocompleteMatch(input: string, table: string[]) {
         if (input == '') {
@@ -106,13 +117,7 @@ export class Functions{
         parent.appendChild(button);
     }
 
-    checkMessage(message: string){
-		if(message!=""){
-			this.messageService.info("Something went wrong");
-		}else{
-			this.messageService.info("Code generation has been completed");
-		}
-	}
+   
 	
     checkInputs(array: Array<Textfield>){
 		let returncode1 = this.checkEmptyInputs(array);
@@ -186,8 +191,8 @@ export class Functions{
 		return 0;
 	}
 
-	check(key: string){
-		return (!key.includes("ConcreteProduct") || extensionWidget.state.statePatternSelection!="AbstractFactory") && (!key.includes("ConcreteCreator") || extensionWidget.state.statePatternSelection!="FactoryMethod") && (!key.includes("ConcreteBuilder") || extensionWidget.state.statePatternSelection!="Builder")
+	check(key: string, statePatternSelection: string){
+		return (!key.includes("ConcreteProduct") || statePatternSelection!="AbstractFactory") && (!key.includes("ConcreteCreator") || statePatternSelection!="FactoryMethod") && (!key.includes("ConcreteBuilder") || statePatternSelection!="Builder")
 	}
 
 	refreshPage(table: HTMLTableElement){
@@ -197,8 +202,8 @@ export class Functions{
 		
 	}
 
-	insertInputsAbstractFactory():void{
-		let values = JSON.parse(JSON.stringify(extensionWidget.data["AbstractFactory"].values));
+	insertInputsAbstractFactory(data: string){
+		let values = JSON.parse(JSON.stringify(data));
 		let listofFamily: string[] = [];
 		let listofProducts:string[] = [];
 		Object.keys(values).forEach((key)=>{
@@ -217,11 +222,11 @@ export class Functions{
 				values[key].name = listofFamily[Number(array[1])-1].split("Factory")[0]+listofProducts[Number(numberofProduct)-1];
 			}
 		});
-		extensionWidget.data["AbstractFactory"].values = values;
+		return values;
 	}
 	
-	insertInputsBuilder():void{
-		let values = JSON.parse(JSON.stringify(extensionWidget.data["Builder"].values));
+	insertInputsBuilder(data: string):void{
+		let values = JSON.parse(JSON.stringify(data));
 		let listofProducts:string[] = [];
 		Object.keys(values).forEach((key)=>{
 			if(key.includes("Product")) listofProducts.push(values[key].name);
@@ -232,11 +237,11 @@ export class Functions{
 				values[key].name = listofProducts[Number(numofConBuilder)-1] + "Builder";
 			}
 		});
-		extensionWidget.data["Builder"].values = values;
+		return  values;
 	}
 	
-	insertInputsFactoryMethod():void{
-		let values = JSON.parse(JSON.stringify(extensionWidget.data["FactoryMethod"].values));
+	insertInputsFactoryMethod(data: string):void{
+		let values = JSON.parse(JSON.stringify(data));
 		let listofConProducts:string[] = [];
 		Object.keys(values).forEach((key)=>{
 			if(key.includes("ConcreteProduct")) {
@@ -250,18 +255,25 @@ export class Functions{
 				values[key].name = listofConProducts[Number(numofConProduct)-1].split(values.Product.name)[0] + values.Creator.name;
 			}
 		});
-		extensionWidget.data["FactoryMethod"].values = values;
+		return values;
 	}
-    updateJsonObject(){
+    updateJsonObject(data: string){
+		let values = JSON.parse(JSON.stringify(data));
 		let table = document.getElementById('show_pattern_table') as HTMLTableElement;
 		for(let i = 0 ; i < table.rows.length ; i++){
 			let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
 			let txtbox = (document.getElementById( 'txtbox'+ (i + 1) ) as HTMLInputElement).value;
-			extensionWidget.data[extensionWidget.state.statePatternSelection].values[label].name = txtbox;
+			values[label].name = txtbox;
 			}
+		return values;
 	}
 
+	setClassNames(list: string[]){
+		Functions.listOfClassNames = list;
+	}
 	
 
 
 }
+
+
