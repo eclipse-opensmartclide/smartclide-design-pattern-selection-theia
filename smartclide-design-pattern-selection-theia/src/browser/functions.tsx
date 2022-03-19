@@ -1,15 +1,12 @@
 import { MessageService } from '@theia/core';
-import { inject } from 'inversify';
 import autocomplete,{ AutocompleteItem} from 'autocompleter';
 interface Textfield{
 	ident: number;
 	value: string;
   };
 
-
-
 export class Functions{
-    @inject(MessageService)
+    
     protected readonly messageService!: MessageService;
 	static listOfClassNames : string[];
 
@@ -53,7 +50,7 @@ export class Functions{
                 suggestions.className = "suggestions";
                 parent.appendChild(suggestions);
                 inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
-                    this.showSuggestions(inputField.value, Functions.listOfClassNames, ( e.target as Element).id,parent);
+                    this.showSuggestions(inputField.value, Functions.listOfClassNames, ( e.target as Element).id);
                 });
             }
             inputField.autocomplete = "off";
@@ -63,7 +60,7 @@ export class Functions{
         parent.appendChild(inputField);
     }
     //autocomplete
-    showSuggestions(value: string, table: string[], id: string,parent :HTMLElement){
+    showSuggestions(value: string, table: string[], id: string){
 
 		var items = Functions.listOfClassNames.map(function (n) { return { label: n }});
 
@@ -75,16 +72,19 @@ export class Functions{
 			},
 			fetch: function (text, callback) {
 				var match = text;
-				callback(items.filter(function(n) { return n.label.indexOf(match) !== -1; }));
+				let reg = new RegExp('^' + match);
+				callback(items.filter(function(n){
+					if (n.label.match(reg)) {
+					  return n;
+					}
+				}));
 			},
 			render: function(item, value) {
 				var itemElement = document.createElement("div");
-				itemElement.id = "suggestions"+id.substring(6,);
 				itemElement.className = "suggestions";
 				var regex = new RegExp('^'+ value);
 				var inner = item.label!.replace(regex, function(match) { return  match  });
 				itemElement.innerHTML = inner;
-				parent.appendChild(itemElement);
 				return itemElement;
 			},
 			customize: function(input, inputRect, container, maxHeight) {
@@ -94,7 +94,8 @@ export class Functions{
 					container.style.bottom = (window.innerHeight - inputRect.bottom + input.offsetHeight) + "px";
 					container.style.maxHeight = "140px";
 				}
-			}
+			},
+			showOnFocus: true,
 		})
 	}
     //autocomplete
@@ -117,7 +118,13 @@ export class Functions{
         parent.appendChild(button);
     }
 
-   
+	checkMessage(message: string, messageService: MessageService ){
+		if(message!=""){
+			messageService.info("Something went wrong");
+		}else{
+			messageService.info("Code generation has been completed");
+		}
+	}
 	
     checkInputs(array: Array<Textfield>){
 		let returncode1 = this.checkEmptyInputs(array);

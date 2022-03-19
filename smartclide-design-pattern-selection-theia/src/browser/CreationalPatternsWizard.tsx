@@ -1,25 +1,22 @@
-
+import data from './data.json';
 import { inject } from 'inversify';
-import {Functions} from './functions';
+import { Functions } from './functions';
 import { MessageService } from '@theia/core';
 import { HelloBackendService } from '../common/protocol';
-import data from './data.json';
+
 interface Textfield{
 	ident: number;
 	value: string;
   };
 
 export class CreationalPatterns{
-    @inject(MessageService)
-    protected readonly messageService!: MessageService;
 	@inject(HelloBackendService)
 	protected readonly helloBackendService: HelloBackendService;
 
     static functions = new Functions();
 	static values = JSON.parse(JSON.stringify(data));
 
-    creationalPatternswizard(){
-        let divCont = document.getElementById('divCont') as HTMLDivElement;
+    creationalPatternswizard(divCont: HTMLDivElement, messageService: MessageService){
 		divCont.innerHTML = "";
 		let divCont2 = document.createElement('div');
 		CreationalPatterns.functions.radioQuestion('<br> Do you want to create a completely new object or to create one by reusing an existing one?<br>', 'Create new object', 'Reuse an existing one', 'radio11', 'radio12', divCont);
@@ -96,12 +93,13 @@ export class CreationalPatterns{
 													textfieldArray.push(textfield);
 													i++;
 												}
-												CreationalPatterns.functions.insertInputsAbstractFactory();
+												
 												let message = CreationalPatterns.functions.checkInputs(textfieldArray);
 												if (message == "Input is valid"){
-													CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["AbstractFactory"].values, "AbstractFactory"));
+													CreationalPatterns.functions.insertInputsAbstractFactory(CreationalPatterns.values["AbstractFactory"].values);
+													CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["AbstractFactory"].values, "AbstractFactory"), messageService);
 												}else{
-													this.messageService.info(message);
+													messageService.info(message);
 												}
 											});
 										});
@@ -157,12 +155,13 @@ export class CreationalPatterns{
 														textfieldArray.push(textfield);
 														i++;
 													}
-													CreationalPatterns.functions.insertInputsBuilder();
+													
 													let message = CreationalPatterns.functions.checkInputs(textfieldArray);
 													if (message == "Input is valid"){
-														CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Builder"].values, "Builder"));
+														CreationalPatterns.functions.insertInputsBuilder(CreationalPatterns.values["Builder"].values);
+														CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Builder"].values, "Builder"), messageService);
 													}else{
-														this.messageService.info(message);
+														messageService.info(message);
 													}
 												});
 											});
@@ -199,12 +198,13 @@ export class CreationalPatterns{
 													CreationalPatterns.values["FactoryMethod"].values["Creator"].name = (infoList.item(i) as HTMLInputElement).value;
 													let textfield2:  Textfield={ ident: 1, value: (infoList.item(i) as HTMLInputElement).value };
 													textfieldArray.push(textfield2);
-													CreationalPatterns.functions.insertInputsFactoryMethod();															
+																											
 													let message = CreationalPatterns.functions.checkInputs(textfieldArray);																
 													if (message == "Input is valid"){
-														CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["FactoryMethod"].values, "FactoryMethod"));
+														CreationalPatterns.functions.insertInputsFactoryMethod(CreationalPatterns.values["FactoryMethod"].value);	
+														CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["FactoryMethod"].values, "FactoryMethod"),messageService);
 													}else{
-														this.messageService.info(message);
+														messageService.info(message);
 													}
 											});
 										});
@@ -247,11 +247,11 @@ export class CreationalPatterns{
 						let singlName = (document.getElementById('txtboxSingletonName') as HTMLInputElement).value;
 						CreationalPatterns.values["Singleton"].values["Singleton"].name = singlName;
 						if (singlName==""){
-							this.messageService.info("You need to fill all the fields!");
+							messageService.info("You need to fill all the fields!");
 						}else if (!singlName.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){
-							this.messageService.info("Class's name must start with a capital letter!");
+							messageService.info("Class's name must start with a capital letter!");
 						}else{
-							CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Singleton"].values, "Singleton"));
+							CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Singleton"].values, "Singleton"), messageService);
 						}
 					});
 				});
@@ -300,9 +300,9 @@ export class CreationalPatterns{
 									}
 									let message = CreationalPatterns.functions.checkInputs(textfieldArray);
 									if (message == "Input is valid"){											
-										CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Prototype"].values, "Prototype"));
+										CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Prototype"].values, "Prototype"), messageService);
 									}else{
-										this.messageService.info(message);
+										messageService.info(message);
 									}
 								});
 							});
