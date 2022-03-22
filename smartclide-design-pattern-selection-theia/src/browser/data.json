@@ -267,7 +267,7 @@
             }
         }
     },
-    "ChainofResponsibility":{
+    "ChainOfResponsibility":{
         "values":{
             "Handler":{
                 "name":"",

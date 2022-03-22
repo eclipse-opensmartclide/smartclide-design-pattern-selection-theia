@@ -116,6 +116,9 @@
 .Singleton{
   content : url(./img/SingletonIcon.jpg);
 }
+.Visitor{
+    content : url(./img/VisitorIcon.jpg);
+}
 #btn-wizzard{
   margin-left: 50px;
   

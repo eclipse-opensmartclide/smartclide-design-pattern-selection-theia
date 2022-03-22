@@ -275,7 +275,27 @@ export class CodeGenerator {
 	}	
 	public Flyweight(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+
+		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.FlyweightFactory.name);
+		file1.addAttribute(new Attribute("cache","ArrayList<"+obj.Flyweight.name+">", "private")); //list of Flyweights
+		file1.addMethod(new Method(obj.Flyweight.name,'',false,"public","\t \t this.cache = new ArrayList<"+obj.Flyweight.name+">",[])); //constructor of FlyweightFactory class
+		file1.addMethod(new Method("getFlyweight",obj.Flyweight.name,false,"public","",[new Attribute("key","string","")])); //δεν έχω συμπληρώσει το body της μεθόδου
+		this.fillPromise(ppc, file1);
+
+		let file2 :patternParticipatingClass = new NonHierarchyClass(obj.Flyweight.name);
+		file2.addAttribute(new Attribute(obj.ConcreteFlyweight1Attribute.name,"string", "private")); 
+		this.fillPromise(ppc, file2);
+
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteFlyweight") && !key.includes("ConcreteFlyweight1Attribute")){
+				let file3 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Flyweight.name);
+				this.fillPromise(ppc, file3);
+			}
+		});
+		let file4 :patternParticipatingClass = new NonHierarchyClass(obj.Client.name); 
+		this.fillPromise(ppc, file4);
+
 		return ppc.object;
 	}	
 	public Proxy(jsonObj: string): Array<patternParticipatingClass>{
@@ -293,7 +313,7 @@ export class CodeGenerator {
 		let file3 :patternParticipatingClass = new ConcreteClass(obj.Proxy.name ,obj.ServiceInterface.name);
 		file3.addAttribute(new Attribute(obj.Service.name.toLowerCase(), obj.Service.name, "private"))
 		file3.addMethod(new Method(obj.Proxy.name,"",false,"public","\t \t this."+obj.Service.name.toLowerCase()+"=" + obj.Service.name.toLowerCase()+";",[new Attribute(obj.Service.name.toLowerCase(), obj.Service.name, "")]));
-		file3.addMethod(new Method("checkAccess","",false,"public","\t \t this."+obj.Service.name.toLowerCase()+"=" + obj.Service.name.toLowerCase()+";",[new Attribute(obj.Service.name.toLowerCase(), obj.Service.name, "")]));
+		file3.addMethod(new Method("checkAccess","void",false,"public","",[new Attribute(obj.Service.name.toLowerCase(), obj.Service.name, "")]));
 		file3.addMethod(new Method(obj.ServiceInterfaceMethod.name,"void",false,"public","\t \t if(this.checkAccess){\n \t \t \t \t this."+obj.Service.name.toLowerCase()+"."+obj.ServiceInterfaceMethod.name+"();\n \t \t} ",[]));
 		this.fillPromise(ppc, file3);
 
@@ -303,52 +323,285 @@ export class CodeGenerator {
 	//Behavioral Patterns
 	public ChainofResponsibility(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+
+		let file1 :patternParticipatingClass = new abstractClass(obj.Handler.name);
+		file1.addMethod(new Method("setNext","void",true,"public","",[new Attribute((obj.Handler.name).charAt() ,obj.Handler.name,"")]));
+		file1.addMethod(new Method("handle","void",true,"public","",[new Attribute("request","","")]));
+		this.fillPromise(ppc, file1);
+
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteHandler")){
+				let file2 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Handler.name);
+				file2.addMethod(new Method("setNext","void",false,"public","",[new Attribute((obj.Handler.name).charAt() ,obj.Handler.name,"")]));
+				file2.addMethod(new Method("handle","void",false,"public","",[new Attribute("request","","")]));
+				this.fillPromise(ppc, file2);
+			}
+		});
 		return ppc.object;
 	}	
 	public Command(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+
+		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Receiver.name);
+		this.fillPromise(ppc, file1);
+
+		let file2 :patternParticipatingClass = new NonHierarchyClass(obj.Invoker.name);
+		this.fillPromise(ppc, file2);
+
+		let file3 :patternParticipatingClass = new abstractClass(obj.Command.name);
+		//file3.addMethod(new Method(obj.ConcreteCommand1Method.name,))
+		this.fillPromise(ppc, file3);
+
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteCommand") && !key.includes("ConcreteCommand1Method") && !key.includes("ConcreteCommand1MethodParameter1")){
+				let file4 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Command.name);
+				file4.addAttribute(new Attribute((obj.Receiver.name).toLowerCase, obj.Receiver.name, ""));
+
+				var aList: Array<Attribute> = [];
+				aList.push(new Attribute((obj.Receiver.name).toLowerCase(),obj.Receiver.name,""));	
+				Object.keys(obj).forEach((innerkey)=>{
+					if(innerkey.includes("ConcreteCommand1MethodParameter")){
+						file4.addAttribute(new Attribute(obj[key].name, "string", ""));
+						aList.push(new Attribute(obj[key].name, "string", ""));
+					}
+				});
+				file4.addMethod(new Method(obj[key].name,"",false,"private","\t \t this."+(obj.Receiver.name).toLowerCase+" = "+(obj.Receiver.name).toLowerCase +"; \n \t \t",aList));
+				//concreteCommandMethod?
+
+				this.fillPromise(ppc, file4);
+
+			}
+		});
+
 		return ppc.object;
 	}
 	public Interpreter(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+		let file1 :patternParticipatingClass =  new NonHierarchyClass(obj.Context.name);
+		file1.addMethod(new Method("Interpreter","void",false,"public","",[new Attribute(obj.Context.name.toLowerCase(),obj.Context.name,"")]));
+		this.fillPromise(ppc, file1);
+
+		let file2 :patternParticipatingClass =  new NonHierarchyClass(obj.AbstractExpression.name);
+		this.fillPromise(ppc, file2);
+		Object.keys(obj).forEach((key) => {
+			if(key.includes("TerminalExpression") || key.includes("NonterminalExpression")){
+				let file3 :patternParticipatingClass =  new ConcreteClass(obj[key].name, obj.AbstractExpression.name);
+				file3.addMethod(new Method("Interpreter","void",false,"public","",[new Attribute(obj.Context.name.toLowerCase(),obj.Context.name,"")]));
+				this.fillPromise(ppc, file3);
+			}
+		});
 		return ppc.object;
 	}	
 	public Mediator(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+
+		let file1 :patternParticipatingClass =  new abstractClass(obj.Mediator.name);
+		file1.addMethod(new Method("notify","void",true,"public","",[]))
+		this.fillPromise(ppc, file1);
+		var cList: Array<patternParticipatingClass> = [];//list of ConcreteMediators
+		var mList: Array<string> = [];
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteMediator")){
+				let file2 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Mediator.name);
+				file2.addMethod(new Method("notify","void",false,"public","",[]))
+				cList.push(file2);
+				this.fillPromise(ppc, file2);
+			}else if(key.includes("Component")){
+				let file3 : patternParticipatingClass = new NonHierarchyClass(obj[key].name);
+				file3.addAttribute(new Attribute(obj.Mediator.name.toLowerCase().charAt(0),obj.Mediator.name,"private"))
+				mList.push(obj[key].name);
+				this.fillPromise(ppc, file3);
+			}else{
+
+			}
+		});
+		for(var i=0;i<cList.length;i++){
+			for(var j=0;j<mList.length;j++){
+				cList[i].addAttribute(new Attribute(mList[j],mList[j],"private"));
+
+			}
+		}
 		return ppc.object;
 	}	
 	public Memento(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+
+		let file1 :patternParticipatingClass =  new NonHierarchyClass(obj.Originator.name);
+		let file2 :patternParticipatingClass =  new NonHierarchyClass(obj.Memento.name);
+		let file3 :patternParticipatingClass =  new NonHierarchyClass(obj.Caretaker.name);
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("OriginatorAttribute")){
+				file1.addAttribute(new Attribute(obj[key].name,"string","private"));
+			}else if(key.includes("MementoAttribute")){
+				file2.addAttribute(new Attribute(obj[key].name,"string","private"));
+			}else{
+
+			}
+		});
+		file2.addMethod(new Method(obj.Memento.name,"",false,"private","",[]));//memento constructor
+		file2.addMethod(new Method("getState","string",false,"private","\t \t return (this.",[]));// unfinished
+		
+		file1.addMethod(new Method("save",obj.Memento.name,false,"public","",[]));
+		file1.addMethod(new Method("restore","void",false,"public","",[new Attribute(obj.Memento.name.charAt(0),obj.Memento.name,"")]));
+		
+		file3.addAttribute(new Attribute(obj.Originator.name.toLowerCase(), obj.Originator.name,"private"));
+		file3.addAttribute(new Attribute("history","ArrayList<"+obj.Memento.name+">","private"));
+		file3.addMethod(new Method("doSomething","void",false,"public","\t \t "+obj.Memento.name+""+ obj.Memento.name.toLowercase().charAt(0)+" =  "+(obj.Originator.name).toLowerCase()+".save();\n \t \t history.push(m);",[]));
+		file3.addMethod(new Method("undo","void",false,"public","\t \t "+obj.Memento.name+""+ obj.Memento.name.toLowercase().charAt(0)+" =  history.remove();\n \t \t "+(obj.Originator.name).toLowerCase()+".restore(m);",[]));
+		
+		this.fillPromise(ppc, file1);
+		this.fillPromise(ppc, file2);
+		this.fillPromise(ppc, file3);
 		return ppc.object;
 	}		
 	public Observer(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+		let file1 :patternParticipatingClass =  new NonHierarchyClass(obj.Subject.name);
+		file1.addAttribute(new Attribute(obj.Observer.name.toLowerCase()+'s', "ArrayList<"+obj.Observer.name+">","private"));
+		file1.addMethod(new Method("attach","void",false,"public","\t \t "+ obj.Observer.name.toLowerCase()+"s.add("+obj.Observer.name.toLowerCase().charAt(0)+");",[new Attribute(obj.Observer.name.toLowerCase().charAt(0), obj.Observer.name,"")]));
+		file1.addMethod(new Method("detach","void",false,"public","\t \t "+ obj.Observer.name.toLowerCase()+"s.remove("+obj.Observer.name.toLowerCase().charAt(0)+");",[new Attribute(obj.Observer.name.toLowerCase().charAt(0), obj.Observer.name,"")]));
+		file1.addMethod(new Method("notify","void",false,"public","\t \t for(int i=0; i<"+obj.Observer.name.toLowerCase()+"s.size(); i++){\n \t \t \t this."+obj.Observer.name.toLowerCase()+"s.get(i).update();",[]));
+		
+		let file2 :patternParticipatingClass =  new abstractClass(obj.Observer.name);
+		file2.addMethod(new Method("update","void",true,"public","",[]));
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteSubject")){
+				let file3 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Subject.name);
+				file3.addAttribute(new Attribute(obj[key].name+"State","string","private"));
+				file3.addMethod(new Method("getState","string",false,"public","\t \t return (this."+obj[key].name+"State);",[]));
+				file3.addMethod(new Method("setState","void",false,"public","\t \t this."+obj[key].name+"State = state;",[new Attribute("state","string","")]));
+				this.fillPromise(ppc, file3);
+			}else if(key.includes("ConcreteObserver")){
+				let file4 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Observer.name);
+				file4.addAttribute( new Attribute(obj.Observer.name+"state","string","private"));
+				this.fillPromise(ppc, file4);
+			}else{
+
+			}
+		});
+		this.fillPromise(ppc, file1);
+		this.fillPromise(ppc, file2);
 		return ppc.object;
 	}	
 	public State(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Context.name);
+		file1.addAttribute(new Attribute(obj.State.name.toLowerCase(),obj.State.name,"private"));
+		
+		file1.addMethod(new Method(obj.Context.name,"",false,"public","\t \t this."+obj.State.name.toLowerCase()+" = "+obj.State.name.toLowerCase()+";",[new Attribute(obj.State.name.toLowerCase(),obj.State.name,"")]));
+		file1.addMethod(new Method("changeState","void",false,"public","\t \t this."+obj.State.name.toLowerCase()+" = "+obj.State.name.toLowerCase()+";",[new Attribute(obj.State.name.toLowerCase(),obj.State.name,"")]));
+		let file2 :patternParticipatingClass = new abstractClass(obj.State.name);
+		
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteState")){
+				let file3 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.State.name);
+				file3.addAttribute(new Attribute(obj.Context.name.toLowerCase(),obj.Context.name,"private"));
+				file3.addMethod(new Method("setContext","void",false,"public","\t \t this."+obj.Context.name.toLowerCase()+" = "+obj.Context.name.toLowerCase()+";",[new Attribute(obj.Context.name.toLowerCase(),obj.Context.name,"")]));
+				this.fillPromise(ppc, file3);
+			}
+		});
+		this.fillPromise(ppc, file1);
+		this.fillPromise(ppc, file2);
+		
 		return ppc.object;
 	}	
 	public Strategy(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+		let file1 : patternParticipatingClass = new NonHierarchyClass(obj.Context.name);
+		file1.addAttribute(new Attribute(obj.Strategy.name.toLowerCase(),obj.Strategy.name,"private"));
+		file1.addMethod(new Method("set"+obj.Strategy.name,"void",false,"public","\t \t this."+obj.Strategy.name.toLowerCase()+" = "+obj.Strategy.name.toLowerCase()+";",[new Attribute(obj.Strategy.name.toLowerCase(),obj.Strategy.name,"")]));
+		file1.addMethod(new Method("doSomething","void",false,"public","\t \t this."+obj.Strategy.name.toLowerCase()+"."+obj.StrategyMethod.name+"()",[]));
+		this.fillPromise(ppc, file1);
+
+		let file2 :patternParticipatingClass = new abstractClass(obj.Strategy.name);
+		file2.addMethod(new Method(obj.StrategyMethod.name,"void",true,"public","",[]));
+		this.fillPromise(ppc, file2);
+
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteStrategy")){
+				let file3 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Strategy.name);
+				file3.addMethod(new Method(obj.StrategyMethod.name,"void",false,"public","",[]));
+				this.fillPromise(ppc, file3);
+
+			}
+		});
 		return ppc.object;
 	}	
 	public TemplateMethod(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+
+		let file1 : patternParticipatingClass = new NonHierarchyClass(obj.AbstractClass.name);
+		file1.addMethod(new Method("templateMethod","void",false,"public","",[]))
+		var cList: Array<patternParticipatingClass> = [];//list of ConcreteClass
+		var mList: Array<Method> = [];//list of AbstractClass methods
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteClass")){
+				let file2 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.AbstractClass.name);
+				cList.push(file2);
+			}else if(key.includes("AbstractClassMethod")){
+				file1.addMethod(new Method(obj[key].name,"void",true,"public","",[]));
+				mList.push(new Method(obj[key].name,"void",false,"public","",[]));
+			}else{
+
+			}
+		});
+		for(var i=0;i<cList.length;i++){
+			for(var j=0;j<mList.length;j++){
+				cList[i].addMethod(mList[j]); // each one ConcreteClass has a method 
+			}
+			this.fillPromise(ppc,cList[i]);
+		}
+		this.fillPromise(ppc, file1);
 		return ppc.object;
 	}	
 	public Visitor(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
-		//let obj = JSON.parse(JSON.stringify(jsonObj));
+		let obj = JSON.parse(JSON.stringify(jsonObj));
+		let file1 : patternParticipatingClass = new abstractClass(obj.Visitor.name);
+		
+		this.fillPromise(ppc, file1);
+
+		let file2 : patternParticipatingClass = new abstractClass(obj.Element.name);
+		file2.addMethod(new Method("accept","void",true,"public","",[new Attribute(obj.Visitor.name.toLowerCase().charAt(0),obj.Visitor.name,"")]))
+		this.fillPromise(ppc, file2);
+		var cList: Array<patternParticipatingClass> = [];//list of ConcreteVisitors
+		var eList: Array<Method> = [];//list of ConcreteElement method 
+		Object.keys(obj).forEach((key)=>{
+			if(key.includes("ConcreteVisitor")){
+				let file3 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Visitor.name);
+				cList.push(file3);
+				//this.fillPromise(ppc, file3);
+			}else if(key.includes("ConcreteElement")){
+				let file4 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Element.name);
+				file1.addMethod(new Method("visit"+obj[key].name,"void",true,"public","",[new  Attribute(obj[key].name.toLowerCase().charAt(0),obj[key].name,"")]));
+				file4.addMethod(new Method("accept","void",false,"public","",[new Attribute(obj.Visitor.name.toLowerCase().charAt(0),obj.Visitor.name,"")]));
+				file4.addMethod(new Method("feature","void",false,"public","",[]));
+				eList.push(new Method("visit"+obj[key].name,"void",false,"public","",[new  Attribute(obj[key].name.toLowerCase().charAt(0),obj[key].name,"")]));
+				this.fillPromise(ppc, file4);
+			}else{
+
+			}
+		});
+		
+		for(var i=0;i<cList.length;i++){
+			for(var j=0;j<eList.length;j++){
+				cList[i].addMethod(eList[j]); // each one ConcreteVisitor has a method for each one ConcreteElement
+			}
+			this.fillPromise(ppc,cList[i]);
+		}
+		
+		let file5 : patternParticipatingClass = new abstractClass(obj.Visitor.name);
+		this.fillPromise(ppc, file5);
 		return ppc.object;
 	}	
 	fillPromise(labelObj: Object, item: patternParticipatingClass){
