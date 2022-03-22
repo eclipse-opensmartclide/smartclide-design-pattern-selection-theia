@@ -863,12 +863,56 @@ export class extensionWidget extends ReactWidget {
 				let radio221 = document.getElementById('radio221') as HTMLInputElement;
 				radio221.addEventListener('click', async (e: Event) =>{
 					divCont2.innerHTML = "";
-					//let divCont3 = document.createElement('div');
+					let divCont3 = document.createElement('div');
 					textfieldQuestion('<br> What is the name Interface representing both Composite and Simple objects? <br>', 1, 'text', 'Interface name', '', 'infoField', 'buttonNext', divCont2);
-					let buttonNext = document.getElementById('buttonNext');
-					buttonNext?.addEventListener('click', async (e: Event) =>{
-					
+					let buttonNext = document.getElementById('buttonNext') as HTMLButtonElement;
+					buttonNext.addEventListener('click', async (e: Event) =>{
+						divCont3.innerHTML = "";
+						let divCont4 = document.createElement('div');
+						textfieldQuestion('<br> How many common functionalities does the Interface offer? <br>', 1, 'number', '1', 'numOfInterfaceMethods', '', 'buttonNext1', divCont3);
+						let buttonNext1 = document.getElementById('buttonNext1') as HTMLButtonElement;
+						buttonNext1.addEventListener('click', async (e: Event) =>{
+							divCont4.innerHTML = "";
+							let divCont5 = document.createElement('div');
+							textfieldQuestion('<br> Insert the name of each functionality <br>', parseInt((document.getElementById('numOfInterfaceMethods') as HTMLInputElement).value), 'text', 'Functionality name ', 'numOfInterfaceMethods', '', 'buttonNext2', divCont4);
+							let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
+							buttonNext2.addEventListener('click', async (e: Event) =>{
+								divCont5.innerHTML = "";
+								let divCont6 = document.createElement('div');
+								textfieldQuestion('<br> How many types of Simple objects exist? <br>', 1, 'number', '1', 'numOfSimpleObjectsTypes', '', 'buttonNext3', divCont5);
+								let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
+								buttonNext3.addEventListener('click', async (e: Event) =>{
+									divCont6.innerHTML = "";
+									let divCont7 = document.createElement('div');
+									textfieldQuestion('<br> Insert the names of the Simple objects <br>', parseInt((document.getElementById('numOfSimpleObjectsTypes') as HTMLInputElement).value), 'text', 'Simple Object name ', 'numOfSimpleObjectsTypes', '', 'buttonNext4', divCont6);
+									let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
+									buttonNext4.addEventListener('click', async (e: Event) =>{
+										divCont7.innerHTML = "";
+										let divCont8 = document.createElement('div');
+										radioQuestion('<br>Are there different layers that extend the behaviour of the Composite object? <br>', 'Yes', 'No', 'radio2211', 'radio2212', divCont7);
+										let radio2211 = document.getElementById('radio2211') as HTMLInputElement;
+										radio2211.addEventListener('click', async (e: Event) =>{
+											divCont8.innerHTML = "";
+											let divCont9 = document.createElement('div');
+											textfieldQuestion('<br>What is the name of the Decorator class? <br>', 1, 'text', 'Decorator name', '', 'infoField', 'buttonNext5', divCont8 );
+											let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
+											buttonNext5.addEventListener('click', async (e: Event) =>{
+												
+				
+											});
+											divCont8.appendChild(divCont9);
+										});
+										divCont7.appendChild(divCont8);
+									});
+									divCont6.appendChild(divCont7);
+								});
+								divCont5.appendChild(divCont6);
+							});
+							divCont4.appendChild(divCont5);
+						});
+						divCont3.appendChild(divCont4);
 					});
+					divCont2.appendChild(divCont3);
 				});
 				let radio222 = document.getElementById('radio222') as HTMLInputElement;
 				radio222.addEventListener('click', async (e: Event) =>{
