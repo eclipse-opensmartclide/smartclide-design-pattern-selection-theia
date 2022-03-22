@@ -847,7 +847,106 @@ export class extensionWidget extends ReactWidget {
 		let radio2 = document.getElementById('radio2') as HTMLInputElement;
 		radio2.addEventListener('click', async (e: Event) =>{
 			divCont.innerHTML = "";
-			createLabel('<br> Do you want to ... <br>', 'labelQuestion18', divCont);
+			let divCont1 = document.createElement('div');
+			radioQuestion('<br> Do you need to implement a function that requires information from 2 different hierarchies? <br>', 'Yes', 'No', 'radio21', 'radio22', divCont);
+
+			let radio21 = document.getElementById('radio21') as HTMLInputElement;
+			radio21.addEventListener('click', async (e: Event) =>{
+				divCont1.innerHTML = "";
+				
+			});
+			let radio22 = document.getElementById('radio22') as HTMLInputElement;
+			radio22.addEventListener('click', async (e: Event) =>{
+				divCont1.innerHTML = "";
+				let divCont2 = document.createElement('div');
+				radioQuestion('<br>Is any of  your objects a composite one (i.e. comprised of simple objects), which however needs to be treated uniformly along with simple objects?<br>', 'Yes', 'No', 'radio221', 'radio222', divCont1);
+				let radio221 = document.getElementById('radio221') as HTMLInputElement;
+				radio221.addEventListener('click', async (e: Event) =>{
+					divCont2.innerHTML = "";
+					//let divCont3 = document.createElement('div');
+					textfieldQuestion('<br> What is the name Interface representing both Composite and Simple objects? <br>', 1, 'text', 'Interface name', '', 'infoField', 'buttonNext', divCont2);
+					let buttonNext = document.getElementById('buttonNext');
+					buttonNext?.addEventListener('click', async (e: Event) =>{
+					
+					});
+				});
+				let radio222 = document.getElementById('radio222') as HTMLInputElement;
+				radio222.addEventListener('click', async (e: Event) =>{
+					divCont2.innerHTML = "";
+					let divCont3 = document.createElement('div');
+					radioQuestion('<br>Do you want to communicate  (reuse or hide the complexity) of an exiting artifact (class or subsystem)? <br>', 'Yes', 'No', 'radio2221', 'radio2222', divCont2);
+					let radio2221 = document.getElementById('radio2221') as HTMLInputElement;
+					radio2221.addEventListener('click', async (e: Event) =>{
+						divCont3.innerHTML = "";
+						let divCont4 = document.createElement('div');
+						radioQuestion('<br>Communicate with one class or subsystem? <br>', 'One', 'Subsystem', 'radio22211', 'radio22212', divCont3);
+						let radio22211 = document.getElementById('radio22211') as HTMLInputElement;
+						radio22211.addEventListener('click', async (e: Event) =>{
+							divCont4.innerHTML = "";
+							let divCont5 = document.createElement('div');
+							radioQuestion('<br>Do you need an interface in order to reduce memory usage? <br>', 'Yes', 'No', 'radio222111', 'radio222112', divCont4);
+							let radio222111 = document.getElementById('radio222111') as HTMLInputElement;
+							radio222111.addEventListener('click', async (e: Event) =>{
+								divCont5.innerHTML = "";
+								//let divCont6 = document.createElement('div');
+								//radioQuestion('<br>Do you need an interface in order to reduce memory usage? <br>', 'Yes', 'No', 'radio222111', 'radio222112', divCont4);
+							
+							});
+							let radio222112 = document.getElementById('radio222112') as HTMLInputElement;
+							radio222112.addEventListener('click', async (e: Event) =>{
+								divCont5.innerHTML = "";
+								let divCont6 = document.createElement('div');
+								radioQuestion('<br>Are you unable to change the interface of the existing class? <br>', 'Yes', 'No', 'radio2221121', 'radio2221122', divCont5);
+								let radio2221121 = document.getElementById('radio2221121') as HTMLInputElement;
+								radio2221121.addEventListener('click', async (e: Event) =>{
+									divCont6.innerHTML = "";
+									//let divCont7 = document.createElement('div');
+									radioQuestion('<br>Are you unable to change the interface of the existing class? <br>', 'Yes', 'No', 'radio2221121', 'radio2221121', divCont6);
+								
+							
+								});
+								let radio2221122 = document.getElementById('radio2221122') as HTMLInputElement;
+								radio2221122.addEventListener('click', async (e: Event) =>{
+									divCont6.innerHTML = "";
+									createLabel('There is no pattern.', '', divCont6);							
+								});
+								divCont5.appendChild(divCont6);
+							});
+							divCont4.appendChild(divCont5);
+						});
+						let radio22212 = document.getElementById('radio22212') as HTMLInputElement;
+						radio22212.addEventListener('click', async (e: Event) =>{
+							divCont4.innerHTML = "";
+							//let divCont5 = document.createElement('div');
+							//radioQuestion('<br>Communicate with one class or subsystem? <br>', 'One', 'Subsystem', 'radio22211', 'radio22212', divCont4);
+							
+						});
+						divCont3.appendChild(divCont4);
+					});
+					let radio2222 = document.getElementById('radio2222') as HTMLInputElement;
+					radio2222.addEventListener('click', async (e: Event) =>{
+						divCont3.innerHTML = "";
+						let divCont4 = document.createElement('div');
+						radioQuestion('<br>Do you need access control for the some service class? <br>', 'Yes', 'No', 'radio22221', 'radio22222', divCont2);
+						let radio22221 = document.getElementById('radio22221') as HTMLInputElement;
+						radio22221.addEventListener('click', async (e: Event) =>{
+							divCont4.innerHTML = "";
+							//let divCont5 = document.createElement('div');
+							//radioQuestion('<br>Do you need access control for the some service class? <br>', 'Yes', 'No', 'radio22221', 'radio22222', divCont2);
+						
+						});
+						let radio22222 = document.getElementById('radio22222') as HTMLInputElement;
+						radio22222.addEventListener('click', async (e: Event) =>{
+							divCont4.innerHTML = "";
+							createLabel('There is no pattern.', '', divCont4);						
+						});
+						divCont3.appendChild(divCont4);
+					});
+					divCont2.appendChild(divCont3);
+				});
+				divCont1.appendChild(divCont2);
+			});
+			divCont.appendChild(divCont1);
 		});
 		createLabel('Behavioral', 'label3', divWiz);
 		createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
