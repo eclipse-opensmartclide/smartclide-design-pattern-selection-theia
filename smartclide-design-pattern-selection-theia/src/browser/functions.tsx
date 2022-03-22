@@ -50,7 +50,7 @@ export class Functions{
                 suggestions.className = "suggestions";
                 parent.appendChild(suggestions);
                 inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
-                    this.showSuggestions(inputField.value, Functions.listOfClassNames, ( e.target as Element).id);
+                    this.showSuggestions(( e.target as Element).id);
                 });
             }
             inputField.autocomplete = "off";
@@ -60,8 +60,8 @@ export class Functions{
         parent.appendChild(inputField);
     }
     //autocomplete
-    showSuggestions(value: string, table: string[], id: string){
-
+    showSuggestions(id: string){
+ 
 		var items = Functions.listOfClassNames.map(function (n) { return { label: n }});
 
 		autocomplete({
@@ -75,18 +75,21 @@ export class Functions{
 				let reg = new RegExp('^' + match);
 				callback(items.filter(function(n){
 					if (n.label.match(reg)) {
-					  return n;
+					  return n.label;
 					}
 				}));
 			},
 			render: function(item, value) {
 				var itemElement = document.createElement("div");
-				itemElement.className = "suggestions";
+				itemElement.className = "autocomplete";
 				var regex = new RegExp('^'+ value);
-				var inner = item.label!.replace(regex, function(match) { return  match  });
-				itemElement.innerHTML = inner;
-				return itemElement;
+				if(item.label?.match(regex)){
+					itemElement.innerHTML = item.label;
+					(document.getElementById("suggestions"+id.substring(6,)) as HTMLDivElement).appendChild(itemElement);
+					return itemElement;
+				}
 			},
+			/*
 			customize: function(input, inputRect, container, maxHeight) {
 				if (maxHeight < 100) {
 					container.style.visibility = 'visible';
@@ -94,8 +97,8 @@ export class Functions{
 					container.style.bottom = (window.innerHeight - inputRect.bottom + input.offsetHeight) + "px";
 					container.style.maxHeight = "140px";
 				}
-			},
-			showOnFocus: true,
+			},*/
+			showOnFocus: false,
 		})
 	}
     //autocomplete
