@@ -5,7 +5,6 @@ import { MessageService } from '@theia/core';
 import { HelloBackendService } from '../common/protocol';
 
 
-
 export class StructuralPatterns{
     @inject(MessageService)
     protected readonly messageService!: MessageService;
@@ -21,7 +20,54 @@ export class StructuralPatterns{
 			let radio21 = document.getElementById('radio21') as HTMLInputElement;
 			radio21.addEventListener('click', async (e: Event) =>{
 				divCont1.innerHTML = "";
-				
+				let divCont2 = document.createElement('div');
+				StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the 1st hierarchy (the class which is called from the client)<br>', 1, 'text', "1st Hierarchy's name", 'txtboxAbstraction', 'infoField', 'buttonNext', divCont1);
+				let buttonNext = document.getElementById('buttonNext') as HTMLButtonElement;
+				buttonNext.addEventListener('click', async (e: Event) =>{
+					divCont2.innerHTML = "";
+					let divCont3 = document.createElement('div');
+					StructuralPatterns.functions.textfieldQuestion('<br> How many subclasses does the 1st hierarchy has? <br>', 1, 'number', '1', 'numOfRefinedAbstractions', '', 'buttonNext1', divCont2);
+					let buttonNext1 = document.getElementById('buttonNext1') as HTMLButtonElement;
+					buttonNext1.addEventListener('click', async (e: Event) =>{
+						divCont3.innerHTML = "";
+						let divCont4 = document.createElement('div');
+						StructuralPatterns.functions.textfieldQuestion("<br> Insert the names of the 1st hierarchy's subclasses  <br>", parseInt((document.getElementById('numOfRefinedAbstractions') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxRefinedAbstractions', 'infoField', 'buttonNext2', divCont3);
+						let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
+						buttonNext2.addEventListener('click', async (e: Event) =>{
+							divCont4.innerHTML = "";
+							let divCont5 = document.createElement('div');
+							StructuralPatterns.functions.textfieldQuestion('<br> Insert the name of the 2nd hierarchy <br>',  1, 'text', "2nd Hierarchy's name", 'txtboxImplementation', 'infoField', 'buttonNext3', divCont4);
+							let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
+							buttonNext3.addEventListener('click', async (e: Event) =>{
+								divCont5.innerHTML = "";
+								let divCont6 = document.createElement('div');
+								StructuralPatterns.functions.textfieldQuestion('<br> How many subclasses does the 2nd hierarchy has? <br>', 1, 'number', '1', 'numOfConcreteImplementations', '', 'buttonNext4', divCont5);
+								let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
+								buttonNext4.addEventListener('click', async (e: Event) =>{
+									divCont6.innerHTML = "";
+									let divCont7 = document.createElement('div');
+									StructuralPatterns.functions.textfieldQuestion("<br> Insert the names of the 2nd hierarchy's subclasses <br>", parseInt((document.getElementById('numOfConcreteImplementations') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxConcreteImplementations', 'infoField', 'buttonNext5', divCont6);
+									let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
+									buttonNext5.addEventListener('click', async (e: Event) =>{
+										divCont7.innerHTML = "";
+										StructuralPatterns.functions.createLabel('<br> <b>Bridge Pattern</b>  ', '', divCont7);
+										StructuralPatterns.functions.createButton('Get Code', 'getcodeBridgePattern', divCont7);
+										let buttonCodeBP = document.getElementById('getcodeBridgePattern') as HTMLButtonElement;
+										buttonCodeBP.addEventListener('click', async (e: Event) =>{
+											//BRIDGE
+										});
+									});
+									divCont6.appendChild(divCont7);
+								});
+								divCont5.appendChild(divCont6);
+							});
+							divCont4.appendChild(divCont5);
+						});
+						divCont3.appendChild(divCont4);
+					});
+					divCont2.appendChild(divCont3);
+				});
+				divCont1.appendChild(divCont2);
 			});
 			let radio22 = document.getElementById('radio22') as HTMLInputElement;
 			radio22.addEventListener('click', async (e: Event) =>{
@@ -32,7 +78,7 @@ export class StructuralPatterns{
 				radio221.addEventListener('click', async (e: Event) =>{
 					divCont2.innerHTML = "";
 					let divCont3 = document.createElement('div');
-					StructuralPatterns.functions.textfieldQuestion('<br> What is the name Interface representing both Composite and Simple objects? <br>', 1, 'text', 'Interface name', 'txtboxInterface', 'infoField', 'buttonNext', divCont2);
+					StructuralPatterns.functions.textfieldQuestion('<br> Insert the name Interface representing both Composite and Simple objects <br>', 1, 'text', 'Interface name', 'txtboxInterface', 'infoField', 'buttonNext', divCont2);
 					let buttonNext = document.getElementById('buttonNext') as HTMLButtonElement;
 					buttonNext.addEventListener('click', async (e: Event) =>{
 						divCont3.innerHTML = "";
@@ -62,7 +108,7 @@ export class StructuralPatterns{
 										radio2211.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											let divCont9 = document.createElement('div');
-											StructuralPatterns.functions.textfieldQuestion('<br>What is the name of the Decorator class? <br>', 1, 'text', 'Decorator name', 'txtDecorator', 'infoField', 'buttonNext5', divCont8 );
+											StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Decorator class <br>', 1, 'text', 'Decorator name', 'txtDecorator', 'infoField', 'buttonNext5', divCont8 );
 											let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
 											buttonNext5.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
@@ -72,17 +118,23 @@ export class StructuralPatterns{
 												buttonNext6.addEventListener('click', async (e: Event) =>{
 													divCont10.innerHTML = "";
 													let divCont11 = document.createElement('div');
-													StructuralPatterns.functions.textfieldQuestion('<br> Insert the names of the Concrete Decorators and their functions <br> ', parseInt((document.getElementById('numOfConcreteDecorators') as HTMLInputElement).value), 'text', 'Concrete Decorator name ', '', 'infoField', '', divCont10 ); 
-													StructuralPatterns.functions.textfieldQuestion('', parseInt((document.getElementById('numOfConcreteDecorators') as HTMLInputElement).value), 'text', 'Function of Concrete Decorator ', '', 'infoField', 'buttonNext7', divCont10 ); 
-													let buttonNext7 = document.getElementById('buttonNext7') as HTMLButtonElement;
-													buttonNext7.addEventListener('click', async (e: Event) =>{
+													StructuralPatterns.functions.textfieldQuestion('<br> Insert the names of the Concrete Decorators <br> ', parseInt((document.getElementById('numOfConcreteDecorators') as HTMLInputElement).value), 'text', 'Concrete Decorator name ', '', 'infoField', 'buttonNext7a', divCont10 ); 
+													let buttonNext7a = document.getElementById('buttonNext7a') as HTMLButtonElement;
+													buttonNext7a.addEventListener('click', async (e: Event) =>{
 														divCont11.innerHTML = "";
-														StructuralPatterns.functions.createLabel('<br> <b>Decorator Pattern</b>  ', '', divCont11);
-														StructuralPatterns.functions.createButton('Get Code', 'getcodeDecoratorPattern', divCont11);
-														let buttonCodeDP = document.getElementById('getcodeDecoratorPattern') as HTMLButtonElement;
-														buttonCodeDP.addEventListener('click', async (e: Event) =>{
-															//DECORATOR
+														let divCont12 = document.createElement('div');
+														StructuralPatterns.functions.textfieldQuestion('<br> Insert the name of the function of each Concrete Decorator <br>', parseInt((document.getElementById('numOfConcreteDecorators') as HTMLInputElement).value), 'text', 'Function of Concrete Decorator ', '', 'infoField', 'buttonNext7b', divCont11 );
+														let buttonNext7b = document.getElementById('buttonNext7b') as HTMLButtonElement;
+														buttonNext7b.addEventListener('click', async (e: Event) =>{	
+															divCont12.innerHTML = "";
+															StructuralPatterns.functions.createLabel('<br> <b>Decorator Pattern</b>  ', '', divCont12);
+															StructuralPatterns.functions.createButton('Get Code', 'getcodeDecoratorPattern', divCont12);
+															let buttonCodeDP = document.getElementById('getcodeDecoratorPattern') as HTMLButtonElement;
+															buttonCodeDP.addEventListener('click', async (e: Event) =>{
+																//DECORATOR
+															});
 														});
+														divCont11.appendChild(divCont12);
 													});	
 													divCont10.appendChild(divCont11);
 												});
@@ -95,7 +147,7 @@ export class StructuralPatterns{
 											divCont8.innerHTML = "";
 											let divCont9 = document.createElement('div');
 											StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Composite class <br>', 1, 'text', 'Composite name', '', 'infoField', 'buttonNext8', divCont8);
-											let buttonNext8 = document.getElementById('buttonNext6') as HTMLButtonElement;
+											let buttonNext8 = document.getElementById('buttonNext8') as HTMLButtonElement;
 											buttonNext8.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
 												StructuralPatterns.functions.createLabel('<br> <b>Composite Pattern</b>  ', '', divCont9);
@@ -138,12 +190,12 @@ export class StructuralPatterns{
 							radio222111.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
 								let divCont6 = document.createElement('div');
-								StructuralPatterns.functions.textfieldQuestion('<br>What is the name of the Flyweight Factory class that creates and manages Flyweight object? <br>', 1, 'text', 'Flyweight Factory name', 'txtboxFlyweightFactory', 'infoField', 'buttonNext9', divCont5);
+								StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Flyweight Factory class that creates and manages Flyweight object <br>', 1, 'text', 'Flyweight Factory name', 'txtboxFlyweightFactory', 'infoField', 'buttonNext9', divCont5);
 								let buttonNext9 = document.getElementById('buttonNext9') as HTMLButtonElement;
 								buttonNext9.addEventListener('click', async (e: Event) =>{
 									divCont6.innerHTML = "";
 									let divCont7 = document.createElement('div');	
-									StructuralPatterns.functions.textfieldQuestion('<br>What is the name of the Flyweight? <br>', 1, 'text', 'Flyweight name', 'txtboxFlyweight', 'infoField', 'buttonNext10', divCont6);
+									StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Flyweight <br>', 1, 'text', 'Flyweight name', 'txtboxFlyweight', 'infoField', 'buttonNext10', divCont6);
 									let buttonNext10 = document.getElementById('buttonNext10') as HTMLButtonElement;
 									buttonNext10.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
@@ -153,7 +205,7 @@ export class StructuralPatterns{
 										buttonNext11.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											let divCont9 = document.createElement('div');	
-											StructuralPatterns.functions.textfieldQuestion('<br>Insert the names of the Concrete Flyweights <br>', parseInt((document.getElementById('numOfConcreteFlyweights') as HTMLInputElement).value), 'text', 'Concrete Flyweight name', 'txtboxConcreteFlyweight', 'infoField', 'buttonNext12', divCont8);
+											StructuralPatterns.functions.textfieldQuestion('<br>Insert the names of the Concrete Flyweights <br>', parseInt((document.getElementById('numOfConcreteFlyweights') as HTMLInputElement).value), 'text', 'Concrete Flyweight name ', 'txtboxConcreteFlyweight', 'infoField', 'buttonNext12', divCont8);
 											let buttonNext12 = document.getElementById('buttonNext12') as HTMLButtonElement;
 											buttonNext12.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
@@ -163,7 +215,7 @@ export class StructuralPatterns{
 												buttonNext13.addEventListener('click', async (e: Event) =>{
 													divCont10.innerHTML = "";
 													let divCont11 = document.createElement('div');	
-													StructuralPatterns.functions.textfieldQuestion('<br>What is the name of the Client? <br>', 1, 'text', "Client name", 'txtboxClient', 'infoField', 'buttonNext15', divCont10);
+													StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Client <br>', 1, 'text', "Client name", 'txtboxClient', 'infoField', 'buttonNext15', divCont10);
 													let buttonNext15 = document.getElementById('buttonNext15') as HTMLButtonElement;
 													buttonNext15.addEventListener('click', async (e: Event) =>{
 														divCont11.innerHTML = "";
@@ -241,9 +293,33 @@ export class StructuralPatterns{
 						let radio22212 = document.getElementById('radio22212') as HTMLInputElement;
 						radio22212.addEventListener('click', async (e: Event) =>{
 							divCont4.innerHTML = "";
-							//let divCont5 = document.createElement('div');
-							//StructuralPatterns.functions.radioQuestion('<br>Communicate with one class or subsystem? <br>', 'One', 'Subsystem', 'radio22211', 'radio22212', divCont4);
-							
+							let divCont5 = document.createElement('div');
+							StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Facade class (giving access to the functioalilty of the subsystem) <br>', 1, 'text', 'Facade name', 'txtFacade', 'infoField', 'buttonNext20',  divCont4);
+							let buttonNext20 = document.getElementById('buttonNext20') as HTMLButtonElement;
+							buttonNext20.addEventListener('click', async (e: Event) =>{
+								divCont5.innerHTML = "";
+								let divCont6 = document.createElement('div');
+								StructuralPatterns.functions.textfieldQuestion('<br> How many methods does the Facade serve? <br>', 1, 'number', '1', 'numOfAdditionalFacades', '', 'buttonNext21', divCont5);
+								let buttonNext21 = document.getElementById('buttonNext21') as HTMLButtonElement;
+								buttonNext21.addEventListener('click', async (e: Event) =>{
+									divCont6.innerHTML = "";
+									let divCont7 = document.createElement('div');
+									StructuralPatterns.functions.textfieldQuestion('<br>Insert the names of the methods <br>', parseInt((document.getElementById('numOfAdditionalFacades') as HTMLInputElement).value), 'text', 'Facade Method name ', 'txtboxFacadeMethods', 'infoField', 'buttonNext22', divCont6);
+									let buttonNext22 = document.getElementById('buttonNext22') as HTMLButtonElement;
+									buttonNext22.addEventListener('click', async (e: Event) =>{
+										divCont7.innerHTML = "";
+										StructuralPatterns.functions.createLabel('<br> <b>Facade Pattern</b>  ', '', divCont7);
+										StructuralPatterns.functions.createButton('Get Code', 'getcodeFacadePattern', divCont7);
+										let buttonCodeFP = document.getElementById('getcodeFacadePattern') as HTMLButtonElement;
+										buttonCodeFP.addEventListener('click', async (e: Event) =>{
+											//FACADE
+										});
+									});
+									divCont6.appendChild(divCont7);
+								});	
+								divCont5.appendChild(divCont6);
+							});	
+							divCont4.appendChild(divCont5);
 						});
 						divCont3.appendChild(divCont4);
 					});
@@ -255,9 +331,40 @@ export class StructuralPatterns{
 						let radio22221 = document.getElementById('radio22221') as HTMLInputElement;
 						radio22221.addEventListener('click', async (e: Event) =>{
 							divCont4.innerHTML = "";
-							//let divCont5 = document.createElement('div');
-							//StructuralPatterns.functions.radioQuestion('<br>Do you need access control for the some service class? <br>', 'Yes', 'No', 'radio22221', 'radio22222', divCont2);
-						
+							let divCont5 = document.createElement('div');
+							StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Interface serving both the service and the access control class? <br>', 1, 'text', 'Interface name', 'txtboxInterface', 'infoField', 'buttonNext23', divCont4);
+							let buttonNext23 = document.getElementById('buttonNext23') as HTMLButtonElement;
+							buttonNext23.addEventListener('click', async (e: Event) =>{
+								divCont5.innerHTML = "";
+								let divCont6 = document.createElement('div');
+								StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the main method of the service class <br>', 1, 'text', 'Service Method name', '', 'infoField', 'buttonNext24', divCont5)
+								let buttonNext24 = document.getElementById('buttonNext24') as HTMLButtonElement;
+								buttonNext24.addEventListener('click', async (e: Event) =>{
+									divCont6.innerHTML = "";
+									let divCont7 = document.createElement('div');
+									StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the service class <br>', 1, 'text', 'Service name', '', 'infoField', 'buttonNext25', divCont6);
+									let buttonNext25 = document.getElementById('buttonNext25') as HTMLButtonElement;
+									buttonNext25.addEventListener('click', async (e: Event) =>{
+										divCont7.innerHTML = "";
+										let divCont8 = document.createElement('div');
+										StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Proxy class (access control) <br>', 1, 'text', 'Proxy name', '', 'infoField', 'buttonNext26', divCont7);
+										let buttonNext26 = document.getElementById('buttonNext26') as HTMLButtonElement;
+										buttonNext26.addEventListener('click', async (e: Event) =>{
+											divCont8.innerHTML = "";
+											StructuralPatterns.functions.createLabel('<br> <b>Proxy Pattern</b>  ', '', divCont7);
+											StructuralPatterns.functions.createButton('Get Code', 'getcodeProxyPattern', divCont7);
+											let buttonCodePP = document.getElementById('getcodeProxyPattern') as HTMLButtonElement;
+											buttonCodePP.addEventListener('click', async (e: Event) =>{
+												//PROXY
+											});
+										});
+										divCont7.appendChild(divCont8);
+									});
+									divCont6.appendChild(divCont7);
+								});
+								divCont5.appendChild(divCont6);
+							});
+							divCont4.appendChild(divCont5);
 						});
 						let radio22222 = document.getElementById('radio22222') as HTMLInputElement;
 						radio22222.addEventListener('click', async (e: Event) =>{
