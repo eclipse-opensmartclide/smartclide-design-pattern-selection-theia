@@ -1,5 +1,5 @@
 import { MessageService } from '@theia/core';
-import autocomplete,{ AutocompleteItem} from 'autocompleter';
+import autocomplete, { AutocompleteItem } from 'autocompleter';
 interface Textfield{
 	ident: number;
 	value: string;
@@ -41,26 +41,27 @@ export class Functions{
         let inputField = document.createElement('input');
         inputField.placeholder = innerMessage;
         inputField.id = id;
+		parent.appendChild(inputField);
         if (!id.includes('radio') && !id.includes('Num')){
             inputField.className = classname;
             if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
-				let suggestions = document.createElement("div");
-                suggestions.id = "suggestions"+id.substring(6,);
-                console.log("suggestions"+id.substring(6,));
-                suggestions.className = "suggestions";
-                parent.appendChild(suggestions);
-                inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
-                    this.showSuggestions(( e.target as Element).id);
-                });
+				//let suggestions = document.createElement("div");
+                //suggestions.id = "suggestions"+id.substring(6,);
+                //console.log("suggestions"+id.substring(6,));
+                //suggestions.className = "suggestions";
+                //parent.appendChild(suggestions);
+                //inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
+                this.showSuggestions(id, parent);
+               // });
             }
             inputField.autocomplete = "off";
         }
         inputField.name = name;
         inputField.type = type;
-        parent.appendChild(inputField);
+        
     }
     //autocomplete
-    showSuggestions(id: string){
+    showSuggestions(id: string, parent: HTMLElement){
  
 		var items = Functions.listOfClassNames.map(function (n) { return { label: n }});
 
@@ -85,24 +86,25 @@ export class Functions{
 				var regex = new RegExp('^'+ value);
 				if(item.label?.match(regex)){
 					itemElement.innerHTML = item.label;
-					(document.getElementById("suggestions"+id.substring(6,)) as HTMLDivElement).appendChild(itemElement);
+					//itemElement.className = "suggestions";
+					//parent.appendChild(itemElement);
 					return itemElement;
 				}
 			},
-			/*
 			customize: function(input, inputRect, container, maxHeight) {
 				if (maxHeight < 100) {
 					container.style.visibility = 'visible';
+					container.className = "suggestions";
 					container.style.top = "";
 					container.style.bottom = (window.innerHeight - inputRect.bottom + input.offsetHeight) + "px";
 					container.style.maxHeight = "140px";
 				}
-			},*/
-			showOnFocus: false,
+			},
+			showOnFocus: true,
 		})
-	}
+	
     //autocomplete
-    autocompleteMatch(input: string, table: string[]) {
+    /*autocompleteMatch(input: string, table: string[]) {
         if (input == '') {
             return [];
           }
@@ -112,8 +114,8 @@ export class Functions{
                 return term;
               }
           });
-    }
-    
+    }*/
+}
     createButton(innerMessage: string, id: string, parent: HTMLElement){
         let button = document.createElement('button');
         button.innerHTML = innerMessage;
@@ -285,5 +287,4 @@ export class Functions{
 
 
 }
-
 
