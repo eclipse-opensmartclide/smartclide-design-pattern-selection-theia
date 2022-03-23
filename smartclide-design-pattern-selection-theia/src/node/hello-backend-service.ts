@@ -178,31 +178,25 @@ export class HelloBackendServiceImpl implements HelloBackendService {
                 ppc[i].writeToFile(rootUri);
             }
         }else if(statePatternSelection == "Command"){
-            let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
+            let ppc : Array<patternParticipatingClass> = cg.Command(jsonObj);
             for (let i=0; i<ppc.length; i++) {
                 message = ppc[i].writeToFile(rootUri);
                 if(message!="") return new Promise<string>(resolve => resolve(message));
             }
         }else if(statePatternSelection == "Interpreter"){
-            let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
-            for (let i=0; i<ppc.length; i++) {
-                message = ppc[i].writeToFile(rootUri);
-                if(message!="") return new Promise<string>(resolve => resolve(message));
-            }
-        }else if(statePatternSelection == "Iterator"){
-            let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
+            let ppc : Array<patternParticipatingClass> = cg.Interpreter(jsonObj);
             for (let i=0; i<ppc.length; i++) {
                 message = ppc[i].writeToFile(rootUri);
                 if(message!="") return new Promise<string>(resolve => resolve(message));
             }
         }else if(statePatternSelection == "Mediator"){
-            let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
+            let ppc : Array<patternParticipatingClass> = cg.Mediator(jsonObj);
             for (let i=0; i<ppc.length; i++) {
                 message = ppc[i].writeToFile(rootUri);
                 if(message!="") return new Promise<string>(resolve => resolve(message));
             }
         }else if(statePatternSelection == "Memento"){
-            let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
+            let ppc : Array<patternParticipatingClass> = cg.Memento(jsonObj);
             for (let i=0; i<ppc.length; i++) {
                 message = ppc[i].writeToFile(rootUri);
                 if(message!="") return new Promise<string>(resolve => resolve(message));
