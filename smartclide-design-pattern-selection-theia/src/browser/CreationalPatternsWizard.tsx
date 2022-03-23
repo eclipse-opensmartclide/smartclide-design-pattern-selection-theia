@@ -323,9 +323,6 @@ export class CreationalPatterns{
 		});
 		divCont.appendChild(divCont2);
 
-}		
-				
-
-
+	}		
 
 }
