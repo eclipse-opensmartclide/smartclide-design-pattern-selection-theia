@@ -57,7 +57,7 @@
                 "name":"",
                 "extension":0
             },
-            "Product1":{
+            "ConcreteProduct1":{
                 "name":"",
                 "extension":1
             }
@@ -267,7 +267,7 @@
             }
         }
     },
-    "ChainofResponsibility":{
+    "ChainOfResponsibility":{
         "values":{
             "Handler":{
                 "name":"",

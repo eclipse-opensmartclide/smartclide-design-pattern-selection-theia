@@ -122,7 +122,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.id, "#widget-container{\r\n  max-width: 100%;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n\r\ninput{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n\r\n    width: 250px;\r\n    height: 20px;\r\n\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n  margin-right: 10px;\r\n  max-width: 100%;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  margin-top: 25px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n#btnFinalize{\r\n  margin-left: 10px;\r\n}\r\n#image{\r\n  max-width: 100%;\r\n  height: auto;\r\n}\r\n#elements{\r\n  max-width: 100%;\r\n  visibility: hidden;\r\n}\r\n.AbstractFactory{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AbstractFactoryIcon.jpg */ "../extension/src/browser/style/img/AbstractFactoryIcon.jpg")) + ");\r\n}\r\n.Adapter{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Bridge{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BridgeIcon.jpg */ "../extension/src/browser/style/img/BridgeIcon.jpg")) + ");\r\n}\r\n.Builder{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BuilderIcon.jpg */ "../extension/src/browser/style/img/BuilderIcon.jpg")) + ");\r\n}\r\n.Composite{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/CompositeIcon.jpg */ "../extension/src/browser/style/img/CompositeIcon.jpg")) + ");\r\n}\r\n.Decorator{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/DecoratorIcon.jpg */ "../extension/src/browser/style/img/DecoratorIcon.jpg")) + ");\r\n}\r\n.FactoryMethod{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Prototype{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/PrototypeIcon.jpg */ "../extension/src/browser/style/img/PrototypeIcon.jpg")) + ");\r\n}\r\n.Singleton{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/SingletonIcon.jpg */ "../extension/src/browser/style/img/SingletonIcon.jpg")) + ");\r\n}\r\n\r\n\r\n", ""]);
+exports.push([module.id, "#widget-container{\r\n  max-width: 100%;\r\n}\r\n#widget-container h2 {\r\n    color: var(--theia-ui-font-color1);\r\n    font-size: 12px;\r\n    font-weight: 400;\r\n    padding: 10px;\r\n    text-transform: uppercase;\r\n}\r\n\r\n#issues input{\r\n\tmargin-left: 10px;\r\n\tbackground: transparent;\r\n    border: none;\r\n    color: white;\r\n\r\n    max-width: 100%;\r\n    height: 20px;\r\n\r\n}\r\n\r\n#TD{\r\n\tdisplay: none;\r\n\tmargin-left: 10px;\r\n\tmargin-top: 20px;\r\n}\r\n#show_pattern_table td {\r\n\twidth: 200px;\r\n}\r\n#issues{\r\n\tmargin-left: 10px;\r\n  margin-right: 10px;\r\n  max-width: 100%;\r\n}\r\n\r\n.divIssue{\r\n\tborder-style: solid;\r\n    border-width: thin;\r\n    margin: 5px;\r\n\tpadding: 2px;\r\n\tborder-color: #6a6a6a;\r\n}\r\n\r\n.divIssue i{\r\n    font-size: 12px;\r\n}\r\n\r\n.divIssue span{\r\n\tfloat: right;\r\n}\r\n\r\n.divIssue p{\r\n\tdisplay: block;\r\n    font-size: 13px;\r\n\tmargin: auto;\r\n\tmargin-top: 3px;\r\n}\r\n.btn-get-classes{\r\n\tdisplay: hidden;\r\n}\r\n\r\n.suggestions {\r\n  border: 1px #ccc;\r\n  margin-left: 10px;\r\n  margin-top: 25px;\r\n  width:190px;\r\n  position: absolute;\r\n  background-color: #3c3c3c;\r\n  padding-left: 2px;\r\n}\r\n.suggestions ul {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  margin: 0;\r\n}\r\n.suggestions ul li {\r\n  padding: 3px 0;\r\n}\r\n.suggestions ul li:hover {\r\n  background: #eee;\r\n}\r\n\r\n#image{\r\n  max-width: 100%;\r\n  height: auto;\r\n}\r\n#elements{\r\n  max-width: 100%;\r\n}\r\n#result{\r\n  visibility: hidden;\r\n}\r\n.AbstractFactory{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AbstractFactoryIcon.jpg */ "../extension/src/browser/style/img/AbstractFactoryIcon.jpg")) + ");\r\n}\r\n.Adapter{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Bridge{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BridgeIcon.jpg */ "../extension/src/browser/style/img/BridgeIcon.jpg")) + ");\r\n}\r\n.Builder{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/BuilderIcon.jpg */ "../extension/src/browser/style/img/BuilderIcon.jpg")) + ");\r\n}\r\n.Composite{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/CompositeIcon.jpg */ "../extension/src/browser/style/img/CompositeIcon.jpg")) + ");\r\n}\r\n.Decorator{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/DecoratorIcon.jpg */ "../extension/src/browser/style/img/DecoratorIcon.jpg")) + ");\r\n}\r\n.FactoryMethod{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/AdapterIcon.jpg */ "../extension/src/browser/style/img/AdapterIcon.jpg")) + ");\r\n}\r\n.Prototype{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/PrototypeIcon.jpg */ "../extension/src/browser/style/img/PrototypeIcon.jpg")) + ");\r\n}\r\n.Singleton{\r\n  content : url(" + escape(__webpack_require__(/*! ./img/SingletonIcon.jpg */ "../extension/src/browser/style/img/SingletonIcon.jpg")) + ");\r\n}\r\n\r\n.infoField{\r\n  margin-right: 20px;\r\n\tbackground: transparent;\r\n  border: none;\r\n  color: white;\r\n  height: 20px;\r\n  display:flex;\r\n  flex-direction: column;\r\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -390,33 +390,51 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
                     React.createElement("i", { className: "fa fa-refresh" })),
                 React.createElement("br", null),
                 React.createElement("br", null),
+                React.createElement("button", { id: "btn-wizard", type: "button", title: 'Wizard', onClick: _a => this.runWizard() }, "Wizard"),
+                React.createElement("br", null),
+                React.createElement("br", null),
                 React.createElement("button", { id: "btn-get-code", type: "button", title: 'Assign roles to classes and methods', onClick: _a => this.runprocess() }, "Assign roles to classes and methods"),
                 React.createElement("br", null),
                 React.createElement("div", { id: "show_pattern" }),
                 React.createElement("br", null),
                 React.createElement("div", { id: "result" },
+                    React.createElement("fieldset", null,
+                        React.createElement("details", null,
+                            React.createElement("summary", { id: 'description' }),
+                            React.createElement("p", { id: 'example' }),
+                            React.createElement("img", { id: "image", alt: "Class Diagram " }))),
                     React.createElement("table", { id: "show_pattern_table" }),
                     React.createElement("div", { id: "elements" },
-                        React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Code "),
-                        React.createElement("p", { id: 'description' }),
-                        React.createElement("p", { id: 'example' }),
-                        React.createElement("img", { id: "image", alt: "Class Diagram " })))));
+                        React.createElement("button", { id: "btnFinalize", type: "button", title: 'Get the code according to the pattern', onClick: _a => this.buttonClick2(document.getElementById('show_pattern_table').rows.length) }, " Get Code ")))),
+            React.createElement("div", { id: "divWiz" }));
     }
     async runprocess() {
         if (extensionWidget_1.state.statePatternSelection != "Choose_pattern" && extensionWidget_1.state.statePatternSelection != "") {
             document.getElementById("btn-get-code").style.visibility = 'hidden';
             var getUrl = window.location.href;
             extensionWidget_1.res = await this.helloBackendService.sayHelloTo(getUrl);
+            document.getElementById("result").style.visibility = 'visible';
+            document.getElementById('image').className = extensionWidget_1.state.statePatternSelection;
+            document.getElementById('description').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].description;
+            document.getElementById('example').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].example;
             //show the JSON values for the chosen key-pattern
             let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values; //data[extensionWidget.state.statePatternSelection];
             var table = document.getElementById('show_pattern_table');
             Object.keys(values).forEach(async (key) => {
                 this.insertCells(table, key);
+                let values = extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values;
+                if (values[key].extension == 1) {
+                    let cell3 = this.insertCell(2);
+                    let t3 = document.createElement("button");
+                    t3.innerHTML = "+";
+                    t3.id = "btn" + key;
+                    cell3.appendChild(t3);
+                    t3.addEventListener('click', (event) => {
+                        this.extensionButtonClick(table, event.target.id, extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values);
+                    });
+                }
             });
-            document.getElementById("elements").style.visibility = 'visible';
-            document.getElementById('image').className = extensionWidget_1.state.statePatternSelection;
-            document.getElementById('description').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].description;
-            document.getElementById('example').innerHTML = extensionWidget_1.explanation[extensionWidget_1.state.statePatternSelection].example;
+            //await this.helloBackendService.main();
         }
         else {
             this.messageService.info('You need to choose a software pattern!');
@@ -740,6 +758,194 @@ let extensionWidget = extensionWidget_1 = class extensionWidget extends react_wi
         table.innerHTML = "";
         document.getElementById("btn-get-code").style.visibility = 'visible';
         document.getElementById("elements").style.visibility = 'hidden';
+        window.location.reload();
+    }
+    runWizard() {
+        document.getElementById("issues").style.visibility = 'hidden';
+        document.getElementById("issues").style.height = '0px';
+        let divWiz = document.getElementById('divWiz');
+        divWiz.style.marginLeft = '10px';
+        let divCont = document.createElement('div');
+        createLabel('Choose the type of the pattern: <br>', 'label0', divWiz);
+        createLabel('Creational', 'label1', divWiz);
+        createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);
+        let radio1 = document.getElementById('radio1');
+        radio1.onclick = function () {
+            divCont.innerHTML = "";
+            let divCont2 = document.createElement('div');
+            createLabel('<br> Do you want to create a completely new object or to create one by reusing an existing one?<br>', 'label4', divCont);
+            createLabel('Create new object', 'label11', divCont);
+            createInput('', 'radio11', '', 'new_existed', 'radio', divCont);
+            let radio11 = document.getElementById('radio11');
+            radio11.onclick = function () {
+                divCont2.innerHTML = "";
+                let divCont3 = document.createElement('div');
+                createLabel('<br> Give the name of the Product that you want to create (Let X the name of the product)<br>', 'labelQuestion3', divCont2);
+                createInput('Product name', 'product_name', 'infoField', '', 'text', divCont2);
+                createButton('Next', 'buttonNext1', divCont2);
+                let buttonNext1 = document.getElementById('buttonNext1');
+                buttonNext1.onclick = function () {
+                    divCont3.innerHTML = "";
+                    let divCont4 = document.createElement('div');
+                    createLabel('<br> Does the Product has sub-categories (Concrete Products)? <br>', 'labelQuestion4', divCont3);
+                    createLabel('Yes', 'label31', divCont3);
+                    createInput('', 'radio31', '', 'yes_no', 'radio', divCont3);
+                    let radio31 = document.getElementById('radio31');
+                    radio31.onclick = function () {
+                        divCont4.innerHTML = "";
+                        let divCont5 = document.createElement('div');
+                        createLabel('<br> How many sub-categories exist? <br>', 'labelQuestion5', divCont4);
+                        createInput('0', 'subcategoriesNum', '', '', 'number', divCont4);
+                        createButton('Next', 'buttonNext2', divCont4);
+                        let buttonNext2 = document.getElementById('buttonNext2');
+                        buttonNext2.onclick = function () {
+                            divCont5.innerHTML = "";
+                            let divCont6 = document.createElement('div');
+                            createLabel('<br> Please give the names of the Concrete Products <br>', 'labelQuestion6', divCont5);
+                            let num = parseInt(document.getElementById('subcategoriesNum').value);
+                            for (var i = 1; i <= num; i++) {
+                                createInput('Concrete Product name ' + i, 'txtConcreteProductsName' + i, 'infoField', '', 'text', divCont5);
+                            }
+                            createButton('Next', 'buttonNext3', divCont5);
+                            let buttonNext3 = document.getElementById('buttonNext3');
+                            buttonNext3.onclick = function () {
+                                divCont6.innerHTML = "";
+                                let divCont7 = document.createElement('div');
+                                createLabel('<br> Can the Products be classified in a Family? <br>', 'labelQuestion7', divCont6);
+                                createLabel('Yes', 'label61', divCont6);
+                                createInput('', 'radio61', '', 'yes_no', 'radio', divCont6);
+                                let radio61 = document.getElementById('radio61');
+                                radio61.onclick = function () {
+                                    divCont7.innerHTML = "";
+                                    let divCont8 = document.createElement('div');
+                                    createLabel('<br> How many Families of Products exist? <br>', 'labelQuestion8', divCont7);
+                                    createInput('0', 'familiesNum', '', '', 'number', divCont7);
+                                    createButton('Next', 'buttonNext4', divCont7);
+                                    let buttonNext4 = document.getElementById('buttonNext4');
+                                    buttonNext4.onclick = function () {
+                                        divCont8.innerHTML = "";
+                                        let divCont9 = document.createElement('div');
+                                        createLabel('<br> Please give the names of the Components <br>', 'labelQuestion9', divCont8);
+                                        let num = parseInt(document.getElementById('familiesNum').value);
+                                        for (var i = 1; i <= num; i++) {
+                                            createInput('Component name ' + i, 'txtComponentName', 'infoField', '', 'text', divCont8);
+                                        }
+                                        createButton('Next', 'buttonNext5', divCont8);
+                                        let buttonNext5 = document.getElementById('buttonNext5');
+                                        buttonNext5.onclick = function () {
+                                            createLabel('<br> Abstract Factory Pattern ', 'labelQuestion10', divCont9);
+                                            createButton('Get Code', 'getcodeAbstractFactoryPattern', divCont9);
+                                            let buttonCodeAFP = document.getElementById('getcodeAbstractFactoryPattern');
+                                            buttonCodeAFP.onclick = function () {
+                                                //code generation
+                                            };
+                                        };
+                                        divCont8.appendChild(divCont9);
+                                    };
+                                    divCont7.appendChild(divCont8);
+                                };
+                                createLabel('No', 'label62', divCont6);
+                                createInput('', 'radio62', '', 'yes_no', 'radio', divCont6);
+                                let radio62 = document.getElementById('radio62');
+                                radio62.onclick = function () {
+                                    divCont7.innerHTML = "";
+                                    let divCont8 = document.createElement('div');
+                                    createLabel('<br> Can Product be created as series of steps which is different in every subcategory? <br>', 'labelQuestion11', divCont7);
+                                    createLabel('Yes', 'label71', divCont7);
+                                    createInput('', 'radio71', '', 'yes_no', 'radio', divCont7);
+                                    let radio71 = document.getElementById('radio71');
+                                    radio71.onclick = function () {
+                                        divCont8.innerHTML = "";
+                                        let divCont9 = document.createElement('div');
+                                        createLabel('<br> How many Steps are involved ?  <br>', 'labelQuestion12', divCont8);
+                                        createInput('0', 'stepsNum', '', '', 'number', divCont8);
+                                        createButton('Next', 'buttonNext6', divCont8);
+                                        let buttonNext6 = document.getElementById('buttonNext6');
+                                        buttonNext6.onclick = function () {
+                                            divCont9.innerHTML = "";
+                                            let divCont10 = document.createElement('div');
+                                            createLabel('<br> Please give the name of the steps  <br>', 'labelQuestion13', divCont9);
+                                            let num = parseInt(document.getElementById('stepsNum').value);
+                                            for (var i = 1; i <= num; i++) {
+                                                createInput('Step name ' + i, 'txtStepName' + i, 'infoField', 'txtStepsName', 'text', divCont9);
+                                            }
+                                            createButton('Next', 'buttonNext7', divCont9);
+                                            let buttonNext7 = document.getElementById('buttonNext7');
+                                            buttonNext7.onclick = function () {
+                                                createLabel('<br> Builder Pattern ', 'labelPattern1', divCont10);
+                                                createButton('Get Code', 'getcodeBuildPattern', divCont10);
+                                                let buttonCodeBP = document.getElementById('getcodeBuildPattern');
+                                                buttonCodeBP.onclick = function () {
+                                                    //code generation
+                                                };
+                                            };
+                                            divCont9.appendChild(divCont10);
+                                        };
+                                        divCont8.appendChild(divCont9);
+                                    };
+                                    createLabel('No', 'label72', divCont7);
+                                    createInput('', 'radio72', '', 'yes_no', 'radio', divCont7);
+                                    let radio72 = document.getElementById('radio72');
+                                    radio72.onclick = function () {
+                                        divCont8.innerHTML = "";
+                                        let divCont9 = document.createElement('div');
+                                        createLabel('<br> What is the name of the Creator (e.g., Oven) of Product? <br>', 'labelQuestion14', divCont8);
+                                        createInput('Creator name', 'txtCreatorName', 'infoField', 'txtCreatorName', 'text', divCont8);
+                                        createButton('Next', 'buttonNext8', divCont8);
+                                        let buttonNext8 = document.getElementById('buttonNext8');
+                                        buttonNext8.onclick = function () {
+                                            createLabel('<br> Factory Method Pattern', 'labelQuestion15', divCont9);
+                                            createButton('Get Code', 'getcodeFactoryMethodPattern', divCont9);
+                                            let buttonCodeFMP = document.getElementById('getcodeFactoryMethodPattern');
+                                            buttonCodeFMP.onclick = function () {
+                                                //code generation
+                                            };
+                                        };
+                                        divCont8.appendChild(divCont9);
+                                    };
+                                    divCont7.appendChild(divCont8);
+                                };
+                                divCont6.appendChild(divCont7);
+                            };
+                            divCont5.appendChild(divCont6);
+                        };
+                        divCont4.appendChild(divCont5);
+                    };
+                    createLabel('No', 'label32', divCont3);
+                    createInput('', 'radio32', '', 'yes_no', 'radio', divCont3);
+                    let radio32 = document.getElementById('radio32');
+                    radio32.onclick = function () {
+                        divCont4.innerHTML = "";
+                        createLabel('<br> There is no pattern <br>', 'labelQuestion16', divCont4);
+                    };
+                    divCont3.appendChild(divCont4);
+                };
+                divCont2.appendChild(divCont3);
+            };
+            createLabel('Reuse an existing one', 'label12', divCont);
+            createInput('', 'radio12', '', 'new_existed', 'radio', divCont);
+            let radio12 = document.getElementById('radio12');
+            radio12.onclick = function () {
+                divCont2.innerHTML = "";
+                createLabel('<br> You chose existed <br>', 'labelQuestion17', divCont2);
+            };
+            divCont.appendChild(divCont2);
+        };
+        createLabel('Structural', 'label2', divWiz);
+        createInput('', 'radio2', '', 'patternTypes', 'radio', divWiz);
+        let radio2 = document.getElementById('radio2');
+        radio2.onclick = function () {
+            divCont.innerHTML = "";
+            createLabel('<br> Do you want to ... <br>', 'labelQuestion18', divCont);
+        };
+        createLabel('Behavioral', 'label3', divWiz);
+        createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
+        let radio3 = document.getElementById('radio3');
+        radio3.onclick = function () {
+            divCont.innerHTML = "";
+            createLabel('<br> Do you want to ... <br>', 'labelQuestion19', divCont);
+        };
+        divWiz.appendChild(divCont);
     }
     insertInputsAbstractFactory() {
         let values = JSON.parse(JSON.stringify(extensionWidget_1.data[extensionWidget_1.state.statePatternSelection].values));
@@ -838,6 +1044,29 @@ extensionWidget = extensionWidget_1 = __decorate([
     inversify_1.injectable()
 ], extensionWidget);
 exports.extensionWidget = extensionWidget;
+function createLabel(innerMessage, id, parent) {
+    let labelQuestion = document.createElement('label');
+    labelQuestion.innerHTML = innerMessage;
+    labelQuestion.id = id;
+    parent.appendChild(labelQuestion);
+}
+function createInput(innerMessage, id, classname, name, type, parent) {
+    let inputField = document.createElement('input');
+    inputField.innerHTML = innerMessage;
+    inputField.id = id;
+    if (!id.includes('radio') && !id.includes('Num')) {
+        inputField.className = classname;
+    }
+    inputField.name = name;
+    inputField.type = type;
+    parent.appendChild(inputField);
+}
+function createButton(innerMessage, id, parent) {
+    let button = document.createElement('button');
+    button.innerHTML = innerMessage;
+    button.id = id;
+    parent.appendChild(button);
+}
 
 
 /***/ }),

@@ -9,13 +9,12 @@
     text-transform: uppercase;
 }
 
-input{
-	margin-left: 10px;
+#issues input{
 	background: transparent;
     border: none;
     color: white;
 
-    width: 250px;
+    max-width: 100%;
     height: 20px;
 
 }
@@ -62,9 +61,8 @@ input{
 
 .suggestions {
   border: 1px #ccc;
-  margin-left: 10px;
-  margin-top: 25px;
-  width:190px;
+  margin-top: 22px;
+  width:172px;
   position: absolute;
   background-color: #3c3c3c;
   padding-left: 2px;
@@ -80,15 +78,15 @@ input{
 .suggestions ul li:hover {
   background: #eee;
 }
-#btnFinalize{
-  margin-left: 10px;
-}
+
 #image{
   max-width: 100%;
   height: auto;
 }
 #elements{
   max-width: 100%;
+}
+#result{
   visibility: hidden;
 }
 .AbstractFactory{
@@ -110,7 +108,7 @@ input{
   content : url(./img/DecoratorIcon.jpg);
 }
 .FactoryMethod{
-  content : url(./img/AdapterIcon.jpg);
+  content : url(./img/FactoryMethodIcon.jpg);
 }
 .Prototype{
   content : url(./img/PrototypeIcon.jpg);
@@ -118,5 +116,29 @@ input{
 .Singleton{
   content : url(./img/SingletonIcon.jpg);
 }
+.Visitor{
+    content : url(./img/VisitorIcon.jpg);
+}
+#btn-wizzard{
+  margin-left: 50px;
+  
+}
+.infoField{
+  margin-right: 20px;
+	background: transparent;
+  border: none;
+  color: white;
+  height: 20px;
+  display:flex;
+  flex-direction: column;
+}
+#divWiz input{
+  margin-right: 20px;
+}
+
+#btn-refresh{
+	visibility: hidden;
+}
+
 
 

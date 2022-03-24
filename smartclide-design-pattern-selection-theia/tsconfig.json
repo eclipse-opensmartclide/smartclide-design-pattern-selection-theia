@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "allowJs": false,
         "skipLibCheck": true,
         "declaration": true,
         "declarationMap": true,
