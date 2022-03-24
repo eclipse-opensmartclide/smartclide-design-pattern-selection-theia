@@ -169,8 +169,8 @@ export class extensionWidget extends ReactWidget {
 			let cell2 = row.insertCell(1);
 			cell2.id = "cell2";
 			
-			extensionWidget.functions.createLabel(key,"label"+ table.rows.length,table);
-			extensionWidget.functions.createInput(key, "txtbox"+ table.rows.length,"", "txtbox"+ table.rows.length,"text",table)
+			extensionWidget.functions.createLabel(key,"label"+ table.rows.length,cell1);
+			extensionWidget.functions.createInput(key, "txtbox"+ table.rows.length,"", "txtbox"+ table.rows.length,"text",cell2)
 
 			cell1.appendChild((document.getElementById('label'+ table.rows.length) as HTMLInputElement));
 			cell2.appendChild((document.getElementById('txtbox'+ table.rows.length) as HTMLInputElement));

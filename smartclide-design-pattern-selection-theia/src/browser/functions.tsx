@@ -41,6 +41,9 @@ export class Functions{
         let inputField = document.createElement('input');
         inputField.placeholder = innerMessage;
         inputField.id = id;
+		inputField.name = name;
+        inputField.type = type;
+		parent.appendChild(inputField);
         if (!id.includes('radio') && !id.includes('Num')){
             inputField.className = classname;
             if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
@@ -50,17 +53,14 @@ export class Functions{
                 suggestions.className = "suggestions";
                 parent.appendChild(suggestions);
                 inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
-                    this.showSuggestions(inputField.value, Functions.listOfClassNames, ( e.target as Element).id);
+                    this.showSuggestions(inputField.value, Functions.listOfClassNames, ( e.target as Element).id, suggestions);
                 });
             }
             inputField.autocomplete = "off";
-        }
-        inputField.name = name;
-        inputField.type = type;
-        parent.appendChild(inputField);
+        }  
     }
     //autocomplete
-    showSuggestions(value: string, table: string[], id: string){
+    showSuggestions(value: string, table: string[], id: string, parent : HTMLDivElement){
 
 		var items = Functions.listOfClassNames.map(function (n) { return { label: n }});
 
@@ -88,12 +88,17 @@ export class Functions{
 				return itemElement;
 			},
 			customize: function(input, inputRect, container, maxHeight) {
-				if (maxHeight < 100) {
-					container.style.visibility = 'visible';
-					container.style.top = "";
-					container.style.bottom = (window.innerHeight - inputRect.bottom + input.offsetHeight) + "px";
-					container.style.maxHeight = "140px";
-				}
+				
+				container.style.visibility = 'visible';
+				container.style.top = "0px";
+				container.style.left = "0px";
+				container.style.position = 'relative';
+
+				//container.style.bottom = (window.innerHeight - inputRect.bottom + input.offsetHeight) + "px";
+				container.style.maxHeight = "140px";
+					
+				
+				parent.appendChild(container);
 			},
 			showOnFocus: true,
 		})
