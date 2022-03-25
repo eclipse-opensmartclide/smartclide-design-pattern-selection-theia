@@ -33,6 +33,7 @@
         "outDir": "lib"
     },
     "include": [
-        "src"
+        "src",
+        "./src/**/*.json"
     ]
 }
