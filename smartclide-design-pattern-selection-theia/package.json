@@ -22,6 +22,7 @@
     "build": "tsc -b",
     "watch": "tsc -w"
   },
+  "license": "EPL-2.0",
   "theiaExtensions": [
     {
       "frontend": "lib/browser/extension-frontend-module",
