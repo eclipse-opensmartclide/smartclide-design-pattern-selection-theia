@@ -1,5 +1,5 @@
 import { MessageService } from '@theia/core';
-import autocomplete, { AutocompleteItem } from 'autocompleter';
+import autocomplete,{ AutocompleteItem} from 'autocompleter';
 interface Textfield{
 	ident: number;
 	value: string;
@@ -39,30 +39,31 @@ export class Functions{
     
     createInput(innerMessage: string, id: string, classname: string, name: string, type: string, parent: HTMLElement){
         let inputField = document.createElement('input');
-        inputField.placeholder = innerMessage;
+		inputField.placeholder = innerMessage;
         inputField.id = id;
-		parent.appendChild(inputField);
+		inputField.name = name;
+        inputField.type = type;
+		parent.append(inputField);
+        
+		
         if (!id.includes('radio') && !id.includes('Num')){
             inputField.className = classname;
             if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
 				//let suggestions = document.createElement("div");
                 //suggestions.id = "suggestions"+id.substring(6,);
-                //console.log("suggestions"+id.substring(6,));
                 //suggestions.className = "suggestions";
-                //parent.appendChild(suggestions);
+				//inputField.append(suggestions);
+                //cd parent.append(suggestions);
                 //inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
-                this.showSuggestions(id, parent);
-               // });
+                this.showSuggestions(inputField.value, Functions.listOfClassNames, inputField.id, parent as HTMLDivElement);
+               //});
             }
             inputField.autocomplete = "off";
-        }
-        inputField.name = name;
-        inputField.type = type;
-        
+        }  
     }
     //autocomplete
-    showSuggestions(id: string, parent: HTMLElement){
- 
+    showSuggestions(value: string, table: string[], id: string, parent : HTMLDivElement){
+
 		var items = Functions.listOfClassNames.map(function (n) { return { label: n }});
 
 		autocomplete({
@@ -76,35 +77,35 @@ export class Functions{
 				let reg = new RegExp('^' + match);
 				callback(items.filter(function(n){
 					if (n.label.match(reg)) {
-					  return n.label;
+					  return n;
 					}
 				}));
 			},
 			render: function(item, value) {
 				var itemElement = document.createElement("div");
-				itemElement.className = "autocomplete";
+				itemElement.className = "suggestions";
 				var regex = new RegExp('^'+ value);
-				if(item.label?.match(regex)){
-					itemElement.innerHTML = item.label;
-					//itemElement.className = "suggestions";
-					//parent.appendChild(itemElement);
-					return itemElement;
-				}
+				var inner = item.label!.replace(regex, function(match) { return  match  });
+				itemElement.innerHTML = inner;
+				return itemElement;
 			},
 			customize: function(input, inputRect, container, maxHeight) {
-				if (maxHeight < 100) {
-					container.style.visibility = 'visible';
-					container.className = "suggestions";
-					container.style.top = "";
-					container.style.bottom = (window.innerHeight - inputRect.bottom + input.offsetHeight) + "px";
-					container.style.maxHeight = "140px";
-				}
+				
+				container.style.visibility = 'visible';
+				container.style.top = "0px";
+				container.style.left = "0px";
+				container.style.position = 'relative';
+				container.style.maxHeight = "140px";
+					
+				
+				parent.appendChild(container);
 			},
 			showOnFocus: true,
+			disableAutoSelect: true,
 		})
-	
+	}
     //autocomplete
-    /*autocompleteMatch(input: string, table: string[]) {
+    autocompleteMatch(input: string, table: string[]) {
         if (input == '') {
             return [];
           }
@@ -114,8 +115,8 @@ export class Functions{
                 return term;
               }
           });
-    }*/
-}
+    }
+    
     createButton(innerMessage: string, id: string, parent: HTMLElement){
         let button = document.createElement('button');
         button.innerHTML = innerMessage;
@@ -287,4 +288,3 @@ export class Functions{
 
 
 }
-

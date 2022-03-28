@@ -19,9 +19,10 @@
   "scripts": {
     "prepare": "yarn run clean && yarn run build",
     "clean": "rimraf lib",
-    "build": "tsc",
+    "build": "tsc -b",
     "watch": "tsc -w"
   },
+  "license": "EPL-2.0",
   "theiaExtensions": [
     {
       "frontend": "lib/browser/extension-frontend-module",
