@@ -367,6 +367,7 @@ export class extensionWidget extends ReactWidget {
 
 		var getUrl = window.location.href;
 		extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
+		extensionWidget.functions.setClassNames(extensionWidget.res);
 		
 		let divWiz = document.getElementById('divWiz') as HTMLDivElement;
 		divWiz.style.marginLeft = '10px';

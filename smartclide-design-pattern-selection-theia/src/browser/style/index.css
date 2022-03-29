@@ -134,13 +134,10 @@
   overflow: scroll;
   box-sizing: border-box;
   border: 1px solid rgba(50, 50, 50, 0.6);
-  font-size: 12px;
+  font-size: 13px;
   position: absolute; 
   height: auto; 
   width: auto;
-  left: 162.906px; 
-  max-height: 140px; 
-  visibility: visible;
 }
 
 .autocomplete * {
@@ -160,6 +157,6 @@
   background: #eee;
   cursor: pointer;
 }
-
-
-
+body::-webkit-scrollbar {
+  width: thin;               /* width of the entire scrollbar */
+}

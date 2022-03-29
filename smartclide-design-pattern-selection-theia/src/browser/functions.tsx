@@ -75,11 +75,14 @@ export class Functions{
 			fetch: function (text, callback) {
 				var match = text;
 				let reg = new RegExp('^' + match);
-				callback(items.filter(function(n){
-					if (n.label.match(reg)) {
-					  return n;
-					}
-				}));
+				if(match!=""){
+					callback(items.filter(function(n){
+						if (n.label.match(reg)) {
+						  return n;
+						}
+					}));
+				}
+				
 			},
 			render: function(item, value) {
 				var itemElement = document.createElement("div");
@@ -90,14 +93,11 @@ export class Functions{
 				return itemElement;
 			},
 			customize: function(input, inputRect, container, maxHeight) {
-				
 				container.style.visibility = 'visible';
-				container.style.top = "0px";
-				container.style.left = "0px";
-				container.style.position = 'relative';
+				container.style.left = "auto";
+				container.style.top = "auto";
+				container.style.position = 'absolute';
 				container.style.maxHeight = "140px";
-					
-				
 				parent.appendChild(container);
 			},
 			showOnFocus: true,
