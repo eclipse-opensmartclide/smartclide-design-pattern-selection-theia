@@ -20,11 +20,13 @@ export class Functions{
     
     textfieldQuestion(questionLabel: string, num: number, inputType: string, inputMessage: string, inputId: string, inputClassname: string, buttonId: string, parent: HTMLElement){
         this.createLabel(questionLabel, '', parent);
+		let divInput = document.createElement('div');
+			parent.append(divInput);
         if (num==1){
-            this.createInput(inputMessage, inputId, inputClassname, inputId, inputType, parent);
+            this.createInput(inputMessage, inputId, inputClassname, inputId, inputType, divInput);
         }else{
             for (let i=1; i<=num; i++){
-                this.createInput(inputMessage+i, inputId+i, inputClassname, inputId+i, inputType, parent);
+                this.createInput(inputMessage+i, inputId+i, inputClassname, inputId+i, inputType, divInput);
             }
         }
         this.createButton('Next', buttonId, parent);
@@ -98,6 +100,7 @@ export class Functions{
 				container.style.top = "auto";
 				container.style.position = 'absolute';
 				container.style.maxHeight = "140px";
+				container.style.background = '#3c3c3c';
 				parent.appendChild(container);
 			},
 			showOnFocus: true,
