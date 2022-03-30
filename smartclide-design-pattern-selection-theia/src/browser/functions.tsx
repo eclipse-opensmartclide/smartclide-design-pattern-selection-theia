@@ -100,6 +100,7 @@ export class Functions{
 				container.style.top = "auto";
 				container.style.position = 'absolute';
 				container.style.maxHeight = "140px";
+				container.style.width = "166.400px";
 				container.style.background = '#3c3c3c';
 				parent.appendChild(container);
 			},
@@ -123,7 +124,13 @@ export class Functions{
     createButton(innerMessage: string, id: string, parent: HTMLElement){
         let button = document.createElement('button');
         button.innerHTML = innerMessage;
-        button.id = id;
+		
+		if(id.includes('btn-')){
+			button.className = 'theia-button secondary btn-plus';
+		}else{
+			button.className = 'theia-button secondary';
+		}
+		button.id = id;
         parent.appendChild(button);
     }
 
