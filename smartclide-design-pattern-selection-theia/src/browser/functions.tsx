@@ -39,22 +39,24 @@ export class Functions{
     
     createInput(innerMessage: string, id: string, classname: string, name: string, type: string, parent: HTMLElement){
         let inputField = document.createElement('input');
-        inputField.placeholder = innerMessage;
+		inputField.placeholder = innerMessage;
         inputField.id = id;
 		inputField.name = name;
         inputField.type = type;
-		parent.appendChild(inputField);
+		parent.append(inputField);
+        
+		
         if (!id.includes('radio') && !id.includes('Num')){
             inputField.className = classname;
             if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
-				let suggestions = document.createElement("div");
-                suggestions.id = "suggestions"+id.substring(6,);
-                console.log("suggestions"+id.substring(6,));
-                suggestions.className = "suggestions";
-                parent.appendChild(suggestions);
-                inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
-                    this.showSuggestions(inputField.value, Functions.listOfClassNames, ( e.target as Element).id, suggestions);
-                });
+				//let suggestions = document.createElement("div");
+                //suggestions.id = "suggestions"+id.substring(6,);
+                //suggestions.className = "suggestions";
+				//inputField.append(suggestions);
+                //cd parent.append(suggestions);
+                //inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
+                this.showSuggestions(inputField.value, Functions.listOfClassNames, inputField.id, parent as HTMLDivElement);
+               //});
             }
             inputField.autocomplete = "off";
         }  
@@ -73,11 +75,14 @@ export class Functions{
 			fetch: function (text, callback) {
 				var match = text;
 				let reg = new RegExp('^' + match);
-				callback(items.filter(function(n){
-					if (n.label.match(reg)) {
-					  return n;
-					}
-				}));
+				if(match!=""){
+					callback(items.filter(function(n){
+						if (n.label.match(reg)) {
+						  return n;
+						}
+					}));
+				}
+				
 			},
 			render: function(item, value) {
 				var itemElement = document.createElement("div");
@@ -88,19 +93,15 @@ export class Functions{
 				return itemElement;
 			},
 			customize: function(input, inputRect, container, maxHeight) {
-				
 				container.style.visibility = 'visible';
-				container.style.top = "0px";
-				container.style.left = "0px";
-				container.style.position = 'relative';
-
-				//container.style.bottom = (window.innerHeight - inputRect.bottom + input.offsetHeight) + "px";
+				container.style.left = "auto";
+				container.style.top = "auto";
+				container.style.position = 'absolute';
 				container.style.maxHeight = "140px";
-					
-				
 				parent.appendChild(container);
 			},
 			showOnFocus: true,
+			disableAutoSelect: true,
 		})
 	}
     //autocomplete
@@ -287,5 +288,3 @@ export class Functions{
 
 
 }
-
-
