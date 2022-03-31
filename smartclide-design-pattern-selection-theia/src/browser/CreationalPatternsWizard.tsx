@@ -70,7 +70,7 @@ export class CreationalPatterns{
 											buttonCodeAFP.addEventListener('click', async (e: Event) =>{
 												let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
 												let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check													
-												data["AbstractFactory"].values["AbstractFactory"].name = (infoList.item(0) as HTMLInputElement).value;
+												CreationalPatterns.values["AbstractFactory"].values["AbstractFactory"].name = (infoList.item(0) as HTMLInputElement).value;
 												let textfield:  Textfield={ ident: 1, value: (infoList.item(0) as HTMLInputElement).value };
 												textfieldArray.push(textfield);
 												let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
@@ -323,9 +323,6 @@ export class CreationalPatterns{
 		});
 		divCont.appendChild(divCont2);
 
-}		
-				
-
-
+	}		
 
 }
