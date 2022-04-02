@@ -97,8 +97,8 @@ export class extensionWidget extends ReactWidget {
 				</select>
 				<br /> 
 				<br /> 
-				<button id="btn-get-code" className='theia-button secondary' type="button" title='Assign roles to classes and methods' onClick={_a => this.runprocess()}>Assign roles to classes and methods</button>
-				<button id="btn-wizard" className='theia-button secondary' type="button" title='Wizard' onClick={_a => this.runWizard()}>Wizard</button>
+				<button id="btn-get-code" type="button" title='Assign roles to classes and methods' onClick={_a => this.runprocess()}>Assign roles to classes and methods</button>
+				<button id="btn-wizard"  type="button" title='Wizard' onClick={_a => this.runWizard()}>Wizard</button>
 				<br />
 				<br />
 				<div id="result">
@@ -112,7 +112,7 @@ export class extensionWidget extends ReactWidget {
 					<table id="show_pattern_table">
 					</table>
 					<div id="elements">
-						<button id ="btn-finalize" className='theia-button secondary' type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement))}> Get Code </button>
+						<button id ="btn-finalize"  type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement))}> Get Code </button>
 					</div>
 				</div>
 			</div>
@@ -376,13 +376,13 @@ export class extensionWidget extends ReactWidget {
 		extensionWidget.functions.createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);
 		let radio1 = document.getElementById('radio1') as HTMLInputElement;
 		radio1.addEventListener('click', async (e: Event) =>{	
-			extensionWidget.creationalPatterns.creationalPatternswizard(divCont, this.messageService);
+			extensionWidget.creationalPatterns.creationalPatternswizard(divCont, this.messageService, this.helloBackendService);
 		});
 		extensionWidget.functions.createLabel('Structural', 'label2', divWiz);
 		extensionWidget.functions.createInput('', 'radio2', '', 'patternTypes', 'radio', divWiz);
 		let radio2 = document.getElementById('radio2') as HTMLInputElement;
 		radio2.addEventListener('click', async (e: Event) =>{
-			extensionWidget.structuralPatterns.structuralPatternsWizard(divCont, this.messageService);
+			extensionWidget.structuralPatterns.structuralPatternsWizard(divCont, this.messageService, this.helloBackendService);
 		});	
 		extensionWidget.functions.createLabel('Behavioral', 'label3', divWiz);
 		extensionWidget.functions.createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
