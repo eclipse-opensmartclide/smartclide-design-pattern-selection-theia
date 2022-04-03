@@ -20,12 +20,14 @@ export class Functions{
     
     textfieldQuestion(questionLabel: string, num: number, inputType: string, inputMessage: string, inputId: string, inputClassname: string, buttonId: string, parent: HTMLElement){
         this.createLabel(questionLabel, '', parent);
-		let divInput = document.createElement('div');
-			parent.append(divInput);
         if (num==1){
+			let divInput = document.createElement('div');
+			parent.append(divInput);
             this.createInput(inputMessage, inputId, inputClassname, inputId, inputType, divInput);
         }else{
             for (let i=1; i<=num; i++){
+				let divInput = document.createElement('div');
+				parent.append(divInput);
                 this.createInput(inputMessage+i, inputId+i, inputClassname, inputId+i, inputType, divInput);
             }
         }
@@ -51,14 +53,7 @@ export class Functions{
         if (!id.includes('radio') && !id.includes('Num')){
             inputField.className = classname;
             if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
-				//let suggestions = document.createElement("div");
-                //suggestions.id = "suggestions"+id.substring(6,);
-                //suggestions.className = "suggestions";
-				//inputField.append(suggestions);
-                //cd parent.append(suggestions);
-                //inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
                 this.showSuggestions(inputField.value, Functions.listOfClassNames, inputField.id, parent as HTMLDivElement);
-               //});
             }
             inputField.autocomplete = "off";
         }  
@@ -100,6 +95,7 @@ export class Functions{
 				container.style.top = "auto";
 				container.style.position = 'absolute';
 				container.style.maxHeight = "140px";
+				container.style.width = "166.400px";
 				container.style.background = '#3c3c3c';
 				parent.appendChild(container);
 			},
@@ -123,7 +119,7 @@ export class Functions{
     createButton(innerMessage: string, id: string, parent: HTMLElement){
         let button = document.createElement('button');
         button.innerHTML = innerMessage;
-        button.id = id;
+		button.id = id;
         parent.appendChild(button);
     }
 
