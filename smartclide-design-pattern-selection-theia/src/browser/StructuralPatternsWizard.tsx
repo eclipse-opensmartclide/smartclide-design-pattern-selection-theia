@@ -401,19 +401,49 @@ export class StructuralPatterns{
 											let buttonNext18 = document.getElementById('buttonNext18') as HTMLButtonElement;
 											buttonNext18.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
-												let divCont10 = document.createElement('div');
+												let divCont9b = document.createElement('div');
 												StructuralPatterns.functions.textfieldQuestion("<br>Insert the name of the Adapter method that will wrap the method of the existing class <br>", 1, 'text', "Adapter's Method name", 'txtboxAdapterMethod', 'infoField', 'buttonNext19', divCont9);
 												let buttonNext19 = document.getElementById('buttonNext19') as HTMLButtonElement;
 												buttonNext19.addEventListener('click', async (e: Event) =>{
+												  divCont9b.innerHTML = "";
+												  let divCont10 = document.createElement('div');
+												  StructuralPatterns.functions.textfieldQuestion("<br>Insert the name of the Client that needs to use the existing class <br>", 1, 'text', "Client's name", 'txtboxClient', 'infoField', 'buttonNext19b', divCont9b);
+												  let buttonNext19b = document.getElementById('buttonNext19b') as HTMLButtonElement;
+												  buttonNext19b.addEventListener('click', async (e: Event) =>{
 													divCont10.innerHTML = "";
 													StructuralPatterns.functions.createLabel('<br> <b>Adapter Pattern</b>  ', '', divCont10);
 													StructuralPatterns.functions.createButton('Get Code', 'getcodeAdapterPattern', divCont10);
 													let buttonCodeAP = document.getElementById('getcodeAdapterPattern') as HTMLButtonElement;
 													buttonCodeAP.addEventListener('click', async (e: Event) =>{
-														//ADAPTER
+														let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
+														let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
+														StructuralPatterns.values["Adapter"].values["Adaptee"].name = (infoList.item(0) as HTMLInputElement).value;
+														let textfield:  Textfield={ ident: 1, value: (infoList.item(0) as HTMLInputElement).value };
+														textfieldArray.push(textfield);
+														StructuralPatterns.values["Adapter"].values["AdapteeMethod"].name = (infoList.item(1) as HTMLInputElement).value;
+														let textfield1:  Textfield={ ident: 2, value: (infoList.item(1) as HTMLInputElement).value };
+														textfieldArray.push(textfield1);
+														StructuralPatterns.values["Adapter"].values["Adapter"].name = (infoList.item(2) as HTMLInputElement).value;
+														let textfield2:  Textfield={ ident: 1, value: (infoList.item(2) as HTMLInputElement).value };
+														textfieldArray.push(textfield2);
+														StructuralPatterns.values["Adapter"].values["AdapterMethod"].name = (infoList.item(3) as HTMLInputElement).value;
+														let textfield3:  Textfield={ ident: 2, value: (infoList.item(3) as HTMLInputElement).value };
+														textfieldArray.push(textfield3);
+														StructuralPatterns.values["Adapter"].values["ClientInterface"].name = (infoList.item(4) as HTMLInputElement).value;
+														let textfield4:  Textfield={ ident: 1, value: (infoList.item(4) as HTMLInputElement).value };
+														textfieldArray.push(textfield4);
+														console.log(JSON.stringify(StructuralPatterns.values["Adapter"]));
+														let message = StructuralPatterns.functions.checkInputs(textfieldArray);
+														if (message == "Input is valid"){
+															StructuralPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Adapter"].values, "Adapter"), messageService);
+														}else{
+															messageService.info(message);
+														}
 													});
+												  });
+												  divCont9b.appendChild(divCont10);
 												});
-												divCont9.appendChild(divCont10);
+												divCont9.appendChild(divCont9b);
 											});
 											divCont8.appendChild(divCont9);
 										});
