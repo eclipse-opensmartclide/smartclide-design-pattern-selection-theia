@@ -50,19 +50,13 @@ export class Functions{
 		inputField.name = name;
         inputField.type = type;
 		parent.append(inputField);
-        
-		
+        if (type.includes('number')){
+			inputField.min = '1';
+		}
         if (!id.includes('radio') && !id.includes('Num')&& !id.includes('num')){
             inputField.className = classname;
             if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
-				//let suggestions = document.createElement("div");
-                //suggestions.id = "suggestions"+id.substring(6,);
-                //suggestions.className = "suggestions";
-				//inputField.append(suggestions);
-                //cd parent.append(suggestions);
-                //inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
                 this.showSuggestions(inputField.value, Functions.listOfClassNames, inputField.id, parent as HTMLDivElement);
-               //});
             }
             inputField.autocomplete = "off";
         }  

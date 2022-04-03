@@ -53,8 +53,6 @@ export class CreationalPatterns{
 									divCont7.innerHTML = "";
 									let divCont8 = document.createElement('div');
 									CreationalPatterns.functions.textfieldQuestion('<br> How many Families of Products exist? <br>', 1, 'number', '2', 'familiesNum', '', 'buttonNext4', divCont7);
-									let numFam = document.getElementById('familiesNum') as HTMLInputElement;
-									numFam.min = '2';
 									let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
 									buttonNext4.addEventListener('click', async (e: Event) =>{
 										divCont8.innerHTML = "";
