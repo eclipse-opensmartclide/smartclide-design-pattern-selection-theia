@@ -236,7 +236,7 @@ export class extensionWidget extends ReactWidget {
 			let labelConDec = this.updateLabel(key.substring(3,), (count/2+1));
 			let labelmethod = labelConDec + "Method";
 			
-			newValues[label] =  { "name":"", "extension":0};
+			newValues[labelConDec] =  { "name":"", "extension":0};
 			newValues[labelmethod] = { "name":"", "extension":0};
 			extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;	
 			this.insertCells(table, labelConDec); 
