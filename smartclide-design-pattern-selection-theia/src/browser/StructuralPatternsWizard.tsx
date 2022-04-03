@@ -27,25 +27,35 @@ export class StructuralPatterns{
 			let radio21 = document.getElementById('radio21') as HTMLInputElement;
 			radio21.addEventListener('click', async (e: Event) =>{
 				divCont1.innerHTML = "";
-				let divCont2 = document.createElement('div');
+				let divCont1b = document.createElement('div');
 				StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the 1st hierarchy (the class which is called from the client)<br>', 1, 'text', "1st Hierarchy's name", 'txtboxAbstraction', 'infoField', 'buttonNext', divCont1);
 				let buttonNext = document.getElementById('buttonNext') as HTMLButtonElement;
 				buttonNext.addEventListener('click', async (e: Event) =>{
-					divCont2.innerHTML = "";
-					let divCont3 = document.createElement('div');
-					StructuralPatterns.functions.textfieldQuestion('<br> How many subclasses does the 1st hierarchy has? <br>', 1, 'number', '1', 'numOfRefinedAbstractions', '', 'buttonNext1', divCont2);
-					let buttonNext1 = document.getElementById('buttonNext1') as HTMLButtonElement;
-					buttonNext1.addEventListener('click', async (e: Event) =>{
+					divCont1b.innerHTML = "";
+					let divCont2 = document.createElement('div');
+					StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the function that needs the 2 hierarchies <br>', 1, 'text', "1st Hierarchy's Method", 'txtboxAbstractionMethod', 'infoField', 'buttonNextb', divCont1b);
+					let buttonNextb = document.getElementById('buttonNextb') as HTMLButtonElement;
+					buttonNextb.addEventListener('click', async (e: Event) =>{
+					  divCont2.innerHTML = "";
+					  let divCont3 = document.createElement('div');
+				      StructuralPatterns.functions.textfieldQuestion('<br> How many subclasses does the 1st hierarchy has? <br>', 1, 'number', '1', 'numOfRefinedAbstractions', '', 'buttonNext1', divCont2);
+				   	  let buttonNext1 = document.getElementById('buttonNext1') as HTMLButtonElement;
+					  buttonNext1.addEventListener('click', async (e: Event) =>{
 						divCont3.innerHTML = "";
 						let divCont4 = document.createElement('div');
 						StructuralPatterns.functions.textfieldQuestion("<br> Insert the names of the 1st hierarchy's subclasses  <br>", parseInt((document.getElementById('numOfRefinedAbstractions') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxRefinedAbstraction', 'infoField', 'buttonNext2', divCont3);
 						let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
 						buttonNext2.addEventListener('click', async (e: Event) =>{
 							divCont4.innerHTML = "";
-							let divCont5 = document.createElement('div');
+							let divCont4b = document.createElement('div');
 							StructuralPatterns.functions.textfieldQuestion('<br> Insert the name of the 2nd hierarchy <br>',  1, 'text', "2nd Hierarchy's name", 'txtboxImplementation', 'infoField', 'buttonNext3', divCont4);
 							let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
 							buttonNext3.addEventListener('click', async (e: Event) =>{
+							  divCont4b.innerHTML = "";
+							  let divCont5 = document.createElement('div');
+							  StructuralPatterns.functions.textfieldQuestion("<br> Insert the name of the 2nd hierarchy's function  <br>",  1, 'text', "2nd Hierarchy's Method", 'txtboxImplementationMethod', 'infoField', 'buttonNext3b', divCont4b);
+							  let buttonNext3b = document.getElementById('buttonNext3b') as HTMLButtonElement;
+							  buttonNext3b.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
 								let divCont6 = document.createElement('div');
 								StructuralPatterns.functions.textfieldQuestion('<br> How many subclasses does the 2nd hierarchy has? <br>', 1, 'number', '1', 'numOfConcreteImplementations', '', 'buttonNext4', divCont5);
@@ -69,8 +79,8 @@ export class StructuralPatterns{
 											StructuralPatterns.values["Bridge"].values["AbstractionMethod"].name = (infoList.item(1) as HTMLInputElement).value;
 											let textfield1:  Textfield={ ident: 2, value: (infoList.item(1) as HTMLInputElement).value };
 											textfieldArray.push(textfield1);
-											let numRefAb = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
-											let numImpl = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
+											let numRefAb = parseInt((document.getElementById('numOfRefinedAbstractions') as HTMLInputElement).value);
+											let numImpl = parseInt((document.getElementById('numOfConcreteImplementations') as HTMLInputElement).value);
 											let i = 2;
 											for (var j=1; j<=numRefAb; j++){
 												StructuralPatterns.values["Bridge"].values["RefinedAbstraction"+j] = { "name":"", "extension":1};
@@ -83,14 +93,19 @@ export class StructuralPatterns{
 											StructuralPatterns.values["Bridge"].values["Implementation"].name = (infoList.item(i) as HTMLInputElement).value;
 											let textfield2:  Textfield={ ident: 1, value: (infoList.item(i) as HTMLInputElement).value };
 											textfieldArray.push(textfield2);
+											i++;
+											StructuralPatterns.values["Bridge"].values["ImplementationMethod"].name = (infoList.item(i) as HTMLInputElement).value;
+											let textfield3:  Textfield={ ident: 2, value: (infoList.item(i) as HTMLInputElement).value };
+											textfieldArray.push(textfield3);
+											i++;
 											for (var j=1; j<=numImpl; j++){
 												StructuralPatterns.values["Bridge"].values["ConcreteImplementation"+j] = { "name":"", "extension":1};
-												let v2 = (infoList.item(i+1) as HTMLInputElement).value;
+												let v2 = (infoList.item(i++) as HTMLInputElement).value;
 												StructuralPatterns.values["Bridge"].values["ConcreteImplementation"+j].name = v2;
 												let textfield:  Textfield={ ident: 1, value: v2 };
 												textfieldArray.push(textfield);
-												i++;
 											}
+											console.log(JSON.stringify(StructuralPatterns.values["Bridge"]));
 											let message = StructuralPatterns.functions.checkInputs(textfieldArray);
 											if (message == "Input is valid"){
 												StructuralPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
@@ -103,13 +118,17 @@ export class StructuralPatterns{
 								});
 								divCont5.appendChild(divCont6);
 							});
-							divCont4.appendChild(divCont5);
+							divCont4b.appendChild(divCont5);
+						  });
+						  divCont4.appendChild(divCont4b);
 						});
 						divCont3.appendChild(divCont4);
 					});
 					divCont2.appendChild(divCont3);
+				  });
+				  divCont1b.appendChild(divCont2);
 				});
-				divCont1.appendChild(divCont2);
+				divCont1.appendChild(divCont1b);
 			});
 			let radio22 = document.getElementById('radio22') as HTMLInputElement;
 			radio22.addEventListener('click', async (e: Event) =>{
@@ -218,7 +237,7 @@ export class StructuralPatterns{
 																console.log(JSON.stringify(StructuralPatterns.values["Decorator"]));
 																let message = StructuralPatterns.functions.checkInputs(textfieldArray);
 																if (message == "Input is valid"){
-																	StructuralPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
+																	StructuralPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Decorator"].values, "Decorator"), messageService);
 																}else{
 																	messageService.info(message);
 																}
