@@ -3,6 +3,7 @@ import { inject } from 'inversify';
 import {Functions} from './functions';
 import { MessageService } from '@theia/core';
 import { HelloBackendService } from '../common/protocol';
+//import { stringify } from 'querystring';
 
 interface Textfield{
 	ident: number;
@@ -18,7 +19,7 @@ export class StructuralPatterns{
 
     static functions = new Functions();
 	static values = JSON.parse(JSON.stringify(data));
-    structuralPatternsWizard(divCont: HTMLDivElement, messageService: MessageService){
+    structuralPatternsWizard(divCont: HTMLDivElement, messageService: MessageService, helloBackendService: HelloBackendService){
 			divCont.innerHTML = "";
 			let divCont1 = document.createElement('div');
 			StructuralPatterns.functions.radioQuestion('<br> Do you need to implement a function that requires information from 2 different hierarchies? <br>', 'Yes', 'No', 'radio21', 'radio22', divCont);
@@ -37,7 +38,7 @@ export class StructuralPatterns{
 					buttonNext1.addEventListener('click', async (e: Event) =>{
 						divCont3.innerHTML = "";
 						let divCont4 = document.createElement('div');
-						StructuralPatterns.functions.textfieldQuestion("<br> Insert the names of the 1st hierarchy's subclasses  <br>", parseInt((document.getElementById('numOfRefinedAbstractions') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxRefinedAbstractions', 'infoField', 'buttonNext2', divCont3);
+						StructuralPatterns.functions.textfieldQuestion("<br> Insert the names of the 1st hierarchy's subclasses  <br>", parseInt((document.getElementById('numOfRefinedAbstractions') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxRefinedAbstraction', 'infoField', 'buttonNext2', divCont3);
 						let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
 						buttonNext2.addEventListener('click', async (e: Event) =>{
 							divCont4.innerHTML = "";
@@ -52,7 +53,7 @@ export class StructuralPatterns{
 								buttonNext4.addEventListener('click', async (e: Event) =>{
 									divCont6.innerHTML = "";
 									let divCont7 = document.createElement('div');
-									StructuralPatterns.functions.textfieldQuestion("<br> Insert the names of the 2nd hierarchy's subclasses <br>", parseInt((document.getElementById('numOfConcreteImplementations') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxConcreteImplementations', 'infoField', 'buttonNext5', divCont6);
+									StructuralPatterns.functions.textfieldQuestion("<br> Insert the names of the 2nd hierarchy's subclasses <br>", parseInt((document.getElementById('numOfConcreteImplementations') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxConcreteImplementation', 'infoField', 'buttonNext5', divCont6);
 									let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
 									buttonNext5.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
@@ -60,7 +61,42 @@ export class StructuralPatterns{
 										StructuralPatterns.functions.createButton('Get Code', 'getcodeBridgePattern', divCont7);
 										let buttonCodeBP = document.getElementById('getcodeBridgePattern') as HTMLButtonElement;
 										buttonCodeBP.addEventListener('click', async (e: Event) =>{
-											//BRIDGE
+											let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
+											let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
+											StructuralPatterns.values["Bridge"].values["Abstraction"].name = (infoList.item(0) as HTMLInputElement).value;
+											let textfield:  Textfield={ ident: 1, value: (infoList.item(0) as HTMLInputElement).value };
+											textfieldArray.push(textfield);
+											StructuralPatterns.values["Bridge"].values["AbstractionMethod"].name = (infoList.item(1) as HTMLInputElement).value;
+											let textfield1:  Textfield={ ident: 2, value: (infoList.item(1) as HTMLInputElement).value };
+											textfieldArray.push(textfield1);
+											let numRefAb = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+											let numImpl = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
+											let i = 2;
+											for (var j=1; j<=numRefAb; j++){
+												StructuralPatterns.values["Bridge"].values["RefinedAbstraction"+j] = { "name":"", "extension":1};
+												let v1 = (infoList.item(i) as HTMLInputElement).value;
+												StructuralPatterns.values["Bridge"].values["RefinedAbstraction"+j].name = v1;
+												let textfield:  Textfield={ ident: 1, value: v1 };
+												textfieldArray.push(textfield);
+												i++;
+											}
+											StructuralPatterns.values["Bridge"].values["Implementation"].name = (infoList.item(i) as HTMLInputElement).value;
+											let textfield2:  Textfield={ ident: 1, value: (infoList.item(i) as HTMLInputElement).value };
+											textfieldArray.push(textfield2);
+											for (var j=1; j<=numImpl; j++){
+												StructuralPatterns.values["Bridge"].values["ConcreteImplementation"+j] = { "name":"", "extension":1};
+												let v2 = (infoList.item(i+1) as HTMLInputElement).value;
+												StructuralPatterns.values["Bridge"].values["ConcreteImplementation"+j].name = v2;
+												let textfield:  Textfield={ ident: 1, value: v2 };
+												textfieldArray.push(textfield);
+												i++;
+											}
+											let message = StructuralPatterns.functions.checkInputs(textfieldArray);
+											if (message == "Input is valid"){
+												StructuralPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
+											}else{
+												messageService.info(message);
+											}
 										});
 									});
 									divCont6.appendChild(divCont7);
@@ -114,7 +150,7 @@ export class StructuralPatterns{
 										radio2211.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											let divCont9 = document.createElement('div');
-											StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Decorator class <br>', 1, 'text', 'Decorator name', 'txtDecorator', 'infoField', 'buttonNext5', divCont8 );
+											StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Decorator class <br>', 1, 'text', 'Decorator name', 'txtboxDecorator', 'infoField', 'buttonNext5', divCont8 );
 											let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
 											buttonNext5.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
@@ -137,7 +173,55 @@ export class StructuralPatterns{
 															StructuralPatterns.functions.createButton('Get Code', 'getcodeDecoratorPattern', divCont12);
 															let buttonCodeDP = document.getElementById('getcodeDecoratorPattern') as HTMLButtonElement;
 															buttonCodeDP.addEventListener('click', async (e: Event) =>{
-																//DECORATOR
+																let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
+																let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
+																StructuralPatterns.values["Decorator"].values["Component"].name = (infoList.item(0) as HTMLInputElement).value;
+																let textfield:  Textfield={ ident: 1, value: (infoList.item(0) as HTMLInputElement).value };
+																textfieldArray.push(textfield);
+																let numInterfaceMethods = parseInt((document.getElementById('NumOfInterfaceMethods') as HTMLInputElement).value);
+																let numSimpleObj = parseInt((document.getElementById('NumOfSimpleObjectsTypes') as HTMLInputElement).value);
+																let numConDec = parseInt((document.getElementById('NumOfConcreteDecorators') as HTMLInputElement).value);
+																for (var i=1; i<=numInterfaceMethods; i++){
+																	StructuralPatterns.values["Decorator"].values["ComponentMethod"+i] = { "name":"", "extension":1};
+																	let v1 = (infoList.item(i) as HTMLInputElement).value;
+																	StructuralPatterns.values["Decorator"].values["ComponentMethod"+i].name = v1;
+																	let textfield:  Textfield={ ident: 2, value: v1 };
+																	textfieldArray.push(textfield);
+																}
+																i++;
+																for (var j=1; j<=numSimpleObj; j++){
+																	StructuralPatterns.values["Decorator"].values["ConcreteComponent"+j] = { "name":"", "extension":1};
+																	let v1 = (infoList.item(i) as HTMLInputElement).value;
+																	StructuralPatterns.values["Decorator"].values["ConcreteComponent"+j].name = v1;
+																	let textfield:  Textfield={ ident: 1, value: v1 };
+																	textfieldArray.push(textfield);
+																	i++;
+																}
+																StructuralPatterns.values["Decorator"].values["Decorator"].name = (infoList.item(i) as HTMLInputElement).value;
+																let textfield1:  Textfield={ ident: 1, value: (infoList.item(i) as HTMLInputElement).value };
+																textfieldArray.push(textfield1);
+																for (var j=1; j<=numConDec; j++){
+																	StructuralPatterns.values["Decorator"].values["ConcreteDecorator"+j] = { "name":"", "extension":1};
+																	let v2 = (infoList.item(i+1) as HTMLInputElement).value;
+																	StructuralPatterns.values["Decorator"].values["ConcreteDecorator"+j].name = v2;
+																	let textfield:  Textfield={ ident: 1, value: v2 };
+																	textfieldArray.push(textfield);
+																	i++;
+																}
+																for (var j=1; j<=numConDec; j++){
+																	StructuralPatterns.values["Decorator"].values["ConcreteDecorator"+j+"Method"] = { "name":"", "extension":0};
+																	let v2 = (infoList.item(i+1) as HTMLInputElement).value;
+																	StructuralPatterns.values["Decorator"].values["ConcreteDecorator"+j+"Method"].name = v2;
+																	let textfield:  Textfield={ ident: 2, value: v2 };
+																	textfieldArray.push(textfield);
+																	i++;
+																}
+																let message = StructuralPatterns.functions.checkInputs(textfieldArray);
+																if (message == "Input is valid"){
+																	StructuralPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
+																}else{
+																	messageService.info(message);
+																}
 															});
 														});
 														divCont11.appendChild(divCont12);
@@ -152,7 +236,7 @@ export class StructuralPatterns{
 										radio2212.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											let divCont9 = document.createElement('div');
-											StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Composite class <br>', 1, 'text', 'Composite name', '', 'infoField', 'buttonNext8', divCont8);
+											StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Composite class <br>', 1, 'text', 'Composite name', 'txtboxComposite', 'infoField', 'buttonNext8', divCont8);
 											let buttonNext8 = document.getElementById('buttonNext8') as HTMLButtonElement;
 											buttonNext8.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
@@ -160,7 +244,38 @@ export class StructuralPatterns{
 												StructuralPatterns.functions.createButton('Get Code', 'getcodeCompositePattern', divCont9);
 												let buttonCodeCP = document.getElementById('getcodeCompositePattern') as HTMLButtonElement;
 												buttonCodeCP.addEventListener('click', async (e: Event) =>{
-													//COMPOSITE
+													let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
+													let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
+													StructuralPatterns.values["Composite"].values["Component"].name = (infoList.item(0) as HTMLInputElement).value;
+													let textfield:  Textfield={ ident: 1, value: (infoList.item(0) as HTMLInputElement).value };
+													textfieldArray.push(textfield);
+													let numInterfaceMethods = parseInt((document.getElementById('NumOfInterfaceMethods') as HTMLInputElement).value);
+													let numSimpleObj = parseInt((document.getElementById('NumOfSimpleObjectsTypes') as HTMLInputElement).value);
+													for (var i=1; i<=numInterfaceMethods; i++){
+														StructuralPatterns.values["Composite"].values["ComponentMethod"+i] = { "name":"", "extension":1};
+														let v1 = (infoList.item(i) as HTMLInputElement).value;
+														StructuralPatterns.values["Composite"].values["ComponentMethod"+i].name = v1;
+														let textfield:  Textfield={ ident: 2, value: v1 };
+														textfieldArray.push(textfield);
+													}
+													for (var j=1; j<=numSimpleObj; j++){
+														StructuralPatterns.values["Composite"].values["ConcreteComponent"+j] = { "name":"", "extension":1};
+														let v1 = (infoList.item(i) as HTMLInputElement).value;
+														StructuralPatterns.values["Composite"].values["ConcreteComponent"+j].name = v1;
+														let textfield:  Textfield={ ident: 1, value: v1 };
+														textfieldArray.push(textfield);
+														i++;
+													}
+													StructuralPatterns.values["Composite"].values["Composite"].name = (infoList.item(i) as HTMLInputElement).value;
+													let textfield1:  Textfield={ ident: 1, value: (infoList.item(i) as HTMLInputElement).value };
+													textfieldArray.push(textfield1);
+													console.log(JSON.stringify(StructuralPatterns.values["Composite"]));
+													let message = StructuralPatterns.functions.checkInputs(textfieldArray);
+													if (message == "Input is valid"){
+														StructuralPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Composite"].values, "Composite"), messageService);
+													}else{
+														messageService.info(message);
+													}
 												});
 											});
 											divCont8.appendChild(divCont9);
@@ -403,7 +518,7 @@ export class StructuralPatterns{
 				});
 				divCont1.appendChild(divCont2);
 			});
-			divCont.appendChild(divCont1);
-		
+			divCont.appendChild(divCont1);	
     } 
+
 }

@@ -21,12 +21,16 @@ export class Functions{
     textfieldQuestion(questionLabel: string, num: number, inputType: string, inputMessage: string, inputId: string, inputClassname: string, buttonId: string, parent: HTMLElement){
         this.createLabel(questionLabel, '', parent);
 		let divInput = document.createElement('div');
-			parent.append(divInput);
+		parent.append(divInput);
         if (num==1){
-            this.createInput(inputMessage, inputId, inputClassname, inputId, inputType, divInput);
+			let divInput = document.createElement('div');
+			parent.append(divInput);
+            this.createInput(inputMessage, inputId, inputClassname, inputId, inputType, parent);
         }else{
             for (let i=1; i<=num; i++){
-                this.createInput(inputMessage+i, inputId+i, inputClassname, inputId+i, inputType, divInput);
+				let divInput = document.createElement('div');
+				parent.append(divInput);
+                this.createInput(inputMessage+i, inputId+i, inputClassname, inputId+i, inputType, parent);
             }
         }
         this.createButton('Next', buttonId, parent);
@@ -48,7 +52,7 @@ export class Functions{
 		parent.append(inputField);
         
 		
-        if (!id.includes('radio') && !id.includes('Num')){
+        if (!id.includes('radio') && !id.includes('Num')&& !id.includes('num')){
             inputField.className = classname;
             if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
 				//let suggestions = document.createElement("div");
