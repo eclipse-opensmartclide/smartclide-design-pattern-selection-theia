@@ -160,12 +160,12 @@ export class StructuralPatterns{
 												buttonNext6.addEventListener('click', async (e: Event) =>{
 													divCont10.innerHTML = "";
 													let divCont11 = document.createElement('div');
-													StructuralPatterns.functions.textfieldQuestion('<br> Insert the names of the Concrete Decorators <br> ', parseInt((document.getElementById('NumOfConcreteDecorators') as HTMLInputElement).value), 'text', 'Concrete Decorator name ', '', 'infoField', 'buttonNext7a', divCont10 ); 
+													StructuralPatterns.functions.textfieldQuestion('<br> Insert the names of the Concrete Decorators <br> ', parseInt((document.getElementById('NumOfConcreteDecorators') as HTMLInputElement).value), 'text', 'Concrete Decorator name ', 'txtboxConcreteDecorator', 'infoField', 'buttonNext7a', divCont10 ); 
 													let buttonNext7a = document.getElementById('buttonNext7a') as HTMLButtonElement;
 													buttonNext7a.addEventListener('click', async (e: Event) =>{
 														divCont11.innerHTML = "";
 														let divCont12 = document.createElement('div');
-														StructuralPatterns.functions.textfieldQuestion('<br> Insert the name of the function of each Concrete Decorator <br>', parseInt((document.getElementById('NumOfConcreteDecorators') as HTMLInputElement).value), 'text', 'Function of Concrete Decorator ', '', 'infoField', 'buttonNext7b', divCont11 );
+														StructuralPatterns.functions.textfieldQuestion('<br> Insert the name of the function of each Concrete Decorator <br>', parseInt((document.getElementById('NumOfConcreteDecorators') as HTMLInputElement).value), 'text', 'Function of Concrete Decorator ', 'txtboxConcreteDecoratorMethod', 'infoField', 'buttonNext7b', divCont11 );
 														let buttonNext7b = document.getElementById('buttonNext7b') as HTMLButtonElement;
 														buttonNext7b.addEventListener('click', async (e: Event) =>{	
 															divCont12.innerHTML = "";
@@ -188,7 +188,6 @@ export class StructuralPatterns{
 																	let textfield:  Textfield={ ident: 2, value: v1 };
 																	textfieldArray.push(textfield);
 																}
-																i++;
 																for (var j=1; j<=numSimpleObj; j++){
 																	StructuralPatterns.values["Decorator"].values["ConcreteComponent"+j] = { "name":"", "extension":1};
 																	let v1 = (infoList.item(i) as HTMLInputElement).value;
@@ -216,6 +215,7 @@ export class StructuralPatterns{
 																	textfieldArray.push(textfield);
 																	i++;
 																}
+																console.log(JSON.stringify(StructuralPatterns.values["Decorator"]));
 																let message = StructuralPatterns.functions.checkInputs(textfieldArray);
 																if (message == "Input is valid"){
 																	StructuralPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
