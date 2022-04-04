@@ -161,7 +161,7 @@ export class Functions{
 			if (labelcode == 2 && !txtbox.match("^[a-z]+[a-z|0-9]*([A-Z][a-z|0-9]*)*")){ //method case
 					return 3;
 			}
-			if (labelcode == 3 && !txtbox.match("^([a-z]*[0-9]*)$")){ //attribute case
+			if (labelcode == 3 && !txtbox.match("^([a-z]*[0-9]*)$")){ //attribute case ^([a-zA-Z]*[0-9]*)[ ]([a-z]{1}[a-zA-Z]*[0-9]*)
 					return 4;
 			}	
 		}
