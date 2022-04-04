@@ -165,9 +165,9 @@
                 "name":"",
                 "extension":0
             },
-            "ComponentMethod":{
+            "ComponentMethod1":{
                 "name":"",
-                "extension":0
+                "extension":1
             },
             "ConcreteComponent1":{
                 "name":"",
@@ -186,9 +186,9 @@
                 "name":"",
                 "extension":0
             },
-            "ComponentMethod":{
+            "ComponentMethod1":{
                 "name":"",
-                "extension":0
+                "extension":1
             },
             "ConcreteComponent1":{
                 "name":"",
