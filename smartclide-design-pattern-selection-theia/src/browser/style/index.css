@@ -15,7 +15,6 @@
   color: white;
   max-width: 100%;
   height: 20px;
-
 }
 
 #TD{
@@ -126,7 +125,6 @@
 	visibility: hidden;
 }
 
-
 .autocomplete {
   background: white;
   z-index: 1000;
@@ -160,3 +158,10 @@
 body::-webkit-scrollbar {
   width: thin;               /* width of the entire scrollbar */
 }
+#btn-finalize{
+  margin-left:0px;
+}
+#btn-get-code{
+  margin-left:0px;
+}
+
