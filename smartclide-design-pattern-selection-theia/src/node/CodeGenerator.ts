@@ -206,27 +206,36 @@ export class CodeGenerator {
 	public Composite(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
+		let file1 :patternParticipatingClass = new abstractClass(obj.Component.name);
+
+		let file3 :patternParticipatingClass = new ConcreteClass(obj.Composite.name, obj.Component.name);
+		file3.addAttribute(new Attribute("children", "ArrayList<"+obj.Component.name+">", "private"));
+		//constructor
+		file3.addMethod(new Method(obj.Composite.name,"",false,"public","\t \t children = new ArrayList<"+obj.Component.name +">();",[]));
+		file3.addMethod(new Method("add","void",false,"public","",[new Attribute("c",obj.Composite.name,"")]));
+		file3.addMethod(new Method("remove","void",false,"public","",[new Attribute("c",obj.Composite.name,"")]));
+		file3.addMethod(new Method("getChildern","ArrayList<"+obj.Component.name+">",false,"public","",[]));
+		
+		var cList: Array<patternParticipatingClass> = [];//list of Concrete Component classes
+		var mList: Array<Method> = [];//list of Composite's methods
 		Object.keys(obj).forEach((key)=>{
-			if(key=="Component"){
-				let file1 :patternParticipatingClass = new abstractClass(obj[key].name);
-				file1.addMethod(new Method(obj.ComponentMethod.name,"void",true, "public", "",[]));
-				this.fillPromise(ppc, file1);
-			}else if(key.includes("ConcreteComponent")){
+			if(key.includes("ConcreteComponent")){
 				let file2 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Component.name);
-				file2.addMethod(new Method(obj.ComponentMethod.name,"void",false, "public", "",[]));
-				this.fillPromise(ppc, file2);
-			}else if(key == ("Composite")){
-				let file3 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Component.name);
-				file3.addAttribute(new Attribute("children", "ArrayList<"+obj.Component.name+">", "private"));
-				//constructor
-				file3.addMethod(new Method(obj.Composite.name,"",false,"public","\t \t children = new ArrayList<"+obj.Component.name +">();",[]));
-				file3.addMethod(new Method(obj.ComponentMethod.name,"void",false, "public", "",[]));
-				file3.addMethod(new Method("add","void",false,"public","",[new Attribute("c",obj.Composite.name,"")]));
-				file3.addMethod(new Method("remove","void",false,"public","",[new Attribute("c",obj.Composite.name,"")]));
-				file3.addMethod(new Method("getChildern","ArrayList<"+obj.Component.name+">",false,"public","",[]));
-				this.fillPromise(ppc, file3);
+				cList.push(file2);
+			}else if(key.includes("ComponentMethod")){
+				file1.addMethod(new Method(obj[key].name,"void",true, "public", "",[]));
+				file3.addMethod(new Method(obj[key].name,"void",false, "public", "",[]));
+				mList.push(new Method(obj[key].name,"void",false, "public", "",[]));
 			}
 		});
+		for(var i=0;i<cList.length;i++){
+			for(var j=0;j<mList.length;j++){
+				cList[i].addMethod(mList[j]); 
+			}
+			this.fillPromise(ppc,cList[i]);
+		}
+		this.fillPromise(ppc, file1);
+		this.fillPromise(ppc, file3);
 		return ppc.object;
 	}	
 	public Decorator(jsonObj: string): Array<patternParticipatingClass>{
@@ -239,23 +248,28 @@ export class CodeGenerator {
 
 		let file2 :patternParticipatingClass = new MidHierarchyClass(obj.Decorator, obj.Component.name);
 		file2.addMethod(new Method(obj.Decorator.name,"",false, "public", "\t \t this."+obj.Component.name.toLowerCase()+" = "+obj.Component.name.toLowerCase()+";",[new Attribute(obj.Component.name.toLowerCase(), obj.Component.name, "")]));
-		file2.addMethod(new Method(obj.ComponentMethod.name,"void",false, "public", "\t \t this."+obj.Component.name.toLowerCase()+"."+obj.ComponentMethod.name+"();",[]));
-		this.fillPromise(ppc, file2);
-
+		var cList: Array<patternParticipatingClass> = [];//list of Concrete Component classes
+		var mList: Array<Method> = [];//list of Component's methods
 		Object.keys(obj).forEach((key)=>{
 			if(key.includes("ConcreteComponent")){
 				let file3 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Component.name);
-				file3.addMethod(new Method(obj.ComponentMethod.name,"void",false, "public", "",[]));
-				this.fillPromise(ppc, file3);
+				cList.push(file3);
 			}else if(key.includes("ConcreteDecorator")){
 				let file4 :patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Decorator.name);
-				file4.addMethod(new Method(obj.ComponentMethod.name,"void",false, "public", "\t \t super(); \n \t \t "+obj.ConcreteDecorator1Method.name+"();",[]));
 				file4.addMethod(new Method(obj.ConcreteDecorator1Method.name, "void", false, "public","",[]));
-				this.fillPromise(ppc, file4);
-			}else {
-
+				cList.push(file4);
+			}else if(key.includes("ComponentMethod")){
+				file2.addMethod(new Method(obj[key].name,"void",false, "public", "",[]));
+				mList.push(new Method(obj[key].name,"void",false, "public", "",[]))
 			}
-		})
+		});
+		for(var i=0;i<cList.length;i++){
+			for(var j=0;j<mList.length;j++){
+				cList[i].addMethod(mList[j]); 
+			}
+			this.fillPromise(ppc,cList[i]);
+		}
+		this.fillPromise(ppc, file2);
 		return ppc.object;
 	}	
 	public Facade(jsonObj: string): Array<patternParticipatingClass>{
@@ -264,10 +278,8 @@ export class CodeGenerator {
 		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Facade.name);
 		
 		Object.keys(obj).forEach((key)=>{
-			if(key.includes("AdditionalFacade")){
-				let file2 :patternParticipatingClass = new NonHierarchyClass(obj[key].name);
-				file1.addAttribute(new Attribute(obj[key].name.toLowerCase(),obj[key].name,"private"));
-				this.fillPromise(ppc, file2);
+			if(key.includes("FacadeMethod")){
+				file1.addMethod(new Method(obj[key].name.toLowerCase(),"void",false,"public","",[]));
 			}
 		});
 		this.fillPromise(ppc, file1);
