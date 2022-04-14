@@ -313,7 +313,7 @@ export class extensionWidget extends ReactWidget {
 						if (methodNames.includes(methodName)){
 							extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 							this.messageService.info("Well done! Code is coming...");
-							await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
+							extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection),this.messageService);
 						}else{
 							this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: "+methodNames);
 						}

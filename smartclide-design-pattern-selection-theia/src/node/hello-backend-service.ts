@@ -217,7 +217,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
                 message = ppc[i].writeToFile(rootUri);
                 if(message!="") return new Promise<string>(resolve => resolve(message));
             }
-        }else {
+        }else if(statePatternSelection == "Visitor"){
             let ppc : Array<patternParticipatingClass> = cg.Visitor(jsonObj);
             for (let i=0; i<ppc.length; i++) {
                 message = ppc[i].writeToFile(rootUri);
