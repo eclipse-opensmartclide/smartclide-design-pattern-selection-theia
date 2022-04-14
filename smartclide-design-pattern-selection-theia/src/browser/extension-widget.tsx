@@ -63,6 +63,10 @@ export class extensionWidget extends ReactWidget {
 		
 		<div id='issues'>
 				<br />
+				<label>Enter the project's name</label>
+				<input id="projectName" type="text" autoComplete="off" placeholder="Project's name"></input>
+				<br /> 
+				<br /> 
 				<select id="drop-down-patterns" onChange={this.updateSelection } name="statePatternSelection">
 						<option id="empty-choice" value="Choose_pattern">Choose pattern</option>
 					<optgroup label="Creational">
@@ -122,11 +126,12 @@ export class extensionWidget extends ReactWidget {
 	}
 	
     protected async runprocess(): Promise<void> {
-		if (extensionWidget.state.statePatternSelection!="Choose_pattern" && extensionWidget.state.statePatternSelection!=""){
+		if (extensionWidget.state.statePatternSelection!="Choose_pattern" && extensionWidget.state.statePatternSelection!="" && (document.getElementById("projectName") as HTMLInputElement).value!=""){
 			(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'hidden';
 			(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'hidden';
 
-			var getUrl = window.location.href;
+			var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
+
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
 			extensionWidget.functions.setClassNames(extensionWidget.res);
 			
@@ -143,7 +148,12 @@ export class extensionWidget extends ReactWidget {
 			});
 
 		}else{
-			this.messageService.info('You need to choose a software pattern!');
+			if(extensionWidget.state.statePatternSelection=="Choose_pattern" || extensionWidget.state.statePatternSelection==""){
+				this.messageService.info('You need to choose a software pattern!');
+			}
+			if((document.getElementById("projectName") as HTMLInputElement).value==""){
+				this.messageService.info("You need to enter the project's name!");
+			}
 		}
 	}
 	

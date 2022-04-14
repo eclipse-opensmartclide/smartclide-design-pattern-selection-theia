@@ -164,4 +164,7 @@ body::-webkit-scrollbar {
 #btn-get-code{
   margin-left:0px;
 }
-
+#projectName{
+  margin-left: 20px;
+  margin-right:20px;
+}

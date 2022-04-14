@@ -37,7 +37,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         else{
             rootUri = url.substr(lastL+2);
         }
-        
+        console.log(1);
         //search for every file name in textbox values
         //index=-1 if not found
         this.ThroughDirectory(rootUri);

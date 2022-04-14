@@ -51,7 +51,7 @@ export class Functions{
         if (type.includes('number')){
 			inputField.min = '1';
 		}
-        if (!id.includes('radio') && !id.includes('Num')&& !id.includes('num')){
+        if (!id.includes('radio') && !id.includes('Num')&& !id.includes('num') && !id.includes("projectName")){
             inputField.className = classname;
             if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
                 this.showSuggestions(inputField.value, Functions.listOfClassNames, inputField.id, parent as HTMLDivElement);
