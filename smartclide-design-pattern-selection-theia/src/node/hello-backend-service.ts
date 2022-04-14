@@ -49,8 +49,6 @@ export class HelloBackendServiceImpl implements HelloBackendService {
             file = file.substr(0, file.indexOf("."));
             res[i] = file;  
         }
-        //fs
-        //console.log(fs.readFileSync('C:/Users/test/Downloads/src/src/Main.java','utf8'));
         
         return new Promise<string[]>(resolve => resolve(res))
     }
@@ -183,13 +181,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
                 message = ppc[i].writeToFile(rootUri);
                 if(message!="") return new Promise<string>(resolve => resolve(message));
             }
-        }else if(statePatternSelection == "Interpreter"){
-            let ppc : Array<patternParticipatingClass> = cg.Interpreter(jsonObj);
-            for (let i=0; i<ppc.length; i++) {
-                message = ppc[i].writeToFile(rootUri);
-                if(message!="") return new Promise<string>(resolve => resolve(message));
-            }
-        }else if(statePatternSelection == "Mediator"){
+        } if(statePatternSelection == "Mediator"){
             let ppc : Array<patternParticipatingClass> = cg.Mediator(jsonObj);
             for (let i=0; i<ppc.length; i++) {
                 message = ppc[i].writeToFile(rootUri);

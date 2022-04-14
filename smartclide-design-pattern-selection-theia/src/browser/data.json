@@ -308,26 +308,6 @@
             }
         }
     },
-    "Interpreter":{
-        "values":{
-            "Context":{
-                "name":"",
-                "extension":0
-            },
-            "AbstractExpression":{
-                "name":"",
-                "extension":0
-            },
-            "TerminalExpression1":{
-                "name":"",
-                "extension":1
-            },
-            "NonterminalExpression1":{
-                "name":"",
-                "extension":1
-            }
-        }
-    },
     "Mediator":{
         "values":{
             "Mediator":{

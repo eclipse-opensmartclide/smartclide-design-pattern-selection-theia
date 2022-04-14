@@ -388,24 +388,6 @@ export class CodeGenerator {
 		});
 
 		return ppc.object;
-	}
-	public Interpreter(jsonObj: string): Array<patternParticipatingClass>{
-		let ppc : Object ={object: []}
-		let obj = JSON.parse(JSON.stringify(jsonObj));
-		let file1 :patternParticipatingClass =  new NonHierarchyClass(obj.Context.name);
-		file1.addMethod(new Method("Interpreter","void",false,"public","",[new Attribute(obj.Context.name.toLowerCase(),obj.Context.name,"")]));
-		this.fillPromise(ppc, file1);
-
-		let file2 :patternParticipatingClass =  new NonHierarchyClass(obj.AbstractExpression.name);
-		this.fillPromise(ppc, file2);
-		Object.keys(obj).forEach((key) => {
-			if(key.includes("TerminalExpression") || key.includes("NonterminalExpression")){
-				let file3 :patternParticipatingClass =  new ConcreteClass(obj[key].name, obj.AbstractExpression.name);
-				file3.addMethod(new Method("Interpreter","void",false,"public","",[new Attribute(obj.Context.name.toLowerCase(),obj.Context.name,"")]));
-				this.fillPromise(ppc, file3);
-			}
-		});
-		return ppc.object;
 	}	
 	public Mediator(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}

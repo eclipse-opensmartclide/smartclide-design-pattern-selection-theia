@@ -84,8 +84,6 @@ export class extensionWidget extends ReactWidget {
 					<optgroup label="Behavioral">
 						<option value="ChainOfResponsibility">Chain of Responsibility</option>
 						<option value="Command">Command</option>
-						<option value="Interpreter">Interpreter</option>
-						<option value="Iterator">Iterator</option>
 						<option value="Mediator">Mediator</option>
 						<option value="Memento">Memento</option>
 						<option value="Observer">Observer</option>
