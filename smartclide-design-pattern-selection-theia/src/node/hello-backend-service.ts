@@ -173,7 +173,8 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         }else if(statePatternSelection == "ChainofResponsibility"){
             let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
             for (let i=0; i<ppc.length; i++) {
-                ppc[i].writeToFile(rootUri);
+                message = ppc[i].writeToFile(rootUri);
+                if(message!="") return new Promise<string>(resolve => resolve(message));
             }
         }else if(statePatternSelection == "Command"){
             let ppc : Array<patternParticipatingClass> = cg.Command(jsonObj);
@@ -223,6 +224,8 @@ export class HelloBackendServiceImpl implements HelloBackendService {
                 message = ppc[i].writeToFile(rootUri);
                 if(message!="") return new Promise<string>(resolve => resolve(message));
             }
+        }else {
+
         }
         return new Promise<string>(resolve=>resolve(message));
         
