@@ -368,39 +368,43 @@ export class extensionWidget extends ReactWidget {
 	}
 	
 	async runWizard(){
-		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'hidden';
-		(document.getElementById('issues') as HTMLDivElement).style.height = '0';
-		(document.getElementById('result') as HTMLDivElement).style.height = '0';
+		if((document.getElementById("projectName") as HTMLInputElement).value != ""){
+			(document.getElementById('issues') as HTMLDivElement).style.visibility = 'hidden';
+			(document.getElementById('issues') as HTMLDivElement).style.height = '0';
+			(document.getElementById('result') as HTMLDivElement).style.height = '0';
 
-		var getUrl = window.location.href;
-		extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
-		extensionWidget.functions.setClassNames(extensionWidget.res);
+			var getUrl = window.location.href;
+			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
+			extensionWidget.functions.setClassNames(extensionWidget.res);
 		
-		let divWiz = document.getElementById('divWiz') as HTMLDivElement;
-		divWiz.style.marginLeft = '10px';
-		let divCont = document.createElement('div');
-		extensionWidget.functions.createLabel('Choose the type of the pattern: <br>', 'label0', divWiz);
-		extensionWidget.functions.createLabel('Creational', 'label1', divWiz)
-		extensionWidget.functions.createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);
-		let radio1 = document.getElementById('radio1') as HTMLInputElement;
-		radio1.addEventListener('click', async (e: Event) =>{	
-			extensionWidget.creationalPatterns.creationalPatternswizard(divCont, this.messageService, this.helloBackendService);
-		});
-		extensionWidget.functions.createLabel('Structural', 'label2', divWiz);
-		extensionWidget.functions.createInput('', 'radio2', '', 'patternTypes', 'radio', divWiz);
-		let radio2 = document.getElementById('radio2') as HTMLInputElement;
-		radio2.addEventListener('click', async (e: Event) =>{
-			extensionWidget.structuralPatterns.structuralPatternsWizard(divCont, this.messageService, this.helloBackendService);
-		});	
-		extensionWidget.functions.createLabel('Behavioral', 'label3', divWiz);
-		extensionWidget.functions.createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
-		let radio3 = document.getElementById('radio3') as HTMLInputElement;
-		radio3.addEventListener('click', async (e: Event) =>{
-			divCont.innerHTML = "";
-			extensionWidget.functions.createLabel('<br> Do you want to ... <br>', 'labelQuestion19', divCont);
-		});
+			let divWiz = document.getElementById('divWiz') as HTMLDivElement;
+			divWiz.style.marginLeft = '10px';
+			let divCont = document.createElement('div');
+			extensionWidget.functions.createLabel('Choose the type of the pattern: <br>', 'label0', divWiz);
+			extensionWidget.functions.createLabel('Creational', 'label1', divWiz)
+			extensionWidget.functions.createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);
+			let radio1 = document.getElementById('radio1') as HTMLInputElement;
+			radio1.addEventListener('click', async (e: Event) =>{	
+				extensionWidget.creationalPatterns.creationalPatternswizard(divCont, this.messageService, this.helloBackendService);
+			});
+			extensionWidget.functions.createLabel('Structural', 'label2', divWiz);
+			extensionWidget.functions.createInput('', 'radio2', '', 'patternTypes', 'radio', divWiz);
+			let radio2 = document.getElementById('radio2') as HTMLInputElement;
+			radio2.addEventListener('click', async (e: Event) =>{
+				extensionWidget.structuralPatterns.structuralPatternsWizard(divCont, this.messageService, this.helloBackendService);
+			});	
+			extensionWidget.functions.createLabel('Behavioral', 'label3', divWiz);
+			extensionWidget.functions.createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
+			let radio3 = document.getElementById('radio3') as HTMLInputElement;
+			radio3.addEventListener('click', async (e: Event) =>{
+				divCont.innerHTML = "";
+				extensionWidget.functions.createLabel('<br> Do you want to ... <br>', 'labelQuestion19', divCont);
+			});
 		
-		divWiz.appendChild(divCont);
+			divWiz.appendChild(divCont);
+		}else{
+			this.messageService.info("You need to enter the project's name!");
+		}
 	}	
 }			
 	
