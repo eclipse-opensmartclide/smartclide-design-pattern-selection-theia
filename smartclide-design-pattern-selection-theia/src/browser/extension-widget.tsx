@@ -132,6 +132,7 @@ export class extensionWidget extends ReactWidget {
 
 			var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
 
+			console.log('url -> '+getUrl);
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
 			extensionWidget.functions.setClassNames(extensionWidget.res);
 			
@@ -314,16 +315,16 @@ export class extensionWidget extends ReactWidget {
 			}
 			let message = extensionWidget.functions.checkInputs(textfieldArray);
 			if (message.includes("Input is valid")){
+				var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
 				if (extensionWidget.state.statePatternSelection=="Adapter"){
 					let adapteeName = (document.getElementById("txtbox4") as HTMLInputElement).value;
-					var getUrl = window.location.href;
 					var methodNames = await this.helloBackendService.getMethods(getUrl, adapteeName);
 					if (extensionWidget.res.includes(adapteeName)){
 						let methodName = (document.getElementById("txtbox5") as HTMLInputElement).value;
 						if (methodNames.includes(methodName)){
 							extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 							this.messageService.info("Well done! Code is coming...");
-							extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection),this.messageService);
+							extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(getUrl, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection),this.messageService);
 						}else{
 							this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: "+methodNames);
 						}
@@ -333,18 +334,18 @@ export class extensionWidget extends ReactWidget {
 				}else if(extensionWidget.state.statePatternSelection == "AbstractFactory"){
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.insertInputsAbstractFactory(extensionWidget.data["AbstractFactory"].values);
-					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
+					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(getUrl, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
 				}else if(extensionWidget.state.statePatternSelection == "FactoryMethod"){
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.insertInputsFactoryMethod(extensionWidget.data["FactoryMethod"].values);
-					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
+					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(getUrl, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
 				}else if(extensionWidget.state.statePatternSelection == "Builder"){
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.insertInputsBuilder(extensionWidget.data["Builder"].values);
-					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
+					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(getUrl, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
 				}else{
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
-					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
+					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(getUrl, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
 				}
 			}else{
 				this.messageService.info(message);
@@ -373,7 +374,7 @@ export class extensionWidget extends ReactWidget {
 			(document.getElementById('issues') as HTMLDivElement).style.height = '0';
 			(document.getElementById('result') as HTMLDivElement).style.height = '0';
 
-			var getUrl = window.location.href;
+			var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
 			extensionWidget.functions.setClassNames(extensionWidget.res);
 		

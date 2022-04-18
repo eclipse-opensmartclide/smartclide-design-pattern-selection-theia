@@ -103,7 +103,8 @@ export class StructuralPatterns{
 											console.log(JSON.stringify(StructuralPatterns.values["Bridge"]));
 											let message = StructuralPatterns.functions.checkInputs(textfieldArray);
 											if (message == "Input is valid"){
-												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
+												var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
+												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
 											}else{
 												messageService.info(message);
 											}
@@ -232,7 +233,8 @@ export class StructuralPatterns{
 																console.log(JSON.stringify(StructuralPatterns.values["Decorator"]));
 																let message = StructuralPatterns.functions.checkInputs(textfieldArray);
 																if (message == "Input is valid"){
-																	StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Decorator"].values, "Decorator"), messageService);
+																	var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
+																	StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, StructuralPatterns.values["Decorator"].values, "Decorator"), messageService);
 																}else{
 																	messageService.info(message);
 																}
@@ -286,7 +288,8 @@ export class StructuralPatterns{
 													console.log(JSON.stringify(StructuralPatterns.values["Composite"]));
 													let message = StructuralPatterns.functions.checkInputs(textfieldArray);
 													if (message == "Input is valid"){
-														StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Composite"].values, "Composite"), messageService);
+														var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
+														StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, StructuralPatterns.values["Composite"].values, "Composite"), messageService);
 													}else{
 														messageService.info(message);
 													}
@@ -386,8 +389,8 @@ export class StructuralPatterns{
 															//console.log(JSON.stringify(StructuralPatterns.values));
 															let message = StructuralPatterns.functions.checkInputs(textfieldArray);
 															if (message == "Input is valid"){	
-																console.log(window.location.href);										
-																StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
+																var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
+																StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
 															}else{
 																messageService.info(message);
 															}
@@ -463,7 +466,8 @@ export class StructuralPatterns{
 														console.log(JSON.stringify(StructuralPatterns.values["Adapter"]));
 														let message = StructuralPatterns.functions.checkInputs(textfieldArray);
 														if (message == "Input is valid"){
-															StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Adapter"].values, "Adapter"), messageService);
+															var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
+															StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, StructuralPatterns.values["Adapter"].values, "Adapter"), messageService);
 														}else{
 															messageService.info(message);
 														}
@@ -526,8 +530,9 @@ export class StructuralPatterns{
 											}
 											console.log(JSON.stringify(StructuralPatterns.values["Facade"]));
 											let message = StructuralPatterns.functions.checkInputs(textfieldArray);
-											if (message == "Input is valid"){											
-												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
+											if (message == "Input is valid"){										
+												var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;	
+												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
 											}else{
 												messageService.info(message);
 											}
@@ -595,8 +600,9 @@ export class StructuralPatterns{
 												
 												console.log(JSON.stringify(StructuralPatterns.values["Proxy"]));
 												let message = StructuralPatterns.functions.checkInputs(textfieldArray);
-												if (message == "Input is valid"){											
-													StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Proxy"].values, "Proxy"), messageService);
+												if (message == "Input is valid"){					
+													var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;						
+													StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, StructuralPatterns.values["Proxy"].values, "Proxy"), messageService);
 												}else{
 													messageService.info(message);
 												}

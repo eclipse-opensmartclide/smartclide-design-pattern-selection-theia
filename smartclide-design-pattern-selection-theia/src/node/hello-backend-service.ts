@@ -32,7 +32,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         var res= HelloBackendServiceImpl.Files;
         HelloBackendServiceImpl.array = res;
         for (let i=0; i<res.length; i++){
-            let lastW = res[i].lastIndexOf("");
+            let lastW = res[i].lastIndexOf("/");
             let file = res[i].substr(lastW+1);
             file = file.substr(0, file.indexOf("."));
             console.log(file);

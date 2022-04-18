@@ -94,7 +94,8 @@ export class CreationalPatterns{
 												let message = CreationalPatterns.functions.checkInputs(textfieldArray);
 												if (message == "Input is valid"){
 													CreationalPatterns.functions.insertInputsAbstractFactory(CreationalPatterns.values["AbstractFactory"].values);
-													CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["AbstractFactory"].values, "AbstractFactory"), messageService);
+													var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
+													CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, CreationalPatterns.values["AbstractFactory"].values, "AbstractFactory"), messageService);
 												}else{
 													messageService.info(message);
 												}
@@ -156,7 +157,8 @@ export class CreationalPatterns{
 													let message = CreationalPatterns.functions.checkInputs(textfieldArray);
 													if (message == "Input is valid"){
 														CreationalPatterns.functions.insertInputsBuilder(CreationalPatterns.values["Builder"].values);
-														CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Builder"].values, "Builder"), messageService);
+														var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
+														CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, CreationalPatterns.values["Builder"].values, "Builder"), messageService);
 													}else{
 														messageService.info(message);
 													}
@@ -199,7 +201,8 @@ export class CreationalPatterns{
 													let message = CreationalPatterns.functions.checkInputs(textfieldArray);																
 													if (message == "Input is valid"){
 														CreationalPatterns.functions.insertInputsFactoryMethod(CreationalPatterns.values["FactoryMethod"].value);	
-														CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["FactoryMethod"].values, "FactoryMethod"),messageService);
+														var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
+														CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, CreationalPatterns.values["FactoryMethod"].values, "FactoryMethod"),messageService);
 													}else{
 														messageService.info(message);
 													}
@@ -248,7 +251,8 @@ export class CreationalPatterns{
 						}else if (!singlName.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){
 							messageService.info("Class's name must start with a capital letter!");
 						}else{
-							CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Singleton"].values, "Singleton"), messageService);
+							var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
+							CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, CreationalPatterns.values["Singleton"].values, "Singleton"), messageService);
 						}
 					});
 				});
@@ -297,7 +301,8 @@ export class CreationalPatterns{
 									}
 									let message = CreationalPatterns.functions.checkInputs(textfieldArray);
 									if (message == "Input is valid"){											
-										CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Prototype"].values, "Prototype"), messageService);
+										var getUrl = (document.getElementById("projectName") as HTMLInputElement).value;
+										CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(getUrl, CreationalPatterns.values["Prototype"].values, "Prototype"), messageService);
 									}else{
 										messageService.info(message);
 									}
