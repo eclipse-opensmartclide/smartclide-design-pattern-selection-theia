@@ -11,7 +11,7 @@ import explanation from './explanation.json';
 import {Functions} from './functions';
 import { CreationalPatterns } from './CreationalPatternsWizard';
 import { StructuralPatterns} from './StructuralPatternsWizard';
-
+import { BehavioralPatterns} from './BehavioralPatternsWizard';
 interface Textfield{
 	ident: number;
 	value: string;
@@ -55,6 +55,7 @@ export class extensionWidget extends ReactWidget {
 	static functions = new Functions();
 	static creationalPatterns = new CreationalPatterns();
 	static structuralPatterns = new StructuralPatterns();
+	static behavioralPatterns = new BehavioralPatterns();
 	protected render(): React.ReactNode {
 		const header = `Choose a Design Pattern and get the code. `;
 		
@@ -313,7 +314,7 @@ export class extensionWidget extends ReactWidget {
 						if (methodNames.includes(methodName)){
 							extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 							this.messageService.info("Well done! Code is coming...");
-							await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection);
+							extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection),this.messageService);
 						}else{
 							this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: "+methodNames);
 						}
@@ -386,8 +387,7 @@ export class extensionWidget extends ReactWidget {
 		extensionWidget.functions.createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
 		let radio3 = document.getElementById('radio3') as HTMLInputElement;
 		radio3.addEventListener('click', async (e: Event) =>{
-			divCont.innerHTML = "";
-			extensionWidget.functions.createLabel('<br> Do you want to ... <br>', 'labelQuestion19', divCont);
+			extensionWidget.behavioralPatterns.behavioralPatternsWizard(divCont, this.messageService, this.helloBackendService);
 		});
 		
 		divWiz.appendChild(divCont);
