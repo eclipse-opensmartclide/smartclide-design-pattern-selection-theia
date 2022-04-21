@@ -302,9 +302,9 @@
                 "name":"",
                 "extension":0
             },
-            "ConcreteCommand1MethodParameter1":{
+            "ConcreteCommand1MethodParameter":{
                 "name":"",
-                "extension":1
+                "extension":0
             }
         }
     },
