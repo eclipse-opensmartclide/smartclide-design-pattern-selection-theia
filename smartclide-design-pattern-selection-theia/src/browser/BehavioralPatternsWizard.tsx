@@ -43,30 +43,61 @@ export class BehavioralPatterns{
 							buttonNext1.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
 								let divCont6 = document.createElement('div');
-								BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Mediators <br>", parseInt((document.getElementById('numOfConcreteMediators') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxConcreteImplementation', 'infoField', 'buttonNext2', divCont5);
+								BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Mediators <br>", parseInt((document.getElementById('numOfConcreteMediators') as HTMLInputElement).value), 'text', "Concrete Mediator's name ", 'txtboxConcreteImplementation', 'infoField', 'buttonNext2', divCont5);
 								let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
 								buttonNext2.addEventListener('click', async (e: Event) =>{
 									divCont6.innerHTML = "";
-									BehavioralPatterns.functions.textfieldQuestion('<br>How many Components(classes that need to be connected) exist? <br>',  1, 'number', '1', 'numOfConmponents', '', 'buttonNext3', divCont4);;
+									let divCont7 = document.createElement('div');
+									BehavioralPatterns.functions.textfieldQuestion('<br>How many Components(classes that need to be connected) exist? <br>',  1, 'number', '1', 'numOfConmponents', '', 'buttonNext3', divCont6);;
 									let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
 									buttonNext3.addEventListener('click', async (e: Event) =>{
-										divCont5.innerHTML = "";
-										let divCont6 = document.createElement('div');
-										BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Components <br>", parseInt((document.getElementById('numOfConmponents') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxConcreteImplementation', 'infoField', 'buttonNext4', divCont5);
+										divCont7.innerHTML = "";
+										let divCont8 = document.createElement('div');
+										BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Components <br>", parseInt((document.getElementById('numOfConmponents') as HTMLInputElement).value), 'text', "Concrete Component's name ", 'txtboxConcreteImplementation', 'infoField', 'buttonNext4', divCont7);
 										let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
 										buttonNext4.addEventListener('click', async (e: Event) =>{
-											divCont6.innerHTML = "";
-											let divCont7 = document.createElement('div');
-											BehavioralPatterns.functions.createLabel('<br> <b>Mediator Pattern</b>  ', '', divCont7);
-											BehavioralPatterns.functions.createButton('Get Code', 'getcodeBridgePattern', divCont7);
-											let buttonCodeBP = document.getElementById('getcodeBridgePattern') as HTMLButtonElement;
-											buttonCodeBP.addEventListener('click', async (e: Event) =>{
+											divCont8.innerHTML = "";
+											BehavioralPatterns.functions.createLabel('<br> <b>Mediator Pattern</b>  ', '', divCont8);
+											BehavioralPatterns.functions.createButton('Get Code', 'getcodeMediatorPattern', divCont8);
+											let buttonCodeMP = document.getElementById('getcodeMediatorPattern') as HTMLButtonElement;
+											buttonCodeMP.addEventListener('click', async (e: Event) =>{
+												//Mediator ?? Θελει σιγουρα δυο Components?????
+												let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
+												let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
+												BehavioralPatterns.values["Mediator"].values["Mediator"].name = (infoList.item(0) as HTMLInputElement).value;
+												let textfield:  Textfield={ ident: 1, value: (infoList.item(0) as HTMLInputElement).value };
+												textfieldArray.push(textfield);
+												console.log(JSON.stringify(BehavioralPatterns.values["Mediator"]));
+												let numConMed = parseInt((document.getElementById('numOfConcreteMediators') as HTMLInputElement).value);
+												for (var j=1; j<=numConMed; j++){
+													BehavioralPatterns.values["Mediator"].values["ConcreteMediator"+j] = { "name":"", "extension":1};
+													let v1 = (infoList.item(j) as HTMLInputElement).value;
+													BehavioralPatterns.values["Mediator"].values["ConcreteMediator"+j].name = v1;
+													let textfield:  Textfield={ ident: 1, value: v1 };
+													textfieldArray.push(textfield);
+												}
+												let numComp = parseInt((document.getElementById('numOfConmponents') as HTMLInputElement).value);
+												console.log(numComp)
+												for (var j=1; j<=numComp; j++){
+													BehavioralPatterns.values["Mediator"].values["Component"+j] = { "name":"", "extension":1};
+													let v2 = (infoList.item(j) as HTMLInputElement).value;
+													BehavioralPatterns.values["Mediator"].values["Component"+j].name = v2;
+													let textfield:  Textfield={ ident: 1, value: v2 };
+													textfieldArray.push(textfield);
+												}
+												console.log(JSON.stringify(BehavioralPatterns.values["Mediator"]));
+												let message = BehavioralPatterns.functions.checkInputs(textfieldArray);
+												if (message == "Input is valid"){
+													BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Mediator"].values, "Mediator"), messageService);
+												}else{
+													messageService.info(message);
+												}
 											});
-											divCont6.append(divCont7);
+											
 										});
-										
+										divCont7.append(divCont8);
 									});
-									
+									divCont6.append(divCont7);
 								});
 								divCont5.append(divCont6);
 							});
