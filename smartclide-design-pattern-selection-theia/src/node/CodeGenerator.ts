@@ -333,7 +333,7 @@ export class CodeGenerator {
 	}	
 
 	//Behavioral Patterns
-	public ChainofResponsibility(jsonObj: string): Array<patternParticipatingClass>{
+	public ChainOfResponsibility(jsonObj: string): Array<patternParticipatingClass>{
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -350,6 +350,7 @@ export class CodeGenerator {
 				this.fillPromise(ppc, file2);
 			}
 		});
+		console.log(1);
 		return ppc.object;
 	}	
 	public Command(jsonObj: string): Array<patternParticipatingClass>{
