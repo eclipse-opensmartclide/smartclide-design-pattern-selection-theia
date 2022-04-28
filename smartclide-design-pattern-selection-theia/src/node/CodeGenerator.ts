@@ -408,7 +408,8 @@ export class CodeGenerator {
 				this.fillPromise(ppc, file2);
 			}else if(key.includes("Component")){
 				let file3 : patternParticipatingClass = new NonHierarchyClass(obj[key].name);
-				file3.addAttribute(new Attribute(obj.Mediator.name.toLowerCase().charAt(0),obj.Mediator.name,"private"))
+				let attribute = obj.Mediator.name.toLowerCase();
+				file3.addAttribute(new Attribute(attribute.charAt(0),obj.Mediator.name,"private"))
 				mList.push(obj[key].name);
 				this.fillPromise(ppc, file3);
 			}else{
@@ -447,8 +448,9 @@ export class CodeGenerator {
 		
 		file3.addAttribute(new Attribute(obj.Originator.name.toLowerCase(), obj.Originator.name,"private"));
 		file3.addAttribute(new Attribute("history","ArrayList<"+obj.Memento.name+">","private"));
-		file3.addMethod(new Method("doSomething","void",false,"public","\t \t "+obj.Memento.name+""+ obj.Memento.name.toLowercase().charAt(0)+" =  "+(obj.Originator.name).toLowerCase()+".save();\n \t \t history.push(m);",[]));
-		file3.addMethod(new Method("undo","void",false,"public","\t \t "+obj.Memento.name+""+ obj.Memento.name.toLowercase().charAt(0)+" =  history.remove();\n \t \t "+(obj.Originator.name).toLowerCase()+".restore(m);",[]));
+		let attribute = obj.Memento.name.toLowerCase();
+		file3.addMethod(new Method("doSomething","void",false,"public","\t \t "+obj.Memento.name+""+ attribute.charAt(0)+" =  "+(obj.Originator.name).toLowerCase()+".save();\n \t \t history.push(m);",[]));
+		file3.addMethod(new Method("undo","void",false,"public","\t \t "+obj.Memento.name+""+ (attribute.charAt(0))+" =  history.remove();\n \t \t "+(obj.Originator.name).toLowerCase()+".restore(m);",[]));
 		
 		this.fillPromise(ppc, file1);
 		this.fillPromise(ppc, file2);
@@ -567,7 +569,7 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file1);
 
 		let file2 : patternParticipatingClass = new abstractClass(obj.Element.name);
-		file2.addMethod(new Method("accept","void",true,"public","",[new Attribute(obj.Visitor.name.toLowerCase().charAt(0),obj.Visitor.name,"")]))
+		file2.addMethod(new Method("accept","void",true,"public","",[new Attribute(obj.Visitor.name.toLowerCase().charAt(0), obj.Visitor.name,"")]))
 		this.fillPromise(ppc, file2);
 		var cList: Array<patternParticipatingClass> = [];//list of ConcreteVisitors
 		var eList: Array<Method> = [];//list of ConcreteElement method 
