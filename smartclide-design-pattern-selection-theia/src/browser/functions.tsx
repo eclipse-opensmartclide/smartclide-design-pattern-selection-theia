@@ -50,7 +50,7 @@ export class Functions{
 		parent.append(inputField);
         if (type.includes('number')){
 			inputField.min = '1';
-			inputField.value = '1';
+			inputField.value = innerMessage;
 		}
         if (!id.includes('radio') && !id.includes('Num')&& !id.includes('num')){
             inputField.className = classname;

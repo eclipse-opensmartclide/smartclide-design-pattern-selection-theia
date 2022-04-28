@@ -54,7 +54,7 @@ export class BehavioralPatterns{
 									buttonNext3.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
 										let divCont8 = document.createElement('div');
-										BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Components <br>", parseInt((document.getElementById('numOfConmponents') as HTMLInputElement).value), 'text', "Component's name ", 'txtboxComponent', 'infoField', 'buttonNext4', divCont7);
+										BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Components <br>", parseInt((document.getElementById('numOfConmponents') as HTMLInputElement).value), 'text', "Component's name ", 'txtboxComponent', 'infoField', 'buttonNext4', divCont7);
 										let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
 										buttonNext4.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
@@ -267,6 +267,82 @@ export class BehavioralPatterns{
 					let radio3211 = document.getElementById('radio3211') as HTMLInputElement;
 					radio3211.addEventListener('click', async (e: Event) =>{
 						//VISITOR
+						divCont3.innerHTML = "";
+						let divCont4 = document.createElement('div');
+						BehavioralPatterns.functions.textfieldQuestion('<br> Insert the name of the Visitor, the interface that declares a set of visiting methods that can take concrete elements of an object structure as arguments<br>', 1, 'text', "Visitor's name", 'txtboxVisitor', '', 'buttonNext', divCont3);
+						let buttonNext = document.getElementById('buttonNext') as HTMLButtonElement;
+						buttonNext.addEventListener('click', async (e: Event) =>{
+							divCont4.innerHTML = "";
+							let divCont5 = document.createElement('div');
+							BehavioralPatterns.functions.textfieldQuestion('<br>How many Concrete Visitors(classes that implement several versions of the same behaviors) exist? <br>',  1, 'number', '1', 'numOfConcreteVisitors', '', 'buttonNext1', divCont4);;
+							let buttonNext1 = document.getElementById('buttonNext1') as HTMLButtonElement;
+							buttonNext1.addEventListener('click', async (e: Event) =>{
+								divCont5.innerHTML = "";
+								let divCont6 = document.createElement('div');
+								BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Visitors <br>", parseInt((document.getElementById('numOfConcreteVisitors') as HTMLInputElement).value), 'text', "Concrete Visitor's name ", 'txtboxConcreteVisitor', '', 'buttonNext2', divCont5);
+								let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
+								buttonNext2.addEventListener('click', async (e: Event) =>{
+									divCont6.innerHTML = "";
+									let divCont6b = document.createElement('div');
+									BehavioralPatterns.functions.textfieldQuestion('<br> Insert the name of the Element, the interface that declares a method for “accepting” visitors<br>', 1, 'text', "Element's name", 'txtboxElement', '', 'buttonNext2b', divCont6);
+									let buttonNext2b = document.getElementById('buttonNext2b') as HTMLButtonElement;
+									buttonNext2b.addEventListener('click', async (e: Event) =>{
+									  divCont6b.innerHTML = "";
+									  let divCont7 = document.createElement('div');
+									  BehavioralPatterns.functions.textfieldQuestion('<br>How many Concrete Elements exist? <br>',  1, 'number', '2', 'numOfConcreteElements', '', 'buttonNext3', divCont6b);
+									  (document.getElementById('numOfConcreteElements') as HTMLInputElement).min = '2';
+									  let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
+									  buttonNext3.addEventListener('click', async (e: Event) =>{
+										divCont7.innerHTML = "";
+										let divCont8 = document.createElement('div');
+										BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Elements <br>", parseInt((document.getElementById('numOfConcreteElements') as HTMLInputElement).value), 'text', "Concrete Element's name ", 'txtboxConcreteElement', '', 'buttonNext4', divCont7);
+										let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
+										buttonNext4.addEventListener('click', async (e: Event) =>{
+											divCont8.innerHTML = "";
+											BehavioralPatterns.functions.createLabel('<br> <b>Visitor Pattern</b>  ', '', divCont8);
+											BehavioralPatterns.functions.createButton('Get Code', 'getcodeVisitorPattern', divCont8);
+											let buttonCodeVP = document.getElementById('getcodeVisitorPattern') as HTMLButtonElement;
+											buttonCodeVP.addEventListener('click', async (e: Event) =>{
+												let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
+												let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxVisitor')as HTMLInputElement).value };
+												textfieldArray.push(textfield1);
+												BehavioralPatterns.values["Visitor"].values["Element"].name = (document.getElementById('txtboxElement')as HTMLInputElement).value;
+												let textfield2:  Textfield={ ident: 1, value: (document.getElementById('txtboxElement')as HTMLInputElement).value };
+												textfieldArray.push(textfield2);
+												BehavioralPatterns.values["Visitor"].values["Visitor"].name = (document.getElementById('txtboxVisitor')as HTMLInputElement).value;
+												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteVisitors') as HTMLInputElement).value); i++){
+													BehavioralPatterns.values["Visitor"].values["ConcreteVisitor"+i] = { "name":"", "extension":0};
+													BehavioralPatterns.values["Visitor"].values["ConcreteVisitor"+i].name = (document.getElementById('txtboxConcreteVisitor'+i)as HTMLInputElement).value;
+													let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcreteVisitor'+i)as HTMLInputElement).value };
+													textfieldArray.push(textfield);
+												}
+												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteElements') as HTMLInputElement).value); i++){
+													BehavioralPatterns.values["Visitor"].values["ConcreteElement"+i] = { "name":"", "extension":1};
+													BehavioralPatterns.values["Visitor"].values["ConcreteElement"+i].name = (document.getElementById('txtboxConcreteElement'+i)as HTMLInputElement).value;
+													let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcreteElement'+i)as HTMLInputElement).value };
+													textfieldArray.push(textfield);
+												}
+													console.log(JSON.stringify(BehavioralPatterns.values["Visitor"]));
+
+												let message = BehavioralPatterns.functions.checkInputs(textfieldArray);
+												if (message == "Input is valid"){
+													BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Visitor"].values, "Visitor"), messageService);
+												}else{
+													messageService.info(message);
+												}
+											});
+										});
+										divCont7.append(divCont8);
+									  });
+									  divCont6b.append(divCont7);
+									});
+									divCont6.append(divCont6b);
+								});
+								divCont5.append(divCont6);
+							});
+							divCont4.appendChild(divCont5);
+						});
+						divCont3.appendChild(divCont4);
 					});
 					let radio3212 = document.getElementById('radio3212') as HTMLInputElement;
 					radio3212.addEventListener('click', async (e: Event) =>{
