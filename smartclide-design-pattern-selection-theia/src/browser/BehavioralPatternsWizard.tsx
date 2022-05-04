@@ -49,7 +49,7 @@ export class BehavioralPatterns{
 								buttonNext2.addEventListener('click', async (e: Event) =>{
 									divCont6.innerHTML = "";
 									let divCont7 = document.createElement('div');
-									BehavioralPatterns.functions.textfieldQuestion('<br>How many Components(classes that need to be connected) exist? <br>',  1, 'number', '1', 'numOfConmponents', '', 'buttonNext3', divCont6);;
+									BehavioralPatterns.functions.textfieldQuestion('<br>How many Components(classes that need to be connected) exist? <br>',  1, 'number', '2', 'numOfConmponents', '', 'buttonNext3', divCont6);;
 									let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
 									buttonNext3.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
@@ -281,7 +281,6 @@ export class BehavioralPatterns{
 					BehavioralPatterns.functions.radioQuestion('<br>Are the varying implementations based on an existing implementention, being extended in different ways? <br>', 'Yes', 'No', 'radio3211', 'radio3212', divCont2);
 					let radio3211 = document.getElementById('radio3211') as HTMLInputElement;
 					radio3211.addEventListener('click', async (e: Event) =>{
-						//VISITOR
 						divCont3.innerHTML = "";
 						let divCont4 = document.createElement('div');
 						BehavioralPatterns.functions.textfieldQuestion('<br> Insert the name of the Visitor, the interface that declares a set of visiting methods that can take concrete elements of an object structure as arguments<br>', 1, 'text', "Visitor's name", 'txtboxVisitor', '', 'buttonNext', divCont3);
@@ -578,20 +577,16 @@ export class BehavioralPatterns{
 														let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxOriginator')as HTMLInputElement).value };
 														textfieldArray.push(textfield1);
 														BehavioralPatterns.values["Memento"].values["Originator"].name = (document.getElementById('txtboxOriginator')as HTMLInputElement).value;
-														let textfield2:  Textfield={ ident: 3, value: (document.getElementById('txtboxOriginatorAttribute')as HTMLInputElement).value };
-														textfieldArray.push(textfield2);
-														BehavioralPatterns.values["Memento"].values["OriginatorAttribute1"].name = (document.getElementById('txtboxOriginatorAttribute')as HTMLInputElement).value;
 														let textfield3:  Textfield={ ident: 1, value: (document.getElementById('txtboxMemento')as HTMLInputElement).value };
 														textfieldArray.push(textfield3);
 														BehavioralPatterns.values["Memento"].values["Memento"].name = (document.getElementById('txtboxMemento')as HTMLInputElement).value;
-														
 														let textfield5:  Textfield={ ident: 1, value: (document.getElementById('txtboxCaretaker')as HTMLInputElement).value };
 														textfieldArray.push(textfield5);
 														BehavioralPatterns.values["Memento"].values["Caretaker"].name = (document.getElementById('txtboxCaretaker')as HTMLInputElement).value;
 														for (var i=1; i<=parseInt((document.getElementById('numOfMementoAttributes') as HTMLInputElement).value); i++){
 															BehavioralPatterns.values["Memento"].values["MementoAttribute"+i] = { "name":"", "extension":1};
-															let textfield4:  Textfield={ ident: 3, value: (document.getElementById('txtboxMementoAttribute'+i)as HTMLInputElement).value };
-															textfieldArray.push(textfield4);
+															let textfield:  Textfield={ ident: 3, value: (document.getElementById('txtboxMementoAttribute'+i)as HTMLInputElement).value };
+															textfieldArray.push(textfield);
 															BehavioralPatterns.values["Memento"].values["MementoAttribute"+i].name = (document.getElementById('txtboxMementoAttribute'+i)as HTMLInputElement).value;
 														}
 														for (var i=1; i<=parseInt((document.getElementById('numOfOriginatorAttributes') as HTMLInputElement).value); i++){
