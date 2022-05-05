@@ -112,6 +112,7 @@ export class extensionWidget extends ReactWidget {
 					</table>
 					<div id="elements">
 						<button id ="btn-finalize"  type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement))}> Get Code </button>
+						<button id ="btn-back"  type="button" title='Go back'  onClick={_a => this.goBackbuttonClick((document.getElementById('show_pattern_table') as HTMLTableElement))}> Back </button>
 					</div>
 				</div>
 			</div>
@@ -132,6 +133,7 @@ export class extensionWidget extends ReactWidget {
 			extensionWidget.functions.setClassNames(extensionWidget.res);
 			
 			(document.getElementById("result") as HTMLElement).style.visibility = 'visible';
+			(document.getElementById("btn-back") as HTMLButtonElement).style.visibility = 'visible';
 			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
 			(document.getElementById('description') as HTMLElement).innerHTML = "<b>"+extensionWidget.state.statePatternSelection.split(/(?=[A-Z])/).join(" ")+"</b> "+extensionWidget.explanation[extensionWidget.state.statePatternSelection].description;
 			(document.getElementById('example') as HTMLElement).innerHTML = "<b>Example:</b> "+extensionWidget.explanation[extensionWidget.state.statePatternSelection].example;
@@ -286,7 +288,14 @@ export class extensionWidget extends ReactWidget {
 		
 		
 	}
+	async goBackbuttonClick(table: HTMLTableElement){
+		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
+		(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'visible';
+		(document.getElementById("btn-back") as HTMLButtonElement).style.visibility = 'hidden';
+		(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
+		table.innerHTML = "";
 
+	}
 	async buttonClick2 (table: HTMLTableElement):Promise<void>{
 			let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
 			for (var i=0; i<table.rows.length; i++){

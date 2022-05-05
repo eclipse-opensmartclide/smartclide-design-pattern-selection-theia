@@ -123,6 +123,7 @@ export class Functions{
 			let button = document.createElement('button');
 			button.innerHTML = innerMessage;
 			button.id = id;
+			button.title = (innerMessage === "+") ? "Plus button": innerMessage;
 			parent.appendChild(button);
 		}
     }
@@ -209,13 +210,6 @@ export class Functions{
 
 	check(key: string, statePatternSelection: string){
 		return (!key.includes("ConcreteProduct") || statePatternSelection!="AbstractFactory") && (!key.includes("ConcreteCreator") || statePatternSelection!="FactoryMethod") && (!key.includes("ConcreteBuilder") || statePatternSelection!="Builder")
-	}
-
-	refreshPage(table: HTMLTableElement){
-		table.innerHTML = "";
-		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
-		(document.getElementById("elements") as HTMLElement).style.visibility = 'hidden';
-		
 	}
 
 	insertInputsAbstractFactory(data: string){

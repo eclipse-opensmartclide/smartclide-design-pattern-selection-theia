@@ -85,8 +85,6 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         
     }
     
-    
-    
     async codeGeneration(url : string, jsonObj : string, statePatternSelection: string): Promise<string>{ 
         let cg : CodeGenerator  = new CodeGenerator();
         var lastL = url.indexOf("/#/");
@@ -170,8 +168,8 @@ export class HelloBackendServiceImpl implements HelloBackendService {
                 message = ppc[i].writeToFile(rootUri);
                 if(message!="") return new Promise<string>(resolve => resolve(message));
             }
-        }else if(statePatternSelection == "ChainofResponsibility"){
-            let ppc : Array<patternParticipatingClass> = cg.ChainofResponsibility(jsonObj);
+        }else if(statePatternSelection == "ChainOfResponsibility"){
+            let ppc : Array<patternParticipatingClass> = cg.ChainOfResponsibility(jsonObj);
             for (let i=0; i<ppc.length; i++) {
                 message = ppc[i].writeToFile(rootUri);
                 if(message!="") return new Promise<string>(resolve => resolve(message));

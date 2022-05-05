@@ -110,6 +110,10 @@
 .Strategy{
   content : url(./img/BehavioralPatternsIcons/StrategyIcon.jpg);
 }
+.TemplateMethod{
+  content : url(./img/BehavioralPatternsIcons/TemplateMethodIcon.jpg);
+}
+
 #btn-wizzard{
   margin-left: 50px;
   
@@ -170,4 +174,11 @@ body::-webkit-scrollbar {
 #btn-get-code{
   margin-left:0px;
 }
+#btn-back{
+  visibility: hidden;
+  margin-left: 15px;
+}
 
+#btn-wizard{
+  margin-left: 15px;
+}
