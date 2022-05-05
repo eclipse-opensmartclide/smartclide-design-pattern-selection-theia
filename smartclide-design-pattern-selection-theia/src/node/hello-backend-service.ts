@@ -85,8 +85,6 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         
     }
     
-    
-    
     async codeGeneration(url : string, jsonObj : string, statePatternSelection: string): Promise<string>{ 
         let cg : CodeGenerator  = new CodeGenerator();
         var lastL = url.indexOf("/#/");

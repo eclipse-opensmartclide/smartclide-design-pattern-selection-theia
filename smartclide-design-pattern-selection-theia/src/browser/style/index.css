@@ -110,6 +110,10 @@
 .Strategy{
   content : url(./img/BehavioralPatternsIcons/StrategyIcon.jpg);
 }
+.TemplateMethod{
+  content : url(./img/BehavioralPatternsIcons/TemplateMethodIcon.jpg);
+}
+
 #btn-wizzard{
   margin-left: 50px;
   
