@@ -50,6 +50,7 @@ export class Functions{
 		parent.append(inputField);
         if (type.includes('number')){
 			inputField.min = '1';
+			inputField.value = innerMessage;
 		}
         if (!id.includes('radio') && !id.includes('Num')&& !id.includes('num')){
             inputField.className = classname;
@@ -118,11 +119,13 @@ export class Functions{
     }
     
     createButton(innerMessage: string, id: string, parent: HTMLElement){
-        let button = document.createElement('button');
-        button.innerHTML = innerMessage;
-		button.id = id;
-		button.title = (innerMessage === "+") ? "Plus button": innerMessage;
-        parent.appendChild(button);
+		if (id!=='disable'){
+			let button = document.createElement('button');
+			button.innerHTML = innerMessage;
+			button.id = id;
+			button.title = (innerMessage === "+") ? "Plus button": innerMessage;
+			parent.appendChild(button);
+		}
     }
 
 	checkMessage(message: string, messageService: MessageService ){
