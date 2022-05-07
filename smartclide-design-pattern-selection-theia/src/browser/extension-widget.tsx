@@ -50,6 +50,7 @@ export class extensionWidget extends ReactWidget {
 	static methodNames: string[];
 	
 	static data = JSON.parse(JSON.stringify(data));
+	static initialData = JSON.parse(JSON.stringify(data));
 	static explanation = JSON.parse(JSON.stringify(explanation));
 
 	static functions = new Functions();
@@ -293,6 +294,7 @@ export class extensionWidget extends ReactWidget {
 		(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'visible';
 		(document.getElementById("btn-back") as HTMLButtonElement).style.visibility = 'hidden';
 		(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
+		extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.initialData[extensionWidget.state.statePatternSelection].values;
 		table.innerHTML = "";
 
 	}
