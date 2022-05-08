@@ -80,7 +80,7 @@ export class BehavioralPatterns{
 												}
 													console.log(JSON.stringify(BehavioralPatterns.values["Mediator"]));
 
-												let message = BehavioralPatterns.functions.checkInputs(textfieldArray);
+												let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){
 													BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Mediator"].values, "Mediator"), messageService);
 												}else{
@@ -185,7 +185,7 @@ export class BehavioralPatterns{
 															}
 															console.log(JSON.stringify(BehavioralPatterns.values["Command"]));
 
-														let message = BehavioralPatterns.functions.checkInputs(textfieldArray);
+														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
 															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Command"].values, "Command"), messageService);
 														}else{
@@ -252,7 +252,7 @@ export class BehavioralPatterns{
 									}
 									console.log(JSON.stringify(BehavioralPatterns.values["ChainOfResponsibility"]));
 
-								let message = BehavioralPatterns.functions.checkInputs(textfieldArray);
+								let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 								if (message == "Input is valid"){
 									BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["ChainOfResponsibility"].values, "ChainOfResponsibility"), messageService);
 								}else{
@@ -338,7 +338,7 @@ export class BehavioralPatterns{
 												}
 													console.log(JSON.stringify(BehavioralPatterns.values["Visitor"]));
 
-												let message = BehavioralPatterns.functions.checkInputs(textfieldArray);
+												let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){
 													BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Visitor"].values, "Visitor"), messageService);
 												}else{
@@ -414,7 +414,7 @@ export class BehavioralPatterns{
 														}
 															console.log(JSON.stringify(BehavioralPatterns.values["TemplateMethod"]));
 
-														let message = BehavioralPatterns.functions.checkInputs(textfieldArray);
+														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
 															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["TemplateMethod"].values, "TemplateMethod"), messageService);
 														}else{
@@ -491,7 +491,7 @@ export class BehavioralPatterns{
 															}
 															console.log(JSON.stringify(BehavioralPatterns.values["Strategy"]));
 
-														let message = BehavioralPatterns.functions.checkInputs(textfieldArray);
+														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
 															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Strategy"].values, "Strategy"), messageService);
 														}else{
@@ -596,7 +596,7 @@ export class BehavioralPatterns{
 															textfieldArray.push(textfield);
 														}
 														console.log(JSON.stringify(BehavioralPatterns.values["Memento"]));
-														let message = BehavioralPatterns.functions.checkInputs(textfieldArray);
+														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
 															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Memento"].values, "Memento"), messageService);
 														}else{
@@ -681,7 +681,7 @@ export class BehavioralPatterns{
 															}
 																console.log(JSON.stringify(BehavioralPatterns.values["Observer"]));
 	
-															let message = BehavioralPatterns.functions.checkInputs(textfieldArray);
+															let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 															if (message == "Input is valid"){
 																BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Observer"].values, "Observer"), messageService);
 															}else{
@@ -749,7 +749,7 @@ export class BehavioralPatterns{
 																textfieldArray.push(textfield);
 															}
 															console.log(JSON.stringify(BehavioralPatterns.values["State"]));
-														let message = BehavioralPatterns.functions.checkInputs(textfieldArray);
+														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
 															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["State"].values, "State"), messageService);
 														}else{

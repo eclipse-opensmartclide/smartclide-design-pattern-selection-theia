@@ -91,7 +91,7 @@ export class CreationalPatterns{
 													i++;
 												}
 												
-												let message = CreationalPatterns.functions.checkInputs(textfieldArray);
+												let message = CreationalPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){
 													CreationalPatterns.functions.insertInputsAbstractFactory(CreationalPatterns.values["AbstractFactory"].values);
 													CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["AbstractFactory"].values, "AbstractFactory"), messageService);
@@ -153,7 +153,7 @@ export class CreationalPatterns{
 														i++;
 													}
 													
-													let message = CreationalPatterns.functions.checkInputs(textfieldArray);
+													let message = CreationalPatterns.functions.checkInputsOnSubmit(1);
 													if (message == "Input is valid"){
 														CreationalPatterns.functions.insertInputsBuilder(CreationalPatterns.values["Builder"].values);
 														CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Builder"].values, "Builder"), messageService);
@@ -195,10 +195,10 @@ export class CreationalPatterns{
 													CreationalPatterns.values["FactoryMethod"].values["Creator"].name = (infoList.item(i) as HTMLInputElement).value;
 													let textfield2:  Textfield={ ident: 1, value: (infoList.item(i) as HTMLInputElement).value };
 													textfieldArray.push(textfield2);
-																											
-													let message = CreationalPatterns.functions.checkInputs(textfieldArray);																
+													console.log(JSON.stringify(CreationalPatterns.values["FactoryMethod"]));;											
+													let message = CreationalPatterns.functions.checkInputsOnSubmit(1);																
 													if (message == "Input is valid"){
-														CreationalPatterns.functions.insertInputsFactoryMethod(CreationalPatterns.values["FactoryMethod"].value);	
+														CreationalPatterns.functions.insertInputsFactoryMethod(CreationalPatterns.values["FactoryMethod"].values);	
 														CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["FactoryMethod"].values, "FactoryMethod"),messageService);
 													}else{
 														messageService.info(message);
@@ -295,7 +295,7 @@ export class CreationalPatterns{
 										let textfield:  Textfield={ ident: 1, value: v1 };
 										textfieldArray.push(textfield);
 									}
-									let message = CreationalPatterns.functions.checkInputs(textfieldArray);
+									let message = CreationalPatterns.functions.checkInputsOnSubmit(1);
 									if (message == "Input is valid"){											
 										CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Prototype"].values, "Prototype"), messageService);
 									}else{

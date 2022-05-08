@@ -101,7 +101,7 @@ export class StructuralPatterns{
 												textfieldArray.push(textfield);
 											}
 											console.log(JSON.stringify(StructuralPatterns.values["Bridge"]));
-											let message = StructuralPatterns.functions.checkInputs(textfieldArray);
+											let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 											if (message == "Input is valid"){
 												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
 											}else{
@@ -230,7 +230,7 @@ export class StructuralPatterns{
 																	i++;
 																}
 																console.log(JSON.stringify(StructuralPatterns.values["Decorator"]));
-																let message = StructuralPatterns.functions.checkInputs(textfieldArray);
+																let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 																if (message == "Input is valid"){
 																	StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Decorator"].values, "Decorator"), messageService);
 																}else{
@@ -284,7 +284,7 @@ export class StructuralPatterns{
 													let textfield1:  Textfield={ ident: 1, value: (infoList.item(i) as HTMLInputElement).value };
 													textfieldArray.push(textfield1);
 													console.log(JSON.stringify(StructuralPatterns.values["Composite"]));
-													let message = StructuralPatterns.functions.checkInputs(textfieldArray);
+													let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 													if (message == "Input is valid"){
 														StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Composite"].values, "Composite"), messageService);
 													}else{
@@ -384,7 +384,7 @@ export class StructuralPatterns{
 															textfield={ ident: 1, value: (infoList.item(3+numCat) as HTMLInputElement).value };
 															textfieldArray.push(textfield);
 															//console.log(JSON.stringify(StructuralPatterns.values));
-															let message = StructuralPatterns.functions.checkInputs(textfieldArray);
+															let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 															if (message == "Input is valid"){	
 																console.log(window.location.href);										
 																StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
@@ -461,7 +461,7 @@ export class StructuralPatterns{
 														let textfield4:  Textfield={ ident: 1, value: (infoList.item(4) as HTMLInputElement).value };
 														textfieldArray.push(textfield4);
 														console.log(JSON.stringify(StructuralPatterns.values["Adapter"]));
-														let message = StructuralPatterns.functions.checkInputs(textfieldArray);
+														let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
 															StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Adapter"].values, "Adapter"), messageService);
 														}else{
@@ -525,7 +525,7 @@ export class StructuralPatterns{
 												textfieldArray.push(textfield);
 											}
 											console.log(JSON.stringify(StructuralPatterns.values["Facade"]));
-											let message = StructuralPatterns.functions.checkInputs(textfieldArray);
+											let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 											if (message == "Input is valid"){											
 												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
 											}else{
@@ -594,7 +594,7 @@ export class StructuralPatterns{
 												textfieldArray.push(textfield);
 												
 												console.log(JSON.stringify(StructuralPatterns.values["Proxy"]));
-												let message = StructuralPatterns.functions.checkInputs(textfieldArray);
+												let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){											
 													StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Proxy"].values, "Proxy"), messageService);
 												}else{

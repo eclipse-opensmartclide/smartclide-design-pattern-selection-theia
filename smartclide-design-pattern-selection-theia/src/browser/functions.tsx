@@ -1,9 +1,6 @@
 import { MessageService } from '@theia/core';
 import autocomplete,{ AutocompleteItem} from 'autocompleter';
-interface Textfield{
-	ident: number;
-	value: string;
-  };
+
 
 export class Functions{
     
@@ -124,6 +121,7 @@ export class Functions{
 			button.innerHTML = innerMessage;
 			button.id = id;
 			button.title = (innerMessage === "+") ? "Plus button": innerMessage;
+			button.type = 'button';
 			parent.appendChild(button);
 		}
     }
@@ -135,77 +133,82 @@ export class Functions{
 			messageService.info("Code generation has been completed");
 		}
 	}
-	
-    checkInputs(array: Array<Textfield>){
-		let returncode1 = this.checkEmptyInputs(array);
-		let returncode2 = this.checkWritingInput(array);
-		let returncode3 = this.checkInputsForSameValues(array);
-		if (returncode1+returncode2+returncode3==0){
-			return "Input is valid";
-		}else if (returncode1==1){
-			return "You need to fill all the fields!";
-		}else if (returncode2==2){
-			return "Class's name must start with a capital letter!";
-		}else if (returncode2==3){
-			return "Method's name must follow camel writing!";
-		}else if (returncode2==4){
-			return "Attribute's name must contain only small letters!";
-		}else {
-			return "There are duplicated names in the fields!";
-		}	
-	}
-    //method that checks the writing of class name, method name and attribute name
-	checkWritingInput(array: Array<Textfield>){
-		for(let i = 0 ; i < array.length; i++){
-			let txtbox = array[i].value;
-			let labelcode = array[i].ident;
-			if (labelcode == 1 && !txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){ //class case
-					return 2;
-			}
-			if (labelcode == 2 && !txtbox.match("^[a-z]+[a-z|0-9]*([A-Z][a-z|0-9]*)*")){ //method case
-					return 3;
-			}
-			if (labelcode == 3 && !txtbox.match("^([a-z]*[0-9]*)$")){ //attribute case ^([a-zA-Z]*[0-9]*)[ ]([a-z]{1}[a-zA-Z]*[0-9]*)
-					return 4;
-			}	
-		}
-		return 0;
-	}
 
-	//method that checks for duplicate values
-	checkInputsForSameValues(array: Array<Textfield>){
-		let resultToReturn = false;
-		for (let i = 0; i < array.length; i++) { // nested for loop
-			for (let j = 0; j < array.length; j++) {
-				// prevents the element from comparing with itself
-				if (i != j) {
-					// check if elements' values are equal
-					if (array[i].value == array[j].value && array[i].value!=undefined) {
-						// duplicate element present                  
-						resultToReturn = true;
-						// terminate inner loop
-						break;
+	checkInputsOnSubmit(aaform: number){
+		for (let i=0; i<(document.forms[aaform] as HTMLFormElement).length; i++){
+			console.log((document.forms[aaform][i] as HTMLInputElement).value);
+		}
+		if (this.checkEmptyInputs(document.forms[aaform] as HTMLFormElement)){
+			return "You need to fill all the fields!";
+		}else{
+			for (let i=0; i<(document.forms[aaform] as HTMLFormElement).length; i++){
+				let field = document.forms[aaform][i] as HTMLInputElement;
+				if (field.id.includes('txtbox')){
+					if (this.checkInputsForSameValues(field.value, document.forms[aaform] as HTMLFormElement)){
+						return "There are duplicated names in the fields!";
 					}
 				}
 			}
-			// terminate outer loop                                                                      
-			if (resultToReturn) {
-				break;
+			for (let i=0; i<(document.forms[aaform] as HTMLFormElement).length; i++){
+				let field = document.forms[aaform][i] as HTMLInputElement;
+				if (field.id.includes('txtbox')){
+					if (field.id.includes('Attribute') || field.id.includes('Parameter') || field.name.includes('Attribute') || field.name.includes('Parameter')){
+						if (!this.checkAttributeNameWriting(field.value)) return "Attribute/Parameter's type can start with uppercase letter! Attribute/Parameter's name must contain only small letters! ";
+					}else if (field.id.includes('Method') || field.name.includes('Method')){
+						if (!this.checkMethodNameWriting(field.value)) return "Method's name must follow camel writing!";
+					}else if (!this.checkClassNameWriting(field.value)){
+						return "Class's name must start with a capital letter!";
+					}
+				}
 			}
 		}
-		if (!resultToReturn){
-			return 0;
-		}else{
-			return 5;
+		return "Input is valid";
+	}
+
+//methods that check writing in textfields
+	checkClassNameWriting(value: string){
+		if (value.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){ //class case
+			return true;
 		}
+		return false;
+	}
+	checkMethodNameWriting(value: string){
+		if (value.match("^([a-z]+[a-z|0-9]*([A-Z][a-z|0-9]*)*)$")){ //method case
+			return true;
+		}
+		return false;
+	}
+	checkAttributeNameWriting(value: string){
+		if (value.match("^([A-Za-z][a-z]+( [a-z0-9]*))$")){ //attribute case ^([a-zA-Z]*[0-9]*)[ ]([a-z]{1}[a-zA-Z]*[0-9]*)
+			return true;
+		}
+		return false;
+	}
+
+	//method that checks for duplicate values
+	checkInputsForSameValues(value: string, vform: HTMLFormElement){
+		let count = 0;
+		for (let i=0; i<vform.length; i++){
+			if (value===(vform[i] as HTMLInputElement).value){
+				count++;
+				if (count==2){
+					return true;
+
+				}
+			}
+		}
+		return false;
 	}
 
 	//method that search for empty textfields
-	checkEmptyInputs(array: Array<Textfield>){
-		for (var i=0; i<array.length; i++){
-			if (array[i].value == "") return 1;
+	checkEmptyInputs(vform: HTMLFormElement){
+		for (var i=0; i<vform.length; i++){
+			if ((vform[i] as HTMLInputElement).value.trim() === "" && !(vform[i] as HTMLInputElement).id.includes('btn')){
+				//console.log('TRUE', (vform[i] as HTMLInputElement).id);
+				return true;
+			}
 		}
-		return 0;
+		return false;
 	}
 
 	check(key: string, statePatternSelection: string){
