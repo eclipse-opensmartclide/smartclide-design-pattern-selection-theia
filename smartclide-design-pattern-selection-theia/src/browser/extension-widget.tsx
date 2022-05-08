@@ -12,6 +12,7 @@ import {Functions} from './functions';
 import { CreationalPatterns } from './CreationalPatternsWizard';
 import { StructuralPatterns} from './StructuralPatternsWizard';
 import { BehavioralPatterns} from './BehavioralPatternsWizard';
+
 interface Textfield{
 	ident: number;
 	value: string;
@@ -152,9 +153,11 @@ export class extensionWidget extends ReactWidget {
 	
 
     //update the state of dropdown
-    updateSelection(e:React.ChangeEvent<HTMLSelectElement>){
+    async updateSelection(e:React.ChangeEvent<HTMLSelectElement>){
 		const key =  e.currentTarget.name as keyof typeof extensionWidget.state;
 		extensionWidget.state[key]  = e.currentTarget.value;
+		if((document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility === 'hidden')
+			await this.runprocess();
 	}
 	
 	insertCells(table: HTMLTableElement, key: string,){
@@ -312,6 +315,7 @@ export class extensionWidget extends ReactWidget {
 					textfieldArray.push(textfield);
 				}
 			}
+			console.log(JSON.stringify(textfieldArray));
 			let message = extensionWidget.functions.checkInputs(textfieldArray);
 			if (message.includes("Input is valid")){
 				if (extensionWidget.state.statePatternSelection=="Adapter"){
