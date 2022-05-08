@@ -56,6 +56,9 @@ export class Functions{
             }
             inputField.autocomplete = "off";
         }  
+		if (id.includes('Attribute') || id.includes('Parameter') || name.includes('Attribute') || name.includes('Parameter')){
+			inputField.title = 'Insert first the type and after the name of the attribute/parameter with a space between'
+		}
     }
     //autocomplete
     showSuggestions(value: string, table: string[], id: string, parent : HTMLDivElement){
@@ -135,9 +138,9 @@ export class Functions{
 	}
 
 	checkInputsOnSubmit(aaform: number){
-		for (let i=0; i<(document.forms[aaform] as HTMLFormElement).length; i++){
+		/*for (let i=0; i<(document.forms[aaform] as HTMLFormElement).length; i++){
 			console.log((document.forms[aaform][i] as HTMLInputElement).value);
-		}
+		}*/
 		if (this.checkEmptyInputs(document.forms[aaform] as HTMLFormElement)){
 			return "You need to fill all the fields!";
 		}else{
