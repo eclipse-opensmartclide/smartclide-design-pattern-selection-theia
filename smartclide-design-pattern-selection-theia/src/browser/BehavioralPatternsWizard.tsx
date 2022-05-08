@@ -3,13 +3,6 @@ import {Functions} from './functions';
 import { MessageService } from '@theia/core';
 import { HelloBackendService } from '../common/protocol';
 
-
-interface Textfield{
-	ident: number;
-	value: string;
-};
-
-
 export class BehavioralPatterns{
 
     static functions = new Functions();
@@ -62,24 +55,16 @@ export class BehavioralPatterns{
 											BehavioralPatterns.functions.createButton('Get Code', 'getcodeMediatorPattern', divCont8);
 											let buttonCodeBP = document.getElementById('getcodeMediatorPattern') as HTMLButtonElement;
 											buttonCodeBP.addEventListener('click', async (e: Event) =>{
-												let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
-												let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxMediator')as HTMLInputElement).value };
-												textfieldArray.push(textfield1);
 												BehavioralPatterns.values["Mediator"].values["Mediator"].name = (document.getElementById('txtboxMediator')as HTMLInputElement).value;
 												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteMediators') as HTMLInputElement).value); i++){
 													BehavioralPatterns.values["Mediator"].values["ConcreteMediator"+i] = { "name":"", "extension":0};
-													BehavioralPatterns.values["Mediator"].values["ConcreteMediator"+i].name = (document.getElementById('txtboxConcreteMediator'+i)as HTMLInputElement).value;
-													let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcreteMediator'+i)as HTMLInputElement).value };
-													textfieldArray.push(textfield);
+													BehavioralPatterns.values["Mediator"].values["ConcreteMediator"+i].name = (document.getElementById('txtboxConcreteMediator'+i)as HTMLInputElement).value;									
 												}
 												for (var i=1; i<=parseInt((document.getElementById('numOfConmponents') as HTMLInputElement).value); i++){
 													BehavioralPatterns.values["Mediator"].values["Component"+i] = { "name":"", "extension":1};
 													BehavioralPatterns.values["Mediator"].values["Component"+i].name = (document.getElementById('txtboxComponent'+i)as HTMLInputElement).value;
-													let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxComponent'+i)as HTMLInputElement).value };
-													textfieldArray.push(textfield);
 												}
-													console.log(JSON.stringify(BehavioralPatterns.values["Mediator"]));
-
+												//console.log(JSON.stringify(BehavioralPatterns.values["Mediator"]));
 												let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){
 													BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Mediator"].values, "Mediator"), messageService);
@@ -156,35 +141,20 @@ export class BehavioralPatterns{
 													BehavioralPatterns.functions.createButton('Get Code', 'getcodeCommandPattern', divCont10);
 													let buttonCodeCP = document.getElementById('getcodeCommandPattern') as HTMLButtonElement;
 													buttonCodeCP.addEventListener('click', async (e: Event) =>{
-														let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
-														let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxReceiver')as HTMLInputElement).value };
-														let textfield2:  Textfield={ ident: 1, value: (document.getElementById('txtboxInvoker')as HTMLInputElement).value };
-														let textfield3:  Textfield={ ident: 1, value: (document.getElementById('txtboxCommand')as HTMLInputElement).value };
-														textfieldArray.push(textfield1);
-														textfieldArray.push(textfield2);
-														textfieldArray.push(textfield3);
-														
-															BehavioralPatterns.values["Command"].values["Receiver"].name = (document.getElementById('txtboxReceiver')as HTMLInputElement).value;
-															BehavioralPatterns.values["Command"].values["Invoker"].name = (document.getElementById('txtboxInvoker')as HTMLInputElement).value;
-															BehavioralPatterns.values["Command"].values["Command"].name = (document.getElementById('txtboxCommand')as HTMLInputElement).value;
-															for (var i=1; i<=parseInt((document.getElementById('numOfConcreteCommands') as HTMLInputElement).value); i++){
-																BehavioralPatterns.values["Command"].values["ConcreteCommand"+i] = { "name":"", "extension":1};
-																BehavioralPatterns.values["Command"].values["ConcreteCommand"+i].name = (document.getElementById('txtboxConcreteCommand'+i)as HTMLInputElement).value;
-																BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"Method"] = { "name":"", "extension":0};
-																BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"Method"].name = (document.getElementById('txtboxConcreteCommandMethod'+i)as HTMLInputElement).value;
-																let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcreteCommand'+i)as HTMLInputElement).value };
-																let textfield2:  Textfield={ ident: 2, value: (document.getElementById('txtboxConcreteCommandMethod'+i)as HTMLInputElement).value };
-																textfieldArray.push(textfield1);
-																textfieldArray.push(textfield2);
-																for( var j=1; j<=parseInt((document.getElementById('numOfConcreteCommand'+i+'MethodParameters') as HTMLInputElement).value); j++){
-																	BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"MethodParameter"+j] = { "name":"", "extension":0};
-																	BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"MethodParameter"+j].name = (document.getElementById('txtboxConcreteCommand'+i+'MethodParameter'+j)as HTMLInputElement).value;
-																	let textfield3:  Textfield={ ident: 3, value: (document.getElementById('txtboxConcreteCommand'+i+'MethodParameter'+j)as HTMLInputElement).value };
-																	textfieldArray.push(textfield3);
-																}
+														BehavioralPatterns.values["Command"].values["Receiver"].name = (document.getElementById('txtboxReceiver')as HTMLInputElement).value;
+														BehavioralPatterns.values["Command"].values["Invoker"].name = (document.getElementById('txtboxInvoker')as HTMLInputElement).value;
+														BehavioralPatterns.values["Command"].values["Command"].name = (document.getElementById('txtboxCommand')as HTMLInputElement).value;
+														for (var i=1; i<=parseInt((document.getElementById('numOfConcreteCommands') as HTMLInputElement).value); i++){
+															BehavioralPatterns.values["Command"].values["ConcreteCommand"+i] = { "name":"", "extension":1};
+															BehavioralPatterns.values["Command"].values["ConcreteCommand"+i].name = (document.getElementById('txtboxConcreteCommand'+i)as HTMLInputElement).value;
+															BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"Method"] = { "name":"", "extension":0};
+															BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"Method"].name = (document.getElementById('txtboxConcreteCommandMethod'+i)as HTMLInputElement).value;
+															for( var j=1; j<=parseInt((document.getElementById('numOfConcreteCommand'+i+'MethodParameters') as HTMLInputElement).value); j++){
+																BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"MethodParameter"+j] = { "name":"", "extension":0};
+																BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"MethodParameter"+j].name = (document.getElementById('txtboxConcreteCommand'+i+'MethodParameter'+j)as HTMLInputElement).value;
 															}
-															console.log(JSON.stringify(BehavioralPatterns.values["Command"]));
-
+														}
+														//console.log(JSON.stringify(BehavioralPatterns.values["Command"]));
 														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
 															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Command"].values, "Command"), messageService);
@@ -240,18 +210,12 @@ export class BehavioralPatterns{
 								BehavioralPatterns.functions.createButton('Get Code', 'getcodeChainOfResponsibilityPattern', divCont5);
 								let buttonCodeCORP = document.getElementById('getcodeChainOfResponsibilityPattern') as HTMLButtonElement;
 								buttonCodeCORP.addEventListener('click', async (e: Event) =>{
-									let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
-									let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxHandler')as HTMLInputElement).value };
 									BehavioralPatterns.values["ChainOfResponsibility"].values["Handler"].name = (document.getElementById('txtboxHandler')as HTMLInputElement).value;
-									textfieldArray.push(textfield1);
 									for (var i=1; i<=parseInt((document.getElementById('numOfConcreteHandlers') as HTMLInputElement).value); i++){
 										BehavioralPatterns.values["ChainOfResponsibility"].values["ConcreteHandler"+i] = { "name":"", "extension":1};
 										BehavioralPatterns.values["ChainOfResponsibility"].values["ConcreteHandler"+i].name = (document.getElementById('txtboxConcreteHandler'+i)as HTMLInputElement).value;
-										let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcreteHandler'+i)as HTMLInputElement).value };
-										textfieldArray.push(textfield);
 									}
-									console.log(JSON.stringify(BehavioralPatterns.values["ChainOfResponsibility"]));
-
+									//console.log(JSON.stringify(BehavioralPatterns.values["ChainOfResponsibility"]));
 								let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 								if (message == "Input is valid"){
 									BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["ChainOfResponsibility"].values, "ChainOfResponsibility"), messageService);
@@ -268,7 +232,6 @@ export class BehavioralPatterns{
                 });
 				divCont1.appendChild(divCont2);
             });
-			
             let radio32 = document.getElementById('radio32') as HTMLInputElement;
             radio32.addEventListener('click', async (e: Event) =>{	
 				divCont1.innerHTML = "";
@@ -317,27 +280,17 @@ export class BehavioralPatterns{
 											BehavioralPatterns.functions.createButton('Get Code', 'getcodeVisitorPattern', divCont8);
 											let buttonCodeVP = document.getElementById('getcodeVisitorPattern') as HTMLButtonElement;
 											buttonCodeVP.addEventListener('click', async (e: Event) =>{
-												let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
-												let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxVisitor')as HTMLInputElement).value };
-												textfieldArray.push(textfield1);
 												BehavioralPatterns.values["Visitor"].values["Element"].name = (document.getElementById('txtboxElement')as HTMLInputElement).value;
-												let textfield2:  Textfield={ ident: 1, value: (document.getElementById('txtboxElement')as HTMLInputElement).value };
-												textfieldArray.push(textfield2);
 												BehavioralPatterns.values["Visitor"].values["Visitor"].name = (document.getElementById('txtboxVisitor')as HTMLInputElement).value;
 												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteVisitors') as HTMLInputElement).value); i++){
 													BehavioralPatterns.values["Visitor"].values["ConcreteVisitor"+i] = { "name":"", "extension":0};
 													BehavioralPatterns.values["Visitor"].values["ConcreteVisitor"+i].name = (document.getElementById('txtboxConcreteVisitor'+i)as HTMLInputElement).value;
-													let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcreteVisitor'+i)as HTMLInputElement).value };
-													textfieldArray.push(textfield);
 												}
 												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteElements') as HTMLInputElement).value); i++){
 													BehavioralPatterns.values["Visitor"].values["ConcreteElement"+i] = { "name":"", "extension":1};
 													BehavioralPatterns.values["Visitor"].values["ConcreteElement"+i].name = (document.getElementById('txtboxConcreteElement'+i)as HTMLInputElement).value;
-													let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcreteElement'+i)as HTMLInputElement).value };
-													textfieldArray.push(textfield);
 												}
-													console.log(JSON.stringify(BehavioralPatterns.values["Visitor"]));
-
+												//console.log(JSON.stringify(BehavioralPatterns.values["Visitor"]));
 												let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){
 													BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Visitor"].values, "Visitor"), messageService);
@@ -372,7 +325,6 @@ export class BehavioralPatterns{
 							buttonNext.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
 								let divCont6 = document.createElement('div');
-								
 								BehavioralPatterns.functions.textfieldQuestion('<br> How many states/steps exist? <br>', 1, 'number', '1', 'numOfSteps', '', 'buttonNextb', divCont5);
 								let buttonNextb = document.getElementById('buttonNextb') as HTMLButtonElement;
 								buttonNextb.addEventListener('click', async (e: Event) =>{
@@ -392,36 +344,27 @@ export class BehavioralPatterns{
 											let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
 											buttonNext3.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
-													BehavioralPatterns.functions.createLabel('<br> <b>Template Method Pattern</b>  ', '', divCont9);
-													BehavioralPatterns.functions.createButton('Get Code', 'getcodeTemplateMethodPattern', divCont9);
-													let buttonCodeTMP = document.getElementById('getcodeTemplateMethodPattern') as HTMLButtonElement;
-													buttonCodeTMP.addEventListener('click', async (e: Event) =>{
-														let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
-														let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxAbstractClass')as HTMLInputElement).value };
-														textfieldArray.push(textfield1);
-														BehavioralPatterns.values["TemplateMethod"].values["AbstractClass"].name = (document.getElementById('txtboxAbstractClass')as HTMLInputElement).value;
-														for (var i=1; i<=parseInt((document.getElementById('numOfSteps') as HTMLInputElement).value); i++){
-															BehavioralPatterns.values["TemplateMethod"].values["AbstractClassMethod"+i] = { "name":"", "extension":0};
-															BehavioralPatterns.values["TemplateMethod"].values["AbstractClassMethod"+i].name = (document.getElementById('txtboxAbstractClassMethod'+i)as HTMLInputElement).value;
-															let textfield:  Textfield={ ident: 2, value: (document.getElementById('txtboxAbstractClassMethod'+i)as HTMLInputElement).value };
-															textfieldArray.push(textfield);
-														}
-														for (var i=1; i<=parseInt((document.getElementById('numOfConcreteClasses') as HTMLInputElement).value); i++){
-															BehavioralPatterns.values["TemplateMethod"].values["ConcreteClass"+i] = { "name":"", "extension":1};
-															BehavioralPatterns.values["TemplateMethod"].values["ConcreteClass"+i].name = (document.getElementById('txtboxConcreteClass'+i)as HTMLInputElement).value;
-															let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcreteClass'+i)as HTMLInputElement).value };
-															textfieldArray.push(textfield);
-														}
-															console.log(JSON.stringify(BehavioralPatterns.values["TemplateMethod"]));
-
-														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
-														if (message == "Input is valid"){
-															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["TemplateMethod"].values, "TemplateMethod"), messageService);
-														}else{
-															messageService.info(message);
-														}
-													
-													});
+												BehavioralPatterns.functions.createLabel('<br> <b>Template Method Pattern</b>  ', '', divCont9);
+												BehavioralPatterns.functions.createButton('Get Code', 'getcodeTemplateMethodPattern', divCont9);
+												let buttonCodeTMP = document.getElementById('getcodeTemplateMethodPattern') as HTMLButtonElement;
+												buttonCodeTMP.addEventListener('click', async (e: Event) =>{
+													BehavioralPatterns.values["TemplateMethod"].values["AbstractClass"].name = (document.getElementById('txtboxAbstractClass')as HTMLInputElement).value;
+													for (var i=1; i<=parseInt((document.getElementById('numOfSteps') as HTMLInputElement).value); i++){
+														BehavioralPatterns.values["TemplateMethod"].values["AbstractClassMethod"+i] = { "name":"", "extension":0};
+														BehavioralPatterns.values["TemplateMethod"].values["AbstractClassMethod"+i].name = (document.getElementById('txtboxAbstractClassMethod'+i)as HTMLInputElement).value;
+													}
+													for (var i=1; i<=parseInt((document.getElementById('numOfConcreteClasses') as HTMLInputElement).value); i++){
+														BehavioralPatterns.values["TemplateMethod"].values["ConcreteClass"+i] = { "name":"", "extension":1};
+														BehavioralPatterns.values["TemplateMethod"].values["ConcreteClass"+i].name = (document.getElementById('txtboxConcreteClass'+i)as HTMLInputElement).value;
+													}
+													//console.log(JSON.stringify(BehavioralPatterns.values["TemplateMethod"]));
+													let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
+													if (message == "Input is valid"){
+														BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["TemplateMethod"].values, "TemplateMethod"), messageService);
+													}else{
+														messageService.info(message);
+													}
+												});
 											});
 											divCont8.append(divCont9);
 										});
@@ -472,25 +415,13 @@ export class BehavioralPatterns{
 													BehavioralPatterns.functions.createButton('Get Code', 'getcodeStrategyPattern', divCont10);
 													let buttonCodeSP = document.getElementById('getcodeStrategyPattern') as HTMLButtonElement;
 													buttonCodeSP.addEventListener('click', async (e: Event) =>{
-														let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
-														let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxContext')as HTMLInputElement).value };
-														let textfield2:  Textfield={ ident: 1, value: (document.getElementById('txtboxStrategy')as HTMLInputElement).value };
-														let textfield3:  Textfield={ ident: 2, value: (document.getElementById('txtboxStrategyMethod')as HTMLInputElement).value };
-														textfieldArray.push(textfield1);
-														textfieldArray.push(textfield2);
-														textfieldArray.push(textfield3);
-														
-															BehavioralPatterns.values["Strategy"].values["Context"].name = (document.getElementById('txtboxContext')as HTMLInputElement).value;
-															BehavioralPatterns.values["Strategy"].values["Strategy"].name = (document.getElementById('txtboxStrategy')as HTMLInputElement).value;
-															BehavioralPatterns.values["Strategy"].values["StrategyMethod"].name = (document.getElementById('txtboxStrategyMethod')as HTMLInputElement).value;
-															for (var i=1; i<=parseInt((document.getElementById('numOfConcreteStrategies') as HTMLInputElement).value); i++){
-																BehavioralPatterns.values["Strategy"].values["ConcreteStrategy"+i] = { "name":"", "extension":0};
-																BehavioralPatterns.values["Strategy"].values["ConcreteStrategy"+i].name = (document.getElementById('txtboxConcreteStrategy'+i)as HTMLInputElement).value;
-																let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcreteStrategy'+i)as HTMLInputElement).value };
-																textfieldArray.push(textfield);
-															}
-															console.log(JSON.stringify(BehavioralPatterns.values["Strategy"]));
-
+														BehavioralPatterns.values["Strategy"].values["Context"].name = (document.getElementById('txtboxContext')as HTMLInputElement).value;
+														BehavioralPatterns.values["Strategy"].values["Strategy"].name = (document.getElementById('txtboxStrategy')as HTMLInputElement).value;
+														BehavioralPatterns.values["Strategy"].values["StrategyMethod"].name = (document.getElementById('txtboxStrategyMethod')as HTMLInputElement).value;
+														for (var i=1; i<=parseInt((document.getElementById('numOfConcreteStrategies') as HTMLInputElement).value); i++){
+															BehavioralPatterns.values["Strategy"].values["ConcreteStrategy"+i] = { "name":"", "extension":0};
+														}
+														//console.log(JSON.stringify(BehavioralPatterns.values["Strategy"]));
 														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
 															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Strategy"].values, "Strategy"), messageService);
@@ -569,40 +500,29 @@ export class BehavioralPatterns{
 											let buttonNext7 = document.getElementById('buttonNext7') as HTMLButtonElement;
 											buttonNext7.addEventListener('click', async (e: Event) =>{
 												divCont10.innerHTML = "";
-													BehavioralPatterns.functions.createLabel('<br> <b>Memento Pattern</b>  ', '', divCont10);
-													BehavioralPatterns.functions.createButton('Get Code', 'getcodeMementoPattern', divCont10);
-													let buttonCodeMP = document.getElementById('getcodeMementoPattern') as HTMLButtonElement;
-													buttonCodeMP.addEventListener('click', async (e: Event) =>{
-														let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
-														let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxOriginator')as HTMLInputElement).value };
-														textfieldArray.push(textfield1);
-														BehavioralPatterns.values["Memento"].values["Originator"].name = (document.getElementById('txtboxOriginator')as HTMLInputElement).value;
-														let textfield3:  Textfield={ ident: 1, value: (document.getElementById('txtboxMemento')as HTMLInputElement).value };
-														textfieldArray.push(textfield3);
-														BehavioralPatterns.values["Memento"].values["Memento"].name = (document.getElementById('txtboxMemento')as HTMLInputElement).value;
-														let textfield5:  Textfield={ ident: 1, value: (document.getElementById('txtboxCaretaker')as HTMLInputElement).value };
-														textfieldArray.push(textfield5);
-														BehavioralPatterns.values["Memento"].values["Caretaker"].name = (document.getElementById('txtboxCaretaker')as HTMLInputElement).value;
-														for (var i=1; i<=parseInt((document.getElementById('numOfMementoAttributes') as HTMLInputElement).value); i++){
-															BehavioralPatterns.values["Memento"].values["MementoAttribute"+i] = { "name":"", "extension":1};
-															let textfield:  Textfield={ ident: 3, value: (document.getElementById('txtboxMementoAttribute'+i)as HTMLInputElement).value };
-															textfieldArray.push(textfield);
-															BehavioralPatterns.values["Memento"].values["MementoAttribute"+i].name = (document.getElementById('txtboxMementoAttribute'+i)as HTMLInputElement).value;
-														}
-														for (var i=1; i<=parseInt((document.getElementById('numOfOriginatorAttributes') as HTMLInputElement).value); i++){
-															BehavioralPatterns.values["Memento"].values["OriginatorAttribute"+i] = { "name":"", "extension":1};
-															BehavioralPatterns.values["Memento"].values["OriginatorAttribute"+i].name = (document.getElementById('txtboxOriginatorAttribute'+i)as HTMLInputElement).value;
-															let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxOriginatorAttribute'+i)as HTMLInputElement).value };
-															textfieldArray.push(textfield);
-														}
-														console.log(JSON.stringify(BehavioralPatterns.values["Memento"]));
-														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
-														if (message == "Input is valid"){
-															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Memento"].values, "Memento"), messageService);
-														}else{
-															messageService.info(message);
-														}
-													});
+												BehavioralPatterns.functions.createLabel('<br> <b>Memento Pattern</b>  ', '', divCont10);
+												BehavioralPatterns.functions.createButton('Get Code', 'getcodeMementoPattern', divCont10);
+												let buttonCodeMP = document.getElementById('getcodeMementoPattern') as HTMLButtonElement;
+												buttonCodeMP.addEventListener('click', async (e: Event) =>{
+													BehavioralPatterns.values["Memento"].values["Originator"].name = (document.getElementById('txtboxOriginator')as HTMLInputElement).value;
+													BehavioralPatterns.values["Memento"].values["Memento"].name = (document.getElementById('txtboxMemento')as HTMLInputElement).value;
+													BehavioralPatterns.values["Memento"].values["Caretaker"].name = (document.getElementById('txtboxCaretaker')as HTMLInputElement).value;
+													for (var i=1; i<=parseInt((document.getElementById('numOfMementoAttributes') as HTMLInputElement).value); i++){
+														BehavioralPatterns.values["Memento"].values["MementoAttribute"+i] = { "name":"", "extension":1};
+														BehavioralPatterns.values["Memento"].values["MementoAttribute"+i].name = (document.getElementById('txtboxMementoAttribute'+i)as HTMLInputElement).value;
+													}
+													for (var i=1; i<=parseInt((document.getElementById('numOfOriginatorAttributes') as HTMLInputElement).value); i++){
+														BehavioralPatterns.values["Memento"].values["OriginatorAttribute"+i] = { "name":"", "extension":1};
+														BehavioralPatterns.values["Memento"].values["OriginatorAttribute"+i].name = (document.getElementById('txtboxOriginatorAttribute'+i)as HTMLInputElement).value;
+													}
+													//console.log(JSON.stringify(BehavioralPatterns.values["Memento"]));
+													let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
+													if (message == "Input is valid"){
+														BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Memento"].values, "Memento"), messageService);
+													}else{
+														messageService.info(message);
+													}
+												});
 											});
 											divCont9.append(divCont10);
 										  });
@@ -660,34 +580,23 @@ export class BehavioralPatterns{
 														BehavioralPatterns.functions.createButton('Get Code', 'getcodeObserverPattern', divCont11);
 														let buttonCodeOP = document.getElementById('getcodeObserverPattern') as HTMLButtonElement;
 														buttonCodeOP.addEventListener('click', async (e: Event) =>{
-															let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
-															let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxSubscriber')as HTMLInputElement).value };
-															textfieldArray.push(textfield1);
 															BehavioralPatterns.values["Observer"].values["Subject"].name = (document.getElementById('txtboxPublisher')as HTMLInputElement).value;
-															let textfield2:  Textfield={ ident: 1, value: (document.getElementById('txtboxPublisher')as HTMLInputElement).value };
-															textfieldArray.push(textfield2);
 															BehavioralPatterns.values["Observer"].values["Observer"].name = (document.getElementById('txtboxSubscriber')as HTMLInputElement).value;
 															for (var i=1; i<=parseInt((document.getElementById('numOfConcreteSubscribers') as HTMLInputElement).value); i++){
 																BehavioralPatterns.values["Observer"].values["ConcreteSubject"+i] = { "name":"", "extension":1};
 																BehavioralPatterns.values["Observer"].values["ConcreteSubject"+i].name = (document.getElementById('txtboxConcreteSubscriber'+i)as HTMLInputElement).value;
-																let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcreteSubscriber'+i)as HTMLInputElement).value };
-																textfieldArray.push(textfield);
 															}
 															for (var i=1; i<=parseInt((document.getElementById('numOfConcretePublishers') as HTMLInputElement).value); i++){
 																BehavioralPatterns.values["Observer"].values["ConcreteObserver"+i] = { "name":"", "extension":1};
 																BehavioralPatterns.values["Observer"].values["ConcreteObserver"+i].name = (document.getElementById('txtboxConcretePublisher'+i)as HTMLInputElement).value;
-																let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcretePublisher'+i)as HTMLInputElement).value };
-																textfieldArray.push(textfield);
 															}
-																console.log(JSON.stringify(BehavioralPatterns.values["Observer"]));
-	
+															//console.log(JSON.stringify(BehavioralPatterns.values["Observer"]));
 															let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 															if (message == "Input is valid"){
 																BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Observer"].values, "Observer"), messageService);
 															}else{
 																messageService.info(message);
 															}
-														
 														});
 													});
 													divCont10.append(divCont11);
@@ -701,7 +610,6 @@ export class BehavioralPatterns{
 									divCont6.append(divCont7);
 								});
 								divCont5b.append(divCont6);
-
 							});
 							let radio322122 = document.getElementById('radio322122') as HTMLInputElement;
 							radio322122.addEventListener('click', async (e: Event) =>{
@@ -735,20 +643,13 @@ export class BehavioralPatterns{
 													BehavioralPatterns.functions.createButton('Get Code', 'getcodeStatePattern', divCont10);
 													let buttonCodeSP = document.getElementById('getcodeStatePattern') as HTMLButtonElement;
 													buttonCodeSP.addEventListener('click', async (e: Event) =>{
-														let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
-														let textfield1:  Textfield={ ident: 1, value: (document.getElementById('txtboxContext')as HTMLInputElement).value };
-														let textfield2:  Textfield={ ident: 1, value: (document.getElementById('txtboxState')as HTMLInputElement).value };
-														textfieldArray.push(textfield1);
-														textfieldArray.push(textfield2);
-															BehavioralPatterns.values["State"].values["Context"].name = (document.getElementById('txtboxContext')as HTMLInputElement).value;
-															BehavioralPatterns.values["State"].values["State"].name = (document.getElementById('txtboxState')as HTMLInputElement).value;
-															for (var i=1; i<=parseInt((document.getElementById('numOfConcreteStates') as HTMLInputElement).value); i++){
-																BehavioralPatterns.values["State"].values["ConcreteState"+i] = { "name":"", "extension":1};
-																BehavioralPatterns.values["State"].values["ConcreteState"+i].name = (document.getElementById('txtboxConcreteState'+i)as HTMLInputElement).value;
-																let textfield:  Textfield={ ident: 1, value: (document.getElementById('txtboxConcreteState'+i)as HTMLInputElement).value };
-																textfieldArray.push(textfield);
-															}
-															console.log(JSON.stringify(BehavioralPatterns.values["State"]));
+														BehavioralPatterns.values["State"].values["Context"].name = (document.getElementById('txtboxContext')as HTMLInputElement).value;
+														BehavioralPatterns.values["State"].values["State"].name = (document.getElementById('txtboxState')as HTMLInputElement).value;
+														for (var i=1; i<=parseInt((document.getElementById('numOfConcreteStates') as HTMLInputElement).value); i++){
+															BehavioralPatterns.values["State"].values["ConcreteState"+i] = { "name":"", "extension":1};
+															BehavioralPatterns.values["State"].values["ConcreteState"+i].name = (document.getElementById('txtboxConcreteState'+i)as HTMLInputElement).value;
+														}
+														//console.log(JSON.stringify(BehavioralPatterns.values["State"]));
 														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
 															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["State"].values, "State"), messageService);
