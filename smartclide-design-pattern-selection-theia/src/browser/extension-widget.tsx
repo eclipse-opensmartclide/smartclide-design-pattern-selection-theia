@@ -43,6 +43,8 @@ export class extensionWidget extends ReactWidget {
 		this.title.caption = extensionWidget.LABEL;
 		this.title.closable = true;
 		this.title.iconClass = 'fa fa-info-circle';
+		this.runprocess = this.runprocess.bind(this);
+		this.updateSelection = this.updateSelection.bind(this);
 		this.update();
 	}
 	
@@ -156,8 +158,10 @@ export class extensionWidget extends ReactWidget {
     async updateSelection(e:React.ChangeEvent<HTMLSelectElement>){
 		const key =  e.currentTarget.name as keyof typeof extensionWidget.state;
 		extensionWidget.state[key]  = e.currentTarget.value;
-		if((document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility === 'hidden')
+		if((document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility === 'hidden'){
+			((document.getElementById("show_pattern_table")) as HTMLTableElement).innerHTML = "";
 			await this.runprocess();
+		}
 	}
 	
 	insertCells(table: HTMLTableElement, key: string,){
