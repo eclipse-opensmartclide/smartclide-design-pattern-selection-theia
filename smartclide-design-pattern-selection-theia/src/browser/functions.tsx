@@ -73,7 +73,7 @@ export class Functions{
 			},
 			fetch: function (text, callback) {
 				var match = text;
-				let reg = new RegExp('^' + match);
+				let reg = new RegExp('^' + match,'i');
 				if(match!=""){
 					callback(items.filter(function(n){
 						if (n.label.match(reg)) {
