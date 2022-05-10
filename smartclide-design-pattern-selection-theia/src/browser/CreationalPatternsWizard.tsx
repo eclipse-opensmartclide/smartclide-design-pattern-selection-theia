@@ -55,8 +55,8 @@ export class CreationalPatterns{
 										buttonNext5.addEventListener('click', async (e: Event) =>{
 											divCont9.innerHTML = "";
 											CreationalPatterns.functions.createLabel('<br> <b>Abstract Factory Pattern</b>   ', 'labelPattern0', divCont9);
-											CreationalPatterns.functions.createButton('Get Code', 'getcodeAbstractFactoryPattern', divCont9);
-											let buttonCodeAFP = document.getElementById('getcodeAbstractFactoryPattern') as HTMLButtonElement;
+											CreationalPatterns.functions.createButton('Get Code', 'buttongetcodeAbstractFactoryPattern', divCont9);
+											let buttonCodeAFP = document.getElementById('buttongetcodeAbstractFactoryPattern') as HTMLButtonElement;
 											buttonCodeAFP.addEventListener('click', async (e: Event) =>{
 												let infoList = document.getElementsByClassName('infoField') as HTMLCollection;														
 												CreationalPatterns.values["AbstractFactory"].values["AbstractFactory"].name = (infoList.item(0) as HTMLInputElement).value;
@@ -109,8 +109,8 @@ export class CreationalPatterns{
 											buttonNext7.addEventListener('click', async (e: Event) =>{
 												divCont10.innerHTML = "";
 												CreationalPatterns.functions.createLabel('<br> <b>Builder Pattern</b>   ', 'labelPattern1', divCont10);
-												CreationalPatterns.functions.createButton('Get Code', 'getcodeBuilderPattern', divCont10);
-												let buttonCodeBP = document.getElementById('getcodeBuilderPattern') as HTMLButtonElement;
+												CreationalPatterns.functions.createButton('Get Code', 'buttongetcodeBuilderPattern', divCont10);
+												let buttonCodeBP = document.getElementById('buttongetcodeBuilderPattern') as HTMLButtonElement;
 												buttonCodeBP.addEventListener('click', async (e: Event) =>{
 													let infoList = document.getElementsByClassName('infoField');															
 													let v = (document.getElementById('txtboxProduct_name') as HTMLInputElement).value + "Builder";
@@ -152,8 +152,8 @@ export class CreationalPatterns{
 										buttonNext8.addEventListener('click', async (e: Event) =>{
 											divCont9.innerHTML = "";
 											CreationalPatterns.functions.createLabel('<br> <b>Factory Method Pattern</b>   ', 'labelPattern2', divCont9);
-											CreationalPatterns.functions.createButton('Get Code', 'getcodeFactoryMethodPattern', divCont9);
-											let buttonCodeFMP = document.getElementById('getcodeFactoryMethodPattern') as HTMLButtonElement;
+											CreationalPatterns.functions.createButton('Get Code', 'buttongetcodeFactoryMethodPattern', divCont9);
+											let buttonCodeFMP = document.getElementById('buttongetcodeFactoryMethodPattern') as HTMLButtonElement;
 											buttonCodeFMP.addEventListener('click', async (e: Event) =>{
 													let infoList = document.getElementsByClassName('infoField');
 													CreationalPatterns.values["FactoryMethod"].values["Product"].name = (infoList.item(0) as HTMLInputElement).value;
@@ -208,8 +208,8 @@ export class CreationalPatterns{
 				buttonNext9.addEventListener('click', async (e: Event) =>{
 					divCont4.innerHTML = "";
 					CreationalPatterns.functions.createLabel('<br> <b>Singleton Pattern</b>   ', 'labelPattern3', divCont4);
-					CreationalPatterns.functions.createButton('Get Code', 'getcodeSingletonPattern', divCont4);
-					let buttonCodeSP = document.getElementById('getcodeSingletonPattern') as HTMLButtonElement;
+					CreationalPatterns.functions.createButton('Get Code', 'buttongetcodeSingletonPattern', divCont4);
+					let buttonCodeSP = document.getElementById('buttongetcodeSingletonPattern') as HTMLButtonElement;
 					buttonCodeSP.addEventListener('click', async (e: Event) =>{
 						let singlName = (document.getElementById('txtboxSingletonName') as HTMLInputElement).value;
 						CreationalPatterns.values["Singleton"].values["Singleton"].name = singlName;
@@ -249,8 +249,8 @@ export class CreationalPatterns{
 							buttonNext12.addEventListener('click', async (e: Event) =>{
 								divCont7.innerHTML = "";
 								CreationalPatterns.functions.createLabel('<br> <b>Prototype Pattern</b>   ', 'labelPattern4', divCont7);
-								CreationalPatterns.functions.createButton('Get Code', 'getcodePrototypePattern', divCont7);
-								let buttonCodePP = document.getElementById('getcodePrototypePattern') as HTMLButtonElement;
+								CreationalPatterns.functions.createButton('Get Code', 'buttongetcodePrototypePattern', divCont7);
+								let buttonCodePP = document.getElementById('buttongetcodePrototypePattern') as HTMLButtonElement;
 								buttonCodePP.addEventListener('click', async (e: Event) =>{
 									let infoList = document.getElementsByClassName('infoField');
 									CreationalPatterns.values["Prototype"].values["Prototype"].name = (infoList.item(0) as HTMLInputElement).value;

@@ -8,7 +8,7 @@ export class StructuralPatterns{
     static functions = new Functions();
 	static values = JSON.parse(JSON.stringify(data));
 	
-    structuralPatternsWizard(divCont: HTMLDivElement, messageService: MessageService, helloBackendService: HelloBackendService){
+    structuralPatternsWizard(divCont: HTMLDivElement, messageService: MessageService, helloBackendService: HelloBackendService, url: string, classesNames: string[] ){
 			divCont.innerHTML = "";
 			let divCont1 = document.createElement('div');
 			StructuralPatterns.functions.radioQuestion('<br> Do you need to implement a function that requires information from 2 different hierarchies? <br>', 'Yes', 'No', 'radio21', 'radio22', divCont);
@@ -56,8 +56,8 @@ export class StructuralPatterns{
 									buttonNext5.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
 										StructuralPatterns.functions.createLabel('<br> <b>Bridge Pattern</b>  ', '', divCont7);
-										StructuralPatterns.functions.createButton('Get Code', 'getcodeBridgePattern', divCont7);
-										let buttonCodeBP = document.getElementById('getcodeBridgePattern') as HTMLButtonElement;
+										StructuralPatterns.functions.createButton('Get Code', 'buttongetcodeBridgePattern', divCont7);
+										let buttonCodeBP = document.getElementById('buttongetcodeBridgePattern') as HTMLButtonElement;
 										buttonCodeBP.addEventListener('click', async (e: Event) =>{
 											let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
 											StructuralPatterns.values["Bridge"].values["Abstraction"].name = (infoList.item(0) as HTMLInputElement).value;
@@ -164,8 +164,8 @@ export class StructuralPatterns{
 														buttonNext7b.addEventListener('click', async (e: Event) =>{	
 															divCont12.innerHTML = "";
 															StructuralPatterns.functions.createLabel('<br> <b>Decorator Pattern</b>  ', '', divCont12);
-															StructuralPatterns.functions.createButton('Get Code', 'getcodeDecoratorPattern', divCont12);
-															let buttonCodeDP = document.getElementById('getcodeDecoratorPattern') as HTMLButtonElement;
+															StructuralPatterns.functions.createButton('Get Code', 'buttongetcodeDecoratorPattern', divCont12);
+															let buttonCodeDP = document.getElementById('buttongetcodeDecoratorPattern') as HTMLButtonElement;
 															buttonCodeDP.addEventListener('click', async (e: Event) =>{
 																let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
 																StructuralPatterns.values["Decorator"].values["Component"].name = (infoList.item(0) as HTMLInputElement).value;
@@ -222,8 +222,8 @@ export class StructuralPatterns{
 											buttonNext8.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
 												StructuralPatterns.functions.createLabel('<br> <b>Composite Pattern</b>  ', '', divCont9);
-												StructuralPatterns.functions.createButton('Get Code', 'getcodeCompositePattern', divCont9);
-												let buttonCodeCP = document.getElementById('getcodeCompositePattern') as HTMLButtonElement;
+												StructuralPatterns.functions.createButton('Get Code', 'buttongetcodeCompositePattern', divCont9);
+												let buttonCodeCP = document.getElementById('buttongetcodeCompositePattern') as HTMLButtonElement;
 												buttonCodeCP.addEventListener('click', async (e: Event) =>{
 													let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
 													StructuralPatterns.values["Composite"].values["Component"].name = (infoList.item(0) as HTMLInputElement).value;
@@ -313,8 +313,8 @@ export class StructuralPatterns{
 													buttonNext15.addEventListener('click', async (e: Event) =>{
 														divCont11.innerHTML = "";
 														StructuralPatterns.functions.createLabel('<br> <b>Flyweight Pattern</b>  ', '', divCont11);
-														StructuralPatterns.functions.createButton('Get Code', 'getcodeFlyweightPattern', divCont11);
-														let buttonCodeFP = document.getElementById('getcodeFlyweightPattern') as HTMLButtonElement;
+														StructuralPatterns.functions.createButton('Get Code', 'buttongetcodeFlyweightPattern', divCont11);
+														let buttonCodeFP = document.getElementById('buttongetcodeFlyweightPattern') as HTMLButtonElement;
 														buttonCodeFP.addEventListener('click', async (e: Event) =>{
 															//FLYWEIGHT
 															let infoList = document.getElementsByClassName('infoField') as HTMLCollection;													
@@ -384,8 +384,8 @@ export class StructuralPatterns{
 												  buttonNext19b.addEventListener('click', async (e: Event) =>{
 													divCont10.innerHTML = "";
 													StructuralPatterns.functions.createLabel('<br> <b>Adapter Pattern</b>  ', '', divCont10);
-													StructuralPatterns.functions.createButton('Get Code', 'getcodeAdapterPattern', divCont10);
-													let buttonCodeAP = document.getElementById('getcodeAdapterPattern') as HTMLButtonElement;
+													StructuralPatterns.functions.createButton('Get Code', 'buttongetcodeAdapterPattern', divCont10);
+													let buttonCodeAP = document.getElementById('buttongetcodeAdapterPattern') as HTMLButtonElement;
 													buttonCodeAP.addEventListener('click', async (e: Event) =>{
 														let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
 														StructuralPatterns.values["Adapter"].values["Adaptee"].name = (infoList.item(0) as HTMLInputElement).value;
@@ -393,10 +393,22 @@ export class StructuralPatterns{
 														StructuralPatterns.values["Adapter"].values["Adapter"].name = (infoList.item(2) as HTMLInputElement).value;
 														StructuralPatterns.values["Adapter"].values["AdapterMethod"].name = (infoList.item(3) as HTMLInputElement).value;
 														StructuralPatterns.values["Adapter"].values["ClientInterface"].name = (infoList.item(4) as HTMLInputElement).value;
-														//console.log(JSON.stringify(StructuralPatterns.values["Adapter"]));
+														console.log(JSON.stringify(StructuralPatterns.values["Adapter"]));
 														let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
-															StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Adapter"].values, "Adapter"), messageService);
+															//extra checks for existing class and its method
+															let adapteeName = (infoList.item(0) as HTMLInputElement).value;
+															var methodNames = await helloBackendService.getMethods(url, adapteeName);
+															if (classesNames.includes(adapteeName)){
+																var methodName = (infoList.item(1) as HTMLInputElement).value;
+																if (methodNames.includes(methodName)){
+																StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Adapter"].values, "Adapter"), messageService);
+																}else{
+																	messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: "+methodNames);
+																}
+															}else{
+																messageService.info("For Adaptee you need to choose a class name that already exists: "+classesNames);
+															}
 														}else{
 															messageService.info(message);
 														}
@@ -440,8 +452,8 @@ export class StructuralPatterns{
 									buttonNext22.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
 										StructuralPatterns.functions.createLabel('<br> <b>Facade Pattern</b>  ', '', divCont7);
-										StructuralPatterns.functions.createButton('Get Code', 'getcodeFacadePattern', divCont7);
-										let buttonCodeFP = document.getElementById('getcodeFacadePattern') as HTMLButtonElement;
+										StructuralPatterns.functions.createButton('Get Code', 'buttongetcodeFacadePattern', divCont7);
+										let buttonCodeFP = document.getElementById('buttongetcodeFacadePattern') as HTMLButtonElement;
 										buttonCodeFP.addEventListener('click', async (e: Event) =>{
 											//FACADE
 											let infoList = document.getElementsByClassName('infoField') as HTMLCollection;														
@@ -497,8 +509,8 @@ export class StructuralPatterns{
 										buttonNext26.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											StructuralPatterns.functions.createLabel('<br> <b>Proxy Pattern</b>  ', '', divCont7);
-											StructuralPatterns.functions.createButton('Get Code', 'getcodeProxyPattern', divCont7);
-											let buttonCodePP = document.getElementById('getcodeProxyPattern') as HTMLButtonElement;
+											StructuralPatterns.functions.createButton('Get Code', 'buttongetcodeProxyPattern', divCont7);
+											let buttonCodePP = document.getElementById('buttongetcodeProxyPattern') as HTMLButtonElement;
 											buttonCodePP.addEventListener('click', async (e: Event) =>{
 												//PROXY
 												let infoList = document.getElementsByClassName('infoField') as HTMLCollection;																			

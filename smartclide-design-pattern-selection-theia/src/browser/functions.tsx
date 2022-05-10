@@ -51,7 +51,7 @@ export class Functions{
 		}
         if (!id.includes('radio') && !id.includes('Num')&& !id.includes('num')){
             inputField.className = classname;
-            if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
+            if (!innerMessage.includes("Method") && !innerMessage.includes("step")){
                 this.showSuggestions(inputField.value, Functions.listOfClassNames, inputField.id, parent as HTMLDivElement);
             }
             inputField.autocomplete = "off";
@@ -182,7 +182,7 @@ export class Functions{
 		return false;
 	}
 	checkAttributeNameWriting(value: string){
-		if (value.match("^([A-Za-z][a-z]+( [a-z0-9]*))$")){ //attribute case ^([a-zA-Z]*[0-9]*)[ ]([a-z]{1}[a-zA-Z]*[0-9]*)
+		if (value.match("^([A-Za-z][a-z]+( [a-z][a-zA-Z0-9]*))$")){ //attribute case ^([a-zA-Z]*[0-9]*)[ ]([a-z]{1}[a-zA-Z]*[0-9]*)
 			return true;
 		}
 		return false;
@@ -206,8 +206,8 @@ export class Functions{
 	//method that search for empty textfields
 	checkEmptyInputs(vform: HTMLFormElement){
 		for (var i=0; i<vform.length; i++){
-			if ((vform[i] as HTMLInputElement).value.trim() === "" && !(vform[i] as HTMLInputElement).id.includes('btn')){
-				//console.log('TRUE', (vform[i] as HTMLInputElement).id);
+			if ((vform[i] as HTMLInputElement).value.trim() === "" && !(vform[i] as HTMLInputElement).id.includes('btn') && !(vform[i] as HTMLInputElement).id.includes('button') && !(vform[i] as HTMLInputElement).id.includes('radio')){
+				console.log('TRUE', (vform[i] as HTMLInputElement).id);
 				return true;
 			}
 		}

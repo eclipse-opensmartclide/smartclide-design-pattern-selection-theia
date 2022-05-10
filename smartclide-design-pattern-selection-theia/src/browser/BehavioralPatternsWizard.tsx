@@ -52,8 +52,8 @@ export class BehavioralPatterns{
 										buttonNext4.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											BehavioralPatterns.functions.createLabel('<br> <b>Mediator Pattern</b>  ', '', divCont8);
-											BehavioralPatterns.functions.createButton('Get Code', 'getcodeMediatorPattern', divCont8);
-											let buttonCodeBP = document.getElementById('getcodeMediatorPattern') as HTMLButtonElement;
+											BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeMediatorPattern', divCont8);
+											let buttonCodeBP = document.getElementById('buttongetcodeMediatorPattern') as HTMLButtonElement;
 											buttonCodeBP.addEventListener('click', async (e: Event) =>{
 												BehavioralPatterns.values["Mediator"].values["Mediator"].name = (document.getElementById('txtboxMediator')as HTMLInputElement).value;
 												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteMediators') as HTMLInputElement).value); i++){
@@ -138,8 +138,8 @@ export class BehavioralPatterns{
 												  buttonNext9.addEventListener('click', async (e: Event) =>{
 													divCont10.innerHTML = "";
 													BehavioralPatterns.functions.createLabel('<br> <b>Command Pattern</b>  ', '', divCont10);
-													BehavioralPatterns.functions.createButton('Get Code', 'getcodeCommandPattern', divCont10);
-													let buttonCodeCP = document.getElementById('getcodeCommandPattern') as HTMLButtonElement;
+													BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeCommandPattern', divCont10);
+													let buttonCodeCP = document.getElementById('buttongetcodeCommandPattern') as HTMLButtonElement;
 													buttonCodeCP.addEventListener('click', async (e: Event) =>{
 														BehavioralPatterns.values["Command"].values["Receiver"].name = (document.getElementById('txtboxReceiver')as HTMLInputElement).value;
 														BehavioralPatterns.values["Command"].values["Invoker"].name = (document.getElementById('txtboxInvoker')as HTMLInputElement).value;
@@ -207,8 +207,8 @@ export class BehavioralPatterns{
 							buttonNext2.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
 								BehavioralPatterns.functions.createLabel('<br> <b>Chain of Responsibility Pattern</b>  ', '', divCont5);
-								BehavioralPatterns.functions.createButton('Get Code', 'getcodeChainOfResponsibilityPattern', divCont5);
-								let buttonCodeCORP = document.getElementById('getcodeChainOfResponsibilityPattern') as HTMLButtonElement;
+								BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeChainOfResponsibilityPattern', divCont5);
+								let buttonCodeCORP = document.getElementById('buttongetcodeChainOfResponsibilityPattern') as HTMLButtonElement;
 								buttonCodeCORP.addEventListener('click', async (e: Event) =>{
 									BehavioralPatterns.values["ChainOfResponsibility"].values["Handler"].name = (document.getElementById('txtboxHandler')as HTMLInputElement).value;
 									for (var i=1; i<=parseInt((document.getElementById('numOfConcreteHandlers') as HTMLInputElement).value); i++){
@@ -277,8 +277,8 @@ export class BehavioralPatterns{
 										buttonNext4.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											BehavioralPatterns.functions.createLabel('<br> <b>Visitor Pattern</b>  ', '', divCont8);
-											BehavioralPatterns.functions.createButton('Get Code', 'getcodeVisitorPattern', divCont8);
-											let buttonCodeVP = document.getElementById('getcodeVisitorPattern') as HTMLButtonElement;
+											BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeVisitorPattern', divCont8);
+											let buttonCodeVP = document.getElementById('buttongetcodeVisitorPattern') as HTMLButtonElement;
 											buttonCodeVP.addEventListener('click', async (e: Event) =>{
 												BehavioralPatterns.values["Visitor"].values["Element"].name = (document.getElementById('txtboxElement')as HTMLInputElement).value;
 												BehavioralPatterns.values["Visitor"].values["Visitor"].name = (document.getElementById('txtboxVisitor')as HTMLInputElement).value;
@@ -345,8 +345,8 @@ export class BehavioralPatterns{
 											buttonNext3.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
 												BehavioralPatterns.functions.createLabel('<br> <b>Template Method Pattern</b>  ', '', divCont9);
-												BehavioralPatterns.functions.createButton('Get Code', 'getcodeTemplateMethodPattern', divCont9);
-												let buttonCodeTMP = document.getElementById('getcodeTemplateMethodPattern') as HTMLButtonElement;
+												BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeTemplateMethodPattern', divCont9);
+												let buttonCodeTMP = document.getElementById('buttongetcodeTemplateMethodPattern') as HTMLButtonElement;
 												buttonCodeTMP.addEventListener('click', async (e: Event) =>{
 													BehavioralPatterns.values["TemplateMethod"].values["AbstractClass"].name = (document.getElementById('txtboxAbstractClass')as HTMLInputElement).value;
 													for (var i=1; i<=parseInt((document.getElementById('numOfSteps') as HTMLInputElement).value); i++){
@@ -412,8 +412,8 @@ export class BehavioralPatterns{
 													divCont10.innerHTML = "";
 													let divCont11 = document.createElement('div');
 													BehavioralPatterns.functions.createLabel('<br> <b>Strategy Pattern</b>  ', '', divCont10);
-													BehavioralPatterns.functions.createButton('Get Code', 'getcodeStrategyPattern', divCont10);
-													let buttonCodeSP = document.getElementById('getcodeStrategyPattern') as HTMLButtonElement;
+													BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeStrategyPattern', divCont10);
+													let buttonCodeSP = document.getElementById('buttongetcodeStrategyPattern') as HTMLButtonElement;
 													buttonCodeSP.addEventListener('click', async (e: Event) =>{
 														BehavioralPatterns.values["Strategy"].values["Context"].name = (document.getElementById('txtboxContext')as HTMLInputElement).value;
 														BehavioralPatterns.values["Strategy"].values["Strategy"].name = (document.getElementById('txtboxStrategy')as HTMLInputElement).value;
@@ -501,8 +501,8 @@ export class BehavioralPatterns{
 											buttonNext7.addEventListener('click', async (e: Event) =>{
 												divCont10.innerHTML = "";
 												BehavioralPatterns.functions.createLabel('<br> <b>Memento Pattern</b>  ', '', divCont10);
-												BehavioralPatterns.functions.createButton('Get Code', 'getcodeMementoPattern', divCont10);
-												let buttonCodeMP = document.getElementById('getcodeMementoPattern') as HTMLButtonElement;
+												BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeMementoPattern', divCont10);
+												let buttonCodeMP = document.getElementById('buttongetcodeMementoPattern') as HTMLButtonElement;
 												buttonCodeMP.addEventListener('click', async (e: Event) =>{
 													BehavioralPatterns.values["Memento"].values["Originator"].name = (document.getElementById('txtboxOriginator')as HTMLInputElement).value;
 													BehavioralPatterns.values["Memento"].values["Memento"].name = (document.getElementById('txtboxMemento')as HTMLInputElement).value;
@@ -577,8 +577,8 @@ export class BehavioralPatterns{
 													buttonNext8.addEventListener('click', async (e: Event) =>{
 														divCont11.innerHTML = "";
 														BehavioralPatterns.functions.createLabel('<br> <b>Observer Pattern</b>  ', '', divCont11);
-														BehavioralPatterns.functions.createButton('Get Code', 'getcodeObserverPattern', divCont11);
-														let buttonCodeOP = document.getElementById('getcodeObserverPattern') as HTMLButtonElement;
+														BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeObserverPattern', divCont11);
+														let buttonCodeOP = document.getElementById('buttongetcodeObserverPattern') as HTMLButtonElement;
 														buttonCodeOP.addEventListener('click', async (e: Event) =>{
 															BehavioralPatterns.values["Observer"].values["Subject"].name = (document.getElementById('txtboxPublisher')as HTMLInputElement).value;
 															BehavioralPatterns.values["Observer"].values["Observer"].name = (document.getElementById('txtboxSubscriber')as HTMLInputElement).value;
@@ -640,8 +640,8 @@ export class BehavioralPatterns{
 												buttonNext4.addEventListener('click', async (e: Event) =>{
 													divCont10.innerHTML = "";
 													BehavioralPatterns.functions.createLabel('<br> <b>State Pattern</b>  ', '', divCont10);
-													BehavioralPatterns.functions.createButton('Get Code', 'getcodeStatePattern', divCont10);
-													let buttonCodeSP = document.getElementById('getcodeStatePattern') as HTMLButtonElement;
+													BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeStatePattern', divCont10);
+													let buttonCodeSP = document.getElementById('buttongetcodeStatePattern') as HTMLButtonElement;
 													buttonCodeSP.addEventListener('click', async (e: Event) =>{
 														BehavioralPatterns.values["State"].values["Context"].name = (document.getElementById('txtboxContext')as HTMLInputElement).value;
 														BehavioralPatterns.values["State"].values["State"].name = (document.getElementById('txtboxState')as HTMLInputElement).value;
