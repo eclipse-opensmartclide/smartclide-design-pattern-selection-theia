@@ -303,6 +303,15 @@ export class extensionWidget extends ReactWidget {
 		table.innerHTML = "";
 
 	}
+	async goBackbuttonClickWizard(div: HTMLDivElement){
+		//(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
+		//(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'visible';
+		(document.getElementById("btn-back") as HTMLButtonElement).style.visibility = 'hidden';
+		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'visible';
+		//(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
+		div.innerHTML = "";
+
+	}
 	async buttonClick2 (table: HTMLTableElement):Promise<void>{
 			let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
 			for (var i=0; i<table.rows.length; i++){
@@ -387,6 +396,13 @@ export class extensionWidget extends ReactWidget {
 		let divWiz = document.getElementById('divWiz') as HTMLDivElement;
 		divWiz.style.marginLeft = '10px';
 		let divCont = document.createElement('div');
+	
+		extensionWidget.functions.createButton("Back","back-btn",document.getElementById("divWiz") as HTMLDivElement);
+		let backbtn = document.getElementById("back-btn") as HTMLButtonElement;
+		backbtn.addEventListener('click', (event) => {
+			this.goBackbuttonClickWizard(divWiz);
+		});
+		
 		extensionWidget.functions.createLabel('Choose the type of the pattern: <br>', 'label0', divWiz);
 		extensionWidget.functions.createLabel('Creational', 'label1', divWiz)
 		extensionWidget.functions.createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);
