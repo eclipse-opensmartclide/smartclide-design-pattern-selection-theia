@@ -298,7 +298,7 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file1);
 
 		let file2 :patternParticipatingClass = new NonHierarchyClass(obj.Flyweight.name);
-		file2.addAttribute(new Attribute(obj.ConcreteFlyweight1Attribute.name,"string", "private")); 
+		file2.addAttribute(new Attribute(obj.ConcreteFlyweight1Attribute.name,"", "private")); 
 		this.fillPromise(ppc, file2);
 
 		Object.keys(obj).forEach((key)=>{
@@ -378,8 +378,8 @@ export class CodeGenerator {
 				aList.push(new Attribute((obj.Receiver.name).toLowerCase(),obj.Receiver.name,""));	
 				Object.keys(obj).forEach((innerkey)=>{
 					if(innerkey.includes("ConcreteCommand1MethodParameter")){
-						file4.addAttribute(new Attribute(obj[key].name, "string", ""));
-						aList.push(new Attribute(obj[key].name, "string", ""));
+						file4.addAttribute(new Attribute(obj[key].name, "", ""));
+						aList.push(new Attribute(obj[key].name, "", ""));
 					}
 				});
 				file4.addMethod(new Method(obj[key].name,"",false,"private","\t \t this."+(obj.Receiver.name).toLowerCase+" = "+(obj.Receiver.name).toLowerCase +"; \n \t \t",aList));
@@ -435,9 +435,9 @@ export class CodeGenerator {
 		let file3 :patternParticipatingClass =  new NonHierarchyClass(obj.Caretaker.name);
 		Object.keys(obj).forEach((key)=>{
 			if(key.includes("OriginatorAttribute")){
-				file1.addAttribute(new Attribute(obj[key].name,"string","private"));
+				file1.addAttribute(new Attribute(obj[key].name,"","private"));
 			}else if(key.includes("MementoAttribute")){
-				file2.addAttribute(new Attribute(obj[key].name,"string","private"));
+				file2.addAttribute(new Attribute(obj[key].name,"","private"));
 			}else{
 
 			}
