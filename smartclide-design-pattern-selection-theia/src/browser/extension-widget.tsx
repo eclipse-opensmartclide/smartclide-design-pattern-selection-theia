@@ -12,10 +12,10 @@ import {Functions} from './functions';
 import { CreationalPatterns } from './CreationalPatternsWizard';
 import { StructuralPatterns} from './StructuralPatternsWizard';
 import { BehavioralPatterns} from './BehavioralPatternsWizard';
-interface Textfield{
+/*interface Textfield{
 	ident: number;
 	value: string;
-};
+};*/
 
 @injectable()
 export class extensionWidget extends ReactWidget {
@@ -50,6 +50,7 @@ export class extensionWidget extends ReactWidget {
 	static methodNames: string[];
 	
 	static data = JSON.parse(JSON.stringify(data));
+	static initialData = JSON.parse(JSON.stringify(data));
 	static explanation = JSON.parse(JSON.stringify(explanation));
 
 	static functions = new Functions();
@@ -108,18 +109,23 @@ export class extensionWidget extends ReactWidget {
 							<img id = "image" alt= "Class Diagram " ></img>
 						</details>
 					</fieldset>
-					<table id="show_pattern_table">
-					</table>
+					<form name="myForm" >
+						<table id="show_pattern_table">
+						
+						
+						</table>
+					</form>
 					<div id="elements">
 						<button id ="btn-finalize"  type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement))}> Get Code </button>
 						<button id ="btn-back"  type="button" title='Go back'  onClick={_a => this.goBackbuttonClick((document.getElementById('show_pattern_table') as HTMLTableElement))}> Back </button>
 					</div>
 				</div>
 			</div>
+			<form name="wizardForm" >
+				<div id="divWiz">
 
-			<div id="divWiz">
-
-			</div>
+				</div>
+			</form>
 			</div>
 	}
 	
@@ -170,10 +176,8 @@ export class extensionWidget extends ReactWidget {
 			cell2.id = "cell2";
 			
 			extensionWidget.functions.createLabel(key,"label"+ table.rows.length,cell1);
-			extensionWidget.functions.createInput(key, "txtbox"+ table.rows.length,"", "txtbox"+ table.rows.length,"text",cell2)
+			extensionWidget.functions.createInput(key, "txtbox"+ table.rows.length, "", "txtbox"+ table.rows.length+ key,"text",cell2)
 
-			cell1.appendChild((document.getElementById('label'+ table.rows.length) as HTMLInputElement));
-			cell2.appendChild((document.getElementById('txtbox'+ table.rows.length) as HTMLInputElement));
 			if(extensionWidget.data[extensionWidget.state.statePatternSelection].values[key].extension==1){
 				let cell3 = row.insertCell(2);
 				extensionWidget.functions.createButton("+","btn"+ key,table)
@@ -286,33 +290,20 @@ export class extensionWidget extends ReactWidget {
 			this.insertCells(table, label); 
 		}
 		
-		
 	}
+
 	async goBackbuttonClick(table: HTMLTableElement){
 		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
 		(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'visible';
 		(document.getElementById("btn-back") as HTMLButtonElement).style.visibility = 'hidden';
 		(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
+		extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.initialData[extensionWidget.state.statePatternSelection].values;
 		table.innerHTML = "";
 
 	}
+
 	async buttonClick2 (table: HTMLTableElement):Promise<void>{
-			let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
-			for (var i=0; i<table.rows.length; i++){
-				let label = (document.getElementById('label'+(i+1)) as HTMLLabelElement).innerHTML;
-				let v = (document.getElementById('txtbox'+(i+1)) as HTMLInputElement).value;
-				if (label.includes('Method') && !label.includes('FactoryMethod')){
-					let textfield:  Textfield={ ident: 2, value: v };
-					textfieldArray.push(textfield);
-				}else if (label.includes('Attribute')) {
-					let textfield:  Textfield={ ident: 3, value: v };
-					textfieldArray.push(textfield);
-				}else{
-					let textfield:  Textfield={ ident: 1, value: v };
-					textfieldArray.push(textfield);
-				}
-			}
-			let message = extensionWidget.functions.checkInputs(textfieldArray);
+			let message = extensionWidget.functions.checkInputsOnSubmit(0);
 			if (message.includes("Input is valid")){
 				if (extensionWidget.state.statePatternSelection=="Adapter"){
 					let adapteeName = (document.getElementById("txtbox4") as HTMLInputElement).value;
@@ -322,7 +313,6 @@ export class extensionWidget extends ReactWidget {
 						let methodName = (document.getElementById("txtbox5") as HTMLInputElement).value;
 						if (methodNames.includes(methodName)){
 							extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
-							this.messageService.info("Well done! Code is coming...");
 							extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection),this.messageService);
 						}else{
 							this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: "+methodNames);
@@ -349,6 +339,7 @@ export class extensionWidget extends ReactWidget {
 			}else{
 				this.messageService.info(message);
 			}
+			
 		
 	}
 	
@@ -370,7 +361,10 @@ export class extensionWidget extends ReactWidget {
 	async runWizard(){
 		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'hidden';
 		(document.getElementById('issues') as HTMLDivElement).style.height = '0';
+		(document.getElementById('result') as HTMLDivElement).style.visibility = 'hidden';
 		(document.getElementById('result') as HTMLDivElement).style.height = '0';
+		(document.getElementById('btn-get-code') as HTMLButtonElement).style.visibility = 'hidden';
+		(document.getElementById('btn-wizard') as HTMLButtonElement).style.visibility = 'hidden';
 
 		var getUrl = window.location.href;
 		extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
@@ -390,7 +384,7 @@ export class extensionWidget extends ReactWidget {
 		extensionWidget.functions.createInput('', 'radio2', '', 'patternTypes', 'radio', divWiz);
 		let radio2 = document.getElementById('radio2') as HTMLInputElement;
 		radio2.addEventListener('click', async (e: Event) =>{
-			extensionWidget.structuralPatterns.structuralPatternsWizard(divCont, this.messageService, this.helloBackendService);
+			extensionWidget.structuralPatterns.structuralPatternsWizard(divCont, this.messageService, this.helloBackendService, window.location.href, extensionWidget.res);
 		});	
 		extensionWidget.functions.createLabel('Behavioral', 'label3', divWiz);
 		extensionWidget.functions.createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
