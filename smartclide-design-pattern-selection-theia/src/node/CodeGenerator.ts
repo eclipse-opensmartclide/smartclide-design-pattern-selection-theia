@@ -211,10 +211,10 @@ export class CodeGenerator {
 		let file3 :patternParticipatingClass = new ConcreteClass(obj.Composite.name, obj.Component.name);
 		file3.addAttribute(new Attribute("children", "ArrayList<"+obj.Component.name+">", "private"));
 		//constructor
-		file3.addMethod(new Method(obj.Composite.name,"",false,"public","\t \t children = new ArrayList<"+obj.Component.name +">();",[]));
+		file3.addMethod(new Method(obj.Composite.name,"",false,"public","\t\t children = new ArrayList<"+obj.Component.name +">();",[]));
 		file3.addMethod(new Method("add","void",false,"public","",[new Attribute("c",obj.Composite.name,"")]));
 		file3.addMethod(new Method("remove","void",false,"public","",[new Attribute("c",obj.Composite.name,"")]));
-		file3.addMethod(new Method("getChildern","ArrayList<"+obj.Component.name+">",false,"public","",[]));
+		file3.addMethod(new Method("getChildern","ArrayList<"+obj.Component.name+">",false,"public","\t\t return (children); ",[]));
 		
 		var cList: Array<patternParticipatingClass> = [];//list of Concrete Component classes
 		var mList: Array<Method> = [];//list of Composite's methods
@@ -243,8 +243,8 @@ export class CodeGenerator {
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
 		let file1 :patternParticipatingClass = new abstractClass(obj.Component.name);
-		file1.addMethod(new Method(obj.ComponentMethod.name,"void",true, "public", "",[]));
-		this.fillPromise(ppc, file1);
+		file1.addMethod(new Method(obj.ComponentMethod1.name,"void",true, "public", "",[]));
+		
 
 		let file2 :patternParticipatingClass = new MidHierarchyClass(obj.Decorator, obj.Component.name);
 		file2.addMethod(new Method(obj.Decorator.name,"",false, "public", "\t \t this."+obj.Component.name.toLowerCase()+" = "+obj.Component.name.toLowerCase()+";",[new Attribute(obj.Component.name.toLowerCase(), obj.Component.name, "")]));
@@ -260,9 +260,11 @@ export class CodeGenerator {
 				cList.push(file4);
 			}else if(key.includes("ComponentMethod")){
 				file2.addMethod(new Method(obj[key].name,"void",false, "public", "",[]));
+				file1.addMethod(new Method(obj[key].name,"void",false, "public", "",[]));
 				mList.push(new Method(obj[key].name,"void",false, "public", "",[]))
 			}
-		});
+		})
+		this.fillPromise(ppc, file1);;
 		for(var i=0;i<cList.length;i++){
 			for(var j=0;j<mList.length;j++){
 				cList[i].addMethod(mList[j]); 
