@@ -42,6 +42,8 @@ export class extensionWidget extends ReactWidget {
 		this.title.caption = extensionWidget.LABEL;
 		this.title.closable = true;
 		this.title.iconClass = 'fa fa-info-circle';
+		this.runprocess = this.runprocess.bind(this);
+		this.updateSelection = this.updateSelection.bind(this);
 		this.update();
 	}
 	
@@ -158,9 +160,13 @@ export class extensionWidget extends ReactWidget {
 	
 
     //update the state of dropdown
-    updateSelection(e:React.ChangeEvent<HTMLSelectElement>){
+    async updateSelection(e:React.ChangeEvent<HTMLSelectElement>){
 		const key =  e.currentTarget.name as keyof typeof extensionWidget.state;
 		extensionWidget.state[key]  = e.currentTarget.value;
+		if((document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility === 'hidden'){
+			((document.getElementById("show_pattern_table")) as HTMLTableElement).innerHTML = "";
+			await this.runprocess();
+		}
 	}
 	
 	insertCells(table: HTMLTableElement, key: string,){
@@ -250,7 +256,7 @@ export class extensionWidget extends ReactWidget {
 			let labelAttr = label + "Attribute";
 
 			newValues[label] = {"name":"", "extension":0};
-			newValues[labelAttr] = {"name":"", "extension":1};
+			newValues[labelAttr] = {"name":"", "extension":0};
 			extensionWidget.data[extensionWidget.state.statePatternSelection].values = newValues;
 			this.insertCells(table, label);
 			this.insertCells(table, labelAttr);
@@ -299,6 +305,15 @@ export class extensionWidget extends ReactWidget {
 		(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
 		extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.initialData[extensionWidget.state.statePatternSelection].values;
 		table.innerHTML = "";
+
+	}
+	async goBackbuttonClickWizard(div: HTMLDivElement){
+		//(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
+		//(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'visible';
+		(document.getElementById("btn-back") as HTMLButtonElement).style.visibility = 'hidden';
+		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'visible';
+		//(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
+		div.innerHTML = "";
 
 	}
 
@@ -373,6 +388,13 @@ export class extensionWidget extends ReactWidget {
 		let divWiz = document.getElementById('divWiz') as HTMLDivElement;
 		divWiz.style.marginLeft = '10px';
 		let divCont = document.createElement('div');
+	
+		extensionWidget.functions.createButton("Back","back-btn",document.getElementById("divWiz") as HTMLDivElement);
+		let backbtn = document.getElementById("back-btn") as HTMLButtonElement;
+		backbtn.addEventListener('click', (event) => {
+			this.goBackbuttonClickWizard(divWiz);
+		});
+		
 		extensionWidget.functions.createLabel('Choose the type of the pattern: <br>', 'label0', divWiz);
 		extensionWidget.functions.createLabel('Creational', 'label1', divWiz)
 		extensionWidget.functions.createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);

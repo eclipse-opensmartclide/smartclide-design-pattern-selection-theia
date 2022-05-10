@@ -63,7 +63,7 @@ export class Functions{
     //autocomplete
     showSuggestions(value: string, table: string[], id: string, parent : HTMLDivElement){
 
-		var items = Functions.listOfClassNames.map(function (n) { return { label: n }});
+		var items = table.map(function (n) { return { label: n }});
 
 		autocomplete({
 			input: document.getElementById('txtbox'+id.substring(6,)) as HTMLInputElement,
@@ -168,18 +168,12 @@ export class Functions{
 		return "Input is valid";
 	}
 
-//methods that check writing in textfields
+	//methods that check writing in textfields
 	checkClassNameWriting(value: string){
-		if (value.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){ //class case
-			return true;
-		}
-		return false;
+		return (value.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) ? true : false;//class case
 	}
 	checkMethodNameWriting(value: string){
-		if (value.match("^([a-z]+[a-z|0-9]*([A-Z][a-z|0-9]*)*)$")){ //method case
-			return true;
-		}
-		return false;
+		return (value.match("^([a-z]+[a-z|0-9]*([A-Z][a-z|0-9]*)*)$")) ? true : false; //method case
 	}
 	checkAttributeNameWriting(value: string){
 		if (value.match("^([A-Za-z][a-z]+( [a-z][a-zA-Z0-9]*))$")){ //attribute case ^([a-zA-Z]*[0-9]*)[ ]([a-z]{1}[a-zA-Z]*[0-9]*)
@@ -287,7 +281,5 @@ export class Functions{
 	setClassNames(list: string[]){
 		Functions.listOfClassNames = list;
 	}
-	
-
 
 }

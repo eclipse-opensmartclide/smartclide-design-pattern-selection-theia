@@ -113,6 +113,10 @@
 .TemplateMethod{
   content : url(./img/BehavioralPatternsIcons/TemplateMethodIcon.jpg);
 }
+.Proxy{
+  content : url(./img/StructuralPatternsIcons/ProxyIcon.jpg);
+}
+
 
 #btn-wizzard{
   margin-left: 50px;
