@@ -308,11 +308,12 @@ export class extensionWidget extends ReactWidget {
 
 	}
 	async goBackbuttonClickWizard(div: HTMLDivElement){
-		//(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
-		//(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'visible';
-		(document.getElementById("btn-back") as HTMLButtonElement).style.visibility = 'hidden';
 		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'visible';
-		//(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
+		(document.getElementById('issues') as HTMLDivElement).style.height = 'min-content';
+		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
+		(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'visible';
+		(document.getElementById("btn-back") as HTMLButtonElement).style.visibility = 'hidden';
+		(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
 		div.innerHTML = "";
 
 	}
@@ -377,7 +378,6 @@ export class extensionWidget extends ReactWidget {
 		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'hidden';
 		(document.getElementById('issues') as HTMLDivElement).style.height = '0';
 		(document.getElementById('result') as HTMLDivElement).style.visibility = 'hidden';
-		(document.getElementById('result') as HTMLDivElement).style.height = '0';
 		(document.getElementById('btn-get-code') as HTMLButtonElement).style.visibility = 'hidden';
 		(document.getElementById('btn-wizard') as HTMLButtonElement).style.visibility = 'hidden';
 
@@ -395,7 +395,7 @@ export class extensionWidget extends ReactWidget {
 			this.goBackbuttonClickWizard(divWiz);
 		});
 		
-		extensionWidget.functions.createLabel('Choose the type of the pattern: <br>', 'label0', divWiz);
+		extensionWidget.functions.createLabel('<br> <br> Choose the type of the pattern: <br>', 'label0', divWiz);
 		extensionWidget.functions.createLabel('Creational', 'label1', divWiz)
 		extensionWidget.functions.createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);
 		let radio1 = document.getElementById('radio1') as HTMLInputElement;
