@@ -75,35 +75,49 @@
   visibility: hidden;
 }
 .AbstractFactory{
-  content : url(./img/AbstractFactoryIcon.jpg);
+  content : url(./img/CreationalPatternsIcons/AbstractFactoryIcon.jpg);
 }
 .Adapter{
-  content : url(./img/AdapterIcon.jpg);
+  content : url(./img/StructuralPatternsIcons/AdapterIcon.jpg);
 }
 .Bridge{
-  content : url(./img/BridgeIcon.jpg);
+  content : url(./img/StructuralPatternsIcons/BridgeIcon.jpg);
 }
 .Builder{
-  content : url(./img/BuilderIcon.jpg);
+  content : url(./img/CreationalPatternsIcons/BuilderIcon.jpg);
 }
 .Composite{
-  content : url(./img/CompositeIcon.jpg);
+  content : url(./img/StructuralPatternsIcons/CompositeIcon.jpg);
 }
 .Decorator{
-  content : url(./img/DecoratorIcon.jpg);
+  content : url(./img/StructuralPatternsIcons/DecoratorIcon.jpg);
 }
 .FactoryMethod{
-  content : url(./img/FactoryMethodIcon.jpg);
+  content : url(./img/CreationalPatternsIcons/FactoryMethodIcon.jpg);
 }
 .Prototype{
-  content : url(./img/PrototypeIcon.jpg);
+  content : url(./img/CreationalPatternsIcons/PrototypeIcon.jpg);
 }
 .Singleton{
-  content : url(./img/SingletonIcon.jpg);
+  content : url(./img/CreationalPatternsIcons/SingletonIcon.jpg);
 }
 .Visitor{
-    content : url(./img/VisitorIcon.jpg);
+    content : url(./img/BehavioralPatternsIcons/VisitorIcon.jpg);
 }
+.State{
+  content : url(./img/BehavioralPatternsIcons/StateIcon.jpg);
+}
+.Strategy{
+  content : url(./img/BehavioralPatternsIcons/StrategyIcon.jpg);
+}
+.TemplateMethod{
+  content : url(./img/BehavioralPatternsIcons/TemplateMethodIcon.jpg);
+}
+.Proxy{
+  content : url(./img/StructuralPatternsIcons/ProxyIcon.jpg);
+}
+
+
 #btn-wizzard{
   margin-left: 50px;
   
@@ -167,4 +181,12 @@ body::-webkit-scrollbar {
 #projectName{
   margin-left: 20px;
   margin-right:20px;
+}
+#btn-back{
+  visibility: hidden;
+  margin-left: 15px;
+}
+
+#btn-wizard{
+  margin-left: 15px;
 }
