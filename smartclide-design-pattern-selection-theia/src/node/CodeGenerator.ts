@@ -134,7 +134,7 @@ export class CodeGenerator {
 
 		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.Singleton.name);
 		file1.addAttribute(new Attribute("instance",obj.Singleton.name,"private"));
-		file1.addMethod(new Method(obj.Singleton.name,"", false, "private", "\t \t instance  =  new "+obj.Singleton.name + "();",[]));
+		file1.addMethod(new Method(obj.Singleton.name,"", false, "private", "\t\t instance  =  new "+obj.Singleton.name + "();",[]));
 		file1.addMethod(new Method("getInstance",obj.Singleton.name, false, "private", "\t \t if(instance == null) { \n \t \t instance = new "+obj.Singleton.name +"();\n \t \t}\n \t \t return instance;",[]));
 		this.fillPromise(ppc, file1);
 		
@@ -209,6 +209,7 @@ export class CodeGenerator {
 		let file1 :patternParticipatingClass = new abstractClass(obj.Component.name);
 
 		let file3 :patternParticipatingClass = new ConcreteClass(obj.Composite.name, obj.Component.name);
+		file3.sethasArrayList();
 		file3.addAttribute(new Attribute("children", "ArrayList<"+obj.Component.name+">", "private"));
 		//constructor
 		file3.addMethod(new Method(obj.Composite.name,"",false,"public","\t\t children = new ArrayList<"+obj.Component.name +">();",[]));
@@ -292,6 +293,7 @@ export class CodeGenerator {
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
 		let file1 :patternParticipatingClass = new NonHierarchyClass(obj.FlyweightFactory.name);
+		file1.sethasArrayList();
 		file1.addAttribute(new Attribute("cache","ArrayList<"+obj.Flyweight.name+">", "private")); //list of Flyweights
 		file1.addMethod(new Method(obj.Flyweight.name,'',false,"public","\t \t this.cache = new ArrayList<"+obj.Flyweight.name+">",[])); //constructor of FlyweightFactory class
 		file1.addMethod(new Method("getFlyweight",obj.Flyweight.name,false,"public","",[new Attribute("key","string","")])); //δεν έχω συμπληρώσει το body της μεθόδου
@@ -352,7 +354,6 @@ export class CodeGenerator {
 				this.fillPromise(ppc, file2);
 			}
 		});
-		console.log(1);
 		return ppc.object;
 	}	
 	public Command(jsonObj: string): Array<patternParticipatingClass>{
@@ -433,6 +434,7 @@ export class CodeGenerator {
 		let file1 :patternParticipatingClass =  new NonHierarchyClass(obj.Originator.name);
 		let file2 :patternParticipatingClass =  new NonHierarchyClass(obj.Memento.name);
 		let file3 :patternParticipatingClass =  new NonHierarchyClass(obj.Caretaker.name);
+		file3.sethasArrayList();
 		Object.keys(obj).forEach((key)=>{
 			if(key.includes("OriginatorAttribute")){
 				file1.addAttribute(new Attribute(obj[key].name,"","private"));
@@ -463,6 +465,7 @@ export class CodeGenerator {
 		let ppc : Object ={object: []}
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		let file1 :patternParticipatingClass =  new NonHierarchyClass(obj.Subject.name);
+		file1.sethasArrayList();
 		file1.addAttribute(new Attribute(obj.Observer.name.toLowerCase()+'s', "ArrayList<"+obj.Observer.name+">","private"));
 		file1.addMethod(new Method("attach","void",false,"public","\t \t "+ obj.Observer.name.toLowerCase()+"s.add("+obj.Observer.name.toLowerCase().charAt(0)+");",[new Attribute(obj.Observer.name.toLowerCase().charAt(0), obj.Observer.name,"")]));
 		file1.addMethod(new Method("detach","void",false,"public","\t \t "+ obj.Observer.name.toLowerCase()+"s.remove("+obj.Observer.name.toLowerCase().charAt(0)+");",[new Attribute(obj.Observer.name.toLowerCase().charAt(0), obj.Observer.name,"")]));
