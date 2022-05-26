@@ -60,7 +60,7 @@ export class extensionWidget extends ReactWidget {
 	static structuralPatterns = new StructuralPatterns();
 	static behavioralPatterns = new BehavioralPatterns();
 	protected render(): React.ReactNode {
-		const header = `Choose a Design Pattern and get the code. `;
+		const header = `Choose a Design Pattern and get the code or choose Wizard in order to guide you to the right design pattern, depending on your needs!`;
 		
 		return <div id='widget-container'>
 		<AlertMessage type='INFO' header={header} />
@@ -97,15 +97,13 @@ export class extensionWidget extends ReactWidget {
 						<option value="Visitor">Visitor</option>
 					</optgroup>
 				</select>
-				<br /> 
-				<br /> 
-				<button id="btn-get-code" type="button" title='Assign roles to classes and methods' onClick={_a => this.runprocess()}>Assign roles to classes and methods</button>
+				
 				<button id="btn-wizard"  type="button" title='Wizard' onClick={_a => this.runWizard()}>Wizard</button>
 				<br />
 				<br />
 				<div id="result">
-					<fieldset>
-						<details>
+					<fieldset id="details">
+						<details >
 							<summary id={'description'}></summary>
 							<p id={'example'}></p>
 							<img id = "image" alt= "Class Diagram " ></img>
@@ -119,7 +117,6 @@ export class extensionWidget extends ReactWidget {
 					</form>
 					<div id="elements">
 						<button id ="btn-finalize"  type="button" title='Get the code according to the pattern'  onClick={_a => this.buttonClick2((document.getElementById('show_pattern_table') as HTMLTableElement))}> Get Code </button>
-						<button id ="btn-back"  type="button" title='Go back'  onClick={_a => this.goBackbuttonClick((document.getElementById('show_pattern_table') as HTMLTableElement))}> Back </button>
 					</div>
 				</div>
 			</div>
@@ -132,16 +129,14 @@ export class extensionWidget extends ReactWidget {
 	}
 	
     protected async runprocess(): Promise<void> {
-		if (extensionWidget.state.statePatternSelection!="Choose_pattern" && extensionWidget.state.statePatternSelection!=""){
-			(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'hidden';
-			(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'hidden';
-
+		if (extensionWidget.state.statePatternSelection!="Choose_pattern"){
 			var getUrl = window.location.href;
 			extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
 			extensionWidget.functions.setClassNames(extensionWidget.res);
 			
 			(document.getElementById("result") as HTMLElement).style.visibility = 'visible';
-			(document.getElementById("btn-back") as HTMLButtonElement).style.visibility = 'visible';
+			(document.getElementById("elements") as HTMLElement).style.visibility = 'visible';
+			(document.getElementById("details") as HTMLElement).style.visibility = 'visible';
 			(document.getElementById('image') as HTMLImageElement).className = extensionWidget.state.statePatternSelection;
 			(document.getElementById('description') as HTMLElement).innerHTML = "<b>"+extensionWidget.state.statePatternSelection.split(/(?=[A-Z])/).join(" ")+"</b> "+extensionWidget.explanation[extensionWidget.state.statePatternSelection].description;
 			(document.getElementById('example') as HTMLElement).innerHTML = "<b>Example:</b> "+extensionWidget.explanation[extensionWidget.state.statePatternSelection].example;
@@ -154,7 +149,9 @@ export class extensionWidget extends ReactWidget {
 			});
 
 		}else{
-			this.messageService.info('You need to choose a software pattern!');
+			(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
+			(document.getElementById("elements") as HTMLElement).style.visibility = 'hidden';
+			(document.getElementById("details") as HTMLElement).style.visibility = 'hidden';
 		}
 	}
 	
@@ -163,10 +160,11 @@ export class extensionWidget extends ReactWidget {
     async updateSelection(e:React.ChangeEvent<HTMLSelectElement>){
 		const key =  e.currentTarget.name as keyof typeof extensionWidget.state;
 		extensionWidget.state[key]  = e.currentTarget.value;
-		if((document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility === 'hidden'){
-			((document.getElementById("show_pattern_table")) as HTMLTableElement).innerHTML = "";
-			await this.runprocess();
-		}
+		((document.getElementById("show_pattern_table")) as HTMLTableElement).innerHTML = "";
+		//TODO the state might be Chooce pattern
+		extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.initialData[extensionWidget.state.statePatternSelection].values;
+		await this.runprocess();
+		
 	}
 	
 	insertCells(table: HTMLTableElement, key: string,){
@@ -298,26 +296,6 @@ export class extensionWidget extends ReactWidget {
 		
 	}
 
-	async goBackbuttonClick(table: HTMLTableElement){
-		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
-		(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'visible';
-		(document.getElementById("btn-back") as HTMLButtonElement).style.visibility = 'hidden';
-		(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
-		extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.initialData[extensionWidget.state.statePatternSelection].values;
-		table.innerHTML = "";
-
-	}
-	async goBackbuttonClickWizard(div: HTMLDivElement){
-		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'visible';
-		(document.getElementById('issues') as HTMLDivElement).style.height = 'min-content';
-		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
-		(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'visible';
-		(document.getElementById("btn-back") as HTMLButtonElement).style.visibility = 'hidden';
-		(document.getElementById("result") as HTMLElement).style.visibility = 'hidden';
-		div.innerHTML = "";
-
-	}
-
 	async buttonClick2 (table: HTMLTableElement):Promise<void>{
 			let message = extensionWidget.functions.checkInputsOnSubmit(0);
 			if (message.includes("Input is valid")){
@@ -373,13 +351,22 @@ export class extensionWidget extends ReactWidget {
 		});
 		return count;
 	}
+
+	async goBackbuttonClickWizard(div: HTMLDivElement){
+		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'visible';
+		(document.getElementById('issues') as HTMLDivElement).style.height = 'min-content';
+		(document.getElementById("btn-wizard") as HTMLButtonElement).style.visibility = 'visible';
+		(document.getElementById("drop-down-patterns") as HTMLSelectElement).value = 'Choose_pattern';	
+		div.innerHTML = "";
+	}
 	
 	async runWizard(){
 		(document.getElementById('issues') as HTMLDivElement).style.visibility = 'hidden';
 		(document.getElementById('issues') as HTMLDivElement).style.height = '0';
 		(document.getElementById('result') as HTMLDivElement).style.visibility = 'hidden';
-		(document.getElementById('btn-get-code') as HTMLButtonElement).style.visibility = 'hidden';
 		(document.getElementById('btn-wizard') as HTMLButtonElement).style.visibility = 'hidden';
+		(document.getElementById("elements") as HTMLElement).style.visibility = 'hidden';
+		(document.getElementById("details") as HTMLElement).style.visibility = 'hidden';
 
 		var getUrl = window.location.href;
 		extensionWidget.res = await this.helloBackendService.sayHelloTo(getUrl);
