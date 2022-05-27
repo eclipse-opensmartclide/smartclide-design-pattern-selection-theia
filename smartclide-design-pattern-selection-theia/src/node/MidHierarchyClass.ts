@@ -20,6 +20,8 @@ export class MidHierarchyClass extends patternParticipatingClass {
             let classBody = fileContents.slice(fileContents.indexOf('{')+2,fileContents.lastIndexOf('}'));
             console.log("ClassBody: "+classBody);
 
+			if (this.hasArrayList) this.importArrayList(rootUri,declaration); // if the class has arrayList as an attribute
+
             fs.writeFileSync(filename,declaration);
             this.writeAttributes(rootUri);
             fs.appendFileSync(filename,"\n"+classBody);
@@ -29,6 +31,7 @@ export class MidHierarchyClass extends patternParticipatingClass {
             if (err.code === 'ENOENT') {
                 console.log('File not found!');
                 try{
+					if (this.hasArrayList) this.importArrayList(rootUri,""); // if the class has arrayList as an attribute
 					fs.appendFileSync(filename ,"public abstract class " + this.cName + " extends " + this.superClass + " {");
        				this.writeAttributes(rootUri);
 					this.writeMethods(rootUri);
@@ -39,7 +42,15 @@ export class MidHierarchyClass extends patternParticipatingClass {
 			} else {
                 return (err as Error).message;
             }
+		}
+		return "";
 	}
-	return "";
+	public importArrayList(rootUri: string, declaration : string): void {
+		var fs = require("fs");
+		let filename = rootUri+"/src/"+this.cName + ".java";
+		if(!declaration.includes("import java.util.ArrayList;" || declaration==="")){
+			fs.writeFileSync(filename, "import java.util.ArrayList;\n");
+		}
+	}
+}
 
-}}

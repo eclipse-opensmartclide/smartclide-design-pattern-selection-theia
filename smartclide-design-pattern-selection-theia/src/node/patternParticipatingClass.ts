@@ -2,6 +2,7 @@ import {Method} from './Method';
 import {Attribute} from './Attribute';
 
 export abstract class patternParticipatingClass {
+	protected hasArrayList : boolean;
     protected cName : string;
     protected mList : Array<Method>;
     protected aList: Array<Attribute>;
@@ -24,11 +25,15 @@ export abstract class patternParticipatingClass {
 		}		
 	}	
 	
+	public abstract importArrayList(rootUri: string, declaration : string): void ;
 	public addAttribute(a: Attribute): void {
 		this.aList.push(a);		
 	}  
 
 	public addMethod(m: Method): void {
 		this.mList.push(m);		
-	}  	
+	}  
+	public sethasArrayList(){
+		this.hasArrayList = true;
+	}	
 }

@@ -172,7 +172,10 @@ export class extensionWidget extends ReactWidget {
 			let index = 0;
 			for (var i=0; i<table.rows.length; i++){
 				let label = (document.getElementById( 'label'+ (i + 1) ) as HTMLLabelElement).innerHTML;
-				if (key>label) index++;
+				if(key.localeCompare(label, undefined, { numeric: true, sensitivity: 'base' })>0){
+					index++;
+				}
+				
 			}
 			let row = table.insertRow(index);
 			let cell1 = row.insertCell(0);
