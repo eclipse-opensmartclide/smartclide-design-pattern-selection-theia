@@ -364,6 +364,8 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file1);
 
 		let file2 :patternParticipatingClass = new NonHierarchyClass(obj.Invoker.name);
+		file2.addMethod(new Method("setCommand","void",false,"public","",[new Attribute(obj.Command.name.charAt(),obj.Command.name,"")]));
+		file2.addMethod(new Method("executeCommand","void",true,"public","",[]));
 		this.fillPromise(ppc, file2);
 
 		let file3 :patternParticipatingClass = new abstractClass(obj.Command.name);
@@ -373,19 +375,25 @@ export class CodeGenerator {
 		Object.keys(obj).forEach((key)=>{
 			if(key.includes("ConcreteCommand") && !key.includes("Method") ){
 				let file4 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Command.name);
-				file4.addAttribute(new Attribute((obj.Receiver.name).toLowerCase, obj.Receiver.name, ""));
-
+				file4.addAttribute(new Attribute((obj.Receiver.name).toLowerCase(), obj.Receiver.name, ""));
+				
 				var aList: Array<Attribute> = [];
 				aList.push(new Attribute((obj.Receiver.name).toLowerCase(),obj.Receiver.name,""));	
 				Object.keys(obj).forEach((innerkey)=>{
 					if(innerkey.includes("MethodParameter")){
-						file4.addAttribute(new Attribute(obj[key].name, "", ""));
-						aList.push(new Attribute(obj[key].name, "", ""));
+						file4.addAttribute(new Attribute(obj[innerkey].name, "", "private"));
+						aList.push(new Attribute(obj[innerkey].name, "", ""));
+					}else{
+						if(innerkey.includes("Method")){
+							file3.addMethod(new Method(obj[innerkey].name,"void",true,"public","",[]));
+							file4.addMethod(new Method(obj[innerkey].name,"void",false,"public","",[]));
+						}
 					}
 				});
-				file4.addMethod(new Method(obj[key].name,"",false,"private","\t \t this."+(obj.Receiver.name).toLowerCase+" = "+(obj.Receiver.name).toLowerCase +"; \n \t \t",aList));
+	
+				file4.addMethod(new Method(obj[key].name,"",false,"private","\t \t this."+(obj.Receiver.name).toLowerCase()+" = "+(obj.Receiver.name).toLowerCase() +"; \n \t \t",aList));
 				//concreteCommandMethod?
-
+				
 				this.fillPromise(ppc, file4);
 
 			}
