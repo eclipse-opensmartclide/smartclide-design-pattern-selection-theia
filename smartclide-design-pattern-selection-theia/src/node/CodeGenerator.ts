@@ -371,14 +371,14 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file3);
 
 		Object.keys(obj).forEach((key)=>{
-			if(key.includes("ConcreteCommand") && !key.includes("ConcreteCommand1Method") && !key.includes("ConcreteCommand1MethodParameter1")){
+			if(key.includes("ConcreteCommand") && !key.includes("Method") ){
 				let file4 : patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Command.name);
 				file4.addAttribute(new Attribute((obj.Receiver.name).toLowerCase, obj.Receiver.name, ""));
 
 				var aList: Array<Attribute> = [];
 				aList.push(new Attribute((obj.Receiver.name).toLowerCase(),obj.Receiver.name,""));	
 				Object.keys(obj).forEach((innerkey)=>{
-					if(innerkey.includes("ConcreteCommand1MethodParameter")){
+					if(innerkey.includes("MethodParameter")){
 						file4.addAttribute(new Attribute(obj[key].name, "", ""));
 						aList.push(new Attribute(obj[key].name, "", ""));
 					}
