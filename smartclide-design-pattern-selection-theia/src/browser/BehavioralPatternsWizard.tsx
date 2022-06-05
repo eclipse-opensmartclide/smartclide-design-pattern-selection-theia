@@ -22,7 +22,7 @@ export class BehavioralPatterns{
 				radio311.addEventListener('click', async (e: Event) =>{
 					divCont2.innerHTML = "";
 					let divCont3 = document.createElement('div');
-					BehavioralPatterns.functions.radioQuestion('<br>Is the receiver part of a comple component, whose internal structure you want to hide? <br>', 'Yes', 'No', 'radio3111', 'radio3112', divCont2);
+					BehavioralPatterns.functions.radioQuestion('<br>Is the receiver part of a complex component, whose internal structure you want to hide? <br>', 'Yes', 'No', 'radio3111', 'radio3112', divCont2);
 					let radio3111 = document.getElementById("radio3111") as HTMLInputElement;
 					radio3111.addEventListener('click', async(e: Event) =>{
 						divCont3.innerHTML = "";
@@ -37,7 +37,7 @@ export class BehavioralPatterns{
 							buttonNext1.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
 								let divCont6 = document.createElement('div');
-								BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Mediators <br>", parseInt((document.getElementById('numOfConcreteMediators') as HTMLInputElement).value), 'text', "Concrete Madiator's name ", 'txtboxConcreteMediator', 'infoField', 'buttonNext2', divCont5);
+								BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Mediators <br>", parseInt((document.getElementById('numOfConcreteMediators1') as HTMLInputElement).value), 'text', "Concrete Madiator's name ", 'txtboxConcreteMediator', 'infoField', 'buttonNext2', divCont5);
 								let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
 								buttonNext2.addEventListener('click', async (e: Event) =>{
 									divCont6.innerHTML = "";
@@ -47,24 +47,24 @@ export class BehavioralPatterns{
 									buttonNext3.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
 										let divCont8 = document.createElement('div');
-										BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Components <br>", parseInt((document.getElementById('numOfConmponents') as HTMLInputElement).value), 'text', "Component's name ", 'txtboxComponent', 'infoField', 'buttonNext4', divCont7);
+										BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Components <br>", parseInt((document.getElementById('numOfConmponents1') as HTMLInputElement).value), 'text', "Component's name ", 'txtboxComponent', 'infoField', 'buttonNext4', divCont7);
 										let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
 										buttonNext4.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											BehavioralPatterns.functions.createLabel('<br> <b>Mediator Pattern</b>  ', '', divCont8);
 											BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeMediatorPattern', divCont8);
-											let buttonCodeBP = document.getElementById('buttongetcodeMediatorPattern') as HTMLButtonElement;
-											buttonCodeBP.addEventListener('click', async (e: Event) =>{
-												BehavioralPatterns.values["Mediator"].values["Mediator"].name = (document.getElementById('txtboxMediator')as HTMLInputElement).value;
-												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteMediators') as HTMLInputElement).value); i++){
+											let buttonCodeMP = document.getElementById('buttongetcodeMediatorPattern') as HTMLButtonElement;
+											buttonCodeMP.addEventListener('click', async (e: Event) =>{
+												BehavioralPatterns.values["Mediator"].values["Mediator"].name = (document.getElementById('txtboxMediator1')as HTMLInputElement).value;
+												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteMediators1') as HTMLInputElement).value); i++){
 													BehavioralPatterns.values["Mediator"].values["ConcreteMediator"+i] = { "name":"", "extension":0};
 													BehavioralPatterns.values["Mediator"].values["ConcreteMediator"+i].name = (document.getElementById('txtboxConcreteMediator'+i)as HTMLInputElement).value;									
 												}
-												for (var i=1; i<=parseInt((document.getElementById('numOfConmponents') as HTMLInputElement).value); i++){
+												for (var i=1; i<=parseInt((document.getElementById('numOfConmponents1') as HTMLInputElement).value); i++){
 													BehavioralPatterns.values["Mediator"].values["Component"+i] = { "name":"", "extension":1};
 													BehavioralPatterns.values["Mediator"].values["Component"+i].name = (document.getElementById('txtboxComponent'+i)as HTMLInputElement).value;
 												}
-												//console.log(JSON.stringify(BehavioralPatterns.values["Mediator"]));
+												console.log(JSON.stringify(BehavioralPatterns.values["Mediator"]));
 												let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){
 													BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Mediator"].values, "Mediator"), messageService);
@@ -112,17 +112,17 @@ export class BehavioralPatterns{
 									buttonNext6.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
 										let divCont8 = document.createElement('div');
-										BehavioralPatterns.functions.textfieldQuestion('<br> Insert the names of the Concrete Commands <br>', parseInt((document.getElementById('numOfConcreteCommands') as HTMLInputElement).value), 'text', "Concrete Command's name", 'txtboxConcreteCommand', '', 'buttonNext7', divCont7);
+										BehavioralPatterns.functions.textfieldQuestion('<br> Insert the names of the Concrete Commands <br>', parseInt((document.getElementById('numOfConcreteCommands1') as HTMLInputElement).value), 'text', "Concrete Command's name", 'txtboxConcreteCommand', '', 'buttonNext7', divCont7);
 										let buttonNext7 = document.getElementById('buttonNext7') as HTMLButtonElement;
 										buttonNext7.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											let divCont8b = document.createElement('div');
-											BehavioralPatterns.functions.textfieldQuestion('<br> Insert the name of the executing command(method) of each Concrete Command <br>', parseInt((document.getElementById('numOfConcreteCommands') as HTMLInputElement).value), 'text', "Method of Concrete Command", 'txtboxConcreteCommandMethod', '', 'buttonNext8', divCont8);
+											BehavioralPatterns.functions.textfieldQuestion('<br> Insert the name of the executing command(method) of each Concrete Command <br>', parseInt((document.getElementById('numOfConcreteCommands1') as HTMLInputElement).value), 'text', "Method of Concrete Command", 'txtboxConcreteCommandMethod', '', 'buttonNext8', divCont8);
 											let buttonNext8 = document.getElementById('buttonNext8') as HTMLButtonElement;
 											buttonNext8.addEventListener('click', async (e: Event) =>{
 												divCont8b.innerHTML = "";
 												let divCont9 = document.createElement('div');
-												for(var i=1; i<= parseInt((document.getElementById('numOfConcreteCommands') as HTMLInputElement).value); i++){
+												for(var i=1; i<= parseInt((document.getElementById('numOfConcreteCommands1') as HTMLInputElement).value); i++){
 													BehavioralPatterns.functions.textfieldQuestion('<br> How many parameters does the command(method) of Concrete Command '+i+' have? <br>', 1, 'number', "1", 'numOfConcreteCommand'+i+'MethodParameters', '', 'disable', divCont8b);
 												}
 												BehavioralPatterns.functions.createButton('Next', 'buttonNext8b', divCont8b);
@@ -130,8 +130,8 @@ export class BehavioralPatterns{
 												buttonNext8b.addEventListener('click', async (e: Event) =>{	
 												  divCont9.innerHTML = "";
 												  let divCont10 = document.createElement('div');
-												  for(var i=1; i<= parseInt((document.getElementById('numOfConcreteCommands') as HTMLInputElement).value); i++){
-												  	BehavioralPatterns.functions.textfieldQuestion('<br> Insert the type and the name of each parameter of the executing command(method) of Concrete Command '+i+' <br>', parseInt((document.getElementById('numOfConcreteCommand'+i+'MethodParameters') as HTMLInputElement).value), 'text', "Type and Name of Parameter", 'txtboxConcreteCommand'+i+'MethodParameter', '', 'disable', divCont9);
+												  for(var i=1; i<= parseInt((document.getElementById('numOfConcreteCommands1') as HTMLInputElement).value); i++){
+												  	BehavioralPatterns.functions.textfieldQuestion('<br> Insert the type and the name of each parameter of the executing command(method) of Concrete Command '+i+' <br>', parseInt((document.getElementById('numOfConcreteCommand'+i+'MethodParameters1') as HTMLInputElement).value), 'text', "Type and Name of Parameter", 'txtboxConcreteCommand'+i+'MethodParameter', '', 'disable', divCont9);
 												  }
 												  BehavioralPatterns.functions.createButton('Next', 'buttonNext9', divCont9);
 												  let buttonNext9 = document.getElementById('buttonNext9') as HTMLButtonElement;
@@ -141,15 +141,15 @@ export class BehavioralPatterns{
 													BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeCommandPattern', divCont10);
 													let buttonCodeCP = document.getElementById('buttongetcodeCommandPattern') as HTMLButtonElement;
 													buttonCodeCP.addEventListener('click', async (e: Event) =>{
-														BehavioralPatterns.values["Command"].values["Receiver"].name = (document.getElementById('txtboxReceiver')as HTMLInputElement).value;
-														BehavioralPatterns.values["Command"].values["Invoker"].name = (document.getElementById('txtboxInvoker')as HTMLInputElement).value;
-														BehavioralPatterns.values["Command"].values["Command"].name = (document.getElementById('txtboxCommand')as HTMLInputElement).value;
-														for (var i=1; i<=parseInt((document.getElementById('numOfConcreteCommands') as HTMLInputElement).value); i++){
+														BehavioralPatterns.values["Command"].values["Receiver"].name = (document.getElementById('txtboxReceiver1')as HTMLInputElement).value;
+														BehavioralPatterns.values["Command"].values["Invoker"].name = (document.getElementById('txtboxInvoker1')as HTMLInputElement).value;
+														BehavioralPatterns.values["Command"].values["Command"].name = (document.getElementById('txtboxCommand1')as HTMLInputElement).value;
+														for (var i=1; i<=parseInt((document.getElementById('numOfConcreteCommands1') as HTMLInputElement).value); i++){
 															BehavioralPatterns.values["Command"].values["ConcreteCommand"+i] = { "name":"", "extension":1};
 															BehavioralPatterns.values["Command"].values["ConcreteCommand"+i].name = (document.getElementById('txtboxConcreteCommand'+i)as HTMLInputElement).value;
 															BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"Method"] = { "name":"", "extension":0};
 															BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"Method"].name = (document.getElementById('txtboxConcreteCommandMethod'+i)as HTMLInputElement).value;
-															for( var j=1; j<=parseInt((document.getElementById('numOfConcreteCommand'+i+'MethodParameters') as HTMLInputElement).value); j++){
+															for( var j=1; j<=parseInt((document.getElementById('numOfConcreteCommand'+i+'MethodParameters1') as HTMLInputElement).value); j++){
 																BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"MethodParameter"+j] = { "name":"", "extension":0};
 																BehavioralPatterns.values["Command"].values["ConcreteCommand"+i+"MethodParameter"+j].name = (document.getElementById('txtboxConcreteCommand'+i+'MethodParameter'+j)as HTMLInputElement).value;
 															}
@@ -202,7 +202,7 @@ export class BehavioralPatterns{
 						buttonNext1.addEventListener('click', async (e: Event) =>{
 							divCont4.innerHTML = "";
 							let divCont5 = document.createElement('div');
-							BehavioralPatterns.functions.textfieldQuestion('<br>Insert the names of the Concrete Handlers. <br>', parseInt((document.getElementById('numOfConcreteHandlers') as HTMLInputElement).value) , 'text', "Concrete Handler's name", 'txtboxConcreteHandler', '', 'buttonNext2', divCont4);
+							BehavioralPatterns.functions.textfieldQuestion('<br>Insert the names of the Concrete Handlers. <br>', parseInt((document.getElementById('numOfConcreteHandlers1') as HTMLInputElement).value) , 'text', "Concrete Handler's name", 'txtboxConcreteHandler', '', 'buttonNext2', divCont4);
 							let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
 							buttonNext2.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
@@ -210,8 +210,8 @@ export class BehavioralPatterns{
 								BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeChainOfResponsibilityPattern', divCont5);
 								let buttonCodeCORP = document.getElementById('buttongetcodeChainOfResponsibilityPattern') as HTMLButtonElement;
 								buttonCodeCORP.addEventListener('click', async (e: Event) =>{
-									BehavioralPatterns.values["ChainOfResponsibility"].values["Handler"].name = (document.getElementById('txtboxHandler')as HTMLInputElement).value;
-									for (var i=1; i<=parseInt((document.getElementById('numOfConcreteHandlers') as HTMLInputElement).value); i++){
+									BehavioralPatterns.values["ChainOfResponsibility"].values["Handler"].name = (document.getElementById('txtboxHandler1')as HTMLInputElement).value;
+									for (var i=1; i<=parseInt((document.getElementById('numOfConcreteHandlers1') as HTMLInputElement).value); i++){
 										BehavioralPatterns.values["ChainOfResponsibility"].values["ConcreteHandler"+i] = { "name":"", "extension":1};
 										BehavioralPatterns.values["ChainOfResponsibility"].values["ConcreteHandler"+i].name = (document.getElementById('txtboxConcreteHandler'+i)as HTMLInputElement).value;
 									}
@@ -256,7 +256,7 @@ export class BehavioralPatterns{
 							buttonNext1.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
 								let divCont6 = document.createElement('div');
-								BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Visitors <br>", parseInt((document.getElementById('numOfConcreteVisitors') as HTMLInputElement).value), 'text', "Concrete Visitor's name ", 'txtboxConcreteVisitor', '', 'buttonNext2', divCont5);
+								BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Visitors <br>", parseInt((document.getElementById('numOfConcreteVisitors1') as HTMLInputElement).value), 'text', "Concrete Visitor's name ", 'txtboxConcreteVisitor', '', 'buttonNext2', divCont5);
 								let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
 								buttonNext2.addEventListener('click', async (e: Event) =>{
 									divCont6.innerHTML = "";
@@ -272,7 +272,7 @@ export class BehavioralPatterns{
 									  buttonNext3.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
 										let divCont8 = document.createElement('div');
-										BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Elements <br>", parseInt((document.getElementById('numOfConcreteElements') as HTMLInputElement).value), 'text', "Concrete Element's name ", 'txtboxConcreteElement', '', 'buttonNext4', divCont7);
+										BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Elements <br>", parseInt((document.getElementById('numOfConcreteElements1') as HTMLInputElement).value), 'text', "Concrete Element's name ", 'txtboxConcreteElement', '', 'buttonNext4', divCont7);
 										let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
 										buttonNext4.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
@@ -280,13 +280,13 @@ export class BehavioralPatterns{
 											BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeVisitorPattern', divCont8);
 											let buttonCodeVP = document.getElementById('buttongetcodeVisitorPattern') as HTMLButtonElement;
 											buttonCodeVP.addEventListener('click', async (e: Event) =>{
-												BehavioralPatterns.values["Visitor"].values["Element"].name = (document.getElementById('txtboxElement')as HTMLInputElement).value;
-												BehavioralPatterns.values["Visitor"].values["Visitor"].name = (document.getElementById('txtboxVisitor')as HTMLInputElement).value;
-												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteVisitors') as HTMLInputElement).value); i++){
+												BehavioralPatterns.values["Visitor"].values["Element"].name = (document.getElementById('txtboxElement1')as HTMLInputElement).value;
+												BehavioralPatterns.values["Visitor"].values["Visitor"].name = (document.getElementById('txtboxVisitor1')as HTMLInputElement).value;
+												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteVisitors1') as HTMLInputElement).value); i++){
 													BehavioralPatterns.values["Visitor"].values["ConcreteVisitor"+i] = { "name":"", "extension":0};
 													BehavioralPatterns.values["Visitor"].values["ConcreteVisitor"+i].name = (document.getElementById('txtboxConcreteVisitor'+i)as HTMLInputElement).value;
 												}
-												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteElements') as HTMLInputElement).value); i++){
+												for (var i=1; i<=parseInt((document.getElementById('numOfConcreteElements1') as HTMLInputElement).value); i++){
 													BehavioralPatterns.values["Visitor"].values["ConcreteElement"+i] = { "name":"", "extension":1};
 													BehavioralPatterns.values["Visitor"].values["ConcreteElement"+i].name = (document.getElementById('txtboxConcreteElement'+i)as HTMLInputElement).value;
 												}
@@ -330,7 +330,7 @@ export class BehavioralPatterns{
 								buttonNextb.addEventListener('click', async (e: Event) =>{
 									divCont6.innerHTML = "";
 									let divCont7 = document.createElement('div');
-									BehavioralPatterns.functions.textfieldQuestion('<br>Insert the names of the states/steps <br>',  parseInt((document.getElementById('numOfSteps') as HTMLInputElement).value), 'text', 'State/Step name', 'txtboxAbstractClassMethod', '', 'buttonNext1', divCont6);;
+									BehavioralPatterns.functions.textfieldQuestion('<br>Insert the names of the states/steps <br>',  parseInt((document.getElementById('numOfSteps1') as HTMLInputElement).value), 'text', 'State/Step name', 'txtboxAbstractClassMethod', '', 'buttonNext1', divCont6);;
 									let buttonNext1 = document.getElementById('buttonNext1') as HTMLButtonElement;
 									buttonNext1.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
@@ -340,7 +340,7 @@ export class BehavioralPatterns{
 										buttonNext2.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											let divCont9 = document.createElement('div');
-											BehavioralPatterns.functions.textfieldQuestion('<br>Insert the names of the Concrete Classes <br>', parseInt((document.getElementById('numOfConcreteClasses') as HTMLInputElement).value) , 'text', "Concrete Classe's name", 'txtboxConcreteClass', '', 'buttonNext3', divCont8);
+											BehavioralPatterns.functions.textfieldQuestion('<br>Insert the names of the Concrete Classes <br>', parseInt((document.getElementById('numOfConcreteClasses1') as HTMLInputElement).value) , 'text', "Concrete Classe's name", 'txtboxConcreteClass', '', 'buttonNext3', divCont8);
 											let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
 											buttonNext3.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
@@ -348,12 +348,12 @@ export class BehavioralPatterns{
 												BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeTemplateMethodPattern', divCont9);
 												let buttonCodeTMP = document.getElementById('buttongetcodeTemplateMethodPattern') as HTMLButtonElement;
 												buttonCodeTMP.addEventListener('click', async (e: Event) =>{
-													BehavioralPatterns.values["TemplateMethod"].values["AbstractClass"].name = (document.getElementById('txtboxAbstractClass')as HTMLInputElement).value;
-													for (var i=1; i<=parseInt((document.getElementById('numOfSteps') as HTMLInputElement).value); i++){
+													BehavioralPatterns.values["TemplateMethod"].values["AbstractClass"].name = (document.getElementById('txtboxAbstractClass1')as HTMLInputElement).value;
+													for (var i=1; i<=parseInt((document.getElementById('numOfSteps1') as HTMLInputElement).value); i++){
 														BehavioralPatterns.values["TemplateMethod"].values["AbstractClassMethod"+i] = { "name":"", "extension":0};
 														BehavioralPatterns.values["TemplateMethod"].values["AbstractClassMethod"+i].name = (document.getElementById('txtboxAbstractClassMethod'+i)as HTMLInputElement).value;
 													}
-													for (var i=1; i<=parseInt((document.getElementById('numOfConcreteClasses') as HTMLInputElement).value); i++){
+													for (var i=1; i<=parseInt((document.getElementById('numOfConcreteClasses1') as HTMLInputElement).value); i++){
 														BehavioralPatterns.values["TemplateMethod"].values["ConcreteClass"+i] = { "name":"", "extension":1};
 														BehavioralPatterns.values["TemplateMethod"].values["ConcreteClass"+i].name = (document.getElementById('txtboxConcreteClass'+i)as HTMLInputElement).value;
 													}
@@ -406,7 +406,7 @@ export class BehavioralPatterns{
 											buttonNext3.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
 												let divCont10 = document.createElement('div');
-												BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Strategies <br>", parseInt((document.getElementById('numOfConcreteStrategies') as HTMLInputElement).value), 'text', "Concrete Strategy's name ", 'txtboxConcreteStrategy', '', 'buttonNext4', divCont9);
+												BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Strategies <br>", parseInt((document.getElementById('numOfConcreteStrategies1') as HTMLInputElement).value), 'text', "Concrete Strategy's name ", 'txtboxConcreteStrategy', '', 'buttonNext4', divCont9);
 												let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
 												buttonNext4.addEventListener('click', async (e: Event) =>{
 													divCont10.innerHTML = "";
@@ -415,10 +415,10 @@ export class BehavioralPatterns{
 													BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeStrategyPattern', divCont10);
 													let buttonCodeSP = document.getElementById('buttongetcodeStrategyPattern') as HTMLButtonElement;
 													buttonCodeSP.addEventListener('click', async (e: Event) =>{
-														BehavioralPatterns.values["Strategy"].values["Context"].name = (document.getElementById('txtboxContext')as HTMLInputElement).value;
-														BehavioralPatterns.values["Strategy"].values["Strategy"].name = (document.getElementById('txtboxStrategy')as HTMLInputElement).value;
-														BehavioralPatterns.values["Strategy"].values["StrategyMethod"].name = (document.getElementById('txtboxStrategyMethod')as HTMLInputElement).value;
-														for (var i=1; i<=parseInt((document.getElementById('numOfConcreteStrategies') as HTMLInputElement).value); i++){
+														BehavioralPatterns.values["Strategy"].values["Context"].name = (document.getElementById('txtboxContext1')as HTMLInputElement).value;
+														BehavioralPatterns.values["Strategy"].values["Strategy"].name = (document.getElementById('txtboxStrategy1')as HTMLInputElement).value;
+														BehavioralPatterns.values["Strategy"].values["StrategyMethod"].name = (document.getElementById('txtboxStrategyMethod1')as HTMLInputElement).value;
+														for (var i=1; i<=parseInt((document.getElementById('numOfConcreteStrategies1') as HTMLInputElement).value); i++){
 															BehavioralPatterns.values["Strategy"].values["ConcreteStrategy"+i] = { "name":"", "extension":0};
 														}
 														//console.log(JSON.stringify(BehavioralPatterns.values["Strategy"]));
@@ -476,7 +476,7 @@ export class BehavioralPatterns{
 								buttonNext3.addEventListener('click', async (e: Event) =>{
 								  divCont6b.innerHTML = "";
 								  let divCont7 = document.createElement('div');
-								  BehavioralPatterns.functions.textfieldQuestion("<br>Insert the type and the name of each Originator's Attribute <br>",  parseInt((document.getElementById('numOfOriginatorAttributes') as HTMLInputElement).value), 'text', "Originator's Attribute ", 'txtboxOriginatorAttribute', '', 'buttonNext3b', divCont6b);
+								  BehavioralPatterns.functions.textfieldQuestion("<br>Insert the type and the name of each Originator's Attribute <br>",  parseInt((document.getElementById('numOfOriginatorAttributes1') as HTMLInputElement).value), 'text', "Originator's Attribute ", 'txtboxOriginatorAttribute', '', 'buttonNext3b', divCont6b);
 								  let buttonNext3b = document.getElementById('buttonNext3b') as HTMLButtonElement;
 								  buttonNext3b.addEventListener('click', async (e: Event) =>{
 									divCont7.innerHTML = "";
@@ -491,7 +491,7 @@ export class BehavioralPatterns{
 										buttonNext6.addEventListener('click', async (e: Event) =>{
 										  divCont8b.innerHTML = "";
 										  let divCont9 = document.createElement('div');
-										  BehavioralPatterns.functions.textfieldQuestion("<br>Insert the type and the name of each Memento's Attribute <br>",  parseInt((document.getElementById('numOfMementoAttributes') as HTMLInputElement).value), 'text', "Memento's Attribute ", 'txtboxMementoAttribute', '', 'buttonNext6b', divCont8b);
+										  BehavioralPatterns.functions.textfieldQuestion("<br>Insert the type and the name of each Memento's Attribute <br>",  parseInt((document.getElementById('numOfMementoAttributes1') as HTMLInputElement).value), 'text', "Memento's Attribute ", 'txtboxMementoAttribute', '', 'buttonNext6b', divCont8b);
 										  let buttonNext6b = document.getElementById('buttonNext6b') as HTMLButtonElement;
 										  buttonNext6b.addEventListener('click', async (e: Event) =>{
 											divCont9.innerHTML = "";
@@ -504,14 +504,14 @@ export class BehavioralPatterns{
 												BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeMementoPattern', divCont10);
 												let buttonCodeMP = document.getElementById('buttongetcodeMementoPattern') as HTMLButtonElement;
 												buttonCodeMP.addEventListener('click', async (e: Event) =>{
-													BehavioralPatterns.values["Memento"].values["Originator"].name = (document.getElementById('txtboxOriginator')as HTMLInputElement).value;
-													BehavioralPatterns.values["Memento"].values["Memento"].name = (document.getElementById('txtboxMemento')as HTMLInputElement).value;
-													BehavioralPatterns.values["Memento"].values["Caretaker"].name = (document.getElementById('txtboxCaretaker')as HTMLInputElement).value;
-													for (var i=1; i<=parseInt((document.getElementById('numOfMementoAttributes') as HTMLInputElement).value); i++){
+													BehavioralPatterns.values["Memento"].values["Originator"].name = (document.getElementById('txtboxOriginator1')as HTMLInputElement).value;
+													BehavioralPatterns.values["Memento"].values["Memento"].name = (document.getElementById('txtboxMemento1')as HTMLInputElement).value;
+													BehavioralPatterns.values["Memento"].values["Caretaker"].name = (document.getElementById('txtboxCaretaker1')as HTMLInputElement).value;
+													for (var i=1; i<=parseInt((document.getElementById('numOfMementoAttributes1') as HTMLInputElement).value); i++){
 														BehavioralPatterns.values["Memento"].values["MementoAttribute"+i] = { "name":"", "extension":1};
 														BehavioralPatterns.values["Memento"].values["MementoAttribute"+i].name = (document.getElementById('txtboxMementoAttribute'+i)as HTMLInputElement).value;
 													}
-													for (var i=1; i<=parseInt((document.getElementById('numOfOriginatorAttributes') as HTMLInputElement).value); i++){
+													for (var i=1; i<=parseInt((document.getElementById('numOfOriginatorAttributes1') as HTMLInputElement).value); i++){
 														BehavioralPatterns.values["Memento"].values["OriginatorAttribute"+i] = { "name":"", "extension":1};
 														BehavioralPatterns.values["Memento"].values["OriginatorAttribute"+i].name = (document.getElementById('txtboxOriginatorAttribute'+i)as HTMLInputElement).value;
 													}
@@ -557,7 +557,7 @@ export class BehavioralPatterns{
 									buttonNext3.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
 										let divCont8 = document.createElement('div');
-										BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Subscribers <br>", parseInt((document.getElementById('numOfConcreteSubscribers') as HTMLInputElement).value), 'text', "Concrete Subscriber's name ", 'txtboxConcreteSubscriber', '', 'buttonNext5', divCont7);
+										BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Subscribers <br>", parseInt((document.getElementById('numOfConcreteSubscribers1') as HTMLInputElement).value), 'text', "Concrete Subscriber's name ", 'txtboxConcreteSubscriber', '', 'buttonNext5', divCont7);
 										let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
 										buttonNext5.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
@@ -572,7 +572,7 @@ export class BehavioralPatterns{
 												buttonNext7.addEventListener('click', async (e: Event) =>{
 													divCont10.innerHTML = "";
 													let divCont11 = document.createElement('div');
-													BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Publishers <br>", parseInt((document.getElementById('numOfConcretePublishers') as HTMLInputElement).value), 'text', "Concrete Publisher's name ", 'txtboxConcretePublisher', '', 'buttonNext8', divCont10);
+													BehavioralPatterns.functions.textfieldQuestion("<br> Insert the names of the Concrete Publishers <br>", parseInt((document.getElementById('numOfConcretePublishers1') as HTMLInputElement).value), 'text', "Concrete Publisher's name ", 'txtboxConcretePublisher', '', 'buttonNext8', divCont10);
 													let buttonNext8 = document.getElementById('buttonNext8') as HTMLButtonElement;
 													buttonNext8.addEventListener('click', async (e: Event) =>{
 														divCont11.innerHTML = "";
@@ -580,13 +580,13 @@ export class BehavioralPatterns{
 														BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeObserverPattern', divCont11);
 														let buttonCodeOP = document.getElementById('buttongetcodeObserverPattern') as HTMLButtonElement;
 														buttonCodeOP.addEventListener('click', async (e: Event) =>{
-															BehavioralPatterns.values["Observer"].values["Subject"].name = (document.getElementById('txtboxPublisher')as HTMLInputElement).value;
-															BehavioralPatterns.values["Observer"].values["Observer"].name = (document.getElementById('txtboxSubscriber')as HTMLInputElement).value;
-															for (var i=1; i<=parseInt((document.getElementById('numOfConcreteSubscribers') as HTMLInputElement).value); i++){
+															BehavioralPatterns.values["Observer"].values["Subject"].name = (document.getElementById('txtboxSubscriber1')as HTMLInputElement).value;
+															BehavioralPatterns.values["Observer"].values["Observer"].name = (document.getElementById('txtboxPublisher1')as HTMLInputElement).value;
+															for (var i=1; i<=parseInt((document.getElementById('numOfConcreteSubscribers1') as HTMLInputElement).value); i++){
 																BehavioralPatterns.values["Observer"].values["ConcreteSubject"+i] = { "name":"", "extension":1};
 																BehavioralPatterns.values["Observer"].values["ConcreteSubject"+i].name = (document.getElementById('txtboxConcreteSubscriber'+i)as HTMLInputElement).value;
 															}
-															for (var i=1; i<=parseInt((document.getElementById('numOfConcretePublishers') as HTMLInputElement).value); i++){
+															for (var i=1; i<=parseInt((document.getElementById('numOfConcretePublishers1') as HTMLInputElement).value); i++){
 																BehavioralPatterns.values["Observer"].values["ConcreteObserver"+i] = { "name":"", "extension":1};
 																BehavioralPatterns.values["Observer"].values["ConcreteObserver"+i].name = (document.getElementById('txtboxConcretePublisher'+i)as HTMLInputElement).value;
 															}
@@ -630,7 +630,7 @@ export class BehavioralPatterns{
 										buttonNext2.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											let divCont9 = document.createElement('div');
-											BehavioralPatterns.functions.textfieldQuestion('<br>Insert the names of the Concrete State classes  <br>',  parseInt((document.getElementById('numOfConcreteStates') as HTMLInputElement).value), 'text', 'Concrete State name ', 'txtboxConcreteState', '', 'buttonNext3', divCont8);
+											BehavioralPatterns.functions.textfieldQuestion('<br>Insert the names of the Concrete State classes  <br>',  parseInt((document.getElementById('numOfConcreteStates1') as HTMLInputElement).value), 'text', 'Concrete State name ', 'txtboxConcreteState', '', 'buttonNext3', divCont8);
 											let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
 											buttonNext3.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
@@ -643,9 +643,9 @@ export class BehavioralPatterns{
 													BehavioralPatterns.functions.createButton('Get Code', 'buttongetcodeStatePattern', divCont10);
 													let buttonCodeSP = document.getElementById('buttongetcodeStatePattern') as HTMLButtonElement;
 													buttonCodeSP.addEventListener('click', async (e: Event) =>{
-														BehavioralPatterns.values["State"].values["Context"].name = (document.getElementById('txtboxContext')as HTMLInputElement).value;
-														BehavioralPatterns.values["State"].values["State"].name = (document.getElementById('txtboxState')as HTMLInputElement).value;
-														for (var i=1; i<=parseInt((document.getElementById('numOfConcreteStates') as HTMLInputElement).value); i++){
+														BehavioralPatterns.values["State"].values["Context"].name = (document.getElementById('txtboxContext1')as HTMLInputElement).value;
+														BehavioralPatterns.values["State"].values["State"].name = (document.getElementById('txtboxState1')as HTMLInputElement).value;
+														for (var i=1; i<=parseInt((document.getElementById('numOfConcreteStates1') as HTMLInputElement).value); i++){
 															BehavioralPatterns.values["State"].values["ConcreteState"+i] = { "name":"", "extension":1};
 															BehavioralPatterns.values["State"].values["ConcreteState"+i].name = (document.getElementById('txtboxConcreteState'+i)as HTMLInputElement).value;
 														}
