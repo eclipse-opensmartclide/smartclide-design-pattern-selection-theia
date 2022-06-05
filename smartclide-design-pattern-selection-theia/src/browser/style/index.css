@@ -120,15 +120,15 @@
 }
 
 .Facade {
-  content: url(./img/StructuralPatternsIcons/FacadeIcon.jpg);
+  content: url(./img/StructuralPatternsIcons/FacadeIcon.png);
 }
 
 .Proxy {
-  content: url(./img/StructuralPatternsIcons/ProxyIcon.jpg);
+  content: url(./img/StructuralPatternsIcons/ProxyIcon.png);
 }
 
 .Flyweight {
-  content: url(./img/StructuralPatternsIcons/FlyweightIcon.jpg);
+  content: url(./img/StructuralPatternsIcons/FlyweightIcon.png);
 }
 
 /*Class Diagrams for Behavioral Patterns*/
@@ -150,23 +150,23 @@
 }
 
 .Mediator {
-  content: url(./img/BehavioralPatternsIcons/MediatorIcon.jpg);
+  content: url(./img/BehavioralPatternsIcons/MediatorIcon.png);
 }
 
 .Command {
-  content: url(./img/BehavioralPatternsIcons/CommandIcon.jpg);
+  content: url(./img/BehavioralPatternsIcons/CommandIcon.png);
 }
 
 .ChainOfResponsibility {
-  content: url(./img/BehavioralPatternsIcons/ChainofResponsibilityIcon.jpg);
+  content: url(./img/BehavioralPatternsIcons/ChainOfResponsibilityIcon.png);
 }
 
 .Observer {
-  content: url(./img/BehavioralPatternsIcons/ObserverIcon.jpg);
+  content: url(./img/BehavioralPatternsIcons/ObserverIcon.png);
 }
 
 .Memento {
-  content: url(./img/BehavioralPatternsIcons/MementoIcon.jpg);
+  content: url(./img/BehavioralPatternsIcons/MementoIcon.png);
 }
 
 #btn-wizzard {

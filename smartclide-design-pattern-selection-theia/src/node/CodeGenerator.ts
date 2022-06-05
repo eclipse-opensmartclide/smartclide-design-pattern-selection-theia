@@ -1,6 +1,5 @@
 import { patternParticipatingClass } from './patternParticipatingClass';
 import { abstractClass } from './abstractClass';
-import { MidHierarchyClass } from './MidHierarchyClass';
 import { ConcreteClass } from './ConcreteClass';
 import { NonHierarchyClass } from './NonHierarchyClass';
 import { Attribute } from './Attribute';
@@ -244,10 +243,10 @@ export class CodeGenerator {
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
 		let file1: patternParticipatingClass = new abstractClass(obj.Component.name);
-		file1.addMethod(new Method(obj.ComponentMethod1.name, "void", true, "public", "", []));
+		//file1.addMethod(new Method(obj.ComponentMethod1.name, "void", true, "public", "", []));
 
 
-		let file2: patternParticipatingClass = new MidHierarchyClass(obj.Decorator, obj.Component.name);
+		let file2: patternParticipatingClass = new ConcreteClass(obj.Decorator.name, obj.Component.name);
 		file2.addMethod(new Method(obj.Decorator.name, "", false, "public", "\t \t this." + obj.Component.name.toLowerCase() + " = " + obj.Component.name.toLowerCase() + ";", [new Attribute(obj.Component.name.toLowerCase(), obj.Component.name, "")]));
 		var cList: Array<patternParticipatingClass> = [];//list of Concrete Component classes
 		var mList: Array<Method> = [];//list of Component's methods
@@ -255,16 +254,24 @@ export class CodeGenerator {
 			if (key.includes("ConcreteComponent")) {
 				let file3: patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Component.name);
 				cList.push(file3);
-			} else if (key.includes("ConcreteDecorator")) {
+			} else if (key.includes("ConcreteDecorator") && !key.includes("Method")) {
 				let file4: patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Decorator.name);
-				file4.addMethod(new Method(obj.ConcreteDecorator1Method.name, "void", false, "public", "", []));
+					Object.keys(obj).forEach(innerkey => {
+						if(innerkey.includes("ConcreteDecorator") && innerkey.includes("Method")){
+							var numInnerkey = innerkey.match(/\d+/g);
+							var numKey = key.match(/\d+/g);
+							if(numInnerkey!== null && numKey!== null && numInnerkey[0]===numKey[0]){
+								file4.addMethod(new Method(obj[innerkey].name, "void", false, "public", "", []));
+							}		
+						}
+				});
 				cList.push(file4);
 			} else if (key.includes("ComponentMethod")) {
 				file2.addMethod(new Method(obj[key].name, "void", false, "public", "", []));
-				file1.addMethod(new Method(obj[key].name, "void", false, "public", "", []));
+				file1.addMethod(new Method(obj[key].name, "void", true, "public", "", []));
 				mList.push(new Method(obj[key].name, "void", false, "public", "", []))
 			}
-		})
+		});
 		this.fillPromise(ppc, file1);;
 		for (var i = 0; i < cList.length; i++) {
 			for (var j = 0; j < mList.length; j++) {
@@ -295,7 +302,7 @@ export class CodeGenerator {
 		let file1: patternParticipatingClass = new NonHierarchyClass(obj.FlyweightFactory.name);
 		file1.sethasArrayList();
 		file1.addAttribute(new Attribute("cache", "ArrayList<" + obj.Flyweight.name + ">", "private")); //list of Flyweights
-		file1.addMethod(new Method(obj.Flyweight.name, '', false, "public", "\t \t this.cache = new ArrayList<" + obj.Flyweight.name + ">", [])); //constructor of FlyweightFactory class
+		file1.addMethod(new Method(obj.FlyweightFactory.name, '', false, "public", "\t \t this.cache = new ArrayList<" + obj.Flyweight.name + ">", [])); //constructor of FlyweightFactory class
 		file1.addMethod(new Method("getFlyweight", obj.Flyweight.name, false, "public", "", [new Attribute("key", "string", "")])); //δεν έχω συμπληρώσει το body της μεθόδου
 		this.fillPromise(ppc, file1);
 
@@ -304,7 +311,7 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file2);
 
 		Object.keys(obj).forEach((key) => {
-			if (key.includes("ConcreteFlyweight") && !key.includes("ConcreteFlyweight1Attribute")) {
+			if (key.includes("ConcreteFlyweight") && !key.includes("Attribute")) {
 				let file3: patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Flyweight.name);
 				this.fillPromise(ppc, file3);
 			}
@@ -385,7 +392,7 @@ export class CodeGenerator {
 						aList.push(new Attribute(obj[innerkey].name, "", ""));
 					} else {
 						if (innerkey.includes("Method")) {
-							file3.addMethod(new Method(obj[innerkey].name, "void", true, "public", "", []));
+							file3.addMethod(new Method(obj[innerkey].name, "void", false, "public", "", []));
 							file4.addMethod(new Method(obj[innerkey].name, "void", false, "public", "", []));
 						}
 					}
