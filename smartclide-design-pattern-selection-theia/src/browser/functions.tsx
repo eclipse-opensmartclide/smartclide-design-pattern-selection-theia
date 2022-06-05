@@ -20,7 +20,7 @@ export class Functions{
         if (num==1){
 			let divInput = document.createElement('div');
 			parent.append(divInput);
-            this.createInput(inputMessage, inputId, inputClassname, inputId, inputType, divInput);
+            this.createInput(inputMessage, inputId+num, inputClassname, inputId+num, inputType, divInput);
         }else{
             for (let i=1; i<=num; i++){
 				let divInput = document.createElement('div');
@@ -156,8 +156,8 @@ export class Functions{
 				let field = document.forms[aaform][i] as HTMLInputElement;
 				if (field.id.includes('txtbox')){
 					if (field.id.includes('Attribute') || field.id.includes('Parameter') || field.name.includes('Attribute') || field.name.includes('Parameter')){
-						if (!this.checkAttributeNameWriting(field.value)) return "Attribute/Parameter's type can start with uppercase letter! Attribute/Parameter's name must contain only small letters! ";
-					}else if (field.id.includes('Method') || field.name.includes('Method')){
+						if (!this.checkAttributeNameWriting(field.value)) return "Attribute/Parameter's type can start with uppercase letter! Attribute/Parameter's name must start with small letter! ";
+					}else if (field.id.includes('Method') || field.name.includes('Method') || (field.id.includes('Step')  || field.name.includes('Step'))){
 						if (!this.checkMethodNameWriting(field.value)) return "Method's name must follow camel writing!";
 					}else if (!this.checkClassNameWriting(field.value)){
 						return "Class's name must start with a capital letter!";

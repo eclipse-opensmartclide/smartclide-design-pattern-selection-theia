@@ -60,7 +60,7 @@ export class extensionWidget extends ReactWidget {
 	static structuralPatterns = new StructuralPatterns();
 	static behavioralPatterns = new BehavioralPatterns();
 	protected render(): React.ReactNode {
-		const header = `Choose a Design Pattern and get the code or choose Wizard in order to guide you to the right design pattern, depending on your needs!`;
+		const header = `Select a Design Pattern and get the code or choose Wizard in order to guide you to the right design pattern, depending on your needs!`;
 		
 		return <div id='widget-container'>
 		<AlertMessage type='INFO' header={header} />
@@ -407,6 +407,6 @@ export class extensionWidget extends ReactWidget {
 		
 		divWiz.appendChild(divCont);
 	}	
-}			
-	
 
+	
+}

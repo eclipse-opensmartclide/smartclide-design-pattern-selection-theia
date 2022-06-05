@@ -31,7 +31,7 @@ export class StructuralPatterns{
 					  buttonNext1.addEventListener('click', async (e: Event) =>{
 						divCont3.innerHTML = "";
 						let divCont4 = document.createElement('div');
-						StructuralPatterns.functions.textfieldQuestion("<br> Insert the names of the 1st hierarchy's subclasses  <br>", parseInt((document.getElementById('numOfRefinedAbstractions') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxRefinedAbstraction', 'infoField', 'buttonNext2', divCont3);
+						StructuralPatterns.functions.textfieldQuestion("<br> Insert the names of the 1st hierarchy's subclasses  <br>", parseInt((document.getElementById('numOfRefinedAbstractions1') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxRefinedAbstraction', 'infoField', 'buttonNext2', divCont3);
 						let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
 						buttonNext2.addEventListener('click', async (e: Event) =>{
 							divCont4.innerHTML = "";
@@ -51,7 +51,7 @@ export class StructuralPatterns{
 								buttonNext4.addEventListener('click', async (e: Event) =>{
 									divCont6.innerHTML = "";
 									let divCont7 = document.createElement('div');
-									StructuralPatterns.functions.textfieldQuestion("<br> Insert the names of the 2nd hierarchy's subclasses <br>", parseInt((document.getElementById('numOfConcreteImplementations') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxConcreteImplementation', 'infoField', 'buttonNext5', divCont6);
+									StructuralPatterns.functions.textfieldQuestion("<br> Insert the names of the 2nd hierarchy's subclasses <br>", parseInt((document.getElementById('numOfConcreteImplementations1') as HTMLInputElement).value), 'text', "Subclass's name ", 'txtboxConcreteImplementation', 'infoField', 'buttonNext5', divCont6);
 									let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
 									buttonNext5.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
@@ -62,8 +62,8 @@ export class StructuralPatterns{
 											let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
 											StructuralPatterns.values["Bridge"].values["Abstraction"].name = (infoList.item(0) as HTMLInputElement).value;
 											StructuralPatterns.values["Bridge"].values["AbstractionMethod"].name = (infoList.item(1) as HTMLInputElement).value;
-											let numRefAb = parseInt((document.getElementById('numOfRefinedAbstractions') as HTMLInputElement).value);
-											let numImpl = parseInt((document.getElementById('numOfConcreteImplementations') as HTMLInputElement).value);
+											let numRefAb = parseInt((document.getElementById('numOfRefinedAbstractions1') as HTMLInputElement).value);
+											let numImpl = parseInt((document.getElementById('numOfConcreteImplementations1') as HTMLInputElement).value);
 											let i = 2;
 											for (var j=1; j<=numRefAb; j++){
 												StructuralPatterns.values["Bridge"].values["RefinedAbstraction"+j] = { "name":"", "extension":1};
@@ -124,7 +124,7 @@ export class StructuralPatterns{
 						buttonNext1.addEventListener('click', async (e: Event) =>{
 							divCont4.innerHTML = "";
 							let divCont5 = document.createElement('div');
-							StructuralPatterns.functions.textfieldQuestion('<br> Insert the name of each functionality <br>', parseInt((document.getElementById('NumOfInterfaceMethods') as HTMLInputElement).value), 'text', 'Functionality name ', 'txtboxFunctionalities', 'infoField', 'buttonNext2', divCont4);
+							StructuralPatterns.functions.textfieldQuestion('<br> Insert the name of each functionality <br>', parseInt((document.getElementById('NumOfInterfaceMethods1') as HTMLInputElement).value), 'text', 'Functionality name ', 'txtboxFunctionalities', 'infoField', 'buttonNext2', divCont4);
 							let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
 							buttonNext2.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
@@ -134,7 +134,7 @@ export class StructuralPatterns{
 								buttonNext3.addEventListener('click', async (e: Event) =>{
 									divCont6.innerHTML = "";
 									let divCont7 = document.createElement('div');
-									StructuralPatterns.functions.textfieldQuestion('<br> Insert the names of the Simple objects <br>', parseInt((document.getElementById('NumOfSimpleObjectsTypes') as HTMLInputElement).value), 'text', 'Simple Object name ', 'txtboxSimpleObjects', 'infoField', 'buttonNext4', divCont6);
+									StructuralPatterns.functions.textfieldQuestion('<br> Insert the names of the Simple objects <br>', parseInt((document.getElementById('NumOfSimpleObjectsTypes1') as HTMLInputElement).value), 'text', 'Simple Object name ', 'txtboxSimpleObjects', 'infoField', 'buttonNext4', divCont6);
 									let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
 									buttonNext4.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
@@ -154,12 +154,12 @@ export class StructuralPatterns{
 												buttonNext6.addEventListener('click', async (e: Event) =>{
 													divCont10.innerHTML = "";
 													let divCont11 = document.createElement('div');
-													StructuralPatterns.functions.textfieldQuestion('<br> Insert the names of the Concrete Decorators <br> ', parseInt((document.getElementById('NumOfConcreteDecorators') as HTMLInputElement).value), 'text', 'Concrete Decorator name ', 'txtboxConcreteDecorator', 'infoField', 'buttonNext7a', divCont10 ); 
+													StructuralPatterns.functions.textfieldQuestion('<br> Insert the names of the Concrete Decorators <br> ', parseInt((document.getElementById('NumOfConcreteDecorators1') as HTMLInputElement).value), 'text', 'Concrete Decorator name ', 'txtboxConcreteDecorator', 'infoField', 'buttonNext7a', divCont10 ); 
 													let buttonNext7a = document.getElementById('buttonNext7a') as HTMLButtonElement;
 													buttonNext7a.addEventListener('click', async (e: Event) =>{
 														divCont11.innerHTML = "";
 														let divCont12 = document.createElement('div');
-														StructuralPatterns.functions.textfieldQuestion('<br> Insert the name of the function of each Concrete Decorator <br>', parseInt((document.getElementById('NumOfConcreteDecorators') as HTMLInputElement).value), 'text', 'Function of Concrete Decorator ', 'txtboxConcreteDecoratorMethod', 'infoField', 'buttonNext7b', divCont11 );
+														StructuralPatterns.functions.textfieldQuestion('<br> Insert the name of the function of each Concrete Decorator <br>', parseInt((document.getElementById('NumOfConcreteDecorators1') as HTMLInputElement).value), 'text', 'Function of Concrete Decorator ', 'txtboxConcreteDecoratorMethod', 'infoField', 'buttonNext7b', divCont11 );
 														let buttonNext7b = document.getElementById('buttonNext7b') as HTMLButtonElement;
 														buttonNext7b.addEventListener('click', async (e: Event) =>{	
 															divCont12.innerHTML = "";
@@ -169,9 +169,9 @@ export class StructuralPatterns{
 															buttonCodeDP.addEventListener('click', async (e: Event) =>{
 																let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
 																StructuralPatterns.values["Decorator"].values["Component"].name = (infoList.item(0) as HTMLInputElement).value;
-																let numInterfaceMethods = parseInt((document.getElementById('NumOfInterfaceMethods') as HTMLInputElement).value);
-																let numSimpleObj = parseInt((document.getElementById('NumOfSimpleObjectsTypes') as HTMLInputElement).value);
-																let numConDec = parseInt((document.getElementById('NumOfConcreteDecorators') as HTMLInputElement).value);
+																let numInterfaceMethods = parseInt((document.getElementById('NumOfInterfaceMethods1') as HTMLInputElement).value);
+																let numSimpleObj = parseInt((document.getElementById('NumOfSimpleObjectsTypes1') as HTMLInputElement).value);
+																let numConDec = parseInt((document.getElementById('NumOfConcreteDecorators1') as HTMLInputElement).value);
 																for (var i=1; i<=numInterfaceMethods; i++){
 																	StructuralPatterns.values["Decorator"].values["ComponentMethod"+i] = { "name":"", "extension":1};
 																	let v1 = (infoList.item(i) as HTMLInputElement).value;
@@ -227,8 +227,8 @@ export class StructuralPatterns{
 												buttonCodeCP.addEventListener('click', async (e: Event) =>{
 													let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
 													StructuralPatterns.values["Composite"].values["Component"].name = (infoList.item(0) as HTMLInputElement).value;
-													let numInterfaceMethods = parseInt((document.getElementById('NumOfInterfaceMethods') as HTMLInputElement).value);
-													let numSimpleObj = parseInt((document.getElementById('NumOfSimpleObjectsTypes') as HTMLInputElement).value);
+													let numInterfaceMethods = parseInt((document.getElementById('NumOfInterfaceMethods1') as HTMLInputElement).value);
+													let numSimpleObj = parseInt((document.getElementById('NumOfSimpleObjectsTypes1') as HTMLInputElement).value);
 													for (var i=1; i<=numInterfaceMethods; i++){
 														StructuralPatterns.values["Composite"].values["ComponentMethod"+i] = { "name":"", "extension":1};
 														let v1 = (infoList.item(i) as HTMLInputElement).value;
@@ -298,7 +298,7 @@ export class StructuralPatterns{
 										buttonNext11.addEventListener('click', async (e: Event) =>{
 											divCont8.innerHTML = "";
 											let divCont9 = document.createElement('div');	
-											StructuralPatterns.functions.textfieldQuestion('<br>Insert the names of the Concrete Flyweights <br>', parseInt((document.getElementById('NumOfConcreteFlyweights') as HTMLInputElement).value), 'text', 'Concrete Flyweight name ', 'txtboxConcreteFlyweight', 'infoField', 'buttonNext12', divCont8);
+											StructuralPatterns.functions.textfieldQuestion('<br>Insert the names of the Concrete Flyweights <br>', parseInt((document.getElementById('NumOfConcreteFlyweights1') as HTMLInputElement).value), 'text', 'Concrete Flyweight name ', 'txtboxConcreteFlyweight', 'infoField', 'buttonNext12', divCont8);
 											let buttonNext12 = document.getElementById('buttonNext12') as HTMLButtonElement;
 											buttonNext12.addEventListener('click', async (e: Event) =>{
 												divCont9.innerHTML = "";
@@ -320,7 +320,7 @@ export class StructuralPatterns{
 															let infoList = document.getElementsByClassName('infoField') as HTMLCollection;													
 															StructuralPatterns.values["Flyweight"].values["FlyweightFactory"].name = (infoList.item(0) as HTMLInputElement).value;
 															StructuralPatterns.values["Flyweight"].values["Flyweight"].name = (infoList.item(1) as HTMLInputElement).value;
-															let numCat = parseInt((document.getElementById('NumOfConcreteFlyweights') as HTMLInputElement).value);
+															let numCat = parseInt((document.getElementById('NumOfConcreteFlyweights1') as HTMLInputElement).value);
 															for (var i=1; i<=numCat; i++){
 																StructuralPatterns.values["Flyweight"].values["ConcreteFlyweight"+i] = { "name":"", "extension":0};
 																StructuralPatterns.values["Flyweight"].values["ConcreteFlyweight"+i].name = (infoList.item(i) as HTMLInputElement).value;
@@ -437,7 +437,7 @@ export class StructuralPatterns{
 						radio22212.addEventListener('click', async (e: Event) =>{
 							divCont4.innerHTML = "";
 							let divCont5 = document.createElement('div');
-							StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Facade class (giving access to the functioalilty of the subsystem) <br>', 1, 'text', 'Facade name', 'txtboxFacade', 'infoField', 'buttonNext20',  divCont4);
+							StructuralPatterns.functions.textfieldQuestion('<br>Insert the name of the Facade class (giving access to the functionalilty of the subsystem) <br>', 1, 'text', 'Facade name', 'txtboxFacade', 'infoField', 'buttonNext20',  divCont4);
 							let buttonNext20 = document.getElementById('buttonNext20') as HTMLButtonElement;
 							buttonNext20.addEventListener('click', async (e: Event) =>{
 								divCont5.innerHTML = "";
@@ -447,7 +447,7 @@ export class StructuralPatterns{
 								buttonNext21.addEventListener('click', async (e: Event) =>{
 									divCont6.innerHTML = "";
 									let divCont7 = document.createElement('div');
-									StructuralPatterns.functions.textfieldQuestion('<br>Insert the names of the methods <br>', parseInt((document.getElementById('NumOfAdditionalFacades') as HTMLInputElement).value), 'text', 'Facade Method name ', 'txtboxFacadeMethods', 'infoField', 'buttonNext22', divCont6);
+									StructuralPatterns.functions.textfieldQuestion('<br>Insert the names of the methods <br>', parseInt((document.getElementById('NumOfAdditionalFacades1') as HTMLInputElement).value), 'text', 'Facade Method name ', 'txtboxFacadeMethods', 'infoField', 'buttonNext22', divCont6);
 									let buttonNext22 = document.getElementById('buttonNext22') as HTMLButtonElement;
 									buttonNext22.addEventListener('click', async (e: Event) =>{
 										divCont7.innerHTML = "";
@@ -458,7 +458,7 @@ export class StructuralPatterns{
 											//FACADE
 											let infoList = document.getElementsByClassName('infoField') as HTMLCollection;														
 											StructuralPatterns.values["Facade"].values["Facade"].name = (infoList.item(0) as HTMLInputElement).value;
-											let numCat = parseInt((document.getElementById('NumOfAdditionalFacades') as HTMLInputElement).value);
+											let numCat = parseInt((document.getElementById('NumOfAdditionalFacades1') as HTMLInputElement).value);
 											for (var i=1; i<=numCat; i++){
 												StructuralPatterns.values["Facade"].values["FacadeMethod"+i] = { "name":"", "extension":0};
 												StructuralPatterns.values["Facade"].values["FacadeMethod"+i].name = (infoList.item(i) as HTMLInputElement).value;
