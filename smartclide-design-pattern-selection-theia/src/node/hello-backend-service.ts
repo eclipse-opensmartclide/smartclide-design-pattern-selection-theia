@@ -13,7 +13,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     Path = require("path");
     FS = require("fs");
     static Files : string[] = [];
-
+    static absolutes : string[] = [];
     static index = -1;
     static array: string[];
 
@@ -22,8 +22,10 @@ export class HelloBackendServiceImpl implements HelloBackendService {
             var Absolute = this.Path.join(Directory, File);
             if (this.FS.statSync(Absolute).isDirectory())
                 return this.ThroughDirectory(Absolute);
-            else if(Absolute.endsWith(".java"))
+            else if(Absolute.endsWith(".java")){
+                HelloBackendServiceImpl.absolutes.push(Absolute);
                 return HelloBackendServiceImpl.Files.push(File);
+            }       
         });
     }
 
@@ -54,18 +56,18 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     }
 
     async getMethods(url: string, fileName: string): Promise<string[]>{
-        var lastL = url.indexOf("/#/");
-        var rootUri;
-        if(url.match("\/#\/.:\/")){
-            rootUri = url.substr(lastL+3);
-        }
-        else{
-            rootUri = url.substr(lastL+2);
-        }
         var fs = require("fs");
         let lO = {label: []};
+        var res= HelloBackendServiceImpl.absolutes;
+        var file=""
+        res.forEach(element => {
+            console.log(element)
+           if (element.includes(fileName+".java"))
+                file = element;
+        });
+        
         try {
-            const data = fs.readFileSync(rootUri+"/src/"+ fileName +".java", 'utf8')
+            const data = fs.readFileSync( file , 'utf8')
             const regex = new RegExp(/(?:(?:public|private|protected|static|final|native|synchronized|abstract|transient)+\s+)+[$_\w<>\[\]\s]*\s+[\$_\w]+\([^\)]*\)?\s*/gm);
             const array = [...data.matchAll(regex)];
             for(var i = 0; i<array.length; i++){

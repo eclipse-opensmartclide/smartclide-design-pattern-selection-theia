@@ -32,7 +32,7 @@ export class Method {
 				this.params[i].writeAsParam(cName, rootUri);
 			else {
 				this.params[i].writeAsParam(cName, rootUri);
-				fs.appendFileSync(cName + ".java",", ");
+				fs.appendFileSync(filename,", ");
 			}
 		}
 		if (this.isAbstract) {

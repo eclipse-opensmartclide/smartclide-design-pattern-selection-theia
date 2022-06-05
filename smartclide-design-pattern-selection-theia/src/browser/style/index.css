@@ -1,6 +1,7 @@
-#widget-container{
+#widget-container {
   max-width: 100%;
 }
+
 #widget-container h2 {
   color: var(--theia-ui-font-color1);
   font-size: 12px;
@@ -9,134 +10,186 @@
   text-transform: uppercase;
 }
 
-#issues input{
-	background: transparent;
+#issues input {
+  background: transparent;
   border: none;
   color: white;
   max-width: 100%;
   height: 20px;
 }
 
-#TD{
-	display: none;
-	margin-left: 10px;
-	margin-top: 20px;
+#TD {
+  display: none;
+  margin-left: 10px;
+  margin-top: 20px;
 }
+
 #show_pattern_table td {
-	width: 200px;
+  width: 200px;
 }
-#issues{
-	margin-left: 10px;
+
+#issues {
+  margin-left: 10px;
   margin-right: 10px;
   max-width: 100%;
 }
 
-.divIssue{
-	border-style: solid;
+.divIssue {
+  border-style: solid;
   border-width: thin;
   margin: 5px;
-	padding: 2px;
-	border-color: #6a6a6a;
+  padding: 2px;
+  border-color: #6a6a6a;
 }
 
-.divIssue i{
+.divIssue i {
   font-size: 12px;
 }
 
-.divIssue span{
-	float: right;
+.divIssue span {
+  float: right;
 }
 
-.divIssue p{
-	display: block;
+.divIssue p {
+  display: block;
   font-size: 13px;
-	margin: auto;
-	margin-top: 3px;
+  margin: auto;
+  margin-top: 3px;
 }
-.btn-get-classes{
-	display: hidden;
+
+.btn-get-classes {
+  display: hidden;
 }
 
 .suggestions {
   border: 1px #ccc;
-  width:172px;
+  width: 172px;
   position: relative;
   background-color: #3c3c3c;
 }
 
-#image{
+#image {
   max-width: 100%;
   height: auto;
 }
-#elements{
+
+#elements {
   max-width: 100%;
 }
-#result{
+
+#result {
   visibility: hidden;
 }
-.AbstractFactory{
-  content : url(./img/CreationalPatternsIcons/AbstractFactoryIcon.jpg);
-}
-.Adapter{
-  content : url(./img/StructuralPatternsIcons/AdapterIcon.jpg);
-}
-.Bridge{
-  content : url(./img/StructuralPatternsIcons/BridgeIcon.jpg);
-}
-.Builder{
-  content : url(./img/CreationalPatternsIcons/BuilderIcon.jpg);
-}
-.Composite{
-  content : url(./img/StructuralPatternsIcons/CompositeIcon.jpg);
-}
-.Decorator{
-  content : url(./img/StructuralPatternsIcons/DecoratorIcon.jpg);
-}
-.FactoryMethod{
-  content : url(./img/CreationalPatternsIcons/FactoryMethodIcon.jpg);
-}
-.Prototype{
-  content : url(./img/CreationalPatternsIcons/PrototypeIcon.jpg);
-}
-.Singleton{
-  content : url(./img/CreationalPatternsIcons/SingletonIcon.jpg);
-}
-.Visitor{
-    content : url(./img/BehavioralPatternsIcons/VisitorIcon.jpg);
-}
-.State{
-  content : url(./img/BehavioralPatternsIcons/StateIcon.jpg);
-}
-.Strategy{
-  content : url(./img/BehavioralPatternsIcons/StrategyIcon.jpg);
-}
-.TemplateMethod{
-  content : url(./img/BehavioralPatternsIcons/TemplateMethodIcon.jpg);
-}
-.Proxy{
-  content : url(./img/StructuralPatternsIcons/ProxyIcon.jpg);
+
+/*Class Diagraams for Creational Patterns*/
+.AbstractFactory {
+  content: url(./img/CreationalPatternsIcons/AbstractFactoryIcon.jpg);
 }
 
+.Builder {
+  content: url(./img/CreationalPatternsIcons/BuilderIcon.jpg);
+}
 
-#btn-wizzard{
+.FactoryMethod {
+  content: url(./img/CreationalPatternsIcons/FactoryMethodIcon.jpg);
+}
+
+.Prototype {
+  content: url(./img/CreationalPatternsIcons/PrototypeIcon.jpg);
+}
+
+.Singleton {
+  content: url(./img/CreationalPatternsIcons/SingletonIcon.jpg);
+}
+
+/*Class Diagraams for Structural Patterns*/
+.Adapter {
+  content: url(./img/StructuralPatternsIcons/AdapterIcon.jpg);
+}
+
+.Bridge {
+  content: url(./img/StructuralPatternsIcons/BridgeIcon.jpg);
+}
+
+.Composite {
+  content: url(./img/StructuralPatternsIcons/CompositeIcon.jpg);
+}
+
+.Decorator {
+  content: url(./img/StructuralPatternsIcons/DecoratorIcon.jpg);
+}
+
+.Facade {
+  content: url(./img/StructuralPatternsIcons/FacadeIcon.png);
+}
+
+.Proxy {
+  content: url(./img/StructuralPatternsIcons/ProxyIcon.png);
+}
+
+.Flyweight {
+  content: url(./img/StructuralPatternsIcons/FlyweightIcon.png);
+}
+
+/*Class Diagrams for Behavioral Patterns*/
+
+.Visitor {
+  content: url(./img/BehavioralPatternsIcons/VisitorIcon.jpg);
+}
+
+.State {
+  content: url(./img/BehavioralPatternsIcons/StateIcon.jpg);
+}
+
+.Strategy {
+  content: url(./img/BehavioralPatternsIcons/StrategyIcon.jpg);
+}
+
+.TemplateMethod {
+  content: url(./img/BehavioralPatternsIcons/TemplateMethodIcon.jpg);
+}
+
+.Mediator {
+  content: url(./img/BehavioralPatternsIcons/MediatorIcon.png);
+}
+
+.Command {
+  content: url(./img/BehavioralPatternsIcons/CommandIcon.png);
+}
+
+.ChainOfResponsibility {
+  content: url(./img/BehavioralPatternsIcons/ChainOfResponsibilityIcon.png);
+}
+
+.Observer {
+  content: url(./img/BehavioralPatternsIcons/ObserverIcon.png);
+}
+
+.Memento {
+  content: url(./img/BehavioralPatternsIcons/MementoIcon.png);
+}
+
+#btn-wizzard {
   margin-left: 50px;
-  
+
 }
-.infoField{
+
+.infoField {
   margin-right: 20px;
-	background: transparent;
+  background: transparent;
   border: none;
   color: white;
   height: 20px;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
-#divWiz input{
+
+#divWiz input {
   margin-right: 20px;
 }
 
-#btn-refresh{
-	visibility: hidden;
+#btn-refresh {
+  visibility: hidden;
 }
 
 .autocomplete {
@@ -147,8 +200,8 @@
   box-sizing: border-box;
   border: 1px solid rgba(50, 50, 50, 0.6);
   font-size: 13px;
-  position: absolute; 
-  height: auto; 
+  position: absolute;
+  height: auto;
   width: auto;
 }
 
@@ -156,33 +209,38 @@
   font: inherit;
 }
 
-.autocomplete > div {
-  padding: 0 ;
+.autocomplete>div {
+  padding: 0;
 }
 
 .autocomplete .group {
   background: #eee;
 }
 
-.autocomplete > div:hover:not(.group),
-.autocomplete > div.selected {
+.autocomplete>div:hover:not(.group),
+.autocomplete>div.selected {
   background: #eee;
   cursor: pointer;
 }
+
 body::-webkit-scrollbar {
-  width: thin;               /* width of the entire scrollbar */
+  width: thin;
+  /* width of the entire scrollbar */
 }
-#btn-finalize{
-  margin-left:0px;
+
+#btn-finalize {
+  margin-left: 0px;
 }
-#btn-get-code{
-  margin-left:0px;
+
+#btn-get-code {
+  margin-left: 0px;
 }
-#btn-back{
+
+#btn-back {
   visibility: hidden;
   margin-left: 15px;
 }
 
-#btn-wizard{
+#btn-wizard {
   margin-left: 15px;
 }
