@@ -10,7 +10,7 @@ interface Object {
 }
 export class CodeGenerator {
 	//Creational Patterns
-	public AbstractFactory(jsonObj: string): Array<patternParticipatingClass> {
+	public abstractFactory(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -52,7 +52,7 @@ export class CodeGenerator {
 		});
 		return ppc.object;
 	}
-	public Builder(jsonObj: string): Array<patternParticipatingClass> {
+	public builder(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		let file: patternParticipatingClass = new NonHierarchyClass(obj.Director.name);
@@ -98,7 +98,7 @@ export class CodeGenerator {
 		return ppc.object;
 	}
 	//method that creates the files for the factory method design pattern
-	public FactoryMethod(jsonObj: string): Array<patternParticipatingClass> {
+	public factoryMethod(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		Object.keys(obj).forEach((key) => {
@@ -127,7 +127,7 @@ export class CodeGenerator {
 		});
 		return ppc.object;
 	}
-	public Singleton(jsonObj: string): Array<patternParticipatingClass> {
+	public singleton(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -139,7 +139,7 @@ export class CodeGenerator {
 
 		return ppc.object;
 	}
-	public Prototype(jsonObj: string): Array<patternParticipatingClass> {
+	public prototype(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -158,7 +158,7 @@ export class CodeGenerator {
 		return ppc.object;
 	}
 	//Structural Patterns
-	public Adapter(jsonObj: string): Array<patternParticipatingClass> {
+	public adapter(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -175,7 +175,7 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file3)
 		return ppc.object;
 	}
-	public Bridge(jsonObj: string): Array<patternParticipatingClass> {
+	public bridge(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -202,7 +202,7 @@ export class CodeGenerator {
 		});
 		return ppc.object;
 	}
-	public Composite(jsonObj: string): Array<patternParticipatingClass> {
+	public composite(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		let file1: patternParticipatingClass = new abstractClass(obj.Component.name);
@@ -238,12 +238,11 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file3);
 		return ppc.object;
 	}
-	public Decorator(jsonObj: string): Array<patternParticipatingClass> {
+	public decorator(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
 		let file1: patternParticipatingClass = new abstractClass(obj.Component.name);
-		//file1.addMethod(new Method(obj.ComponentMethod1.name, "void", true, "public", "", []));
 
 
 		let file2: patternParticipatingClass = new ConcreteClass(obj.Decorator.name, obj.Component.name);
@@ -256,14 +255,14 @@ export class CodeGenerator {
 				cList.push(file3);
 			} else if (key.includes("ConcreteDecorator") && !key.includes("Method")) {
 				let file4: patternParticipatingClass = new ConcreteClass(obj[key].name, obj.Decorator.name);
-					Object.keys(obj).forEach(innerkey => {
-						if(innerkey.includes("ConcreteDecorator") && innerkey.includes("Method")){
-							var numInnerkey = innerkey.match(/\d+/g);
-							var numKey = key.match(/\d+/g);
-							if(numInnerkey!== null && numKey!== null && numInnerkey[0]===numKey[0]){
-								file4.addMethod(new Method(obj[innerkey].name, "void", false, "public", "", []));
-							}		
+				Object.keys(obj).forEach(innerkey => {
+					if (innerkey.includes("ConcreteDecorator") && innerkey.includes("Method")) {
+						var numInnerkey = innerkey.match(/\d+/g);
+						var numKey = key.match(/\d+/g);
+						if (numInnerkey !== null && numKey !== null && numInnerkey[0] === numKey[0]) {
+							file4.addMethod(new Method(obj[innerkey].name, "void", false, "public", "", []));
 						}
+					}
 				});
 				cList.push(file4);
 			} else if (key.includes("ComponentMethod")) {
@@ -282,7 +281,7 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file2);
 		return ppc.object;
 	}
-	public Facade(jsonObj: string): Array<patternParticipatingClass> {
+	public facade(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		let file1: patternParticipatingClass = new NonHierarchyClass(obj.Facade.name);
@@ -295,7 +294,7 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file1);
 		return ppc.object;
 	}
-	public Flyweight(jsonObj: string): Array<patternParticipatingClass> {
+	public flyweight(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -321,7 +320,7 @@ export class CodeGenerator {
 
 		return ppc.object;
 	}
-	public Proxy(jsonObj: string): Array<patternParticipatingClass> {
+	public proxy(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -344,7 +343,7 @@ export class CodeGenerator {
 	}
 
 	//Behavioral Patterns
-	public ChainOfResponsibility(jsonObj: string): Array<patternParticipatingClass> {
+	public chainOfResponsibility(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -363,7 +362,7 @@ export class CodeGenerator {
 		});
 		return ppc.object;
 	}
-	public Command(jsonObj: string): Array<patternParticipatingClass> {
+	public command(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -408,7 +407,7 @@ export class CodeGenerator {
 
 		return ppc.object;
 	}
-	public Mediator(jsonObj: string): Array<patternParticipatingClass> {
+	public mediator(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 
 		let obj = JSON.parse(JSON.stringify(jsonObj));
@@ -442,7 +441,7 @@ export class CodeGenerator {
 		}
 		return ppc.object;
 	}
-	public Memento(jsonObj: string): Array<patternParticipatingClass> {
+	public memento(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -476,7 +475,7 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file3);
 		return ppc.object;
 	}
-	public Observer(jsonObj: string): Array<patternParticipatingClass> {
+	public observer(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		let file1: patternParticipatingClass = new NonHierarchyClass(obj.Subject.name);
@@ -507,7 +506,7 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file2);
 		return ppc.object;
 	}
-	public State(jsonObj: string): Array<patternParticipatingClass> {
+	public state(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		let file1: patternParticipatingClass = new NonHierarchyClass(obj.Context.name);
@@ -530,7 +529,7 @@ export class CodeGenerator {
 
 		return ppc.object;
 	}
-	public Strategy(jsonObj: string): Array<patternParticipatingClass> {
+	public strategy(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		let file1: patternParticipatingClass = new NonHierarchyClass(obj.Context.name);
@@ -553,7 +552,7 @@ export class CodeGenerator {
 		});
 		return ppc.object;
 	}
-	public TemplateMethod(jsonObj: string): Array<patternParticipatingClass> {
+	public templateMethod(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 
@@ -581,7 +580,7 @@ export class CodeGenerator {
 		this.fillPromise(ppc, file1);
 		return ppc.object;
 	}
-	public Visitor(jsonObj: string): Array<patternParticipatingClass> {
+	public visitor(jsonObj: string): Array<patternParticipatingClass> {
 		let ppc: Object = { object: [] }
 		let obj = JSON.parse(JSON.stringify(jsonObj));
 		let file1: patternParticipatingClass = new abstractClass(obj.Visitor.name);
