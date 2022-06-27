@@ -90,7 +90,6 @@ export class Functions {
 						}
 					}));
 				}
-
 			},
 			render: function (item, value) {
 				var itemElement = document.createElement("div");
@@ -114,18 +113,7 @@ export class Functions {
 			disableAutoSelect: true,
 		})
 	}
-	//autocomplete
-	// autocompleteMatch(input: string, table: string[]) {
-	//     if (input == '') {
-	//         return [];
-	//       }
-	//       let reg = new RegExp('^' + input);
-	//       return table.filter(function(term) {
-	//           if (term.match(reg)) {
-	//             return term;
-	//           }
-	//       });
-	// }
+
 
 	createButton(innerMessage: string, id: string, parent: HTMLElement) {
 		if (id !== 'disable') {
@@ -147,9 +135,6 @@ export class Functions {
 	}
 
 	checkInputsOnSubmit(aaform: number) {
-		/*for (let i=0; i<(document.forms[aaform] as HTMLFormElement).length; i++){
-			console.log((document.forms[aaform][i] as HTMLInputElement).value);
-		}*/
 		if (this.checkEmptyInputs(document.forms[aaform] as HTMLFormElement)) {
 			return "You need to fill all the fields!";
 		} else {
