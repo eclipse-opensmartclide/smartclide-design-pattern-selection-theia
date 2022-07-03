@@ -10,14 +10,14 @@
 import data from './data.json';
 import {Functions} from './functions';
 import { MessageService } from '@theia/core';
-import { HelloBackendService } from '../common/protocol';
+import { BackendService } from '../common/protocol';
 
 export class StructuralPatterns{
 
     static functions = new Functions();
 	static values = JSON.parse(JSON.stringify(data));
 	
-    structuralPatternsWizard(divCont: HTMLDivElement, messageService: MessageService, helloBackendService: HelloBackendService, url: string, classesNames: string[] ){
+    structuralPatternsWizard(divCont: HTMLDivElement, messageService: MessageService, BackendService: BackendService, url: string, classesNames: string[] ){
 			divCont.innerHTML = "";
 			let divCont1 = document.createElement('div');
 			StructuralPatterns.functions.radioQuestion('<br> Do you need to implement a function that requires information from 2 different hierarchies? <br>', 'Yes', 'No', 'radio21', 'radio22', divCont);
@@ -92,7 +92,7 @@ export class StructuralPatterns{
 											//console.log(JSON.stringify(StructuralPatterns.values["Bridge"]));
 											let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 											if (message == "Input is valid"){
-												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
+												StructuralPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
 											}else{
 												messageService.info(message);
 											}
@@ -208,7 +208,7 @@ export class StructuralPatterns{
 																//console.log(JSON.stringify(StructuralPatterns.values["Decorator"]));
 																let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 																if (message == "Input is valid"){
-																	StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Decorator"].values, "Decorator"), messageService);
+																	StructuralPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, StructuralPatterns.values["Decorator"].values, "Decorator"), messageService);
 																}else{
 																	messageService.info(message);
 																}
@@ -234,26 +234,26 @@ export class StructuralPatterns{
 												StructuralPatterns.functions.createButton('Get Code', 'buttongetcodeCompositePattern', divCont9);
 												let buttonCodeCP = document.getElementById('buttongetcodeCompositePattern') as HTMLButtonElement;
 												buttonCodeCP.addEventListener('click', async (e: Event) =>{
-													let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
+													let infoList = document.getElementsByClassName('infoField') as HTMLCollection;
 													StructuralPatterns.values["Composite"].values["Component"].name = (infoList.item(0) as HTMLInputElement).value;
 													let numInterfaceMethods = parseInt((document.getElementById('NumOfInterfaceMethods1') as HTMLInputElement).value);
 													let numSimpleObj = parseInt((document.getElementById('NumOfSimpleObjectsTypes1') as HTMLInputElement).value);
-													for (var i=1; i<=numInterfaceMethods; i++){
-														StructuralPatterns.values["Composite"].values["ComponentMethod"+i] = { "name":"", "extension":1};
+													for (var i = 1; i <= numInterfaceMethods; i++) {
+														StructuralPatterns.values["Composite"].values["ComponentMethod" + i] = { "name": "", "extension": 1 };
 														let v1 = (infoList.item(i) as HTMLInputElement).value;
-														StructuralPatterns.values["Composite"].values["ComponentMethod"+i].name = v1;
+														StructuralPatterns.values["Composite"].values["ComponentMethod" + i].name = v1;
 													}
-													for (var j=1; j<=numSimpleObj; j++){
-														StructuralPatterns.values["Composite"].values["ConcreteComponent"+j] = { "name":"", "extension":1};
+													for (var j = 1; j <= numSimpleObj; j++) {
+														StructuralPatterns.values["Composite"].values["ConcreteComponent" + j] = { "name": "", "extension": 1 };
 														let v1 = (infoList.item(i) as HTMLInputElement).value;
-														StructuralPatterns.values["Composite"].values["ConcreteComponent"+j].name = v1;
+														StructuralPatterns.values["Composite"].values["ConcreteComponent" + j].name = v1;
 														i++;
 													}
 													StructuralPatterns.values["Composite"].values["Composite"].name = (infoList.item(i) as HTMLInputElement).value;
 													//console.log(JSON.stringify(StructuralPatterns.values["Composite"]));
 													let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 													if (message == "Input is valid"){
-														StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Composite"].values, "Composite"), messageService);
+														StructuralPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, StructuralPatterns.values["Composite"].values, "Composite"), messageService);
 													}else{
 														messageService.info(message);
 													}
@@ -340,7 +340,7 @@ export class StructuralPatterns{
 															let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 															if (message == "Input is valid"){	
 																console.log(window.location.href);										
-																StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
+																StructuralPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
 															}else{
 																messageService.info(message);
 															}
@@ -407,11 +407,11 @@ export class StructuralPatterns{
 														if (message == "Input is valid"){
 															//extra checks for existing class and its method
 															let adapteeName = (infoList.item(0) as HTMLInputElement).value;
-															var methodNames = await helloBackendService.getMethods(url, adapteeName);
+															var methodNames = await BackendService.getMethods(url, adapteeName);
 															if (classesNames.includes(adapteeName)){
 																var methodName = (infoList.item(1) as HTMLInputElement).value;
 																if (methodNames.includes(methodName)){
-																StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Adapter"].values, "Adapter"), messageService);
+																StructuralPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, StructuralPatterns.values["Adapter"].values, "Adapter"), messageService);
 																}else{
 																	messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: "+methodNames);
 																}
@@ -475,7 +475,7 @@ export class StructuralPatterns{
 											//console.log(JSON.stringify(StructuralPatterns.values["Facade"]));
 											let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 											if (message == "Input is valid"){											
-												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
+												StructuralPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
 											}else{
 												messageService.info(message);
 											}
@@ -530,7 +530,7 @@ export class StructuralPatterns{
 												//console.log(JSON.stringify(StructuralPatterns.values["Proxy"]));
 												let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){											
-													StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Proxy"].values, "Proxy"), messageService);
+													StructuralPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, StructuralPatterns.values["Proxy"].values, "Proxy"), messageService);
 												}else{
 													messageService.info(message);
 												}

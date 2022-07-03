@@ -9,10 +9,10 @@
  ******************************************************************************/
 import { patternParticipatingClass } from './patternParticipatingClass';
 import { abstractClass } from './abstractClass';
-import { ConcreteClass } from './ConcreteClass';
-import { NonHierarchyClass } from './NonHierarchyClass';
-import { Attribute } from './Attribute';
-import { Method } from './Method';
+import { ConcreteClass } from './concreteClass';
+import { NonHierarchyClass } from './nonHierarchyClass';
+import { Attribute } from './attribute';
+import { Method } from './method';
 
 interface Object {
 	object: Array<patternParticipatingClass>;

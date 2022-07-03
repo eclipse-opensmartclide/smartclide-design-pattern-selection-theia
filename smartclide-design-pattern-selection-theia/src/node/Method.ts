@@ -7,7 +7,7 @@
  * 
  * SPDX-License-Identifier: EPL-2.0
  ******************************************************************************/
-import {Attribute} from './Attribute';
+import {Attribute} from './attribute';
 export class Method {
 	mName : string;
 	rType : string;

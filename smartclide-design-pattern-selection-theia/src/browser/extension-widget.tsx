@@ -14,13 +14,13 @@ import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
 import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
 import { MessageService } from '@theia/core';
 
-import { HelloBackendService } from '../common/protocol';
+import { BackendService } from '../common/protocol';
 import data from './data.json';
 import explanation from './explanation.json';
 import { Functions } from './functions';
-import { CreationalPatterns } from './CreationalPatternsWizard';
-import { StructuralPatterns } from './StructuralPatternsWizard';
-import { BehavioralPatterns } from './BehavioralPatternsWizard';
+import { CreationalPatterns } from './creationalPatternsWizard';
+import { StructuralPatterns } from './structuralPatternsWizard';
+import { BehavioralPatterns } from './behavioralPatternsWizard';
 /*interface Textfield{
 	ident: number;
 	value: string;
@@ -40,8 +40,8 @@ export class extensionWidget extends ReactWidget {
 
 	@inject(MessageService)
 	protected readonly messageService!: MessageService;
-	@inject(HelloBackendService)
-	protected readonly helloBackendService: HelloBackendService;
+	@inject(BackendService)
+	protected readonly helloBackendService: BackendService;
 
 
 	@postConstruct()
@@ -379,7 +379,7 @@ export class extensionWidget extends ReactWidget {
 		(document.getElementById("details") as HTMLElement).style.visibility = 'hidden';
 
 		var getUrl = window.location.href;
-		extensionWidget.res = await this.helloBackendService.getFileNames(getUrl);
+		extensionWidget.res = await this.BackendService.getFileNames(getUrl);
 		extensionWidget.functions.setClassNames(extensionWidget.res);
 
 		let divWiz = document.getElementById('divWiz') as HTMLDivElement;

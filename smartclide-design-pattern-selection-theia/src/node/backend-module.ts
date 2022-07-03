@@ -9,22 +9,22 @@
  ******************************************************************************/
 import { ConnectionHandler, JsonRpcConnectionHandler } from "@theia/core";
 import { ContainerModule } from "inversify";
-import { BackendClient, HelloBackendWithClientService, HelloBackendService, HELLO_BACKEND_PATH, HELLO_BACKEND_WITH_CLIENT_PATH } from "../common/protocol";
-import { HelloBackendWithClientServiceImpl } from "./hello-backend-with-client-service";
-import { HelloBackendServiceImpl } from "./hello-backend-service";
+import { BackendClient, BackendWithClientService, BackendService, BACKEND_PATH, BACKEND_WITH_CLIENT_PATH } from "../common/protocol";
+import { BackendWithClientServiceImpl } from "./backend-with-client-service";
+import { BackendServiceImpl } from "./backend-service";
 
 export default new ContainerModule(bind => {
-    bind(HelloBackendService).to(HelloBackendServiceImpl).inSingletonScope()
+    bind(BackendService).to(BackendServiceImpl).inSingletonScope()
     bind(ConnectionHandler).toDynamicValue(ctx =>
-        new JsonRpcConnectionHandler(HELLO_BACKEND_PATH, () => {
-            return ctx.container.get<HelloBackendService>(HelloBackendService);
+        new JsonRpcConnectionHandler(BACKEND_PATH, () => {
+            return ctx.container.get<BackendService>(BackendService);
         })
     ).inSingletonScope();
 
-    bind(HelloBackendWithClientService).to(HelloBackendWithClientServiceImpl).inSingletonScope()
+    bind(BackendWithClientService).to(BackendWithClientServiceImpl).inSingletonScope()
     bind(ConnectionHandler).toDynamicValue(ctx =>
-        new JsonRpcConnectionHandler<BackendClient>(HELLO_BACKEND_WITH_CLIENT_PATH, client => {
-            const server = ctx.container.get<HelloBackendWithClientServiceImpl>(HelloBackendWithClientService);
+        new JsonRpcConnectionHandler<BackendClient>(BACKEND_WITH_CLIENT_PATH, client => {
+            const server = ctx.container.get<BackendWithClientServiceImpl>(BackendWithClientService);
             server.setClient(client);
             client.onDidCloseConnection(() => server.dispose());
             return server;

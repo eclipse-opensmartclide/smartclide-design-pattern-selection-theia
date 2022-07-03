@@ -8,10 +8,10 @@
  * SPDX-License-Identifier: EPL-2.0
  ******************************************************************************/
 import { injectable } from "inversify";
-import { BackendClient, HelloBackendWithClientService } from "../common/protocol";
+import { BackendClient, BackendWithClientService } from "../common/protocol";
 
 @injectable()
-export class HelloBackendWithClientServiceImpl implements HelloBackendWithClientService {
+export class BackendWithClientServiceImpl implements BackendWithClientService {
     private client?: BackendClient;
     greet(): Promise<string> {
         return new Promise<string>((resolve, reject) =>

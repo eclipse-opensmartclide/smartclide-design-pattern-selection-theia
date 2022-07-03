@@ -10,14 +10,14 @@
 import data from './data.json';
 import { Functions } from './functions';
 import { MessageService } from '@theia/core';
-import { HelloBackendService } from '../common/protocol';
+import { BackendService } from '../common/protocol';
 
 export class CreationalPatterns{
 
     static functions = new Functions();
 	static values = JSON.parse(JSON.stringify(data));
 
-    creationalPatternswizard(divCont: HTMLDivElement, messageService: MessageService, helloBackendService: HelloBackendService){
+    creationalPatternswizard(divCont: HTMLDivElement, messageService: MessageService, BackendService: BackendService){
 		divCont.innerHTML = "";
 		let divCont2 = document.createElement('div');
 		CreationalPatterns.functions.radioQuestion('<br> Do you want to create a completely new object or to create one by reusing an existing one?<br>', 'Create new object', 'Reuse an existing one', 'radio11', 'radio12', divCont);
@@ -88,7 +88,7 @@ export class CreationalPatterns{
 												let message = CreationalPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){
 													CreationalPatterns.functions.insertInputsAbstractFactory(CreationalPatterns.values["AbstractFactory"].values);
-													CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["AbstractFactory"].values, "AbstractFactory"), messageService);
+													CreationalPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, CreationalPatterns.values["AbstractFactory"].values, "AbstractFactory"), messageService);
 												}else{
 													messageService.info(message);
 												}
@@ -142,7 +142,7 @@ export class CreationalPatterns{
 													let message = CreationalPatterns.functions.checkInputsOnSubmit(1);
 													if (message == "Input is valid"){
 														CreationalPatterns.functions.insertInputsBuilder(CreationalPatterns.values["Builder"].values);
-														CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Builder"].values, "Builder"), messageService);
+														CreationalPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, CreationalPatterns.values["Builder"].values, "Builder"), messageService);
 													}else{
 														messageService.info(message);
 													}
@@ -178,7 +178,7 @@ export class CreationalPatterns{
 													let message = CreationalPatterns.functions.checkInputsOnSubmit(1);																
 													if (message == "Input is valid"){
 														CreationalPatterns.functions.insertInputsFactoryMethod(CreationalPatterns.values["FactoryMethod"].values);	
-														CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["FactoryMethod"].values, "FactoryMethod"),messageService);
+														CreationalPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, CreationalPatterns.values["FactoryMethod"].values, "FactoryMethod"),messageService);
 													}else{
 														messageService.info(message);
 													}
@@ -227,7 +227,7 @@ export class CreationalPatterns{
 						}else if (!singlName.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){
 							messageService.info("Class's name must start with a capital letter!");
 						}else{
-							CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Singleton"].values, "Singleton"), messageService);
+							CreationalPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, CreationalPatterns.values["Singleton"].values, "Singleton"), messageService);
 						}
 					});
 				});
@@ -271,7 +271,7 @@ export class CreationalPatterns{
 									}
 									let message = CreationalPatterns.functions.checkInputsOnSubmit(1);
 									if (message == "Input is valid"){											
-										CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Prototype"].values, "Prototype"), messageService);
+										CreationalPatterns.functions.checkMessage(await BackendService.codeGeneration(window.location.href, CreationalPatterns.values["Prototype"].values, "Prototype"), messageService);
 									}else{
 										messageService.info(message);
 									}

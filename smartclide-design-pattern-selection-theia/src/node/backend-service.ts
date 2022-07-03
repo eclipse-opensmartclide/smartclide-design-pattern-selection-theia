@@ -8,8 +8,8 @@
  * SPDX-License-Identifier: EPL-2.0
  ******************************************************************************/
 import { injectable } from "inversify";
-import { HelloBackendService } from "../common/protocol";
-import { CodeGenerator } from "./CodeGenerator";
+import { BackendService } from "../common/protocol";
+import { CodeGenerator } from "./codeGenerator";
 import {patternParticipatingClass} from './patternParticipatingClass';
 interface LabeledValue{
 	label:string[];
@@ -17,7 +17,7 @@ interface LabeledValue{
 
 
 @injectable()
-export class HelloBackendServiceImpl implements HelloBackendService {
+export class BackendServiceImpl implements BackendService {
     
     Path = require("path");
     FS = require("fs");
@@ -32,8 +32,8 @@ export class HelloBackendServiceImpl implements HelloBackendService {
             if (this.FS.statSync(Absolute).isDirectory())
                 return this.throughDirectory(Absolute);
             else if(Absolute.endsWith(".java")){
-                HelloBackendServiceImpl.absolutes.push(Absolute);
-                return HelloBackendServiceImpl.Files.push(File);
+                BackendServiceImpl.absolutes.push(Absolute);
+                return BackendServiceImpl.Files.push(File);
             }       
         });
     }
@@ -52,8 +52,8 @@ export class HelloBackendServiceImpl implements HelloBackendService {
         //search for every file name in textbox values
         //index=-1 if not found
         this.throughDirectory(rootUri);
-        var res= HelloBackendServiceImpl.Files;
-        HelloBackendServiceImpl.array = res;
+        var res= BackendServiceImpl.Files;
+        BackendServiceImpl.array = res;
         for (let i=0; i<res.length; i++){
             let lastW = res[i].lastIndexOf("/");
             let file = res[i].substr(lastW+1);
@@ -67,7 +67,7 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     async getMethods( fileName: string): Promise<string[]>{
         var fs = require("fs");
         let lO = {label: []};
-        var res= HelloBackendServiceImpl.absolutes;
+        var res= BackendServiceImpl.absolutes;
         var file=""
         res.forEach(element => {
             console.log(element)

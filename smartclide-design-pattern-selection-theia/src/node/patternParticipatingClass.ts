@@ -7,8 +7,8 @@
  * 
  * SPDX-License-Identifier: EPL-2.0
  ******************************************************************************/
-import {Method} from './Method';
-import {Attribute} from './Attribute';
+import {Method} from './method';
+import {Attribute} from './attribute';
 
 export abstract class patternParticipatingClass {
 	protected hasArrayList : boolean;
