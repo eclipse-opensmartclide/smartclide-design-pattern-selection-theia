@@ -92,7 +92,7 @@ export class StructuralPatterns{
 											//console.log(JSON.stringify(StructuralPatterns.values["Bridge"]));
 											let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 											if (message == "Input is valid"){
-												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
+												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, StructuralPatterns.values["Bridge"].values, "Bridge"), messageService);
 											}else{
 												messageService.info(message);
 											}
@@ -208,7 +208,7 @@ export class StructuralPatterns{
 																//console.log(JSON.stringify(StructuralPatterns.values["Decorator"]));
 																let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 																if (message == "Input is valid"){
-																	StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Decorator"].values, "Decorator"), messageService);
+																	StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, StructuralPatterns.values["Decorator"].values, "Decorator"), messageService);
 																}else{
 																	messageService.info(message);
 																}
@@ -253,7 +253,7 @@ export class StructuralPatterns{
 													//console.log(JSON.stringify(StructuralPatterns.values["Composite"]));
 													let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 													if (message == "Input is valid"){
-														StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Composite"].values, "Composite"), messageService);
+														StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, StructuralPatterns.values["Composite"].values, "Composite"), messageService);
 													}else{
 														messageService.info(message);
 													}
@@ -339,8 +339,8 @@ export class StructuralPatterns{
 															//console.log(JSON.stringify(StructuralPatterns.values));
 															let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 															if (message == "Input is valid"){	
-																console.log(window.location.href);										
-																StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
+																console.log("url: "+url);										
+																StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
 															}else{
 																messageService.info(message);
 															}
@@ -411,7 +411,7 @@ export class StructuralPatterns{
 															if (classesNames.includes(adapteeName)){
 																var methodName = (infoList.item(1) as HTMLInputElement).value;
 																if (methodNames.includes(methodName)){
-																StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Adapter"].values, "Adapter"), messageService);
+																StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, StructuralPatterns.values["Adapter"].values, "Adapter"), messageService);
 																}else{
 																	messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: "+methodNames);
 																}
@@ -475,7 +475,7 @@ export class StructuralPatterns{
 											//console.log(JSON.stringify(StructuralPatterns.values["Facade"]));
 											let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 											if (message == "Input is valid"){											
-												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
+												StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, StructuralPatterns.values["Facade"].values, "Facade"), messageService);
 											}else{
 												messageService.info(message);
 											}
@@ -530,7 +530,7 @@ export class StructuralPatterns{
 												//console.log(JSON.stringify(StructuralPatterns.values["Proxy"]));
 												let message = StructuralPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){											
-													StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, StructuralPatterns.values["Proxy"].values, "Proxy"), messageService);
+													StructuralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, StructuralPatterns.values["Proxy"].values, "Proxy"), messageService);
 												}else{
 													messageService.info(message);
 												}

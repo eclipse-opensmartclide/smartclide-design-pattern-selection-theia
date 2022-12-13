@@ -17,7 +17,7 @@ export class BehavioralPatterns{
     static functions = new Functions();
 	static values = JSON.parse(JSON.stringify(data));
 	
-    behavioralPatternsWizard(divCont: HTMLDivElement, messageService: MessageService, helloBackendService: HelloBackendService){
+    behavioralPatternsWizard(divCont: HTMLDivElement, messageService: MessageService, helloBackendService: HelloBackendService, url: string){
 			divCont.innerHTML = "";
 			let divCont1 = document.createElement('div');
 			BehavioralPatterns.functions.radioQuestion('<br> Do you need an Object that will handle requests for executing an action? <br>', 'Yes', 'No', 'radio31', 'radio32', divCont);
@@ -76,7 +76,7 @@ export class BehavioralPatterns{
 												console.log(JSON.stringify(BehavioralPatterns.values["Mediator"]));
 												let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){
-													BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Mediator"].values, "Mediator"), messageService);
+													BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, BehavioralPatterns.values["Mediator"].values, "Mediator"), messageService);
 												}else{
 													messageService.info(message);
 												}
@@ -166,7 +166,7 @@ export class BehavioralPatterns{
 														//console.log(JSON.stringify(BehavioralPatterns.values["Command"]));
 														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
-															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Command"].values, "Command"), messageService);
+															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, BehavioralPatterns.values["Command"].values, "Command"), messageService);
 														}else{
 															messageService.info(message);
 														}
@@ -227,7 +227,7 @@ export class BehavioralPatterns{
 									//console.log(JSON.stringify(BehavioralPatterns.values["ChainOfResponsibility"]));
 								let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 								if (message == "Input is valid"){
-									BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["ChainOfResponsibility"].values, "ChainOfResponsibility"), messageService);
+									BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, BehavioralPatterns.values["ChainOfResponsibility"].values, "ChainOfResponsibility"), messageService);
 								}else{
 									messageService.info(message);
 								}			
@@ -302,7 +302,7 @@ export class BehavioralPatterns{
 												//console.log(JSON.stringify(BehavioralPatterns.values["Visitor"]));
 												let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){
-													BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Visitor"].values, "Visitor"), messageService);
+													BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, BehavioralPatterns.values["Visitor"].values, "Visitor"), messageService);
 												}else{
 													messageService.info(message);
 												}
@@ -369,7 +369,7 @@ export class BehavioralPatterns{
 													//console.log(JSON.stringify(BehavioralPatterns.values["TemplateMethod"]));
 													let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 													if (message == "Input is valid"){
-														BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["TemplateMethod"].values, "TemplateMethod"), messageService);
+														BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, BehavioralPatterns.values["TemplateMethod"].values, "TemplateMethod"), messageService);
 													}else{
 														messageService.info(message);
 													}
@@ -433,7 +433,7 @@ export class BehavioralPatterns{
 														//console.log(JSON.stringify(BehavioralPatterns.values["Strategy"]));
 														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
-															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Strategy"].values, "Strategy"), messageService);
+															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, BehavioralPatterns.values["Strategy"].values, "Strategy"), messageService);
 														}else{
 															messageService.info(message);
 														}
@@ -527,7 +527,7 @@ export class BehavioralPatterns{
 													//console.log(JSON.stringify(BehavioralPatterns.values["Memento"]));
 													let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 													if (message == "Input is valid"){
-														BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Memento"].values, "Memento"), messageService);
+														BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, BehavioralPatterns.values["Memento"].values, "Memento"), messageService);
 													}else{
 														messageService.info(message);
 													}
@@ -602,7 +602,7 @@ export class BehavioralPatterns{
 															//console.log(JSON.stringify(BehavioralPatterns.values["Observer"]));
 															let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 															if (message == "Input is valid"){
-																BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["Observer"].values, "Observer"), messageService);
+																BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, BehavioralPatterns.values["Observer"].values, "Observer"), messageService);
 															}else{
 																messageService.info(message);
 															}
@@ -661,7 +661,7 @@ export class BehavioralPatterns{
 														//console.log(JSON.stringify(BehavioralPatterns.values["State"]));
 														let message = BehavioralPatterns.functions.checkInputsOnSubmit(1);
 														if (message == "Input is valid"){
-															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(window.location.href, BehavioralPatterns.values["State"].values, "State"), messageService);
+															BehavioralPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, BehavioralPatterns.values["State"].values, "State"), messageService);
 														}else{
 															messageService.info(message);
 														}

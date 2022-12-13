@@ -309,17 +309,17 @@ export class extensionWidget extends ReactWidget {
 	}
 
 	async buttonClick2 (table: HTMLTableElement):Promise<void>{
+			var getUrl = window.location.href;
 			let message = extensionWidget.functions.checkInputsOnSubmit(0);
 			if (message.includes("Input is valid")){
 				if (extensionWidget.state.statePatternSelection=="Adapter"){
 					let adapteeName = (document.getElementById("txtbox4") as HTMLInputElement).value;
-					var getUrl = window.location.href;
 					var methodNames = await this.helloBackendService.getMethods(getUrl, adapteeName);
 					if (extensionWidget.res.includes(adapteeName)){
 						let methodName = (document.getElementById("txtbox5") as HTMLInputElement).value;
 						if (methodNames.includes(methodName)){
 							extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
-							extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection),this.messageService);
+							extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(getUrl, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection),this.messageService);
 						}else{
 							this.messageService.info("For Adaptee method you need to choose a method name that already exists in Adaptee class: "+methodNames);
 						}
@@ -329,18 +329,18 @@ export class extensionWidget extends ReactWidget {
 				}else if(extensionWidget.state.statePatternSelection == "AbstractFactory"){
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.insertInputsAbstractFactory(extensionWidget.data["AbstractFactory"].values);
-					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
+					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(getUrl, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
 				}else if(extensionWidget.state.statePatternSelection == "FactoryMethod"){
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.insertInputsFactoryMethod(extensionWidget.data["FactoryMethod"].values);
-					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
+					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(getUrl, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
 				}else if(extensionWidget.state.statePatternSelection == "Builder"){
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.insertInputsBuilder(extensionWidget.data["Builder"].values);
-					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
+					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(getUrl, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
 				}else{
 					extensionWidget.data[extensionWidget.state.statePatternSelection].values = extensionWidget.functions.updateJsonObject(extensionWidget.data[extensionWidget.state.statePatternSelection].values);
-					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
+					extensionWidget.functions.checkMessage(await this.helloBackendService.codeGeneration(getUrl, extensionWidget.data[extensionWidget.state.statePatternSelection].values, extensionWidget.state.statePatternSelection), this.messageService);
 				}
 			}else{
 				this.messageService.info(message);
@@ -399,19 +399,19 @@ export class extensionWidget extends ReactWidget {
 		extensionWidget.functions.createInput('', 'radio1', '', 'patternTypes', 'radio', divWiz);
 		let radio1 = document.getElementById('radio1') as HTMLInputElement;
 		radio1.addEventListener('click', async (e: Event) =>{	
-			extensionWidget.creationalPatterns.creationalPatternswizard(divCont, this.messageService, this.helloBackendService);
+			extensionWidget.creationalPatterns.creationalPatternswizard(divCont, this.messageService, this.helloBackendService, getUrl);
 		});
 		extensionWidget.functions.createLabel('Structural', 'label2', divWiz);
 		extensionWidget.functions.createInput('', 'radio2', '', 'patternTypes', 'radio', divWiz);
 		let radio2 = document.getElementById('radio2') as HTMLInputElement;
 		radio2.addEventListener('click', async (e: Event) =>{
-			extensionWidget.structuralPatterns.structuralPatternsWizard(divCont, this.messageService, this.helloBackendService, window.location.href, extensionWidget.res);
+			extensionWidget.structuralPatterns.structuralPatternsWizard(divCont, this.messageService, this.helloBackendService, getUrl, extensionWidget.res);
 		});	
 		extensionWidget.functions.createLabel('Behavioral', 'label3', divWiz);
 		extensionWidget.functions.createInput('', 'radio3', '', 'patternTypes', 'radio', divWiz);
 		let radio3 = document.getElementById('radio3') as HTMLInputElement;
 		radio3.addEventListener('click', async (e: Event) =>{
-			extensionWidget.behavioralPatterns.behavioralPatternsWizard(divCont, this.messageService, this.helloBackendService);
+			extensionWidget.behavioralPatterns.behavioralPatternsWizard(divCont, this.messageService, this.helloBackendService, getUrl);
 		});
 		
 		divWiz.appendChild(divCont);
