@@ -1,0 +1,32 @@
+{
+  "name": "smartclide-design-pattern-selection-theia",
+  "keywords": [
+    "theia-extension"
+  ],
+  "version": "0.0.0",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@theia/core": "latest",
+    "autocompleter": "^6.1.2"
+  },
+  "devDependencies": {
+    "rimraf": "latest",
+    "typescript": "latest"
+  },
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "rimraf lib",
+    "build": "tsc -b",
+    "watch": "tsc -w"
+  },
+  "license": "EPL-2.0",
+  "theiaExtensions": [
+    {
+      "frontend": "lib/browser/extension-frontend-module",
+      "backend": "lib/node/test-backend-module"
+    }
+  ]
+}

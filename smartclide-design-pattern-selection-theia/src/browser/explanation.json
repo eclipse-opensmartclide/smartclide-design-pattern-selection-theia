@@ -1,0 +1,86 @@
+{
+	"AbstractFactory": {
+		"description": "lets you produce families of related objects without specifying their concrete classes.",
+		"example": "Consider a case that you want to develop a system that creates various types of furniture (e.g., Chairs and Sofas). Furniture belong to two families (e.g., Victorian and Modern. For each family, a dedicated factory class is developed, being responsible for creating the concrete type of each product."
+	},
+	"Builder": {
+		"description": "is a creational design pattern that lets you construct complex objects step by step (by ConcreteBuilders methods). The pattern allows you to produce different types and representations of an object (Product) using the same construction code.",
+		"example": "Consider a case that you want to create different types of pizza. The client can delegate the assembly to the director class, which knows how to use a builder to construct several types of pizza. The Builder class declares product construction steps that are common to all types of builders, so you can use the same builder to create different type of pizza. Finally, you get from the ConcreteBuilders the final products (Pepperoni and Margarita). "
+	},
+	"FactoryMethod": {
+		"description": "provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects (ConcreteProducts) that will be created.",
+		"example": "Factory Method can be used for creating cross-platform UI elements without coupling the client code to concrete UI classes. ConcreteCreators (WindowsDialog and WebDialog) override the base factory method (Dialog) so it returns a different type of product (WindowsButton or WebButton)."
+	},
+	"Prototype": {
+		"description": "lets you copy existing objects without making your code dependent on their classes.",
+		"example": "Consider the case that you want to produce exact copies of geometric objects, without coupling the code to their classes. All shape classes (Rectangle and Circle) follow the same interface (Shape), which provides a cloning method. A subclass may call the parent’s cloning method before copying its own field values to the resulting object."
+	},
+	"Singleton": {
+		"description": "lets you ensure that a class has only one instance, while providing a global access point to this instance.Just like a global variable, the Singleton pattern lets you access some object from anywhere in the program. However, it also protects that instance from being overwritten by other code.",
+		"example": " The database connection class acts as a Singleton. This class doesn’t have a public constructor (Database()), so the only way to get its object is to call the getInstance() method. This method caches the first created object and returns it in all subsequent calls."
+	},
+	"Adapter": {
+		"description": "allows objects with incompatible interfaces to collaborate. Τhe adapter implements the interface of one object and wraps the other one.",
+		"example": " Consider the case that you have a SquarePeg and you need to fit it in a RoundHole. You need to create an adapter, which receives calls from the client (RoundHole) via the adapter interface (RoundPeg) and translates them into calls to the wrapped service object (SquarePeg) in a format it can understand"
+	},
+	"Bridge": {
+		"description": "lets you split a large class or a set of closely related classes into two separate hierarchies—abstraction and implementation—which can be developed independently of each other.",
+		"example": " Consider a case that you need to remotely control more than one device. Instead of creating a different class for controlling every device, you can create a bridge between Remote (Abstraction) and Device (Implementation), which allows you to hande many devices by the Device interface."
+	},
+	"Composite": {
+		"description": "lets you compose objects into tree structures and then work with these structures as if they were individual objects.",
+		"example": " Consider the case that you need to draw an image consisted of dots or circles.  A compound shape (CompoundGraphic) passes the request recursively to all its children and “sums up” the result."
+	},
+	"Decorator": {
+		"description": "lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.",
+		"example": " The application wraps the data source object (FileDataSource) with a pair of decorators (EncryptionDecorator and CompressionDecorator). Both wrappers change the way the data is written to and read from the disk. Just before the data is written to disk, the decorators encrypt and compress it. Right after the data is read from disk, it goes through the same decorators, which decompress and decode it. "
+	},
+	"Facade": {
+		"description": "is a simplified interface to a library, a framework, or any other complex set of classes(complex subsystem) and provides only the features that the client cares about.",
+		"example": " Consider a case you want your code to interact with a complex video conversion framework. A facade class encapsulates that functionality and hides it from the rest of the code."
+	},
+	"Flyweight": {
+		"description": " is a structural design pattern that lets you fit more objects into the available amount of RAM by sharing common parts of state between multiple objects instead of keeping all of the data in each object.",
+		"example": "Consider a case that you want to develop a system that creates insects. Flyweights are the Insects and are stored in a Flyweight Factory. The client restrains itself from creating inscents directly, and requests them from the Factory. The Concrete Flyweight Classes can be 'light-weight' because their instance-specific state has been  externalized, and is supplied by the client."
+	},
+	"Proxy": {
+		"description": "lets you provide a substitute or placeholder for another object. Therefore it gives you access to the original object, allowing you to perform something either before or after the request gets through to the original object.",
+		"example": " Consider the case that you want to add a 3rd-party YouTube integration library to your code and this library provides us with the video downloading class. The proxy class  implements the same interface as the original downloader and delegates it all the work."
+	},
+	"ChainOfResponsibility": {
+		"description": "lets you pass requests along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.",
+		"example": "ATMs use the Chain of Responsibility in money giving mechanism. Each ConcreteHandler (Bill100, Bill50 and Bill20) passes the request with the asking amount to the next one. Every ConcreteHandler gathers the maximum amount of money until the summarized amount reaches the amount of money which was initial requested."
+	},
+	"Command": {
+		"description": "is a behavioral design pattern that turns a request into a stand-alone object that contains all information about the request. This transformation lets you pass requests as a method arguments, delay or queue a request’s execution, and support undoable operations.",
+		"example": " Let’s say that we have a robot and we need to make it moving to four different directions, as our will. So we need a class that will invoke the moves, the Handler (Invoker), a class for the Robot, that will receive the commands, and a superclass that will associate with the Handler and pass the command to the ConcreteCommands (WalkUp, WalkDown, WalkLeft and WalkRight). Every ConcreteCommand has its own way (method) in order to implement the move."
+	},
+	"Mediator": {
+		"description": "is a behavioral design pattern that lets you reduce chaotic dependencies between objects. The pattern restricts direct communications between the objects and forces them to collaborate only via a mediator object.",
+		"example": "Imagine there is an application that implements chat rooms, where multiple users can send message to chat room and it is the responsibility of the chat room to show the messages to all users. User objects (Components) will use ChatRoom method (notify) to share their messages to other Users."
+	},
+	"Memento": {
+		"description": "lets you save and restore the previous state of an object without revealing the details of its implementation.",
+		"example": "Consider a case that you want to create a system that stores snapshots of the complex text editor’s state and an earlier state from these snapshots when needed. The command objects are the caretakers that fetch the editor’s memento before executing"
+	},
+	"Observer": {
+		"description": "is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing.",
+		"example": "Consider a case that you want to create a journalism system.  A journalist writes articles and they publish it through a variety of distribution channels(etc. television news, newspapers, and online publishers). The distribution channels are the Observers that dont get notified from the journalist himself but from the Subject class that is responsible for notifying the observers when a new article is published by the journalist."
+	},
+	"State": {
+		"description": "lets an object alter its behavior when its internal state changes. It appears as if the object changed its class.",
+		"example": " Consider the case that you want with the same controls of media player to make it behave differently, depending on the current playback state. The main object of the player (Context) is always linked to a state object (State) that performs most of the work for the player. Some actions replace the current state object of the player with another, which changes the way the player reacts to user interactions."
+	},
+	"Strategy": {
+		"description": "lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.",
+		"example": "​ A navigation app uses the Navigator in order to peak a different routing algorithm without differentiate its own class. Each routing algorithm can be extracted to its own class with a single buildRoute method."
+	},
+	"TemplateMethod": {
+		"description": "defines the skeleton of an algorithm in the superclass but lets subclasses override specific steps of the algorithm without changing its structure.",
+		"example": " Consider the case that you need to create a House of different types. Instead of creating a different class for each type, you can create an AbstractClass (House) and, after, as many ConcreteClasses (e.g., ModernHouse and VictorianHouse) as you need in order to implement the extra attributes and methods. The basic attributes and methods are inherited from AbstractClass, but they can be overriden."
+	},
+	"Visitor": {
+		"description": "lets you separate algorithms from the objects on which they operate.",
+		"example": " Via a visitor object (XMLExportVisitor), you can export various types of objects into XML format.  Visitor pattern adds XML export support to the class hierarchy of geometric shapes.​"
+	}
+}

@@ -1218,19 +1218,6 @@
     "@types/base64-arraybuffer" "0.1.0"
     base64-arraybuffer "^0.1.5"
 
-"@theia/file-search@1.18.0", "@theia/file-search@^1.18.0":
-  version "1.18.0"
-  resolved "https://registry.yarnpkg.com/@theia/file-search/-/file-search-1.18.0.tgz#4662eecb6e25f7f470268bb643b59e2f6a5ec6ff"
-  integrity sha512-+4lJhWFkk5p7Y20dK+MeiqYV969+CM2rLt/ifxT6fRrpWMI3EZlopN/48O+q2pr2n39hFEx8VCUENFg7p0VEug==
-  dependencies:
-    "@theia/core" "1.18.0"
-    "@theia/editor" "1.18.0"
-    "@theia/filesystem" "1.18.0"
-    "@theia/monaco" "1.18.0"
-    "@theia/process" "1.18.0"
-    "@theia/workspace" "1.18.0"
-    vscode-ripgrep "^1.2.4"
-
 "@theia/filesystem@1.18.0", "@theia/filesystem@latest":
   version "1.18.0"
   resolved "https://registry.yarnpkg.com/@theia/filesystem/-/filesystem-1.18.0.tgz#b4a283960fdf649e54fd9b57d00e1e385b118da6"
@@ -2172,6 +2159,11 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
+
+autocompleter@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/autocompleter/-/autocompleter-6.1.2.tgz#35a2c8b496c1ebdd798183e26c529e4b7450fd34"
+  integrity sha512-DfEcgxBJOTJJwxkIRZLv/ggD3g5w/fqzZkdJsOcgk7hjxw36lH/nAfIEXzV7qDE55swnYEe43E/WhZPXmSFfsA==
 
 autoprefixer@^6.3.1:
   version "6.7.7"
@@ -8207,14 +8199,6 @@ vscode-languageserver-types@^3.15.1:
   version "3.16.0"
   resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.16.0.tgz#ecf393fc121ec6974b2da3efb3155644c514e247"
   integrity sha512-k8luDIWJWyenLc5ToFQQMaSrqCHiLwyKPHKPQZ5zz21vM+vIVUSvsRpcbiECH4WR88K2XZqc4ScRcZ7nk/jbeA==
-
-vscode-ripgrep@^1.2.4:
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/vscode-ripgrep/-/vscode-ripgrep-1.12.0.tgz#8fee3f892349f2bf1c7ef9743e3bbccb108ad9d7"
-  integrity sha512-tn+bM7RbVElyuIGjIFyuSZZSuqodDjPNVQeHdo9w7EOIFEOuNtXuZ82s/Sy59lG/gJyMEkXjXjKunbUNNa5kOw==
-  dependencies:
-    https-proxy-agent "^4.0.0"
-    proxy-from-env "^1.1.0"
 
 vscode-textmate@^4.4.0:
   version "4.4.0"

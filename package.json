@@ -12,14 +12,14 @@
     "lerna": "2.4.0"
   },
   "workspaces": [
-    "extension",
+    "smartclide-design-pattern-selection-theia",
     "browser-app",
     "electron-app"
   ],
   "dependencies": {
-    "@theia/file-search": "^1.18.0",
     "@types/node": "^16.11.6",
     "@types/react": "^17.0.19",
+    "autocompleter": "^6.1.2",
     "update-json-file": "^1.1.1"
   }
 }
