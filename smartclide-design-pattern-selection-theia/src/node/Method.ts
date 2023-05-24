@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (C) 2021-2022 University of Macedonia
+ * 
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ ******************************************************************************/
 import {Attribute} from './Attribute';
 export class Method {
 	mName : string;
@@ -32,7 +41,7 @@ export class Method {
 				this.params[i].writeAsParam(cName, rootUri);
 			else {
 				this.params[i].writeAsParam(cName, rootUri);
-				fs.appendFileSync(cName + ".java",", ");
+				fs.appendFileSync(filename,", ");
 			}
 		}
 		if (this.isAbstract) {

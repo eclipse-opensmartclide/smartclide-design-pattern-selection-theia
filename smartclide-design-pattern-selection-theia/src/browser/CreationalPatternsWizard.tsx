@@ -1,22 +1,23 @@
+/*******************************************************************************
+ * Copyright (C) 2021-2022 University of Macedonia
+ * 
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ ******************************************************************************/
 import data from './data.json';
-import { inject } from 'inversify';
 import { Functions } from './functions';
 import { MessageService } from '@theia/core';
 import { HelloBackendService } from '../common/protocol';
 
-interface Textfield{
-	ident: number;
-	value: string;
-  };
-
 export class CreationalPatterns{
-	@inject(HelloBackendService)
-	protected readonly helloBackendService: HelloBackendService;
 
     static functions = new Functions();
 	static values = JSON.parse(JSON.stringify(data));
 
-    creationalPatternswizard(divCont: HTMLDivElement, messageService: MessageService){
+    creationalPatternswizard(divCont: HTMLDivElement, messageService: MessageService, helloBackendService: HelloBackendService, url: string){
 		divCont.innerHTML = "";
 		let divCont2 = document.createElement('div');
 		CreationalPatterns.functions.radioQuestion('<br> Do you want to create a completely new object or to create one by reusing an existing one?<br>', 'Create new object', 'Reuse an existing one', 'radio11', 'radio12', divCont);
@@ -35,13 +36,13 @@ export class CreationalPatterns{
 						divCont4.innerHTML = "";
 						let divCont5 = document.createElement('div');
 						CreationalPatterns.functions.textfieldQuestion('<br> How many sub-categories (ConcreteProducts) exist? <br>', 1, 'number', '2', 'subcategoriesNum', '', 'buttonNext2', divCont4);
-						let numCat = document.getElementById('subcategoriesNum') as HTMLInputElement;
+						let numCat = document.getElementById('subcategoriesNum1') as HTMLInputElement;
 						numCat.min = '2';
 						let buttonNext2 = document.getElementById('buttonNext2') as HTMLButtonElement;
 						buttonNext2.addEventListener('click', async (e: Event) =>{
 							divCont5.innerHTML = "";
 							let divCont6 = document.createElement('div');
-							let num = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+							let num = parseInt((document.getElementById('subcategoriesNum1') as HTMLInputElement).value);
 							CreationalPatterns.functions.textfieldQuestion('<br> Please give the names of the sub-categories (ConcreteProducts) <br>', num, 'text', 'Concrete Product name ', 'txtboxConcreteProductsName', 'infoField', 'buttonNext3', divCont5);
 							let buttonNext3 = document.getElementById('buttonNext3') as HTMLButtonElement;
 							buttonNext3.addEventListener('click', async (e: Event) =>{
@@ -53,34 +54,27 @@ export class CreationalPatterns{
 									divCont7.innerHTML = "";
 									let divCont8 = document.createElement('div');
 									CreationalPatterns.functions.textfieldQuestion('<br> How many Families of Products exist? <br>', 1, 'number', '2', 'familiesNum', '', 'buttonNext4', divCont7);
-									let numFam = document.getElementById('familiesNum') as HTMLInputElement;
-									numFam.min = '2';
 									let buttonNext4 = document.getElementById('buttonNext4') as HTMLButtonElement;
 									buttonNext4.addEventListener('click', async (e: Event) =>{
 										divCont8.innerHTML = "";
 										let divCont9 = document.createElement('div');
-										let num = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
+										let num = parseInt((document.getElementById('familiesNum1') as HTMLInputElement).value);
 										CreationalPatterns.functions.textfieldQuestion('<br> Please give the names of the Components (Families) <br>', num, 'text', 'Component name ', 'txtboxComponentName', 'infoField', 'buttonNext5', divCont8);
 										let buttonNext5 = document.getElementById('buttonNext5') as HTMLButtonElement;
 										buttonNext5.addEventListener('click', async (e: Event) =>{
 											divCont9.innerHTML = "";
 											CreationalPatterns.functions.createLabel('<br> <b>Abstract Factory Pattern</b>   ', 'labelPattern0', divCont9);
-											CreationalPatterns.functions.createButton('Get Code', 'getcodeAbstractFactoryPattern', divCont9);
-											let buttonCodeAFP = document.getElementById('getcodeAbstractFactoryPattern') as HTMLButtonElement;
+											CreationalPatterns.functions.createButton('Get Code', 'buttongetcodeAbstractFactoryPattern', divCont9);
+											let buttonCodeAFP = document.getElementById('buttongetcodeAbstractFactoryPattern') as HTMLButtonElement;
 											buttonCodeAFP.addEventListener('click', async (e: Event) =>{
-												let infoList = document.getElementsByClassName('infoField') as HTMLCollection;	
-												let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check													
-												data["AbstractFactory"].values["AbstractFactory"].name = (infoList.item(0) as HTMLInputElement).value;
-												let textfield:  Textfield={ ident: 1, value: (infoList.item(0) as HTMLInputElement).value };
-												textfieldArray.push(textfield);
-												let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
-												let numFam = parseInt((document.getElementById('familiesNum') as HTMLInputElement).value);
+												let infoList = document.getElementsByClassName('infoField') as HTMLCollection;														
+												CreationalPatterns.values["AbstractFactory"].values["AbstractFactory"].name = (infoList.item(0) as HTMLInputElement).value;
+												let numCat = parseInt((document.getElementById('subcategoriesNum1') as HTMLInputElement).value);
+												let numFam = parseInt((document.getElementById('familiesNum1') as HTMLInputElement).value);
 												for (var i=1; i<=numCat; i++){
 													CreationalPatterns.values["AbstractFactory"].values["Product"+i] = { "name":"", "extension":0};
 													let v1 = (infoList.item(i) as HTMLInputElement).value;
 													CreationalPatterns.values["AbstractFactory"].values["Product"+i].name = v1;
-													let textfield:  Textfield={ ident: 1, value: v1 };
-													textfieldArray.push(textfield);
 													for (var j=1; j<=numFam; j++){
 														CreationalPatterns.values["AbstractFactory"].values["ConcreteProduct"+i+"."+j] = { "name":"", "extension":0};
 													}
@@ -89,15 +83,12 @@ export class CreationalPatterns{
 													CreationalPatterns.values["AbstractFactory"].values["Family"+j] = { "name":"", "extension":0};
 													let v2 = (infoList.item(i) as HTMLInputElement).value;
 													CreationalPatterns.values["AbstractFactory"].values["Family"+j].name = v2;
-													let textfield:  Textfield={ ident: 1, value: v2 };
-													textfieldArray.push(textfield);
 													i++;
 												}
-												
-												let message = CreationalPatterns.functions.checkInputs(textfieldArray);
+												let message = CreationalPatterns.functions.checkInputsOnSubmit(1);
 												if (message == "Input is valid"){
 													CreationalPatterns.functions.insertInputsAbstractFactory(CreationalPatterns.values["AbstractFactory"].values);
-													CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["AbstractFactory"].values, "AbstractFactory"), messageService);
+													CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, CreationalPatterns.values["AbstractFactory"].values, "AbstractFactory"), messageService);
 												}else{
 													messageService.info(message);
 												}
@@ -121,45 +112,37 @@ export class CreationalPatterns{
 										buttonNext6.addEventListener('click', async (e: Event) =>{
 											divCont9.innerHTML = "";
 											let divCont10 = document.createElement('div');
-											let num = parseInt((document.getElementById('stepsNum') as HTMLInputElement).value);
-											CreationalPatterns.functions.textfieldQuestion('<br> Please give the name of the steps  <br>', num, 'text', 'Step name ', 'txtboxStepName', 'infoField', 'buttonNext7', divCont9);
+											let num = parseInt((document.getElementById('stepsNum1') as HTMLInputElement).value);
+											CreationalPatterns.functions.textfieldQuestion('<br> Please give the name of the steps (methods) <br>', num, 'text', 'Step name ', 'txtboxStepName', 'infoField', 'buttonNext7', divCont9);
 											let buttonNext7 = document.getElementById('buttonNext7') as HTMLButtonElement;
 											buttonNext7.addEventListener('click', async (e: Event) =>{
 												divCont10.innerHTML = "";
 												CreationalPatterns.functions.createLabel('<br> <b>Builder Pattern</b>   ', 'labelPattern1', divCont10);
-												CreationalPatterns.functions.createButton('Get Code', 'getcodeBuilderPattern', divCont10);
-												let buttonCodeBP = document.getElementById('getcodeBuilderPattern') as HTMLButtonElement;
+												CreationalPatterns.functions.createButton('Get Code', 'buttongetcodeBuilderPattern', divCont10);
+												let buttonCodeBP = document.getElementById('buttongetcodeBuilderPattern') as HTMLButtonElement;
 												buttonCodeBP.addEventListener('click', async (e: Event) =>{
-													let infoList = document.getElementsByClassName('infoField');
-													let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check															
-													let v = (document.getElementById('txtboxProduct_name') as HTMLInputElement).value + "Builder";
+													let infoList = document.getElementsByClassName('infoField');															
+													let v = (document.getElementById('txtboxProduct_name1') as HTMLInputElement).value + "Builder";
 													CreationalPatterns.values["Builder"].values["Builder"].name = v;
-													let textfield:  Textfield={ ident: 1, value: v };
-													textfieldArray.push(textfield);
 													CreationalPatterns.values["Builder"].values["Director"].name = "Director";
-													let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
-													let numSteps = parseInt((document.getElementById('stepsNum') as HTMLInputElement).value);
+													let numCat = parseInt((document.getElementById('subcategoriesNum1') as HTMLInputElement).value);
+													let numSteps = parseInt((document.getElementById('stepsNum1') as HTMLInputElement).value);
 													for (var i=1; i<=numCat; i++){
 														CreationalPatterns.values["Builder"].values["ConcreteProduct"+i] = { "name":"", "extension":0};
 														let v1 = (infoList.item(i) as HTMLInputElement).value;
 														CreationalPatterns.values["Builder"].values["ConcreteProduct"+i].name = v1;
-														let textfield:  Textfield={ ident: 1, value: v1 };
-														textfieldArray.push(textfield);
 														CreationalPatterns.values["Builder"].values["ConcreteBuilder"+i] = { "name":"", "extension":0};
 													}
 													for (var j=1; j<=numSteps; j++){
 														CreationalPatterns.values["Builder"].values["BuilderMethod"+j] = { "name":"", "extension":0};
 														let v2 = (infoList.item(i) as HTMLInputElement).value;
 														CreationalPatterns.values["Builder"].values["BuilderMethod"+j].name = v2;
-														let textfield:  Textfield={ ident: 2, value: v2 };
-														textfieldArray.push(textfield);
 														i++;
 													}
-													
-													let message = CreationalPatterns.functions.checkInputs(textfieldArray);
+													let message = CreationalPatterns.functions.checkInputsOnSubmit(1);
 													if (message == "Input is valid"){
 														CreationalPatterns.functions.insertInputsBuilder(CreationalPatterns.values["Builder"].values);
-														CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Builder"].values, "Builder"), messageService);
+														CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, CreationalPatterns.values["Builder"].values, "Builder"), messageService);
 													}else{
 														messageService.info(message);
 													}
@@ -178,31 +161,24 @@ export class CreationalPatterns{
 										buttonNext8.addEventListener('click', async (e: Event) =>{
 											divCont9.innerHTML = "";
 											CreationalPatterns.functions.createLabel('<br> <b>Factory Method Pattern</b>   ', 'labelPattern2', divCont9);
-											CreationalPatterns.functions.createButton('Get Code', 'getcodeFactoryMethodPattern', divCont9);
-											let buttonCodeFMP = document.getElementById('getcodeFactoryMethodPattern') as HTMLButtonElement;
+											CreationalPatterns.functions.createButton('Get Code', 'buttongetcodeFactoryMethodPattern', divCont9);
+											let buttonCodeFMP = document.getElementById('buttongetcodeFactoryMethodPattern') as HTMLButtonElement;
 											buttonCodeFMP.addEventListener('click', async (e: Event) =>{
 													let infoList = document.getElementsByClassName('infoField');
-													let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
 													CreationalPatterns.values["FactoryMethod"].values["Product"].name = (infoList.item(0) as HTMLInputElement).value;
-													let textfield:  Textfield={ ident: 1, value: (infoList.item(0) as HTMLInputElement).value };
-													textfieldArray.push(textfield);
-													let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+													let numCat = parseInt((document.getElementById('subcategoriesNum1') as HTMLInputElement).value);
 													for (var i=1; i<=numCat; i++){
 														CreationalPatterns.values["FactoryMethod"].values["ConcreteProduct"+i] = { "name":"", "extension":0};
 														let v1 = (infoList.item(i) as HTMLInputElement).value;
 														CreationalPatterns.values["FactoryMethod"].values["ConcreteProduct"+i].name = v1;
-														let textfield:  Textfield={ ident: 1, value: v1 };
-														textfieldArray.push(textfield);
 														CreationalPatterns.values["FactoryMethod"].values["ConcreteCreator"+i] = { "name":"", "extension":0};
 													}
 													CreationalPatterns.values["FactoryMethod"].values["Creator"].name = (infoList.item(i) as HTMLInputElement).value;
-													let textfield2:  Textfield={ ident: 1, value: (infoList.item(i) as HTMLInputElement).value };
-													textfieldArray.push(textfield2);
-																											
-													let message = CreationalPatterns.functions.checkInputs(textfieldArray);																
+													//console.log(JSON.stringify(CreationalPatterns.values["FactoryMethod"]));;											
+													let message = CreationalPatterns.functions.checkInputsOnSubmit(1);																
 													if (message == "Input is valid"){
-														CreationalPatterns.functions.insertInputsFactoryMethod(CreationalPatterns.values["FactoryMethod"].value);	
-														CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["FactoryMethod"].values, "FactoryMethod"),messageService);
+														CreationalPatterns.functions.insertInputsFactoryMethod(CreationalPatterns.values["FactoryMethod"].values);	
+														CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, CreationalPatterns.values["FactoryMethod"].values, "FactoryMethod"),messageService);
 													}else{
 														messageService.info(message);
 													}
@@ -241,17 +217,17 @@ export class CreationalPatterns{
 				buttonNext9.addEventListener('click', async (e: Event) =>{
 					divCont4.innerHTML = "";
 					CreationalPatterns.functions.createLabel('<br> <b>Singleton Pattern</b>   ', 'labelPattern3', divCont4);
-					CreationalPatterns.functions.createButton('Get Code', 'getcodeSingletonPattern', divCont4);
-					let buttonCodeSP = document.getElementById('getcodeSingletonPattern') as HTMLButtonElement;
+					CreationalPatterns.functions.createButton('Get Code', 'buttongetcodeSingletonPattern', divCont4);
+					let buttonCodeSP = document.getElementById('buttongetcodeSingletonPattern') as HTMLButtonElement;
 					buttonCodeSP.addEventListener('click', async (e: Event) =>{
-						let singlName = (document.getElementById('txtboxSingletonName') as HTMLInputElement).value;
+						let singlName = (document.getElementById('txtboxSingletonName1') as HTMLInputElement).value;
 						CreationalPatterns.values["Singleton"].values["Singleton"].name = singlName;
 						if (singlName==""){
 							messageService.info("You need to fill all the fields!");
 						}else if (!singlName.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){
 							messageService.info("Class's name must start with a capital letter!");
 						}else{
-							CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Singleton"].values, "Singleton"), messageService);
+							CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, CreationalPatterns.values["Singleton"].values, "Singleton"), messageService);
 						}
 					});
 				});
@@ -276,31 +252,26 @@ export class CreationalPatterns{
 						buttonNext11.addEventListener('click', async (e: Event) =>{
 							divCont6.innerHTML = "";
 							let divCont7 = document.createElement('div');
-							let num = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+							let num = parseInt((document.getElementById('subcategoriesNum1') as HTMLInputElement).value);
 							CreationalPatterns.functions.textfieldQuestion('<br> Please give the names of the Concrete Prototypes <br>', num, 'text', 'Concrete Prototype name ', 'txtboxConcretePrototypesName', 'infoField', 'buttonNext12', divCont6);
 							let buttonNext12 = document.getElementById('buttonNext12') as HTMLButtonElement;
 							buttonNext12.addEventListener('click', async (e: Event) =>{
 								divCont7.innerHTML = "";
 								CreationalPatterns.functions.createLabel('<br> <b>Prototype Pattern</b>   ', 'labelPattern4', divCont7);
-								CreationalPatterns.functions.createButton('Get Code', 'getcodePrototypePattern', divCont7);
-								let buttonCodePP = document.getElementById('getcodePrototypePattern') as HTMLButtonElement;
+								CreationalPatterns.functions.createButton('Get Code', 'buttongetcodePrototypePattern', divCont7);
+								let buttonCodePP = document.getElementById('buttongetcodePrototypePattern') as HTMLButtonElement;
 								buttonCodePP.addEventListener('click', async (e: Event) =>{
 									let infoList = document.getElementsByClassName('infoField');
-									let textfieldArray: Array<Textfield> = []; //array with textfield-values for input check
 									CreationalPatterns.values["Prototype"].values["Prototype"].name = (infoList.item(0) as HTMLInputElement).value;
-									let textfield:  Textfield={ ident: 1, value: (infoList.item(0) as HTMLInputElement).value };
-									textfieldArray.push(textfield);
-									let numCat = parseInt((document.getElementById('subcategoriesNum') as HTMLInputElement).value);
+									let numCat = parseInt((document.getElementById('subcategoriesNum1') as HTMLInputElement).value);
 									for (var i=1; i<=numCat; i++){
 										CreationalPatterns.values["Prototype"].values["ConcretePrototype"+i] = { "name":"", "extension":0};
 										let v1 = (infoList.item(i) as HTMLInputElement).value;
 										CreationalPatterns.values["Prototype"].values["ConcretePrototype"+i].name = v1;
-										let textfield:  Textfield={ ident: 1, value: v1 };
-										textfieldArray.push(textfield);
 									}
-									let message = CreationalPatterns.functions.checkInputs(textfieldArray);
+									let message = CreationalPatterns.functions.checkInputsOnSubmit(1);
 									if (message == "Input is valid"){											
-										CreationalPatterns.functions.checkMessage(await this.helloBackendService.codeGeneration(window.location.href, CreationalPatterns.values["Prototype"].values, "Prototype"), messageService);
+										CreationalPatterns.functions.checkMessage(await helloBackendService.codeGeneration(url, CreationalPatterns.values["Prototype"].values, "Prototype"), messageService);
 									}else{
 										messageService.info(message);
 									}
@@ -323,9 +294,6 @@ export class CreationalPatterns{
 		});
 		divCont.appendChild(divCont2);
 
-}		
-				
-
-
+	}		
 
 }

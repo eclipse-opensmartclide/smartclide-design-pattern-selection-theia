@@ -1,0 +1,5 @@
+site_name: SmartCLIDE Design Pattern Selection Frontend Component
+repo_url: https://github.com/eclipse-researchlabs/smartclide-design-pattern-selection-theia
+
+nav:
+  - Design Pattern Selection Frontend: 'index.md'

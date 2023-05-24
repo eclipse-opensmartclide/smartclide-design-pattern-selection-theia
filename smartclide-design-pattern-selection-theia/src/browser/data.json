@@ -1,4 +1,7 @@
 {
+    "Choose_pattern":{
+
+    },
     "AbstractFactory":{
         "values":{
             "AbstractFactory":{
@@ -165,9 +168,9 @@
                 "name":"",
                 "extension":0
             },
-            "ComponentMethod":{
+            "ComponentMethod1":{
                 "name":"",
-                "extension":0
+                "extension":1
             },
             "ConcreteComponent1":{
                 "name":"",
@@ -186,9 +189,9 @@
                 "name":"",
                 "extension":0
             },
-            "ComponentMethod":{
+            "ComponentMethod1":{
                 "name":"",
-                "extension":0
+                "extension":1
             },
             "ConcreteComponent1":{
                 "name":"",
@@ -216,7 +219,7 @@
                 "name":"",
                 "extension":0
             },
-            "AdditionalFacade1":{
+            "FacadeMethod1":{
                 "name":"",
                 "extension":1
             }
@@ -303,26 +306,6 @@
                 "extension":0
             },
             "ConcreteCommand1MethodParameter1":{
-                "name":"",
-                "extension":1
-            }
-        }
-    },
-    "Interpreter":{
-        "values":{
-            "Context":{
-                "name":"",
-                "extension":0
-            },
-            "AbstractExpression":{
-                "name":"",
-                "extension":0
-            },
-            "TerminalExpression1":{
-                "name":"",
-                "extension":1
-            },
-            "NonterminalExpression1":{
                 "name":"",
                 "extension":1
             }

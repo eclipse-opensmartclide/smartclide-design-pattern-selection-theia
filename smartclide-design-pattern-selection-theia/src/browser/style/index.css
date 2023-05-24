@@ -1,144 +1,255 @@
-#widget-container{
+#-------------------------------------------------------------------------------
+# Copyright (C) 2021-2022 University of Macedonia
+# 
+# This program and the accompanying materials are made
+# available under the terms of the Eclipse Public License 2.0
+# which is available at https://www.eclipse.org/legal/epl-2.0/
+# 
+# SPDX-License-Identifier: EPL-2.0
+#-------------------------------------------------------------------------------
+#widget-container {
   max-width: 100%;
 }
+
 #widget-container h2 {
-    color: var(--theia-ui-font-color1);
-    font-size: 12px;
-    font-weight: 400;
-    padding: 10px;
-    text-transform: uppercase;
+  color: var(--theia-ui-font-color1);
+  font-size: 12px;
+  font-weight: 400;
+  padding: 10px;
+  text-transform: uppercase;
 }
 
-#issues input{
-	background: transparent;
-    border: none;
-    color: white;
-
-    max-width: 100%;
-    height: 20px;
-
+#issues input {
+  background: transparent;
+  border: none;
+  color: white;
+  max-width: 100%;
+  height: 20px;
 }
 
-#TD{
-	display: none;
-	margin-left: 10px;
-	margin-top: 20px;
+#TD {
+  display: none;
+  margin-left: 10px;
+  margin-top: 20px;
 }
+
 #show_pattern_table td {
-	width: 200px;
+  width: 200px;
 }
-#issues{
-	margin-left: 10px;
+
+#issues {
+  margin-left: 10px;
   margin-right: 10px;
   max-width: 100%;
 }
 
-.divIssue{
-	border-style: solid;
-    border-width: thin;
-    margin: 5px;
-	padding: 2px;
-	border-color: #6a6a6a;
+.divIssue {
+  border-style: solid;
+  border-width: thin;
+  margin: 5px;
+  padding: 2px;
+  border-color: #6a6a6a;
 }
 
-.divIssue i{
-    font-size: 12px;
+.divIssue i {
+  font-size: 12px;
 }
 
-.divIssue span{
-	float: right;
+.divIssue span {
+  float: right;
 }
 
-.divIssue p{
-	display: block;
-    font-size: 13px;
-	margin: auto;
-	margin-top: 3px;
+.divIssue p {
+  display: block;
+  font-size: 13px;
+  margin: auto;
+  margin-top: 3px;
 }
-.btn-get-classes{
-	display: hidden;
+
+.btn-get-classes {
+  display: hidden;
 }
 
 .suggestions {
   border: 1px #ccc;
-  margin-top: 22px;
-  width:172px;
-  position: absolute;
+  width: 172px;
+  position: relative;
   background-color: #3c3c3c;
-  padding-left: 2px;
-}
-.suggestions ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-.suggestions ul li {
-  padding: 3px 0;
-}
-.suggestions ul li:hover {
-  background: #eee;
 }
 
-#image{
+#image {
   max-width: 100%;
   height: auto;
 }
-#elements{
+
+#elements {
   max-width: 100%;
 }
-#result{
+
+#result {
   visibility: hidden;
 }
-.AbstractFactory{
-  content : url(./img/AbstractFactoryIcon.jpg);
+
+/*Class Diagraams for Creational Patterns*/
+.AbstractFactory {
+  content: url(./img/CreationalPatternsIcons/AbstractFactoryIcon.jpg);
 }
-.Adapter{
-  content : url(./img/AdapterIcon.jpg);
+
+.Builder {
+  content: url(./img/CreationalPatternsIcons/BuilderIcon.jpg);
 }
-.Bridge{
-  content : url(./img/BridgeIcon.jpg);
+
+.FactoryMethod {
+  content: url(./img/CreationalPatternsIcons/FactoryMethodIcon.jpg);
 }
-.Builder{
-  content : url(./img/BuilderIcon.jpg);
+
+.Prototype {
+  content: url(./img/CreationalPatternsIcons/PrototypeIcon.jpg);
 }
-.Composite{
-  content : url(./img/CompositeIcon.jpg);
+
+.Singleton {
+  content: url(./img/CreationalPatternsIcons/SingletonIcon.jpg);
 }
-.Decorator{
-  content : url(./img/DecoratorIcon.jpg);
+
+/*Class Diagraams for Structural Patterns*/
+.Adapter {
+  content: url(./img/StructuralPatternsIcons/AdapterIcon.jpg);
 }
-.FactoryMethod{
-  content : url(./img/FactoryMethodIcon.jpg);
+
+.Bridge {
+  content: url(./img/StructuralPatternsIcons/BridgeIcon.jpg);
 }
-.Prototype{
-  content : url(./img/PrototypeIcon.jpg);
+
+.Composite {
+  content: url(./img/StructuralPatternsIcons/CompositeIcon.jpg);
 }
-.Singleton{
-  content : url(./img/SingletonIcon.jpg);
+
+.Decorator {
+  content: url(./img/StructuralPatternsIcons/DecoratorIcon.jpg);
 }
-.Visitor{
-    content : url(./img/VisitorIcon.jpg);
+
+.Facade {
+  content: url(./img/StructuralPatternsIcons/FacadeIcon.png);
 }
-#btn-wizzard{
+
+.Proxy {
+  content: url(./img/StructuralPatternsIcons/ProxyIcon.png);
+}
+
+.Flyweight {
+  content: url(./img/StructuralPatternsIcons/FlyweightIcon.png);
+}
+
+/*Class Diagrams for Behavioral Patterns*/
+
+.Visitor {
+  content: url(./img/BehavioralPatternsIcons/VisitorIcon.jpg);
+}
+
+.State {
+  content: url(./img/BehavioralPatternsIcons/StateIcon.jpg);
+}
+
+.Strategy {
+  content: url(./img/BehavioralPatternsIcons/StrategyIcon.jpg);
+}
+
+.TemplateMethod {
+  content: url(./img/BehavioralPatternsIcons/TemplateMethodIcon.jpg);
+}
+
+.Mediator {
+  content: url(./img/BehavioralPatternsIcons/MediatorIcon.png);
+}
+
+.Command {
+  content: url(./img/BehavioralPatternsIcons/CommandIcon.png);
+}
+
+.ChainOfResponsibility {
+  content: url(./img/BehavioralPatternsIcons/ChainOfResponsibilityIcon.png);
+}
+
+.Observer {
+  content: url(./img/BehavioralPatternsIcons/ObserverIcon.png);
+}
+
+.Memento {
+  content: url(./img/BehavioralPatternsIcons/MementoIcon.png);
+}
+
+#btn-wizzard {
   margin-left: 50px;
-  
+
 }
-.infoField{
+
+.infoField {
   margin-right: 20px;
-	background: transparent;
+  background: transparent;
   border: none;
   color: white;
   height: 20px;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
-#divWiz input{
+
+#divWiz input {
   margin-right: 20px;
 }
 
-#btn-refresh{
-	visibility: hidden;
+#btn-refresh {
+  visibility: hidden;
 }
 
+.autocomplete {
+  background: white;
+  z-index: 1000;
+  font: 14px/22px "-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow: scroll;
+  box-sizing: border-box;
+  border: 1px solid rgba(50, 50, 50, 0.6);
+  font-size: 13px;
+  position: absolute;
+  height: auto;
+  width: auto;
+}
 
+.autocomplete * {
+  font: inherit;
+}
 
+.autocomplete>div {
+  padding: 0;
+}
+
+.autocomplete .group {
+  background: #eee;
+}
+
+.autocomplete>div:hover:not(.group),
+.autocomplete>div.selected {
+  background: #eee;
+  cursor: pointer;
+}
+
+body::-webkit-scrollbar {
+  width: thin;
+  /* width of the entire scrollbar */
+}
+
+#btn-finalize {
+  margin-left: 0px;
+}
+
+#btn-get-code {
+  margin-left: 0px;
+}
+
+#btn-back {
+  visibility: hidden;
+  margin-left: 15px;
+}
+
+#btn-wizard {
+  margin-left: 15px;
+}

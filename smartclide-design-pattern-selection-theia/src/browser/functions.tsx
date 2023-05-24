@@ -1,9 +1,15 @@
+/*******************************************************************************
+ * Copyright (C) 2021-2022 University of Macedonia
+ * 
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ ******************************************************************************/
 import { MessageService } from '@theia/core';
 import autocomplete,{ AutocompleteItem} from 'autocompleter';
-interface Textfield{
-	ident: number;
-	value: string;
-  };
+
 
 export class Functions{
     
@@ -21,10 +27,14 @@ export class Functions{
     textfieldQuestion(questionLabel: string, num: number, inputType: string, inputMessage: string, inputId: string, inputClassname: string, buttonId: string, parent: HTMLElement){
         this.createLabel(questionLabel, '', parent);
         if (num==1){
-            this.createInput(inputMessage, inputId, inputClassname, inputId, inputType, parent);
+			let divInput = document.createElement('div');
+			parent.append(divInput);
+            this.createInput(inputMessage, inputId+num, inputClassname, inputId+num, inputType, divInput);
         }else{
             for (let i=1; i<=num; i++){
-                this.createInput(inputMessage+i, inputId+i, inputClassname, inputId+i, inputType, parent);
+				let divInput = document.createElement('div');
+				parent.append(divInput);
+                this.createInput(inputMessage+i, inputId+i, inputClassname, inputId+i, inputType, divInput);
             }
         }
         this.createButton('Next', buttonId, parent);
@@ -39,30 +49,30 @@ export class Functions{
     
     createInput(innerMessage: string, id: string, classname: string, name: string, type: string, parent: HTMLElement){
         let inputField = document.createElement('input');
-        inputField.placeholder = innerMessage;
+		inputField.placeholder = innerMessage;
         inputField.id = id;
-        if (!id.includes('radio') && !id.includes('Num')){
+		inputField.name = name;
+        inputField.type = type;
+		parent.append(inputField);
+        if (type.includes('number')){
+			inputField.min = '1';
+			inputField.value = innerMessage;
+		}
+        if (!id.includes('radio') && !id.includes('Num')&& !id.includes('num')){
             inputField.className = classname;
-            if (!innerMessage.includes("Method") || !innerMessage.includes("step")){
-				let suggestions = document.createElement("div");
-                suggestions.id = "suggestions"+id.substring(6,);
-                console.log("suggestions"+id.substring(6,));
-                suggestions.className = "suggestions";
-                parent.appendChild(suggestions);
-                inputField.addEventListener('keypress', (e: KeyboardEvent) =>{
-                    this.showSuggestions(inputField.value, Functions.listOfClassNames, ( e.target as Element).id);
-                });
+            if (!innerMessage.includes("Method") && !innerMessage.includes("step")){
+                this.showSuggestions(inputField.value, Functions.listOfClassNames, inputField.id, parent as HTMLDivElement);
             }
             inputField.autocomplete = "off";
-        }
-        inputField.name = name;
-        inputField.type = type;
-        parent.appendChild(inputField);
+        }  
+		if (id.includes('Attribute') || id.includes('Parameter') || name.includes('Attribute') || name.includes('Parameter')){
+			inputField.title = 'Insert first the type and after the name of the attribute/parameter with a space between'
+		}
     }
     //autocomplete
-    showSuggestions(value: string, table: string[], id: string){
+    showSuggestions(value: string, table: string[], id: string, parent : HTMLDivElement){
 
-		var items = Functions.listOfClassNames.map(function (n) { return { label: n }});
+		var items = table.map(function (n) { return { label: n }});
 
 		autocomplete({
 			input: document.getElementById('txtbox'+id.substring(6,)) as HTMLInputElement,
@@ -72,12 +82,15 @@ export class Functions{
 			},
 			fetch: function (text, callback) {
 				var match = text;
-				let reg = new RegExp('^' + match);
-				callback(items.filter(function(n){
-					if (n.label.match(reg)) {
-					  return n;
-					}
-				}));
+				let reg = new RegExp('^' + match,'i');
+				if(match!=""){
+					callback(items.filter(function(n){
+						if (n.label.match(reg)) {
+						  return n;
+						}
+					}));
+				}
+				
 			},
 			render: function(item, value) {
 				var itemElement = document.createElement("div");
@@ -88,14 +101,17 @@ export class Functions{
 				return itemElement;
 			},
 			customize: function(input, inputRect, container, maxHeight) {
-				if (maxHeight < 100) {
-					container.style.visibility = 'visible';
-					container.style.top = "";
-					container.style.bottom = (window.innerHeight - inputRect.bottom + input.offsetHeight) + "px";
-					container.style.maxHeight = "140px";
-				}
+				container.style.visibility = 'visible';
+				container.style.left = "auto";
+				container.style.top = "auto";
+				container.style.position = 'absolute';
+				container.style.maxHeight = "140px";
+				container.style.width = "166.400px";
+				container.style.background = '#3c3c3c';
+				parent.appendChild(container);
 			},
 			showOnFocus: true,
+			disableAutoSelect: true,
 		})
 	}
     //autocomplete
@@ -112,10 +128,14 @@ export class Functions{
     }
     
     createButton(innerMessage: string, id: string, parent: HTMLElement){
-        let button = document.createElement('button');
-        button.innerHTML = innerMessage;
-        button.id = id;
-        parent.appendChild(button);
+		if (id!=='disable'){
+			let button = document.createElement('button');
+			button.innerHTML = innerMessage;
+			button.id = id;
+			button.title = (innerMessage === "+") ? "Plus button": innerMessage;
+			button.type = 'button';
+			parent.appendChild(button);
+		}
     }
 
 	checkMessage(message: string, messageService: MessageService ){
@@ -125,88 +145,80 @@ export class Functions{
 			messageService.info("Code generation has been completed");
 		}
 	}
-	
-    checkInputs(array: Array<Textfield>){
-		let returncode1 = this.checkEmptyInputs(array);
-		let returncode2 = this.checkWritingInput(array);
-		let returncode3 = this.checkInputsForSameValues(array);
-		if (returncode1+returncode2+returncode3==0){
-			return "Input is valid";
-		}else if (returncode1==1){
-			return "You need to fill all the fields!";
-		}else if (returncode2==2){
-			return "Class's name must start with a capital letter!";
-		}else if (returncode2==3){
-			return "Method's name must follow camel writing!";
-		}else if (returncode2==4){
-			return "Attribute's name must contain only small letters!";
-		}else {
-			return "There are duplicated names in the fields!";
-		}	
-	}
-    //method that checks the writing of class name, method name and attribute name
-	checkWritingInput(array: Array<Textfield>){
-		for(let i = 0 ; i < array.length; i++){
-			let txtbox = array[i].value;
-			let labelcode = array[i].ident;
-			if (labelcode == 1 && !txtbox.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")){ //class case
-					return 2;
-			}
-			if (labelcode == 2 && !txtbox.match("^[a-z]+[a-z|0-9]*([A-Z][a-z|0-9]*)*")){ //method case
-					return 3;
-			}
-			if (labelcode == 3 && !txtbox.match("^([a-z]*[0-9]*)$")){ //attribute case
-					return 4;
-			}	
-		}
-		return 0;
-	}
 
-	//method that checks for duplicate values
-	checkInputsForSameValues(array: Array<Textfield>){
-		let resultToReturn = false;
-		for (let i = 0; i < array.length; i++) { // nested for loop
-			for (let j = 0; j < array.length; j++) {
-				// prevents the element from comparing with itself
-				if (i != j) {
-					// check if elements' values are equal
-					if (array[i].value == array[j].value && array[i].value!=undefined) {
-						// duplicate element present                  
-						resultToReturn = true;
-						// terminate inner loop
-						break;
+	checkInputsOnSubmit(aaform: number){
+		/*for (let i=0; i<(document.forms[aaform] as HTMLFormElement).length; i++){
+			console.log((document.forms[aaform][i] as HTMLInputElement).value);
+		}*/
+		if (this.checkEmptyInputs(document.forms[aaform] as HTMLFormElement)){
+			return "You need to fill all the fields!";
+		}else{
+			for (let i=0; i<(document.forms[aaform] as HTMLFormElement).length; i++){
+				let field = document.forms[aaform][i] as HTMLInputElement;
+				if (field.id.includes('txtbox')){
+					if (this.checkInputsForSameValues(field.value, document.forms[aaform] as HTMLFormElement)){
+						return "There are duplicated names in the fields!";
 					}
 				}
 			}
-			// terminate outer loop                                                                      
-			if (resultToReturn) {
-				break;
+			for (let i=0; i<(document.forms[aaform] as HTMLFormElement).length; i++){
+				let field = document.forms[aaform][i] as HTMLInputElement;
+				if (field.id.includes('txtbox')){
+					if (field.id.includes('Attribute') || field.id.includes('Parameter') || field.name.includes('Attribute') || field.name.includes('Parameter')){
+						if (!this.checkAttributeNameWriting(field.value)) return "Attribute/Parameter's type can start with uppercase letter! Attribute/Parameter's name must start with small letter! ";
+					}else if (field.id.includes('Method') || field.name.includes('Method') || (field.id.includes('Step')  || field.name.includes('Step'))){
+						if (!this.checkMethodNameWriting(field.value)) return "Method's name must follow camel writing!";
+					}else if (!this.checkClassNameWriting(field.value)){
+						return "Class's name must start with a capital letter!";
+					}
+				}
 			}
 		}
-		if (!resultToReturn){
-			return 0;
-		}else{
-			return 5;
+		return "Input is valid";
+	}
+
+	//methods that check writing in textfields
+	checkClassNameWriting(value: string){
+		return (value.match("^([A-Z]{1}[a-zA-Z]*[0-9]*)$")) ? true : false;//class case
+	}
+	checkMethodNameWriting(value: string){
+		return (value.match("^([a-z]+[a-z|0-9]*([A-Z][a-z|0-9]*)*)$")) ? true : false; //method case
+	}
+	checkAttributeNameWriting(value: string){
+		if (value.match("^([A-Za-z][a-z]+( [a-z][a-zA-Z0-9]*))$")){ //attribute case ^([a-zA-Z]*[0-9]*)[ ]([a-z]{1}[a-zA-Z]*[0-9]*)
+			return true;
 		}
+		return false;
+	}
+
+	//method that checks for duplicate values
+	checkInputsForSameValues(value: string, vform: HTMLFormElement){
+		let count = 0;
+		for (let i=0; i<vform.length; i++){
+			if (value===(vform[i] as HTMLInputElement).value){
+				count++;
+				if (count==2){
+					return true;
+
+				}
+			}
+		}
+		return false;
 	}
 
 	//method that search for empty textfields
-	checkEmptyInputs(array: Array<Textfield>){
-		for (var i=0; i<array.length; i++){
-			if (array[i].value == "") return 1;
+	checkEmptyInputs(vform: HTMLFormElement){
+		for (var i=0; i<vform.length; i++){
+			if ((vform[i] as HTMLInputElement).value.trim() === "" && !(vform[i] as HTMLInputElement).id.includes('btn') && !(vform[i] as HTMLInputElement).id.includes('button') && !(vform[i] as HTMLInputElement).id.includes('radio')){
+				console.log('TRUE', (vform[i] as HTMLInputElement).id);
+				return true;
+			}
 		}
-		return 0;
+		return false;
 	}
 
 	check(key: string, statePatternSelection: string){
 		return (!key.includes("ConcreteProduct") || statePatternSelection!="AbstractFactory") && (!key.includes("ConcreteCreator") || statePatternSelection!="FactoryMethod") && (!key.includes("ConcreteBuilder") || statePatternSelection!="Builder")
-	}
-
-	refreshPage(table: HTMLTableElement){
-		table.innerHTML = "";
-		(document.getElementById("btn-get-code") as HTMLButtonElement).style.visibility = 'visible';
-		(document.getElementById("elements") as HTMLElement).style.visibility = 'hidden';
-		
 	}
 
 	insertInputsAbstractFactory(data: string){
@@ -278,9 +290,5 @@ export class Functions{
 	setClassNames(list: string[]){
 		Functions.listOfClassNames = list;
 	}
-	
-
 
 }
-
-
