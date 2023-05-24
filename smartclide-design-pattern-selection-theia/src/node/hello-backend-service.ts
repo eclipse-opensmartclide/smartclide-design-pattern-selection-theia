@@ -39,15 +39,33 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     }
 
     async sayHelloTo(url: string): Promise<string[]> {
+        /**
+         * Not necessary to use url at all to get path
+         */
         //string manipulation to get the right form of url string
-        var lastL = url.indexOf("/#/");
+        /*var lastL = url.indexOf("/#/");
         var rootUri;
         if(url.match("\/#\/.:\/")){
             rootUri = url.substr(lastL+3);
         }
         else{
             rootUri = url.substr(lastL+2);
+        }*/
+        
+        /**
+         * Get Project path that has the flowing format
+         * /projects/{}/
+         */
+        var rootUri='';
+        var rootParrent="/projects";
+        var dirs = this.FS.readdirSync(rootParrent);
+        for(var i in dirs){
+            var newDir= rootParrent +"/"+ dirs[i];
+            if(this.FS.statSync(newDir).isDirectory()){
+                rootUri= newDir;
+            }
         }
+        console.log(rootUri);
         
         //search for every file name in textbox values
         //index=-1 if not found
@@ -98,14 +116,34 @@ export class HelloBackendServiceImpl implements HelloBackendService {
     
     async codeGeneration(url : string, jsonObj : string, statePatternSelection: string): Promise<string>{ 
         let cg : CodeGenerator  = new CodeGenerator();
-        var lastL = url.indexOf("/#/");
+
+        /**
+         * Not necessary to use url at all to get path
+         */
+        /*var lastL = url.indexOf("/#/");
         var rootUri;
         if(url.match("\/#\/.:\/")){
             rootUri = url.substr(lastL+3);
         }
         else{
             rootUri = url.substr(lastL+2);
+        }*/
+
+        /**
+         * Get Project path that has the flowing format
+         * /projects/{}/
+         */
+        var rootUri='';
+        var rootParrent="/projects";
+        var dirs = this.FS.readdirSync(rootParrent);
+        for(var i in dirs){
+            var newDir= rootParrent +"/"+ dirs[i];
+            if(this.FS.statSync(newDir).isDirectory()){
+                rootUri= newDir;
+            }
         }
+        console.log(rootUri);
+
         let message = "";
         if(statePatternSelection == "AbstractFactory"){
             let ppc : Array<patternParticipatingClass> = cg.AbstractFactory(jsonObj);
