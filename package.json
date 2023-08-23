@@ -17,7 +17,7 @@
     "electron-app"
   ],
   "dependencies": {
-    "@types/node": "^16.11.6",
+    "@types/node": "^20.5.3",
     "@types/react": "^17.0.19",
     "autocompleter": "^6.1.2",
     "update-json-file": "^1.1.1"
